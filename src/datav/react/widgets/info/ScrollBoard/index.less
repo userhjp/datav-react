@@ -1,0 +1,46 @@
+.dv-scroll-board {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  color: #fff;
+
+  .text {
+    box-sizing: border-box;
+    padding: 0 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+
+    .header-item {
+      .text;
+
+      transition: all 0.3s;
+    }
+  }
+
+  .rows {
+    overflow: hidden;
+
+    .row-item {
+      display: flex;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+
+    .ceil {
+      .text;
+    }
+
+    .index {
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+  }
+}

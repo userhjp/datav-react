@@ -1,0 +1,46 @@
+.color-picker {
+  display: inline-flex;
+  width: 100%;
+
+  .sketch-picker {
+    position: absolute;
+    top: 36px;
+    right: 0;
+    z-index: 999;
+    width: 166px !important;
+    background-color: #111417 !important;
+    border: 1px solid #2681ff;
+
+    label {
+      color: #e2e2e2 !important;
+      line-height: 1.4 !important;
+    }
+
+    input {
+      width: 100% !important;
+      padding: 2px 0 !important;
+      line-height: 1;
+      text-align: center;
+      background-color: #262c33;
+      box-shadow: none !important;
+
+      &:focus {
+        border: 1px solid #2681ff !important;
+        outline: none;
+      }
+    }
+  }
+
+  .ant-input-group-addon {
+    padding: 0 4px;
+    cursor: pointer;
+  }
+
+  .flexbox-fix:last-child {
+    margin: 0 -8px !important;
+
+    div {
+      margin: 0 8px 8px 0 !important;
+    }
+  }
+}

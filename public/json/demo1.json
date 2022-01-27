@@ -1,0 +1,2520 @@
+{
+    "page": {
+        "width": 1920,
+        "height": 1080,
+        "backgroundColor": "#0e2a42",
+        "zoomMode": 0,
+        "grid": 8
+    },
+    "components": [
+        {
+          "id": "sDz6faMRvPQpCrjvbI0k9cZT",
+          "info": {
+                "name": "标题",
+                "type": "Title",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 673,
+                "y": 19,
+                "w": 524,
+                "h": 51,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "title": {
+                        "map": "",
+                        "status": "success",
+                        "description": "标题"
+                    }
+                },
+                "config": {
+                    "dataType": "object",
+                    "data": {
+                        "title": "React可视化大屏设计器"
+                    },
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "fontSize": 40,
+                "fontFamily": "Microsoft Yahei",
+                "fontWeight": "normal",
+                "color": "#4a90e2",
+                "fontStyle": "normal",
+                "justifyContent": "center",
+                "backgroundStyle": {
+                    "show": false
+                },
+                "writingMode": "horizontal-tb",
+                "letterSpacing": "0",
+                "link": {
+                    "show": false,
+                    "href": "",
+                    "isblank": true
+                }
+            }
+        },
+        {
+          "id":"ylHjHIS6s8kDiLOG8bU7PENd",
+            "info": {
+                "name": "多行文本",
+                "type": "Text",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 1754,
+                "y": 69,
+                "w": 164,
+                "h": 382,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "value": {
+                        "map": "",
+                        "status": "success",
+                        "description": ""
+                    },
+                    "url": {
+                        "map": "",
+                        "status": "success",
+                        "description": "超链接地址"
+                    }
+                },
+                "config": {
+                    "dataType": "object",
+                    "data": {
+                        "value": "DataV 提供运营动态直播、数据综合展示、设备监控预警等多种场景模板，稍加修改就能够直接服务于您的可视化需求。通过拖拽即可实现灵活的可视化布局，在模板的基础上任何人都能够发挥创意，实现您自己的可视化应用。支持阿里云分析数据库、关系型数据库、Restful API、CSV、静态JSON等多种数据来源，且能够动态轮询。能够实现多个数据源汇聚于一个可视化界面中",
+                        "url": ""
+                    },
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "backgroundStyle": {
+                    "show": false
+                },
+                "link": {
+                    "show": false
+                },
+                "fontFamily": "Microsoft Yahei",
+                "fontSize": 16,
+                "fontWeight": "normal",
+                "color": "#4a90e2",
+                "fontStyle": "normal",
+                "scroll": {
+                    "overflowScroll": true,
+                    "duration": 5000
+                },
+                "textAlign": "left",
+                "lineHeight": 22,
+                "letterSpacing": 0,
+                "textIndent": 32
+            }
+        },
+        {
+          "id":"ZAGT4wiNNizIBhj8xaJABvf3",
+            "info": {
+                "name": "跑马灯",
+                "type": "Marquee",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 0,
+                "y": 16,
+                "w": 300,
+                "h": 56,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "value": {
+                        "map": "",
+                        "status": "success",
+                        "description": ""
+                    }
+                },
+                "config": {
+                    "dataType": "object",
+                    "data": {
+                        "value": "DataV 提供运营动态直播、数据综合展示、设备监控预警等多种场景模板，稍加修改就能够直接服务于您的可视化需求。"
+                    },
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "backgroundStyle": {
+                    "show": false
+                },
+                "fontFamily": "Microsoft Yahei",
+                "fontSize": 16,
+                "fontWeight": "normal",
+                "color": "#fff",
+                "fontStyle": "normal",
+                "loop": true,
+                "ifSpeed": false,
+                "duration": 8000,
+                "timeout": 1000
+            }
+        },
+        {
+          "id":"i98z4iyPvRHq4ppPohp0IFdU",
+            "info": {
+                "name": "时间器",
+                "type": "Timer",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 1448,
+                "y": -10,
+                "w": 464,
+                "h": 80,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "iconStyle": {
+                    "show": true,
+                    "size": 40,
+                    "color": "#008bff",
+                    "marginRight": 8
+                },
+                "fontFamily": "Microsoft Yahei",
+                "fontSize": 40,
+                "fontWeight": "normal",
+                "color": "#fff",
+                "format": "yyyy-MM-dd HH:mm:ss"
+            }
+        },
+        {
+          "id":"os2RYAWOOEercKWQoZP32TvH",
+            "info": {
+                "name": "倒计时",
+                "type": "CountDown",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 1222,
+                "y": 117,
+                "w": 480,
+                "h": 150,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "value": {
+                        "map": "",
+                        "status": "success",
+                        "description": "倒计时（秒）"
+                    }
+                },
+                "config": {
+                    "dataType": "object",
+                    "data": {
+                        "value": 86400000
+                    },
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "fontFamily": "Microsoft Yahei",
+                "fontSize": 48,
+                "fontWeight": "normal",
+                "color": "#fff",
+                "flop": {
+                    "show": true,
+                    "backgroundColor": "#fff"
+                }
+            }
+        },
+        {
+          "id":"DmcS5JrWw6dwx9fZqZNqxeQp",
+            "info": {
+                "name": "倒计时",
+                "type": "CountDown",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 1236,
+                "y": 300,
+                "w": 480,
+                "h": 150,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "value": {
+                        "map": "",
+                        "status": "success",
+                        "description": "倒计时（秒）"
+                    }
+                },
+                "config": {
+                    "dataType": "object",
+                    "data": {
+                        "value": 86400000
+                    },
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "fontFamily": "Microsoft Yahei",
+                "fontSize": 48,
+                "fontWeight": "normal",
+                "color": "#fff",
+                "flop": {},
+                "format": "HH:mm:ss:SSS"
+            }
+        },
+        {
+          "id":"9kAZTOuTH0HdtlxcbU1pOUvI",
+            "info": {
+                "name": "滚动列表",
+                "type": "ScrollBoard",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 1506,
+                "y": 498,
+                "w": 372,
+                "h": 245,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "list": {
+                        "map": "",
+                        "status": "success",
+                        "description": "数据列表"
+                    }
+                },
+                "config": {
+                    "dataType": "object",
+                    "data": {
+                        "list": [
+                            {
+                                "key1": "行1列1",
+                                "key2": "行1列2",
+                                "key3": "行1列3",
+                                "key4": "行1列4"
+                            },
+                            {
+                                "key1": "行2列1",
+                                "key2": "行2列2",
+                                "key3": "行2列3",
+                                "key4": "行2列4"
+                            },
+                            {
+                                "key1": "行3列1",
+                                "key2": "行3列2",
+                                "key3": "行3列3",
+                                "key4": "行3列4"
+                            },
+                            {
+                                "key1": "行4列1",
+                                "key2": "行4列2",
+                                "key3": "行4列3",
+                                "key4": "行4列4"
+                            },
+                            {
+                                "key1": "行5列1",
+                                "key2": "行5列2",
+                                "key3": "行5列3",
+                                "key4": "行5列4"
+                            },
+                            {
+                                "key1": "行6列1",
+                                "key2": "行6列2",
+                                "key3": "行6列3",
+                                "key4": "行6列4"
+                            }
+                        ]
+                    },
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "pageRoll": false,
+                "hoverPause": true,
+                "waitTime": 2000,
+                "rowNum": 4,
+                "oddRowBGC": "#0a2732",
+                "evenRowBGC": "#003b51",
+                "indexHeader": {
+                    "show": true,
+                    "title": "#",
+                    "columnWidth": 40,
+                    "backgroundColor": "#00baff",
+                    "textAlign": "left"
+                },
+                "header": {
+                    "show": true,
+                    "height": 50,
+                    "backgroundColor": "#00baff"
+                },
+                "column": [
+                    {
+                        "title": "列1",
+                        "mapKey": "key1",
+                        "textAlign": "center",
+                        "columnWidth": "auto"
+                    },
+                    {
+                        "title": "列2",
+                        "mapKey": "key1",
+                        "textAlign": "center"
+                    },
+                    {
+                        "title": "列3",
+                        "mapKey": "key1",
+                        "textAlign": "center"
+                    },
+                    {
+                        "title": "列4",
+                        "mapKey": "key1",
+                        "textAlign": "center"
+                    }
+                ]
+            }
+        },
+        {
+          "id":"Agkm6R2kxTWHq2HZ7tZBwhY9",
+            "info": {
+                "name": "数字翻牌器",
+                "type": "NumberFlop",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 840,
+                "y": 335,
+                "w": 370,
+                "h": 86,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "title": {
+                        "map": "",
+                        "status": "success",
+                        "description": ""
+                    },
+                    "value": {
+                        "map": "",
+                        "status": "success",
+                        "description": ""
+                    }
+                },
+                "config": {
+                    "dataType": "object",
+                    "data": {
+                        "title": "实时房价",
+                        "value": 123457
+                    },
+                    "apiType": "static",
+                    "useFilter": true,
+                    "filterCode": "let value = res.data.value;\r\nvalue += Math.random() * 10;\r\nres.data.value = value;\r\nreturn res.data;"
+                },
+                "autoUpdate": true,
+                "updateTime": 3
+            },
+            "options": {
+                "global": {
+                    "fontFamily": "Microsoft Yahei",
+                    "arrangement": "top"
+                },
+                "titleConfig": {
+                    "show": true,
+                    "title": "Typesomething",
+                    "distance": 0,
+                    "textStyle": {
+                        "fontSize": 20,
+                        "fontWeight": "normal",
+                        "color": "#79daff"
+                    }
+                },
+                "animation": {
+                    "show": true,
+                    "duration": 1000
+                },
+                "counter": {
+                    "fontFamily": "Microsoft Yahei",
+                    "justifyContent": "left",
+                    "prefix": {
+                        "content": "￥",
+                        "fontSize": 32,
+                        "fontWeight": "bolder",
+                        "color": "#006fff",
+                        "marginRight": 0
+                    },
+                    "suffix": {
+                        "content": "起",
+                        "fontSize": 21,
+                        "fontWeight": "bolder",
+                        "color": "#f10000",
+                        "marginLeft": 6
+                    }
+                },
+                "numbers": {
+                    "textStyle": {
+                        "fontSize": 45,
+                        "fontWeight": "bolder",
+                        "color": "#006fff"
+                    },
+                    "bgColor": "rgba(51,51,51,0)",
+                    "separating": {
+                        "show": true,
+                        "separatingSymbol": ",",
+                        "bgSeparating": false
+                    },
+                    "letterSpacing": 0,
+                    "backgroundColor": "rgba(14,42,66,0)",
+                    "borderRadius": 6,
+                    "digit": 0,
+                    "decimal": 2,
+                    "divisor": 0
+                }
+            }
+        },
+        {
+          "id":"71bpgUxzr3j6vtaSWD6wohTx",
+            "info": {
+                "name": "数字翻牌器",
+                "type": "NumberFlop",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 910,
+                "y": 155,
+                "w": 197,
+                "h": 88,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "title": {
+                        "map": "",
+                        "status": "success",
+                        "description": ""
+                    },
+                    "value": {
+                        "map": "",
+                        "status": "success",
+                        "description": ""
+                    }
+                },
+                "config": {
+                    "dataType": "object",
+                    "data": {
+                        "title": "实时股价",
+                        "value": 36.2
+                    },
+                    "apiType": "static",
+                    "useFilter": true,
+                    "filterCode": "let value = res.data.value;\r\nvalue += Math.random();\r\nres.data.value = value;\r\nreturn res.data;"
+                },
+                "autoUpdate": true,
+                "updateTime": 3
+            },
+            "options": {
+                "global": {
+                    "fontFamily": "Microsoft Yahei",
+                    "arrangement": "top"
+                },
+                "titleConfig": {
+                    "show": true,
+                    "title": "Typesomething",
+                    "distance": 0,
+                    "textStyle": {
+                        "fontSize": 20,
+                        "fontWeight": "normal",
+                        "color": "#79daff"
+                    }
+                },
+                "animation": {
+                    "show": true,
+                    "duration": 1000
+                },
+                "counter": {
+                    "fontFamily": "Microsoft Yahei",
+                    "justifyContent": "left",
+                    "prefix": {
+                        "content": "$",
+                        "fontSize": 42,
+                        "fontWeight": "bolder",
+                        "color": "#006fff",
+                        "marginRight": 10
+                    },
+                    "suffix": {
+                        "content": "",
+                        "fontSize": 21,
+                        "fontWeight": "bolder",
+                        "color": "#f10000",
+                        "marginLeft": 6
+                    }
+                },
+                "numbers": {
+                    "textStyle": {
+                        "fontSize": 45,
+                        "fontWeight": "bolder",
+                        "color": "#006fff"
+                    },
+                    "bgColor": "rgba(51,51,51,0)",
+                    "separating": {
+                        "show": true,
+                        "separatingSymbol": ",",
+                        "bgSeparating": false
+                    },
+                    "letterSpacing": 0,
+                    "backgroundColor": "rgba(14,42,66,0)",
+                    "borderRadius": 6,
+                    "digit": 0,
+                    "decimal": 2,
+                    "divisor": 0
+                }
+            }
+        },
+        {
+          "id":"R7X02MUpqZDzoEoVKTk20dlr",
+            "info": {
+                "name": "单张图片",
+                "type": "SingleImg",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 1434,
+                "y": 776,
+                "w": 465,
+                "h": 283,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "backgroundImg": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fattach.bbs.miui.com%2Fforum%2F201407%2F18%2F142043y217lz8uftzll877.jpg&refer=http%3A%2F%2Fattach.bbs.miui.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637980327&t=8ceb226dd7d5c88c1b53c11719348c4e",
+                "repeat": "no-repeat",
+                "borderRadius": 20,
+                "link": {
+                    "href": "https://www.baidu.com/",
+                    "isblank": false
+                }
+            }
+        },
+        {
+          "id":"1ezzhErwZPZhhfwRrRUbAuPR",
+            "info": {
+                "name": "单张图片",
+                "type": "SingleImg",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 1184,
+                "y": 764,
+                "w": 221,
+                "h": 283,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "backgroundImg": "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fup.enterdesk.com%2Fedpic%2Ffb%2Fa2%2F69%2Ffba2696b9fa4120d758eba82c04f1aad.jpg&refer=http%3A%2F%2Fup.enterdesk.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1637980373&t=bd852dd9333f11fe928bc0c85d233cbf",
+                "repeat": "no-repeat",
+                "borderRadius": 0,
+                "link": {
+                    "href": "https://www.baidu.com/",
+                    "isblank": true
+                }
+            }
+        },
+        {
+          "id":"lV7R6GH2gk6DzudLLwaAqGw4",
+            "info": {
+                "name": "边框",
+                "type": "BorderBox",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 792,
+                "y": 278,
+                "w": 460,
+                "h": 216,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "borderImg": "box6"
+            }
+        },
+        {
+          "id":"qmXRuD3uzbOq7uTqeiWE8GXj",
+            "info": {
+                "name": "边框",
+                "type": "BorderBox",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 830,
+                "y": 114,
+                "w": 328,
+                "h": 174,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "borderImg": "box4"
+            }
+        },
+        {
+          "id":"lZwnTniWZv7uxJD7uuf2VnHQ",
+            "info": {
+                "name": "视频播放器",
+                "type": "VideoPlayer",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 632,
+                "y": 736,
+                "w": 509,
+                "h": 327,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "loop": true,
+                "url": "http://vjs.zencdn.net/v/oceans.mp4",
+                "controls": true,
+                "src": "http://vjs.zencdn.net/v/oceans.mp4",
+                "muted": true
+            }
+        },
+        {
+          "id":"6XW8zt0OKdmCtXhrzPK6PD2P",
+            "info": {
+                "name": "基础柱状图",
+                "type": "BaseBar",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 792,
+                "y": 614,
+                "w": 380,
+                "h": 220,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "controls": false,
+                "loop": true,
+                "muted": true,
+                "src": "http://vjs.zencdn.net/v/oceans.mp4"
+            }
+        },
+        {
+          "id":"zfpL34ty6y1aUXk446WwUg4p",
+            "info": {
+                "name": "基础柱状图",
+                "type": "BaseBar",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 16,
+                "y": 95,
+                "w": 380,
+                "h": 220,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "x": {
+                        "map": "",
+                        "status": "success",
+                        "description": "类目"
+                    },
+                    "y": {
+                        "map": "",
+                        "status": "success",
+                        "description": "系列"
+                    },
+                    "v": {
+                        "map": "",
+                        "status": "success",
+                        "description": "值"
+                    }
+                },
+                "config": {
+                    "dataType": "array",
+                    "data": [
+                        {
+                            "x": "2018",
+                            "y": "上海",
+                            "v": 90
+                        },
+                        {
+                            "x": "2019",
+                            "y": "上海",
+                            "v": 75
+                        },
+                        {
+                            "x": "2020",
+                            "y": "上海",
+                            "v": 70
+                        },
+                        {
+                            "x": "2021",
+                            "y": "上海",
+                            "v": 50
+                        },
+                        {
+                            "x": "2022",
+                            "y": "上海",
+                            "v": 70
+                        },
+                        {
+                            "x": "2018",
+                            "y": "深圳",
+                            "v": 70
+                        },
+                        {
+                            "x": "2019",
+                            "y": "深圳",
+                            "v": 90
+                        },
+                        {
+                            "x": "2020",
+                            "y": "深圳",
+                            "v": 80
+                        },
+                        {
+                            "x": "2021",
+                            "y": "深圳",
+                            "v": 68
+                        },
+                        {
+                            "x": "2022",
+                            "y": "深圳",
+                            "v": 80
+                        },
+                        {
+                            "x": "2018",
+                            "y": "重庆",
+                            "v": 50
+                        },
+                        {
+                            "x": "2019",
+                            "y": "重庆",
+                            "v": 40
+                        },
+                        {
+                            "x": "2020",
+                            "y": "重庆",
+                            "v": 60
+                        },
+                        {
+                            "x": "2021",
+                            "y": "重庆",
+                            "v": 88
+                        },
+                        {
+                            "x": "2022",
+                            "y": "重庆",
+                            "v": 55
+                        },
+                        {
+                            "x": "2018",
+                            "y": "成都",
+                            "v": 60
+                        },
+                        {
+                            "x": "2019",
+                            "y": "成都",
+                            "v": 45
+                        },
+                        {
+                            "x": "2020",
+                            "y": "成都",
+                            "v": 70
+                        },
+                        {
+                            "x": "2021",
+                            "y": "成都",
+                            "v": 80
+                        },
+                        {
+                            "x": "2022",
+                            "y": "成都",
+                            "v": 58
+                        }
+                    ],
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "grid": {
+                    "show": false,
+                    "colors": 1,
+                    "left": 50,
+                    "right": 40,
+                    "top": 50,
+                    "bottom": 50
+                },
+                "xAxis": {
+                    "boundaryGap": true,
+                    "show": true,
+                    "type": "category",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": false
+                    }
+                },
+                "yAxis": {
+                    "show": true,
+                    "splitNumber": 5,
+                    "min": "auto",
+                    "max": "auto",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "tooltip": {
+                    "show": true,
+                    "textStyle": {
+                        "fontSize": 14,
+                        "fontWeight": "normal",
+                        "color": "#fff"
+                    },
+                    "verticalPadding": 5,
+                    "horizontalPadding": 5,
+                    "backgroundColor": "rgba(0, 0, 0, 0.65)",
+                    "axisPointer": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "#f5dc69",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "legend": {
+                    "show": true,
+                    "position": "top-center",
+                    "orient": "horizontal",
+                    "textStyle": {
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "icon": "",
+                    "itemWidth": 26,
+                    "itemHeight": 14,
+                    "itemGap": 10
+                },
+                "animation": true,
+                "animationDuration": 1000,
+                "animationEasing": "cubicOut",
+                "animationDelay": 0,
+                "barSeriesStyle": {
+                    "barWidth": "auto",
+                    "barCategoryGap": 0,
+                    "borderRadius": {
+                        "leftTop": 0,
+                        "rightTop": 0,
+                        "leftbottom": 0,
+                        "rightbottom": 0
+                    },
+                    "label": {
+                        "show": false
+                    },
+                    "backgroundStyle": {
+                        "show": false
+                    }
+                },
+                "series": [
+                    {
+                        "type": "bar",
+                        "itemStyle": {
+                            "colorType": "1"
+                        }
+                    },
+                    {
+                        "type": "bar"
+                    },
+                    {
+                        "type": "bar"
+                    }
+                ]
+            }
+        },
+        {
+          "id":"q71U3EVC6yCYDnDa0JQ5vsXC",
+            "info": {
+                "name": "折线柱状图",
+                "type": "LineBer",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 29,
+                "y": 325,
+                "w": 380,
+                "h": 220,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "x": {
+                        "map": "",
+                        "status": "success",
+                        "description": "类目"
+                    },
+                    "y": {
+                        "map": "",
+                        "status": "success",
+                        "description": "系列"
+                    },
+                    "v": {
+                        "map": "",
+                        "status": "success",
+                        "description": "值"
+                    }
+                },
+                "config": {
+                    "dataType": "array",
+                    "data": [
+                        {
+                            "x": "2018",
+                            "y": "上海",
+                            "v": 70
+                        },
+                        {
+                            "x": "2019",
+                            "y": "上海",
+                            "v": 55
+                        },
+                        {
+                            "x": "2020",
+                            "y": "上海",
+                            "v": 50
+                        },
+                        {
+                            "x": "2021",
+                            "y": "上海",
+                            "v": 30
+                        },
+                        {
+                            "x": "2022",
+                            "y": "上海",
+                            "v": 50
+                        },
+                        {
+                            "x": "2018",
+                            "y": "深圳",
+                            "v": 50
+                        },
+                        {
+                            "x": "2019",
+                            "y": "深圳",
+                            "v": 70
+                        },
+                        {
+                            "x": "2020",
+                            "y": "深圳",
+                            "v": 60
+                        },
+                        {
+                            "x": "2021",
+                            "y": "深圳",
+                            "v": 48
+                        },
+                        {
+                            "x": "2022",
+                            "y": "深圳",
+                            "v": 60
+                        },
+                        {
+                            "x": "2018",
+                            "y": "重庆",
+                            "v": 30
+                        },
+                        {
+                            "x": "2019",
+                            "y": "重庆",
+                            "v": 20
+                        },
+                        {
+                            "x": "2020",
+                            "y": "重庆",
+                            "v": 40
+                        },
+                        {
+                            "x": "2021",
+                            "y": "重庆",
+                            "v": 68
+                        },
+                        {
+                            "x": "2022",
+                            "y": "重庆",
+                            "v": 35
+                        },
+                        {
+                            "x": "2018",
+                            "y": "成都",
+                            "v": 40
+                        },
+                        {
+                            "x": "2019",
+                            "y": "成都",
+                            "v": 25
+                        },
+                        {
+                            "x": "2020",
+                            "y": "成都",
+                            "v": 50
+                        },
+                        {
+                            "x": "2021",
+                            "y": "成都",
+                            "v": 60
+                        },
+                        {
+                            "x": "2022",
+                            "y": "成都",
+                            "v": 48
+                        }
+                    ],
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "grid": {
+                    "show": false,
+                    "colors": 1,
+                    "left": 50,
+                    "right": 40,
+                    "top": 50,
+                    "bottom": 50
+                },
+                "xAxis": {
+                    "boundaryGap": true,
+                    "show": true,
+                    "type": "category",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": false
+                    }
+                },
+                "yAxis": {
+                    "show": true,
+                    "splitNumber": 5,
+                    "min": "auto",
+                    "max": "auto",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "tooltip": {
+                    "show": true,
+                    "textStyle": {
+                        "fontSize": 14,
+                        "fontWeight": "normal",
+                        "color": "#fff"
+                    },
+                    "verticalPadding": 5,
+                    "horizontalPadding": 5,
+                    "backgroundColor": "rgba(0, 0, 0, 0.65)",
+                    "axisPointer": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "#f5dc69",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "legend": {
+                    "show": true,
+                    "position": "top-center",
+                    "orient": "horizontal",
+                    "textStyle": {
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "icon": "",
+                    "itemWidth": 26,
+                    "itemHeight": 14,
+                    "itemGap": 10
+                },
+                "animation": true,
+                "animationDuration": 1000,
+                "animationEasing": "cubicOut",
+                "animationDelay": 0,
+                "lineSeriesStyle": {
+                    "smooth": 0,
+                    "showSymbol": true,
+                    "symbol": "circle",
+                    "symbolSize": 10,
+                    "symbolRotate": 0,
+                    "symbolOffsetX": 0,
+                    "symbolOffsetY": 0,
+                    "label": {
+                        "show": false
+                    }
+                },
+                "barSeriesStyle": {
+                    "barWidth": "auto",
+                    "barCategoryGap": 0,
+                    "borderRadius": {
+                        "leftTop": 0,
+                        "rightTop": 0,
+                        "leftbottom": 0,
+                        "rightbottom": 0
+                    },
+                    "label": {
+                        "show": false
+                    },
+                    "backgroundStyle": {
+                        "show": false
+                    }
+                },
+                "series": [
+                    {
+                        "type": "bar",
+                        "itemStyle": {
+                            "colorType": "1"
+                        }
+                    },
+                    {
+                        "type": "bar"
+                    },
+                    {
+                        "type": "line"
+                    }
+                ]
+            }
+        },
+        {
+          "id":"d6tzoenVZmUcr45Aqs63RAeT",
+            "info": {
+                "name": "垂直胶囊柱状图",
+                "type": "StackBar",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 42,
+                "y": 590,
+                "w": 380,
+                "h": 220,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "x": {
+                        "map": "",
+                        "status": "success",
+                        "description": "类目"
+                    },
+                    "y": {
+                        "map": "",
+                        "status": "success",
+                        "description": "系列"
+                    },
+                    "v": {
+                        "map": "",
+                        "status": "success",
+                        "description": "值"
+                    }
+                },
+                "config": {
+                    "dataType": "array",
+                    "data": [
+                        {
+                            "x": "2018",
+                            "y": "上海",
+                            "v": 30
+                        },
+                        {
+                            "x": "2019",
+                            "y": "上海",
+                            "v": 75
+                        },
+                        {
+                            "x": "2020",
+                            "y": "上海",
+                            "v": 20
+                        },
+                        {
+                            "x": "2021",
+                            "y": "上海",
+                            "v": 50
+                        },
+                        {
+                            "x": "2022",
+                            "y": "上海",
+                            "v": 70
+                        },
+                        {
+                            "x": "2018",
+                            "y": "深圳",
+                            "v": 70
+                        },
+                        {
+                            "x": "2019",
+                            "y": "深圳",
+                            "v": 60
+                        },
+                        {
+                            "x": "2020",
+                            "y": "深圳",
+                            "v": 80
+                        },
+                        {
+                            "x": "2021",
+                            "y": "深圳",
+                            "v": 68
+                        },
+                        {
+                            "x": "2022",
+                            "y": "深圳",
+                            "v": 40
+                        },
+                        {
+                            "x": "2018",
+                            "y": "重庆",
+                            "v": 50
+                        },
+                        {
+                            "x": "2019",
+                            "y": "重庆",
+                            "v": 40
+                        },
+                        {
+                            "x": "2020",
+                            "y": "重庆",
+                            "v": 40
+                        },
+                        {
+                            "x": "2021",
+                            "y": "重庆",
+                            "v": 88
+                        },
+                        {
+                            "x": "2022",
+                            "y": "重庆",
+                            "v": 55
+                        },
+                        {
+                            "x": "2018",
+                            "y": "成都",
+                            "v": 60
+                        },
+                        {
+                            "x": "2019",
+                            "y": "成都",
+                            "v": 45
+                        },
+                        {
+                            "x": "2020",
+                            "y": "成都",
+                            "v": 70
+                        },
+                        {
+                            "x": "2021",
+                            "y": "成都",
+                            "v": 80
+                        },
+                        {
+                            "x": "2022",
+                            "y": "成都",
+                            "v": 30
+                        }
+                    ],
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "grid": {
+                    "show": false,
+                    "colors": 1,
+                    "left": 50,
+                    "right": 40,
+                    "top": 50,
+                    "bottom": 50
+                },
+                "xAxis": {
+                    "boundaryGap": true,
+                    "show": true,
+                    "type": "category",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": false
+                    }
+                },
+                "yAxis": {
+                    "show": true,
+                    "splitNumber": 5,
+                    "min": "auto",
+                    "max": "auto",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "tooltip": {
+                    "show": true,
+                    "textStyle": {
+                        "fontSize": 14,
+                        "fontWeight": "normal",
+                        "color": "#fff"
+                    },
+                    "verticalPadding": 5,
+                    "horizontalPadding": 5,
+                    "backgroundColor": "rgba(0, 0, 0, 0.65)",
+                    "axisPointer": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "#f5dc69",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "legend": {
+                    "show": true,
+                    "position": "top-center",
+                    "orient": "horizontal",
+                    "textStyle": {
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "icon": "",
+                    "itemWidth": 26,
+                    "itemHeight": 14,
+                    "itemGap": 10
+                },
+                "animation": true,
+                "animationDuration": 1000,
+                "animationEasing": "cubicOut",
+                "animationDelay": 0,
+                "barSeriesStyle": {
+                    "borderRadius": {
+                        "leftTop": 50,
+                        "rightTop": 50,
+                        "leftbottom": 50,
+                        "rightbottom": 50,
+                        "barCategoryGap": 80
+                    },
+                    "barWidth": 18,
+                    "backgroundStyle": {
+                        "show": true,
+                        "color": "rgba(0, 0, 0, 0)",
+                        "borderWidth": 1,
+                        "borderColor": "#4a5056",
+                        "borderRadius": 50
+                    },
+                    "barCategoryGap": 0,
+                    "label": {
+                        "show": false
+                    }
+                },
+                "series": [
+                    {
+                        "type": "bar",
+                        "itemStyle": {
+                            "colorType": "1"
+                        }
+                    },
+                    {
+                        "type": "bar"
+                    },
+                    {
+                        "type": "bar"
+                    }
+                ]
+            }
+        },
+        {
+          "id":"ChuCoblyuDPMu8BUx8AAQH3M",
+            "info": {
+                "name": "基础折线图",
+                "type": "BaseLine",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 401,
+                "y": 82,
+                "w": 380,
+                "h": 220,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "x": {
+                        "map": "",
+                        "status": "success",
+                        "description": "类目"
+                    },
+                    "y": {
+                        "map": "",
+                        "status": "success",
+                        "description": "系列"
+                    },
+                    "v": {
+                        "map": "",
+                        "status": "success",
+                        "description": "值"
+                    }
+                },
+                "config": {
+                    "dataType": "array",
+                    "data": [
+                        {
+                            "x": "2017",
+                            "y": "上海",
+                            "v": 85
+                        },
+                        {
+                            "x": "2018",
+                            "y": "上海",
+                            "v": 50
+                        },
+                        {
+                            "x": "2019",
+                            "y": "上海",
+                            "v": 89
+                        },
+                        {
+                            "x": "2020",
+                            "y": "上海",
+                            "v": 48
+                        },
+                        {
+                            "x": "2021",
+                            "y": "上海",
+                            "v": 25
+                        },
+                        {
+                            "x": "2022",
+                            "y": "上海",
+                            "v": 49
+                        },
+                        {
+                            "x": "2017",
+                            "y": "深圳",
+                            "v": 10
+                        },
+                        {
+                            "x": "2018",
+                            "y": "深圳",
+                            "v": 36
+                        },
+                        {
+                            "x": "2019",
+                            "y": "深圳",
+                            "v": 36
+                        },
+                        {
+                            "x": "2020",
+                            "y": "深圳",
+                            "v": 75
+                        },
+                        {
+                            "x": "2021",
+                            "y": "深圳",
+                            "v": 70
+                        },
+                        {
+                            "x": "2022",
+                            "y": "深圳",
+                            "v": 100
+                        },
+                        {
+                            "x": "2017",
+                            "y": "重庆",
+                            "v": 30
+                        },
+                        {
+                            "x": "2018",
+                            "y": "重庆",
+                            "v": 30
+                        },
+                        {
+                            "x": "2019",
+                            "y": "重庆",
+                            "v": 20
+                        },
+                        {
+                            "x": "2020",
+                            "y": "重庆",
+                            "v": 40
+                        },
+                        {
+                            "x": "2021",
+                            "y": "重庆",
+                            "v": 68
+                        },
+                        {
+                            "x": "2022",
+                            "y": "重庆",
+                            "v": 35
+                        },
+                        {
+                            "x": "2017",
+                            "y": "成都",
+                            "v": 40
+                        },
+                        {
+                            "x": "2018",
+                            "y": "成都",
+                            "v": 40
+                        },
+                        {
+                            "x": "2019",
+                            "y": "成都",
+                            "v": 25
+                        },
+                        {
+                            "x": "2020",
+                            "y": "成都",
+                            "v": 50
+                        },
+                        {
+                            "x": "2021",
+                            "y": "成都",
+                            "v": 60
+                        },
+                        {
+                            "x": "2022",
+                            "y": "成都",
+                            "v": 48
+                        }
+                    ],
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "grid": {
+                    "show": false,
+                    "colors": 1,
+                    "left": 50,
+                    "right": 40,
+                    "top": 50,
+                    "bottom": 50
+                },
+                "xAxis": {
+                    "boundaryGap": false,
+                    "show": true,
+                    "type": "category",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": false
+                    }
+                },
+                "yAxis": {
+                    "show": true,
+                    "splitNumber": 5,
+                    "min": "auto",
+                    "max": "auto",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "tooltip": {
+                    "show": true,
+                    "textStyle": {
+                        "fontSize": 14,
+                        "fontWeight": "normal",
+                        "color": "#fff"
+                    },
+                    "verticalPadding": 5,
+                    "horizontalPadding": 5,
+                    "backgroundColor": "rgba(0, 0, 0, 0.65)",
+                    "axisPointer": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "#f5dc69",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "legend": {
+                    "show": true,
+                    "position": "top-center",
+                    "orient": "horizontal",
+                    "textStyle": {
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "icon": "",
+                    "itemWidth": 26,
+                    "itemHeight": 14,
+                    "itemGap": 10
+                },
+                "animation": true,
+                "animationDuration": 1000,
+                "animationEasing": "cubicOut",
+                "animationDelay": 0,
+                "lineSeriesStyle": {
+                    "smooth": 0,
+                    "showSymbol": true,
+                    "symbol": "circle",
+                    "symbolSize": 10,
+                    "symbolRotate": 0,
+                    "symbolOffsetX": 0,
+                    "symbolOffsetY": 0,
+                    "label": {
+                        "show": false
+                    }
+                },
+                "series": [
+                    {
+                        "type": "line",
+                        "itemStyle": {
+                            "colorType": "1"
+                        }
+                    },
+                    {
+                        "type": "line"
+                    }
+                ]
+            }
+        },
+        {
+          "id":"c3HOGbQFqBcIvItg0PtF7vf5",
+            "info": {
+                "name": "堆叠折线图",
+                "type": "StackLine",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 55,
+                "y": 839,
+                "w": 380,
+                "h": 220,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {
+                    "x": {
+                        "map": "",
+                        "status": "success",
+                        "description": "类目"
+                    },
+                    "y": {
+                        "map": "",
+                        "status": "success",
+                        "description": "系列"
+                    },
+                    "v": {
+                        "map": "",
+                        "status": "success",
+                        "description": "值"
+                    }
+                },
+                "config": {
+                    "dataType": "array",
+                    "data": [
+                        {
+                            "x": "2017",
+                            "y": "上海",
+                            "v": 85
+                        },
+                        {
+                            "x": "2018",
+                            "y": "上海",
+                            "v": 50
+                        },
+                        {
+                            "x": "2019",
+                            "y": "上海",
+                            "v": 89
+                        },
+                        {
+                            "x": "2020",
+                            "y": "上海",
+                            "v": 48
+                        },
+                        {
+                            "x": "2021",
+                            "y": "上海",
+                            "v": 25
+                        },
+                        {
+                            "x": "2022",
+                            "y": "上海",
+                            "v": 49
+                        },
+                        {
+                            "x": "2017",
+                            "y": "深圳",
+                            "v": 10
+                        },
+                        {
+                            "x": "2018",
+                            "y": "深圳",
+                            "v": 36
+                        },
+                        {
+                            "x": "2019",
+                            "y": "深圳",
+                            "v": 36
+                        },
+                        {
+                            "x": "2020",
+                            "y": "深圳",
+                            "v": 75
+                        },
+                        {
+                            "x": "2021",
+                            "y": "深圳",
+                            "v": 70
+                        },
+                        {
+                            "x": "2022",
+                            "y": "深圳",
+                            "v": 100
+                        },
+                        {
+                            "x": "2017",
+                            "y": "重庆",
+                            "v": 30
+                        },
+                        {
+                            "x": "2018",
+                            "y": "重庆",
+                            "v": 30
+                        },
+                        {
+                            "x": "2019",
+                            "y": "重庆",
+                            "v": 20
+                        },
+                        {
+                            "x": "2020",
+                            "y": "重庆",
+                            "v": 40
+                        },
+                        {
+                            "x": "2021",
+                            "y": "重庆",
+                            "v": 68
+                        },
+                        {
+                            "x": "2022",
+                            "y": "重庆",
+                            "v": 35
+                        },
+                        {
+                            "x": "2017",
+                            "y": "成都",
+                            "v": 40
+                        },
+                        {
+                            "x": "2018",
+                            "y": "成都",
+                            "v": 40
+                        },
+                        {
+                            "x": "2019",
+                            "y": "成都",
+                            "v": 25
+                        },
+                        {
+                            "x": "2020",
+                            "y": "成都",
+                            "v": 50
+                        },
+                        {
+                            "x": "2021",
+                            "y": "成都",
+                            "v": 60
+                        },
+                        {
+                            "x": "2022",
+                            "y": "成都",
+                            "v": 48
+                        }
+                    ],
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                },
+                "autoUpdate": false,
+                "updateTime": 1
+            },
+            "options": {
+                "grid": {
+                    "show": false,
+                    "colors": 1,
+                    "left": 50,
+                    "right": 40,
+                    "top": 50,
+                    "bottom": 50
+                },
+                "xAxis": {
+                    "boundaryGap": false,
+                    "show": true,
+                    "type": "category",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": false
+                    }
+                },
+                "yAxis": {
+                    "show": true,
+                    "splitNumber": 5,
+                    "min": "auto",
+                    "max": "auto",
+                    "nameTextStyle": {
+                        "show": false
+                    },
+                    "axisLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(255, 255, 255, 0.5)"
+                        }
+                    },
+                    "axisTick": {
+                        "show": true,
+                        "length": 5,
+                        "lineStyle": {
+                            "type": "solid",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)"
+                        }
+                    },
+                    "axisLabel": {
+                        "show": true,
+                        "interval": "auto",
+                        "rotate": 0,
+                        "margin": 8,
+                        "align": "center",
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "splitLine": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "rgba(233, 228, 228, 0.1)",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "tooltip": {
+                    "show": true,
+                    "textStyle": {
+                        "fontSize": 14,
+                        "fontWeight": "normal",
+                        "color": "#fff"
+                    },
+                    "verticalPadding": 5,
+                    "horizontalPadding": 5,
+                    "backgroundColor": "rgba(0, 0, 0, 0.65)",
+                    "axisPointer": {
+                        "show": true,
+                        "lineStyle": {
+                            "type": "dashed",
+                            "width": 1,
+                            "color": "#f5dc69",
+                            "dashedLength": 4,
+                            "dashedSpace": 4
+                        }
+                    }
+                },
+                "legend": {
+                    "show": true,
+                    "position": "top-center",
+                    "orient": "horizontal",
+                    "textStyle": {
+                        "fontSize": 12,
+                        "fontWeight": "normal",
+                        "color": "#e6e9ed"
+                    },
+                    "icon": "",
+                    "itemWidth": 26,
+                    "itemHeight": 14,
+                    "itemGap": 10
+                },
+                "animation": true,
+                "animationDuration": 1000,
+                "animationEasing": "cubicOut",
+                "animationDelay": 0,
+                "areaStyle": {
+                    "show": true,
+                    "opacity": 0.6
+                },
+                "lineSeriesStyle": {
+                    "smooth": 0,
+                    "showSymbol": true,
+                    "symbol": "circle",
+                    "symbolSize": 10,
+                    "symbolRotate": 0,
+                    "symbolOffsetX": 0,
+                    "symbolOffsetY": 0,
+                    "label": {
+                        "show": false
+                    }
+                },
+                "series": [
+                    {
+                        "type": "line",
+                        "itemStyle": {
+                            "colorType": "1"
+                        }
+                    },
+                    {
+                        "type": "line"
+                    },
+                    {
+                        "type": "line"
+                    }
+                ]
+            }
+        },
+        {
+          "id":"6H1F9X5WAaHjn1CGHRAA80TB",
+            "info": {
+                "name": "边框",
+                "type": "BorderBox",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 18,
+                "y": 76,
+                "w": 380,
+                "h": 220,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "borderImg": "box15"
+            }
+        },
+        {
+          "id":"0kHsYsm9svUFZcgnNvWCke0x",
+            "info": {
+                "name": "边框",
+                "type": "BorderBox",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 37,
+                "y": 304,
+                "w": 371,
+                "h": 243,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "borderImg": "box14"
+            }
+        },
+        {
+          "id":"2d6aghgt4i7W0xJKHcqQQvZp",
+            "info": {
+                "name": "边框",
+                "type": "BorderBox",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 27,
+                "y": 570,
+                "w": 418,
+                "h": 242,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "borderImg": "box8"
+            }
+        },
+        {
+          "id":"UsvakCeJnKDhysY9tkRBQlgz",
+            "info": {
+                "name": "边框",
+                "type": "BorderBox",
+                "ver": "1.0"
+            },
+            "attr": {
+                "x": 57,
+                "y": 828,
+                "w": 380,
+                "h": 220,
+                "deg": 0,
+                "opacity": 1
+            },
+            "data": {
+                "fields": {},
+                "config": {
+                    "dataType": "object",
+                    "data": null,
+                    "apiType": "static",
+                    "useFilter": false,
+                    "filterCode": "return res.data;"
+                }
+            },
+            "options": {
+                "borderImg": "box18"
+            }
+        }
+      ]
+}

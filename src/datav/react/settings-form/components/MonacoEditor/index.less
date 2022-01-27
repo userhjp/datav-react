@@ -1,0 +1,132 @@
+@import '../../../theme.less';
+
+.monaco-editor .margin-view-overlays .codicon-chevron-right,
+.monaco-editor .margin-view-overlays .codicon-chevron-down {
+  font-size: 100% !important;
+}
+
+.monaco-editor .suggest-widget {
+  // TODO: 不生效
+  width: 200px;
+}
+
+.monaco-editor .monaco-editor-overlaymessage {
+  padding-bottom: 8px;
+}
+
+.monaco-editor .monaco-editor-overlaymessage.fadeIn {
+  animation: monaco-fade-in 150ms ease-out;
+}
+
+.monaco-editor .monaco-editor-overlaymessage.fadeOut {
+  animation: monaco-fade-out 100ms ease-out;
+}
+
+.monaco-editor .monaco-editor-overlaymessage .message {
+  padding: 1px 4px;
+}
+
+.monaco-editor .monaco-editor-overlaymessage .anchor {
+  position: absolute;
+  z-index: 1000;
+  width: 0 !important;
+  height: 0 !important;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 8px;
+}
+
+@keyframes monaco-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes monaco-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.datav-editor {
+  position: relative;
+  height: 240px;
+  padding: 0;
+  overflow: hidden;
+  background: @background-color;
+  border: 1px solid @monaco-border-color;
+
+  .datav-editor-actions {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    z-index: 1;
+    width: 45px;
+    font-size: 12px;
+    text-align: right;
+
+    .action-btn {
+      padding: 4px;
+      color: @monaco-action-color;
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.2s;
+
+      &:hover {
+        color: @color-primary;
+      }
+    }
+  }
+
+  &.--read-only {
+    .margin,
+    .monaco-editor-background {
+      background-color: @monaco-bgcolor-readonly;
+    }
+  }
+}
+
+.fullscreen-editor-dialog {
+  z-index: 10000;
+  overflow: hidden;
+
+  .ant-modal {
+    height: 90%;
+    padding: 0;
+  }
+
+  .ant-modal-header,
+  .ant-modal-content {
+    background-color: @monaco-fullscreen-dialog-bgcolor;
+    border-color: @m-input-border-color;
+  }
+
+  .ant-modal-title {
+    color: @m-text-color;
+  }
+
+  .ant-modal-close {
+    color: @m-text-color-grey;
+    &:hover {
+      color: @m-text-color;
+    }
+  }
+
+  .ant-modal-content,
+  .fullscreen-editor-wp {
+    height: 100%;
+  }
+
+  .fullscreen-editor {
+    width: 100%;
+    height: 100%;
+  }
+}

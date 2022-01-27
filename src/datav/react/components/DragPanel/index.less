@@ -1,0 +1,114 @@
+@import '../../theme.less';
+
+.left-sidebar {
+  position: relative;
+  z-index: 90;
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background-color: #0a0b0d;
+  border-right: solid 1px #000;
+
+  &.collapsed {
+    .sidebar-content {
+      width: 45px;
+      border-color: transparent;
+    }
+
+    .toggle-icon {
+      transform: rotateY(180deg);
+    }
+  }
+
+  .sidebar-content {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    width: 300px;
+    overflow-x: hidden;
+    transition: all 0.3s;
+
+    .sidebar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 30px;
+      padding: 0 10px;
+      font-size: @m-font-size;
+      line-height: 30px;
+      background-color: rgb(46, 52, 60);
+    }
+  }
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    font-size: 14px;
+
+    .toggle-icon {
+      cursor: pointer;
+      transition: all 0.2s;
+
+      :hover {
+        color: #1e88df;
+      }
+    }
+  }
+
+  .left-sidebar-tabs {
+    height: 100%;
+
+    .tab-btn {
+      font-size: @m-font-size;
+      line-height: 1.4;
+      text-align: center;
+
+      & > span {
+        margin-right: 0;
+        font-size: 18px;
+      }
+    }
+
+    .ant-tabs-nav {
+      min-width: 46px;
+      background-color: #191c21;
+    }
+
+    & > .ant-tabs-nav .ant-tabs-tab {
+      margin: 0;
+      padding: 14px 10px;
+
+      &.ant-tabs-tab-active {
+        background-color: #14161a;
+      }
+    }
+    
+    .ant-tabs-content {
+      height: 100%;
+    }
+
+    & > .ant-tabs-content-holder {
+      height: 100%;
+      border-left: none;
+      & > .ant-tabs-content > .ant-tabs-tabpane {
+        padding-left: 0;
+      }
+    }
+
+    .ant-tabs-ink-bar {
+      left: 0;
+    }
+  }
+}
+
+.ant-tabs-dropdown .tab-btn {
+  display: flex;
+  align-items: center;
+
+  & > span {
+    padding-right: 8px;
+  }
+}

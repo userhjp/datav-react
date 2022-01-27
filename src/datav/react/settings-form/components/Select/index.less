@@ -1,0 +1,25 @@
+
+@import '../../../theme.less';
+
+// select-dropdown 样式重置
+.datav-dropdown.ant-select-dropdown {
+    padding: 0;
+    background-color: #1f1f1f;
+    border: solid 1px @color-primary;
+  
+    .ant-select-item {
+      min-height: 22px;
+      padding: 1px 12px;
+      color: @m-text-color;
+      font-size: @m-font-size;
+    }
+  
+    .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+      color: @m-text-color;
+      background-color: #111b26;
+    }
+  
+    .ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+      background-color: rgba(255, 255, 255, 0.08);
+    }
+  }

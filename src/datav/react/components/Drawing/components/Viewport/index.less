@@ -1,0 +1,24 @@
+.canvas-panel-wrap {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    // 滚动条里面小方块样式
+    background-color: #434b55;
+    // outline: 1px solid #333;
+    &:hover {
+      background-color: #414344;
+    }
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: #1c222b;
+  }
+}

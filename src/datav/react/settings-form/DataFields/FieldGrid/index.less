@@ -1,0 +1,24 @@
+@border: 1px solid #444546;
+
+.field-wp {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.field-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  margin-top: 10px;
+  border-bottom: @border;
+  border-left: @border;
+
+  .field-item {
+    padding: 6px;
+    border-top: @border;
+    border-right: @border;
+  }
+
+  .field-title {
+    background: rgba(255, 255, 255, 0.03);
+  }
+}

@@ -1,0 +1,141 @@
+@import '../../../theme.less';
+
+.step-title {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 18px;
+
+  &::before {
+    position: absolute;
+    top: 50%;
+    left: -13px;
+    display: block;
+    width: 8px;
+    height: 8px;
+    background: @color-primary;
+    border-radius: 4px;
+    box-shadow: 0 0 4px -2px #000;
+    transform: translateY(-50%);
+    transition: background-color 0.2s;
+    content: '';
+  }
+
+  &::after {
+    position: absolute;
+    top: 10px;
+    right: 0;
+    width: 300px;
+    height: 1px;
+    background: rgba(128, 128, 128, 0.4);
+    transform: scaleY(0.5);
+    content: '';
+  }
+
+  &.--error::before {
+    background: #f43;
+  }
+
+  &.--disabled::before {
+    background: #444;
+  }
+}
+
+.ds-response-btn {
+  display: inline-block;
+  margin-top: 8px;
+  color: #2681ff;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: #409fff;
+  }
+}
+
+.filter-editor {
+  border: none;
+}
+
+.filter-edit {
+  overflow: hidden;
+  transition: height 0.3s ease-out;
+
+  .fake-code {
+    height: 28px;
+    margin-bottom: 0;
+    padding-left: 8px;
+    color: #ccc;
+    font-family: Menlo-Regular, monospace;
+    line-height: 28px;
+    background: #0e1013;
+
+    .--keyword {
+      color: #569cd6;
+    }
+  }
+}
+
+.data-settings-drawer {
+  .ant-drawer-body {
+    overflow-x: hidden;
+
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+  }
+}
+
+.editor-popover {
+  width: 400px;
+  max-width: 400px;
+
+  .ant-tooltip-inner {
+    padding: 10px;
+    background-color: #1d2126;
+    border-radius: 0;
+
+    & > div {
+      border: 1px solid #282f3a;
+    }
+  }
+
+  .ant-tooltip-arrow-content {
+    width: 10px;
+    height: 10px;
+  }
+}
+
+.url-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+
+  .api-help {
+    color: @color-primary;
+  }
+}
+
+.url-info-text {
+  margin-bottom: 10px;
+}
+
+.config-layout {
+  .ant-input,
+  .ant-select {
+    background: #0e1013;
+  }
+}
+
+.data-settings-drawer .ant-select.apitype-selectd {
+  .ant-select-selector {
+    height: 30px;
+    line-height: 30px;
+    .ant-select-selection-item {
+      height: 30px;
+      line-height: 27px;
+    }
+  }
+}

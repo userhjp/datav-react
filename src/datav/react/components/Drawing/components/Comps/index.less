@@ -1,0 +1,49 @@
+.drop-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &.putdown {
+    &::after {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: dashed 1px #2483ff;
+      content: '';
+    }
+  }
+}
+
+.widget-container {
+  position: absolute;
+  z-index: 1;
+  // will-change: transform;
+}
+
+.transform-handler {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+
+  .widget-com {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+
+    .wrapper-event-disable {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
+  // &.hided {
+  //   .transform-bg,
+  //   i[class$="-handler"] {
+  //     display: none;
+  //   }
+  // }
+}

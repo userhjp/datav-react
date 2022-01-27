@@ -1,0 +1,20 @@
+@import '../../../theme.less';
+
+.zoom-mode {
+  .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
+    color: #fff;
+    background-color: @color-primary;
+  }
+
+  .ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+    border-right-color: #1765ad !important;
+  }
+
+  .ant-radio-button-wrapper:hover {
+    border-color: @color-primary;
+  }
+
+  .ant-radio-button-wrapper {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,59 @@
+.bg-img {
+  .upload-drag-icon {
+    margin-bottom: 8px;
+
+    .anticon {
+      color: #666;
+      font-size: 48px;
+    }
+  }
+
+  .noimg-cover {
+    padding: 16px 0;
+  }
+
+  .upload-text {
+    color: #999;
+    font-weight: normal;
+    font-size: 12px;
+  }
+
+  .image-show {
+    position: relative;
+    height: 108px;
+    padding: 10px 8px;
+
+    img {
+      height: 100%;
+    }
+
+    .upload-cover {
+      position: absolute;
+      top: 4px;
+      display: none;
+      width: 91%;
+      height: 98px;
+      color: #00b8d6;
+      font-size: 26px;
+      line-height: 98px;
+      background: rgba(0, 0, 0, 0.6);
+    }
+  }
+
+  .image-show:hover .upload-cover {
+    display: block;
+  }
+
+  .ant-upload.ant-upload-drag .ant-upload {
+    padding: 0;
+  }
+
+  .ant-upload.ant-upload-drag {
+    background: rgba(255, 255, 255, 0.04) !important;
+    border-color: #434343;
+  }
+
+  .ant-input-affix-wrapper input {
+    padding-left: 2px !important;
+  }
+}

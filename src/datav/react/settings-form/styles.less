@@ -1,0 +1,48 @@
+@import '../theme.less';
+
+.dv-settings-form {
+  position: relative;
+  z-index: 9;
+  height: 100%;
+  overflow: hidden;
+  background: @background-color;
+  border-left: solid 1px #000;
+  transition: all 0.3s;
+
+  .ant-formily-layout, form, .my-form-tab {
+    height: 100%;
+  }
+
+  // 样式重置----------------------------------------------
+  .my-form-tab  {
+    .ant-tabs-content-holder .ant-tabs-tabpane {
+      padding: 0 10px 0 20px;
+  
+      &.pl_10 {
+        padding-left: 10px;
+      }
+    }
+    & > .ant-tabs-nav > .ant-tabs-nav-wrap {
+      & > .ant-tabs-nav-list {
+        width: 100%;
+        .ant-tabs-tab {
+          flex: 1;
+          justify-content: center;
+        }
+      }
+    }
+
+    & > .ant-tabs-nav > .ant-tabs-nav-operations {
+      display: none;
+    }
+
+    & > .ant-tabs-content-holder {
+      padding-bottom: 30px;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+  }
+}

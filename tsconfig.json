@@ -1,0 +1,48 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "outDir": "build",
+    "module": "commonjs",
+    "target": "es5",
+    "importHelpers": true,
+    "moduleResolution": "node",
+    "jsx": "react-jsx",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "baseUrl": "./",
+    "strict": false,
+    "alwaysStrict": true, // 编译后js是否严格模式
+    "noImplicitThis": false, // 不允许不明确的this
+    "strictNullChecks": false, // 严格检查空值
+    "noImplicitAny": false, // 不允许隐式 any
+    "strictBindCallApply": false,
+    "noEmit": true, 
+    "removeComments": true,
+    "suppressImplicitAnyIndexErrors":false,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitReturns": true,
+    "downlevelIteration": true,
+    "noUnusedLocals": false,
+    "allowJs": true,
+    "skipLibCheck": true,
+    "experimentalDecorators": true,
+    "paths": {
+      "@/*": ["src/*"],
+    },
+  },
+  "exclude": [
+    "node_modules",
+    "lib",
+    "dist",
+  ],
+  "include": [
+    "mock/*",
+    "mock/**/*",
+    "src/**/*",
+    "typings/**/*",
+    "typings.d.ts",
+    "config/"
+  ]
+}

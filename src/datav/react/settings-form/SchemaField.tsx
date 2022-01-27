@@ -1,0 +1,47 @@
+import { createSchemaField } from '@formily/react';
+import { FormItem, FormTab, FormGrid, Input, Switch, Radio, ArrayItems, Space } from '@formily/antd';
+import {
+  Select,
+  NumberPicker,
+  BgImg,
+  ColorPicker,
+  Divider,
+  Empty,
+  FormTitle,
+  USlider,
+  WidgetInfo,
+  ZoomModeRadio,
+  CutCover,
+  MonacoEditor,
+  ArrayTabs,
+  MyFormCollapse,
+  BorderSelect,
+} from './components';
+
+export const SchemaField = createSchemaField({
+  components: {
+    FormItem,
+    FormTab,
+    FormGrid,
+    Select,
+    Input,
+    NumberPicker,
+    BgImg,
+    ColorPicker,
+    Divider,
+    Empty,
+    FormTitle,
+    USlider,
+    WidgetInfo,
+    ZoomMode: ZoomModeRadio,
+    CutCover,
+    MonacoEditor,
+    Switch,
+    ArrayTabs,
+    MyFormCollapse,
+    BorderSelect,
+    Radio,
+    ArrayItems,
+    Space,
+  },
+});

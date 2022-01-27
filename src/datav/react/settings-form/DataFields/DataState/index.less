@@ -1,0 +1,56 @@
+.data-status {
+  .data-success::before,
+  .data-failed::before {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    margin-right: 4px;
+    vertical-align: middle;
+    content: '';
+  }
+
+  .data-success::before {
+    background-color: #1890ff;
+  }
+
+  .data-failed::before {
+    background-color: #f27a24;
+  }
+
+  .status-icon {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    background: #1996df;
+    border-radius: 1px;
+    transition: 0.2s;
+
+    &.validating {
+      animation: loading-validating 1s infinite ease-in-out;
+
+      &:nth-child(1) {
+        animation-delay: 0.25s;
+      }
+
+      &:nth-child(2) {
+        animation-delay: 0.5s;
+      }
+    }
+  }
+
+  @keyframes loading-validating {
+    0% {
+      opacity: 0;
+    }
+
+    50% {
+      opacity: 1;
+    }
+
+    100% {
+      opacity: 0;
+    }
+  }
+}
