@@ -9,7 +9,7 @@
         "-r",
         "${workspaceFolder}/node_modules/ts-node/register",
       ],
-      "args": ["${workspaceFolder}/config/devServer.ts"],
+      // "args": ["${workspaceFolder}/config/devServer.ts"],
       "cwd": "${workspaceFolder}",
       "protocol": "inspector",
       "env": {

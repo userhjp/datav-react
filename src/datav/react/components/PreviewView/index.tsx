@@ -4,8 +4,8 @@ import { autorun } from '@formily/reactive';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ZoomMode } from '@/datav/shared';
 import { ComType } from '@/datav/interface';
-import { Widget } from '@/datav/react/widgets';
 import { useOperation, useScreen } from '@/datav/react/hooks';
+import { Widget } from '../Drawing/components/RenderWidget';
 import './index.less';
 
 const resizeAuto = (width: number, height: number): React.CSSProperties => {

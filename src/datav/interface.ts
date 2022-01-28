@@ -45,7 +45,7 @@ export interface ComType<T = { [key: string]: any }> {
 export interface IScreenProps {
   width: number;
   height: number;
-  scale: number;
+  // scale: number;
   backgroundColor: string;
   backgroundImg: string;
   grid: number;

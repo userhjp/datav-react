@@ -15,7 +15,7 @@ const Workspace: React.FC = observer(() => {
     background: screenProps?.backgroundImg ? `url(${screenProps.backgroundImg})` : 'none',
     width: screenProps.width,
     height: screenProps.height,
-    transform: `scale(${screenProps.scale})`,
+    transform: `scale(${screen.scale})`,
     backgroundColor: screenProps.backgroundColor,
   };
 
@@ -24,8 +24,8 @@ const Workspace: React.FC = observer(() => {
   };
 
   const containerStyle: React.CSSProperties = {
-    width: screenProps.width * screenProps.scale + 100,
-    height: screenProps.height * screenProps.scale + 100,
+    width: screenProps.width * screen.scale + 100,
+    height: screenProps.height * screen.scale + 100,
     position: 'absolute',
   };
 

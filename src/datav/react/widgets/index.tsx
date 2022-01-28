@@ -1,56 +1,18 @@
-import { observer } from '@formily/react';
-import { toJS } from '@formily/reactive';
-import React, { Suspense } from 'react';
-import { WidgetLoading } from '../components';
-import { useReqData } from '@/datav/react/hooks';
-import { ComType, WidgetConfig } from '@/datav/interface';
-import { cancelIdle, requestIdle } from '@/datav/shared';
-import { GlobalRegistry } from '@/datav/core/registry';
-import './index.less';
-
-const GlobalState = {
-  idleRequest: null,
-};
+import React from 'react';
+import { WidgetConfig } from '@/datav/interface';
 
 /** 自动引入所有组件 */
-const widgets: { [key: string]: any } = {};
+const WIDGETS: { [key: string]: any } = {};
 const modulesFiles = require.context('./', true, /\.tsx$/, 'lazy');
 modulesFiles.keys().forEach((fileName) => {
   const name = fileName.split('/');
   if (fileName === './index.tsx' || fileName.match('components')) return;
   const compName = name[name.length - 2];
-  widgets[compName] = React.lazy(async () => {
+  WIDGETS[compName] = React.lazy(async () => {
     // await waitTime(1000); // 模拟懒加载延时
     return modulesFiles(fileName);
   });
 });
-
-GlobalRegistry.setDesignerWidgets(widgets);
-
-const Widget: React.FC<{ comp: ComType }> = observer(
-  ({ comp }) => {
-    if (!comp.info || !comp.info.type) return <div />;
-    const Component = widgets[comp.info.type];
-    if (!Component) return <div />;
-    const data = useReqData(comp.id, comp.data);
-    const options = toJS(comp.options);
-
-    if (!options) return <WidgetLoading />;
-    return (
-      <Suspense fallback={<WidgetLoading />}>
-        <Component options={options} data={data} />
-      </Suspense>
-    );
-  },
-  {
-    scheduler: (update) => {
-      cancelIdle(GlobalState.idleRequest);
-      GlobalState.idleRequest = requestIdle(update, {
-        timeout: 500,
-      });
-    },
-  }
-);
 
 /**
  * 自动引入组件Config文件，约定跟组件同目录下的config.ts 并且以默认导出方式导出配置文件
@@ -69,8 +31,4 @@ configFiles.keys().forEach((fileName) => {
   }
 });
 
-const getComConfig = (type: string) => {
-  return COMPONENT_CONFIG[(type || '').toLowerCase()];
-};
-
-export { Widget, getComConfig };
+export { WIDGETS, COMPONENT_CONFIG };

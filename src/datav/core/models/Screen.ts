@@ -16,6 +16,7 @@ export interface IScreen {
 export class Screen {
   props: IScreenProps;
   engine: Engine;
+  scale = 1;
   // type: ScreenType;
   // flip = false;
   constructor(screen: IScreen) {
@@ -28,6 +29,7 @@ export class Screen {
   makeObservable() {
     define(this, {
       props: observable,
+      scale: observable,
       setScale: action,
       setSize: action,
       // setFlip: action,
@@ -35,7 +37,7 @@ export class Screen {
   }
 
   setScale(scale: number) {
-    this.props.scale = scale;
+    this.scale = scale;
   }
 
   setSize(width?: number, height?: number) {
@@ -50,14 +52,11 @@ export class Screen {
   // setFlip(flip: boolean) {
   //   this.flip = flip;
   // }
-  get scale() {
-    return this.props.scale;
-  }
 
   static defaultProps: IScreenProps = {
     width: 1920,
     height: 1080,
-    scale: 1,
+    // scale: 1,
     backgroundColor: '#0e2a42',
     backgroundImg: '',
     grid: 8,

@@ -39,12 +39,12 @@ const Ruler: React.FC = observer(() => {
       const height = viewport.scrollHeight;
       const hWidth = Math.max(width, cw);
       if (hRuler.current) {
-        hRuler.current.setSize(hWidth, 20, screen.props.scale);
+        hRuler.current.setSize(hWidth, 20, screen.scale);
       } else {
         hRuler.current = new RulerBuilder(hRulerWpRef.current, {
           direction: 'TB',
           width: hWidth,
-          scale: screen.props.scale,
+          scale: screen.scale,
           coorChange: (action, nCoor, oCoor) => {
             if (action === 'add') {
               toolbar.setPanelState({ type: PanelType.referline, value: true });
@@ -62,12 +62,12 @@ const Ruler: React.FC = observer(() => {
       }
 
       if (vRuler.current) {
-        vRuler.current.setSize(height, 20, screen.props.scale);
+        vRuler.current.setSize(height, 20, screen.scale);
       } else {
         vRuler.current = new RulerBuilder(vRulerWpRef.current, {
           direction: 'LR',
           width: height,
-          scale: screen.props.scale,
+          scale: screen.scale,
           coorChange: (action, nCoor, oCoor) => {
             if (action === 'add') {
               guideLine.v.push(nCoor);

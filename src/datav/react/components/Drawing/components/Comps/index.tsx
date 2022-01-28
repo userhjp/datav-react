@@ -3,12 +3,13 @@ import { Observer, observer } from '@formily/react';
 import { useCallback, useMemo } from 'react';
 import { message } from 'antd';
 import { useDrop } from 'ahooks';
-import { getComConfig, Widget } from '@/datav/react/widgets';
 import { useOperation, useViewport } from '@/datav/react/hooks';
 import { ComType } from '@/datav/interface';
 import { useDesigner, useSelection } from '@/datav/react/hooks';
 import { ContextMenu } from '@/datav/react/components';
 import './index.less';
+import { GlobalRegistry } from '@/datav/core/registry';
+import { Widget } from '../RenderWidget';
 
 export const Comps: React.FC = () => {
   const operation = useOperation();
@@ -18,7 +19,7 @@ export const Comps: React.FC = () => {
 
   const addBox = useCallback(
     ({ x = 0, y = 0, name, type }) => {
-      const com = getComConfig(type);
+      const com = GlobalRegistry.getDesignerConfig(type);
       if (!com) {
         message.info('开发中，敬请期待...');
         return;

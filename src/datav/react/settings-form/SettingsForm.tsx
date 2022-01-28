@@ -5,7 +5,6 @@ import { Tabs } from 'antd';
 import { Empty, WidgetInfo } from './components';
 import { baseAttrSchema } from '../schema/baseAttrSchema';
 import DataFields from './DataFields';
-import { getComConfig } from '../widgets';
 import { useToolbar, useScreen } from '@/datav/react/hooks';
 import { cancelIdle, requestIdle } from '@/datav/shared';
 import { useCurrentNode } from '@/datav/react/hooks/useCurrentNode';
@@ -18,6 +17,7 @@ import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';
 import { SettingsFormContext } from './context';
 import './styles.less';
+import { GlobalRegistry } from '@/datav/core/registry';
 
 const GlobalState = {
   idleRequest: null,
@@ -58,7 +58,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     //     form.removeEffects('pageChange');
     //   };
     // }, []);
-    const compSchema = currentNode ? getComConfig(currentNode.info.type) : null;
+    const compSchema = currentNode ? GlobalRegistry.getDesignerWidget(currentNode.info.type) : null;
     const tabBarStyle: React.CSSProperties = useMemo(() => {
       return {
         height: 30,
