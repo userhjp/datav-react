@@ -1,6 +1,6 @@
 import { useDesigner, useScreen } from '@/datav/react/hooks';
 import { observer } from '@formily/react';
-import React from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { ToolWidget } from '../../ToolWidget';
 import { Comps } from '../Comps';
 import './index.less';
@@ -9,6 +9,7 @@ const Workspace: React.FC = observer(() => {
   const screen = useScreen();
   const designer = useDesigner();
   const screenProps = screen.props;
+  const domRef = useRef<HTMLDivElement>();
 
   const style: React.CSSProperties = {
     background: screenProps?.backgroundImg ? `url(${screenProps.backgroundImg})` : 'none',
@@ -28,9 +29,16 @@ const Workspace: React.FC = observer(() => {
     position: 'absolute',
   };
 
+  useLayoutEffect(() => {
+    // 解决初始化时因为动画未完成导致计算画布高宽失败
+    requestAnimationFrame(() => {
+      domRef.current.style.transition = '0.2s all ease-in-out';
+    });
+  }, []);
+
   return (
     <div style={containerStyle}>
-      <div id="canvas-coms" {...canvasNodeAttrName} className="canvas-panel" style={style}>
+      <div ref={domRef} {...canvasNodeAttrName} className="canvas-panel" style={style}>
         <ToolWidget />
         <Comps />
       </div>
