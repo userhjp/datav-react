@@ -59,7 +59,7 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
   };
 
   const cutCover = async () => {
-    const dom = document.getElementById('canvas-coms');
+    const dom: HTMLDivElement = document.querySelector('*[canvas-drawing=root]');
     if (!dom || loading.current) {
       return;
     }
