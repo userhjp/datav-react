@@ -1,16 +1,19 @@
 import { observable } from '@formily/reactive';
+import { IDesignerIcons, IDesignerIconsStore, IDesignerWidgets, IDesignerWidgetStore } from './types';
 
-export interface IDesignerStore<P> {
-  value: P;
-}
-
-export type IDesignerIcons = Record<string, any>;
-
-export type IDesignerIconsStore = IDesignerStore<IDesignerIcons>;
+const DESIGNER_WIDGETS_STORE: IDesignerWidgetStore = observable.ref({});
 
 const DATAV_ICONS_STORE: IDesignerIconsStore = observable.ref({});
 
 const DATAV_GlobalRegistry = {
+  getDesignerWidgets: (name: string) => {
+    return DESIGNER_WIDGETS_STORE[name];
+  },
+
+  setDesignerWidgets: (widgets: IDesignerWidgets) => {
+    Object.assign(DESIGNER_WIDGETS_STORE, widgets);
+  },
+
   getDesignerIcon: (name: string) => {
     return DATAV_ICONS_STORE[name];
   },
@@ -22,4 +25,4 @@ const DATAV_GlobalRegistry = {
 
 export type IDesignerRegistry = typeof DATAV_GlobalRegistry;
 
-export const GlobalRegistry: IDesignerRegistry = window['__DATAV_GlobalRegistry__'] || DATAV_GlobalRegistry;
+export const GlobalRegistry: IDesignerRegistry = DATAV_GlobalRegistry;

@@ -5,6 +5,7 @@ import { WidgetLoading } from '../components';
 import { useReqData } from '@/datav/react/hooks';
 import { ComType, WidgetConfig } from '@/datav/interface';
 import { cancelIdle, requestIdle } from '@/datav/shared';
+import { GlobalRegistry } from '@/datav/core/registry';
 import './index.less';
 
 const GlobalState = {
@@ -23,6 +24,8 @@ modulesFiles.keys().forEach((fileName) => {
     return modulesFiles(fileName);
   });
 });
+
+GlobalRegistry.setDesignerWidgets(widgets);
 
 const Widget: React.FC<{ comp: ComType }> = observer(
   ({ comp }) => {

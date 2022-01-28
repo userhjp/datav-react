@@ -2,6 +2,18 @@ import { PageType } from '../interface';
 import { Event, IEventProps } from '../shared';
 import { Engine, Shortcut } from './models';
 
+export interface IDesignerStore<P> {
+  value: P;
+}
+
+export type IDesignerIcons = Record<string, any>;
+
+export type IDesignerWidgets = Record<string, any>;
+
+export type IDesignerIconsStore = IDesignerStore<IDesignerIcons>;
+
+export type IDesignerWidgetStore = IDesignerStore<IDesignerWidgets>;
+
 export type IEngineProps<T = Event> = IEventProps<T> & {
   shortcuts?: Shortcut[];
   /** 画布节点dom属性名 */
