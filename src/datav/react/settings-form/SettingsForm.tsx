@@ -16,6 +16,7 @@ import { ComType, IScreenProps } from '@/datav/interface';
 import { EventFields } from './EventsFields';
 import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';
+import { SettingsFormContext } from './context';
 import './styles.less';
 
 const GlobalState = {
@@ -75,35 +76,45 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     return (
       <div onKeyDown={(e) => e.stopPropagation()} style={settingsStyle} className="dv-settings-form">
         <div style={{ width: 310, height: '100%' }}>
-          <Form form={form} colon={false} labelWidth={84} labelAlign="left" wrapperAlign="right" feedbackLayout="none" tooltipLayout="text">
-            {currentNode && compSchema ? (
-              <>
-                <Field name="info" component={[WidgetInfo, {}]} />
-                <Tabs className="my-form-tab" animated={false} centered tabBarStyle={tabBarStyle}>
-                  <Tabs.TabPane key="1" tab="属性" forceRender>
-                    <SchemaField name="attr" schema={baseAttrSchema} components={props.components} scope={scope} />
-                    <SchemaField name="options" schema={compSchema.attr} components={props.components} scope={scope} />
-                  </Tabs.TabPane>
-                  <Tabs.TabPane key="2" tab="数据" forceRender className="pl_10">
-                    {compSchema.data ? (
-                      <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />
-                    ) : (
-                      <Empty title="该组件无需配置数据" />
-                    )}
-                  </Tabs.TabPane>
-                  <Tabs.TabPane key="3" tab="交互" forceRender className="pl_10">
-                    {compSchema.events ? (
-                      <ObjectField key={`${currentNode.id}`} name="event" component={[EventFields]} />
-                    ) : (
-                      <Empty title="该组件没有交互事件" />
-                    )}
-                  </Tabs.TabPane>
-                </Tabs>
-              </>
-            ) : (
-              <SchemaField schema={pageSchema} components={props.components} scope={scope} />
-            )}
-          </Form>
+          <SettingsFormContext.Provider value={props}>
+            <Form
+              form={form}
+              colon={false}
+              labelWidth={84}
+              labelAlign="left"
+              wrapperAlign="right"
+              feedbackLayout="none"
+              tooltipLayout="text"
+            >
+              {currentNode && compSchema ? (
+                <>
+                  <Field name="info" component={[WidgetInfo, {}]} />
+                  <Tabs className="my-form-tab" animated={false} centered tabBarStyle={tabBarStyle}>
+                    <Tabs.TabPane key="1" tab="属性" forceRender>
+                      <SchemaField name="attr" schema={baseAttrSchema} components={props.components} scope={scope} />
+                      <SchemaField name="options" schema={compSchema.attr} components={props.components} scope={scope} />
+                    </Tabs.TabPane>
+                    <Tabs.TabPane key="2" tab="数据" forceRender className="pl_10">
+                      {compSchema.data ? (
+                        <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />
+                      ) : (
+                        <Empty title="该组件无需配置数据" />
+                      )}
+                    </Tabs.TabPane>
+                    <Tabs.TabPane key="3" tab="交互" forceRender className="pl_10">
+                      {compSchema.events ? (
+                        <ObjectField key={`${currentNode.id}`} name="event" component={[EventFields]} />
+                      ) : (
+                        <Empty title="该组件没有交互事件" />
+                      )}
+                    </Tabs.TabPane>
+                  </Tabs>
+                </>
+              ) : (
+                <SchemaField schema={pageSchema} components={props.components} scope={scope} />
+              )}
+            </Form>
+          </SettingsFormContext.Provider>
         </div>
       </div>
     );

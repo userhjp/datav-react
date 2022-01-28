@@ -3,9 +3,10 @@ import { message, Upload } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 import html2canvas from 'html2canvas';
-import React, { useRef, useState } from 'react';
-import './index.less';
+import React, { useContext, useRef, useState } from 'react';
 import { IconWidget } from '@/datav/react/components';
+import './index.less';
+import { SettingsFormContext } from '../../context';
 
 type CutCoverProps = {
   value: string;
@@ -15,6 +16,7 @@ type CutCoverProps = {
 export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
   const [fileList, setFileList] = useState([]);
   const [base64Url, setBase64Url] = useState('');
+  const context = useContext(SettingsFormContext);
   const loading = useRef(false);
 
   const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
@@ -41,7 +43,7 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
     onChange(url);
     if (url) {
       const filename = url.substring(url.lastIndexOf('/') + 1).toLowerCase();
-      const fullUrl = !url.startsWith('https://') && !url.startsWith('http://') ? UPLOAD_URL + url : url;
+      const fullUrl = !url.startsWith('https://') && !url.startsWith('http://') ? context.uploadAction + url : url;
       setFileList([
         {
           uid: 1,
@@ -105,7 +107,7 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
           name="file"
           maxCount={1}
           showUploadList={false}
-          action={UPLOAD_URL}
+          action={context.uploadAction}
           customRequest={rcUpload}
           onChange={handleChange}
         >

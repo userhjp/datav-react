@@ -2,9 +2,10 @@ import rcUpload from '../../rc-upload';
 import { Input } from '@formily/antd';
 import { Upload, message, Modal } from 'antd';
 import { UploadFile, UploadChangeParam } from 'antd/lib/upload/interface';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { IconWidget } from '@/datav/react/components';
 import './index.less';
+import { SettingsFormContext } from '../../context';
 
 const { Dragger } = Upload;
 
@@ -15,6 +16,7 @@ type BgImgProps = {
 
 export const BgImg: React.FC<BgImgProps> = (props) => {
   const { onChange, value } = props;
+  const context = useContext(SettingsFormContext);
   const [fileList, setFileList] = useState([]);
 
   const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
@@ -40,7 +42,7 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
     onChange(url);
     if (url) {
       const filename = url.substring(url.lastIndexOf('/') + 1).toLowerCase();
-      const fullUrl = !url.startsWith('https://') && !url.startsWith('http://') ? UPLOAD_URL + url : url;
+      const fullUrl = !url.startsWith('https://') && !url.startsWith('http://') ? context.uploadAction + url : url;
       setFileList([
         {
           uid: 1,
@@ -75,7 +77,7 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
       <div>
         <Dragger
           accept="image/*"
-          action={UPLOAD_URL}
+          action={context.uploadAction}
           fileList={fileList}
           defaultFileList={fileList}
           maxCount={1}
