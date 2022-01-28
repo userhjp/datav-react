@@ -16,11 +16,11 @@ const DATAV_ICONS_STORE: IDesignerIconsStore = observable.ref({});
 
 const DATAV_GlobalRegistry = {
   getDesignerConfig: (name: string) => {
-    return DESIGNER_CONFIG_STORE[name];
+    return DESIGNER_CONFIG_STORE[name.toLowerCase()];
   },
 
-  setDesignerConfig: (widgets: IDesignerConfig) => {
-    Object.assign(DESIGNER_CONFIG_STORE, widgets);
+  setDesignerConfig: (configs: IDesignerConfig) => {
+    Object.assign(DESIGNER_CONFIG_STORE, configs);
   },
 
   getDesignerWidget: (name: string) => {

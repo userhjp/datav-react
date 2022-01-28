@@ -16,8 +16,8 @@ import { EventFields } from './EventsFields';
 import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';
 import { SettingsFormContext } from './context';
-import './styles.less';
 import { GlobalRegistry } from '@/datav/core/registry';
+import './styles.less';
 
 const GlobalState = {
   idleRequest: null,
@@ -58,7 +58,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     //     form.removeEffects('pageChange');
     //   };
     // }, []);
-    const compSchema = currentNode ? GlobalRegistry.getDesignerWidget(currentNode.info.type) : null;
+    const compSchema = currentNode ? GlobalRegistry.getDesignerConfig(currentNode.info.type) : null;
     const tabBarStyle: React.CSSProperties = useMemo(() => {
       return {
         height: 30,
