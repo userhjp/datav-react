@@ -5,17 +5,34 @@ import { UploadFile } from 'antd/lib/upload/interface';
 import html2canvas from 'html2canvas';
 import React, { useContext, useRef, useState } from 'react';
 import { IconWidget } from '@/datav/react/components';
-import './index.less';
 import { SettingsFormContext } from '../../context';
+import './index.less';
 
 type CutCoverProps = {
   value: string;
   onChange: (value: string) => void;
 };
 
+// 将base64转换为blob
+// function dataURLtoBlob(dataurl) {
+//   const arr = dataurl.split(',');
+//   const mime = arr[0].match(/:(.*?);/)[1];
+//   const bstr = atob(arr[1]);
+//   let n = bstr.length;
+//   const u8arr = new Uint8Array(n);
+//   while (n--) {
+//     u8arr[n] = bstr.charCodeAt(n);
+//   }
+//   return new Blob([u8arr], { type: mime });
+// }
+// // 将blob转换为file
+// function blobToFile(theBlob: Blob, fileName: string) {
+//   theBlob['lastModifiedDate'] = new Date();
+//   theBlob['name'] = fileName;
+//   return theBlob;
+// }
+
 export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
-  const [fileList, setFileList] = useState([]);
-  const [base64Url, setBase64Url] = useState('');
   const context = useContext(SettingsFormContext);
   const loading = useRef(false);
 
@@ -36,34 +53,11 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
       const newFiles: any[] = filelist.filter((f) => !f.error && f.url).map((m) => m.url);
       if (onChange) onChange(newFiles[0] || '');
     }
-    setFileList(filelist);
   };
 
-  const valueChange = (url: string) => {
-    onChange(url);
-    if (url) {
-      const filename = url.substring(url.lastIndexOf('/') + 1).toLowerCase();
-      const fullUrl = !url.startsWith('https://') && !url.startsWith('http://') ? context.uploadAction + url : url;
-      setFileList([
-        {
-          uid: 1,
-          name: filename,
-          status: 'done',
-          url,
-          fullUrl,
-        },
-      ]);
-    } else {
-      setFileList([]);
-    }
-  };
-
-  const cutCover = async () => {
+  const cutCover = () => {
     const dom: HTMLDivElement = document.querySelector('*[canvas-drawing=root]');
-    if (!dom || loading.current) {
-      return;
-    }
-
+    if (!dom || loading.current) return;
     const { transform } = dom.style;
     dom.style.transform = 'scale(1) translate(0px, 0px)';
     loading.current = true;
@@ -80,9 +74,9 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
 
         dom.style.transform = transform;
         const base64Url = res.toDataURL('image/jpeg', 0.8);
-        setBase64Url(base64Url);
+        // const file = blobToFile(dataURLtoBlob(base64Url), 'thumbnail.jpeg');
+        onChange(base64Url);
         message.success('截取成功');
-        // await uploadCover(dataURLtoBlob(res.toDataURL('image/jpeg', 0.8)));
       } catch (error) {
         message.error(error.toString());
       } finally {
@@ -92,7 +86,7 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
   };
 
   const delImg = () => {
-    setBase64Url('');
+    onChange('');
   };
 
   return (
@@ -115,9 +109,9 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
         </Upload>
       </div>
       <div className="cover-con">
-        {(base64Url || fileList[0]) && (
+        {value && (
           <>
-            <img src={base64Url || fileList[0]} alt="" />
+            <img src={value} alt="" />
             <div className="del-cover" onClick={delImg}>
               <IconWidget infer="Delete" />
             </div>
