@@ -27,7 +27,7 @@ const Ruler: React.FC = observer(() => {
   const toggleGuides = () => {
     if (hRuler.current && vRuler.current) {
       const val = !toolbar.toolbox.referline;
-      toolbar.setPanelState({ type: PanelType.referline, value: !toolbar.toolbox.referline });
+      toolbar.setPanelState({ type: PanelType.referline, value: val });
       hRuler.current.toggleGuide(val);
       vRuler.current.toggleGuide(val);
     }
@@ -70,6 +70,7 @@ const Ruler: React.FC = observer(() => {
           scale: screen.scale,
           coorChange: (action, nCoor, oCoor) => {
             if (action === 'add') {
+              toolbar.setPanelState({ type: PanelType.referline, value: true });
               guideLine.v.push(nCoor);
             } else if (action === 'update' && nCoor !== oCoor) {
               guideLine.v = guideLine.v.filter((m) => m !== oCoor);
