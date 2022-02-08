@@ -5,6 +5,7 @@ import { cancelIdle, requestIdle } from '@/datav/shared';
 import { observer } from '@formily/react';
 import { toJS } from '@formily/reactive';
 import React, { Suspense } from 'react';
+import './index.less';
 
 const GlobalState = {
   idleRequest: null,
@@ -14,6 +15,7 @@ export const Widget: React.FC<{ comp: ComType }> = observer(
   ({ comp }) => {
     if (!comp.info || !comp.info.type) return <div />;
     const Component = GlobalRegistry.getDesignerWidget(comp.info.type);
+    debugger;
     if (!Component) return <div />;
     const data = useReqData(comp.id, comp.data);
     const options = toJS(comp.options);
@@ -39,16 +41,6 @@ export const Widget: React.FC<{ comp: ComType }> = observer(
 export const WidgetLoading: React.FC = () => {
   return (
     <div className="widget-loading">
-      {/* <div>
-            <div className="spot spot1"></div>
-            <div className="spot spot2"></div>
-            <div className="spot spot3"></div>
-        </div> */}
-      {/* <div className="loader loader-3">
-            <div className="dot dot1"></div>
-            <div className="dot dot2"></div>
-            <div className="dot dot3"></div>
-        </div> */}
       <div className="pulse-container">
         <div className="pulse-bubble pulse-bubble-1" />
         <div className="pulse-bubble pulse-bubble-2" />

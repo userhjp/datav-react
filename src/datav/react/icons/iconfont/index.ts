@@ -13,7 +13,6 @@ export * from './zoomMode';
 export * from './classify';
 export * from './leftarrow';
 export * from './link';
-export * from './loading';
 export * from './inbox';
 export * from './square';
 export * from './check-circle';

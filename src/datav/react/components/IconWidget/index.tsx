@@ -3,8 +3,8 @@ import { isStr, isFn, isObj, isPlainObj } from '@designable/shared';
 import { Tooltip, TooltipProps } from 'antd';
 import { useRegistry } from '@/datav/react/hooks';
 import cls from 'classnames';
-import './styles.less';
 import { observer } from '@formily/react';
+import './styles.less';
 
 const IconContext = createContext<IconProviderProps>(null);
 

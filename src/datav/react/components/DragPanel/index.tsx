@@ -1,6 +1,6 @@
 import { observer } from '@formily/react';
 import { Tabs } from 'antd';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { PanelType } from '@/datav/shared';
 import { useToolbar } from '@/datav/react/hooks';
 import PreviewItem from './PreviewItem';

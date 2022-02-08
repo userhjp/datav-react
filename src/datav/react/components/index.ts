@@ -1,7 +1,6 @@
 export * from './ContextMenu';
 export * from './IconWidget';
 export * from './LayerPanel';
-export * from './Loading';
 export * from './DesignHead';
 export * from './PreviewView';
 export * from './Toolbox';
