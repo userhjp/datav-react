@@ -1,67 +1,66 @@
 @import '../../theme.less';
 
 .data-attr-table {
+  width: 100%;
+  text-align: left;
+
+  .table-head {
+    display: block;
     width: 100%;
-    text-align: left;
-  
-    .table-head {
+    height: 40px;
+    font-size: 0;
+    line-height: 40px;
+    border-bottom: 1px solid @m-border-color;
+
+    .table-head-row {
       display: block;
       width: 100%;
-      height: 40px;
-      font-size: 0;
-      line-height: 40px;
-      border-bottom: 1px solid @m-border-color;
-  
-      .table-head-row {
-        display: block;
-        width: 100%;
-        height: 100%;
-      }
-  
-      .th-item {
-        font-weight: 400;
-      }
+      height: 100%;
     }
-  
-    .table-body {
-      display: block;
-      width: 100%;
-      padding-bottom: 10px;
-  
-      .table-body-row {
-        display: block;
-        width: 100%;
-      }
-    }
-  
-    .table-head,
-    .table-body {
-      .column-item {
-        display: inline-flex;
-        align-items: center;
-        box-sizing: border-box;
-        height: 40px;
-        padding: 0 6px;
-        font-size: @m-font-size;
-        line-height: 17px;
-        vertical-align: middle;
-  
-        &:first-child {
-          padding-left: 10px;
-        }
-      }
-  
-      .attr-name {
-        width: 19%;
-      }
-  
-      .attr-value {
-        width: 41%;
-      }
-  
-      .attr-describe {
-        width: 40%;
-      }
+
+    .th-item {
+      font-weight: 400;
     }
   }
-  
+
+  .table-body {
+    display: block;
+    width: 100%;
+    padding-bottom: 10px;
+
+    .table-body-row {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  .table-head,
+  .table-body {
+    .column-item {
+      display: inline-flex;
+      align-items: center;
+      box-sizing: border-box;
+      height: 40px;
+      padding: 0 6px;
+      font-size: @m-font-size;
+      line-height: 17px;
+      vertical-align: middle;
+
+      &:first-child {
+        padding-left: 10px;
+      }
+    }
+
+    .attr-name {
+      width: 19%;
+    }
+
+    .attr-value {
+      width: 41%;
+    }
+
+    .attr-describe {
+      width: 40%;
+    }
+  }
+}
