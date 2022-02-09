@@ -2,7 +2,7 @@ import { useDesigner, useScreen } from '@/datav/react/hooks';
 import { observer } from '@formily/react';
 import React, { useLayoutEffect, useRef } from 'react';
 import { ToolWidget } from '../../ToolWidget';
-import { Comps } from '../Comps';
+import { WidgetDrag } from '../WidgetDrop';
 import './index.less';
 
 const Workspace: React.FC = observer(() => {
@@ -40,7 +40,7 @@ const Workspace: React.FC = observer(() => {
     <div style={containerStyle}>
       <div ref={domRef} {...canvasNodeAttrName} className="canvas-panel" style={style}>
         <ToolWidget />
-        <Comps />
+        <WidgetDrag />
       </div>
     </div>
   );

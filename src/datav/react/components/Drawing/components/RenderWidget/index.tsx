@@ -11,11 +11,10 @@ const GlobalState = {
   idleRequest: null,
 };
 
-export const Widget: React.FC<{ comp: ComType }> = observer(
+export const RenderWidget: React.FC<{ comp: ComType }> = observer(
   ({ comp }) => {
     if (!comp.info || !comp.info.type) return <div />;
     const Component = GlobalRegistry.getDesignerWidget(comp.info.type);
-    debugger;
     if (!Component) return <div />;
     const data = useReqData(comp.id, comp.data);
     const options = toJS(comp.options);

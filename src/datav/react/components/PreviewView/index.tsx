@@ -5,7 +5,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ZoomMode } from '@/datav/shared';
 import { ComType } from '@/datav/interface';
 import { useOperation, useScreen } from '@/datav/react/hooks';
-import { Widget } from '../Drawing/components/RenderWidget';
+import { RenderWidget } from '../Drawing/components/RenderWidget';
 import './index.less';
 
 const resizeAuto = (width: number, height: number): React.CSSProperties => {
@@ -139,7 +139,7 @@ export const PreviewView: React.FC = observer(() => {
       {operation.components.map((item) => (
         <div key={item.id} style={transformStyle(item)}>
           <div style={comStyle(item)}>
-            <Widget comp={item} />
+            <RenderWidget comp={item} />
           </div>
         </div>
       ))}

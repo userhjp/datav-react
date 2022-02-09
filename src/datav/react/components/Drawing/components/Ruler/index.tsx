@@ -1,7 +1,7 @@
 import { PanelType } from '@/datav/shared';
 import { observer } from '@formily/react';
 import React, { useEffect, useRef } from 'react';
-import { RulerBuilder } from '../../../../../shared/canvas';
+import { RulerBuilder } from '@/datav/shared/canvas';
 import { useScreen, useToolbar, useViewport } from '@/datav/react/hooks';
 import { IconWidget } from '../../../IconWidget';
 import './index.less';

@@ -7,11 +7,11 @@ import { useOperation, useViewport } from '@/datav/react/hooks';
 import { ComType } from '@/datav/interface';
 import { useDesigner, useSelection } from '@/datav/react/hooks';
 import { ContextMenu } from '@/datav/react/components';
-import './index.less';
 import { GlobalRegistry } from '@/datav/core/registry';
-import { Widget } from '../RenderWidget';
+import { RenderWidget } from '../RenderWidget';
+import './index.less';
 
-export const Comps: React.FC = () => {
+export const WidgetDrag: React.FC = () => {
   const operation = useOperation();
   const dropRef = useRef();
   const viewPort = useViewport();
@@ -59,23 +59,23 @@ export const Comps: React.FC = () => {
       <Observer>
         {() => {
           if (!operation.components.length) return <div />;
-          return <>{operation.components.map((item) => <WidgetDrag key={item.id} comp={item} />).reverse()}</>;
+          return <>{operation.components.map((item) => <WidgetContainer key={item.id} comp={item} />).reverse()}</>;
         }}
       </Observer>
     </div>
   );
 };
 
-type WidgetDragProps = {
+type WidgetContainerProps = {
   comp: ComType;
 };
 
-export const WidgetDrag: React.FC<WidgetDragProps> = observer(({ comp }) => {
-  const attr = { ...comp.attr };
+export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ comp }) => {
+  const { attr, id } = comp;
   const ref = useRef<HTMLDivElement>();
   const selection = useSelection();
   const designer = useDesigner();
-  const selected = selection.has(comp.id);
+  const selected = selection.has(id);
 
   const transformStyle: React.CSSProperties = useMemo(() => {
     return {
@@ -86,29 +86,23 @@ export const WidgetDrag: React.FC<WidgetDragProps> = observer(({ comp }) => {
       transform: `translate(${attr.x}px, ${attr.y}px)`,
       zIndex: selected ? 2 : 'auto',
     };
-  }, [attr]);
+  }, [attr.w, attr.h, attr.x, attr.y, selected]);
 
   const handlerStyle = useMemo(() => {
     return { cursor: 'move', transform: `rotate(${attr.deg || 0}deg)` };
-  }, [attr]);
+  }, [attr.deg]);
 
   const comStyle = useMemo(() => {
     return { opacity: attr.opacity };
-  }, [attr]);
+  }, [attr.opacity]);
 
   return (
-    <ContextMenu currentId={comp.id}>
-      <div ref={ref} {...{ [designer.props.nodeIdAttrName]: comp.id, style: transformStyle }} className="widget-container">
+    <ContextMenu currentId={id}>
+      <div ref={ref} style={transformStyle} className="widget-container">
         <div className="transform-handler" style={handlerStyle}>
           <div className="widget-com" style={comStyle}>
-            <Widget comp={comp} />
-            <div
-              className="wrapper-event-disable"
-              {...{ [designer.props.nodeIdAttrName]: comp.id }}
-              onMouseEnter={(e) => {
-                e.stopPropagation();
-              }}
-            />
+            <RenderWidget comp={comp} />
+            <div className="wrapper-event-disable" {...{ [designer.props.nodeIdAttrName]: id }} />
           </div>
         </div>
       </div>

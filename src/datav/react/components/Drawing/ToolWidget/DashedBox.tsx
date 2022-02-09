@@ -1,14 +1,12 @@
 import { observer } from '@formily/react';
 import React from 'react';
-import { useHover, useScreen, useSelection, useToolbar } from '../../../hooks';
+import { useHover, useScreen, useSelection } from '../../../hooks';
 import { ResizeHandler } from './ResizeHandler';
 
 export const DashedBox = observer(() => {
   const hover = useHover();
   const screen = useScreen();
-  // const toolbar = useToolbar();
   const selection = useSelection();
-  // const rect = useValidNodeOffsetRect(hover?.node);
   const createTipsStyle = () => {
     const baseStyle: React.CSSProperties = {
       position: 'absolute',
