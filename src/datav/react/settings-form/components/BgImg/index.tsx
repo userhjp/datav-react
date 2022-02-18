@@ -96,7 +96,7 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
             >
               <img src={value} className="image-value" />
               <div className="upload-cover">
-                <IconWidget infer="Delete" />,
+                <IconWidget infer="Delete" />
               </div>
             </div>
           ) : (

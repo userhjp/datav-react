@@ -6,12 +6,9 @@ const WIDGETS: { [key: string]: any } = {};
 const modulesFiles = require.context('./', true, /\.tsx$/, 'lazy');
 modulesFiles.keys().forEach((fileName) => {
   const name = fileName.split('/');
-  if (fileName === './index.tsx' || fileName.match('components')) return;
+  if (fileName.match('components')) return;
   const compName = name[name.length - 2];
-  WIDGETS[compName] = React.lazy(async () => {
-    // await waitTime(1000); // 模拟懒加载延时
-    return modulesFiles(fileName);
-  });
+  WIDGETS[compName] = React.lazy(() => modulesFiles(fileName));
 });
 
 /**
