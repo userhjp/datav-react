@@ -1,5 +1,4 @@
 import React, { useContext, Fragment, useRef, useLayoutEffect } from 'react';
-import { each } from '@designable/shared';
 import { DesignerLayoutContext } from '../context';
 import { IDesignerLayoutProps } from '../types';
 import cls from 'classnames';
@@ -10,7 +9,7 @@ export const Layout: React.FC<IDesignerLayoutProps> = (props) => {
 
   useLayoutEffect(() => {
     if (ref.current) {
-      each(props.variables, (value, key) => {
+      Object.entries(props.variables || {}).forEach(([key, value]) => {
         ref.current.style.setProperty(`--${key}`, value);
       });
     }
@@ -37,4 +36,9 @@ export const Layout: React.FC<IDesignerLayoutProps> = (props) => {
       </DesignerLayoutContext.Provider>
     </div>
   );
+};
+
+Layout.defaultProps = {
+  theme: 'light',
+  prefixCls: 'dv-',
 };
