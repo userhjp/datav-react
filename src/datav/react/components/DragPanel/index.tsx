@@ -4,7 +4,7 @@ import React from 'react';
 import { PanelType } from '@/datav/shared';
 import { useToolbar } from '@/datav/react/hooks';
 import PreviewItem from './PreviewItem';
-import { typeData } from './data';
+import { resourceData } from './data';
 import { IconWidget } from '../IconWidget';
 import './index.less';
 
@@ -48,7 +48,7 @@ export const DragPanel: React.FC = observer(() => {
             if (!toolbar.components.show) changeConfigPanel();
           }}
         >
-          {typeData.map((m) => (
+          {resourceData.map((m) => (
             <TabPane tab={<RenderTab icon={m.icon} name={m.name} />} key={m.id}>
               <PreviewItem data={m.children} />
             </TabPane>

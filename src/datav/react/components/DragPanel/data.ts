@@ -1,4 +1,4 @@
-export const typeData = [
+export const resourceData = [
   {
     id: '1',
     name: '图表',
