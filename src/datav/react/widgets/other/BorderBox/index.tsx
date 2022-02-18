@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import './index.less';
 
 export const presetImages = [

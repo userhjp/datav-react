@@ -1,7 +1,7 @@
 import React, { Fragment, useRef } from 'react';
 import { useSelection, useOperation, useToolbar } from '../../../hooks';
 import { observer } from '@formily/react';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import { ResizeHandler } from './ResizeHandler';
 import { NavLine } from './NavLine';
 export interface ISelectionBoxProps {

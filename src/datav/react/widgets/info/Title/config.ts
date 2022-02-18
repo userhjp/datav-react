@@ -1,4 +1,4 @@
-import { WidgetConfig } from '@/datav/interface';
+import { WidgetConfig } from '@/datav/react/interface';
 import { fontFamilys, fontStyles, fontWeights, hAligns, justifyContents, lineStyles, writingModes } from '../../../../shared';
 
 export const Config: WidgetConfig = {

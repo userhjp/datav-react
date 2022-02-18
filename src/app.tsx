@@ -4,7 +4,7 @@ import { createDesigner, waitTime } from './datav/core';
 import { Designer, Preview } from './datav/react/containers';
 import Axios from 'axios';
 import './app.less';
-import { PageType } from './datav/interface';
+import { PageType } from './datav/react/interface';
 
 const PreviewKey = 'DataV-Preview';
 

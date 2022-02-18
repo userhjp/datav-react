@@ -1,6 +1,6 @@
 import { Engine, CursorType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { ComPosition, ComType } from '@/datav/interface';
+import { ComPosition, ComType } from '@/datav/react/interface';
 import { toJS } from '@formily/reactive';
 import { Direction, IPoint, Point } from '@/datav/shared';
 

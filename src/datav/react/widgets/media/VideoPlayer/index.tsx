@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useMemo, useRef } from 'react';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import './index.less';
 
 const BaseBar: React.FC<ComType> = ({ options }) => {

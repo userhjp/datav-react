@@ -1,4 +1,4 @@
-import { WidgetConfig } from '@/datav/interface';
+import { WidgetConfig } from '@/datav/react/interface';
 
 export const config: WidgetConfig = {
   w: 380,

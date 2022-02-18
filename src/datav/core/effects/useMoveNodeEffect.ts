@@ -1,6 +1,6 @@
 import { Engine } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent, ViewportScrollEvent } from '../events';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import { CursorType } from '../index';
 
 /** 位置移动 */

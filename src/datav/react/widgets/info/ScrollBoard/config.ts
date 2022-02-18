@@ -1,5 +1,5 @@
 import { hAligns } from '@/datav/shared';
-import { WidgetConfig } from '@/datav/interface';
+import { WidgetConfig } from '@/datav/react/interface';
 
 const Config: WidgetConfig = {
   w: 320,

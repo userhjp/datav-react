@@ -1,5 +1,5 @@
 import { GlobalRegistry } from '@/datav/core/registry';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import { useReqData } from '@/datav/react/hooks';
 import { cancelIdle, requestIdle } from '@/datav/shared';
 import { observer } from '@formily/react';

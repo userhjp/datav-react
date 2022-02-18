@@ -1,4 +1,4 @@
-import { ZoomMode, ComDataType, FieldStatus, ApiType, ApiRequestMethod, MoveSortType } from './shared';
+import { ZoomMode, ComDataType, FieldStatus, ApiType, ApiRequestMethod, MoveSortType } from '../shared';
 import { ISchema } from '@formily/react';
 
 export type BaseComp = {
@@ -106,5 +106,3 @@ export type WidgetConfig = Partial<{
   /** 数据源 */
   data: Array<Record<string, any>> | Record<string, any>;
 }>;
-
-export type MoveType = 'ArrowLeft' | 'ArrowUp' | 'ArrowRight' | 'ArrowDown';

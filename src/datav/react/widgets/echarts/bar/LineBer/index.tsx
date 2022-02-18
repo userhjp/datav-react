@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useMemo, useRef } from 'react';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import { DatasetComponent, GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import { LineChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';

@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { message } from 'antd';
 import { useDrop } from 'ahooks';
 import { useOperation, useViewport } from '@/datav/react/hooks';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import { useDesigner, useSelection } from '@/datav/react/hooks';
 import { ContextMenu } from '@/datav/react/components';
 import { GlobalRegistry } from '@/datav/core/registry';

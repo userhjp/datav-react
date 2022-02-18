@@ -1,6 +1,6 @@
 import { toJS } from '@formily/reactive';
 import React from 'react';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import './index.less';
 
 const chartDemo: React.FC<ComType> = (props) => {

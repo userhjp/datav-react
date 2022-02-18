@@ -1,6 +1,6 @@
 import { useDebounceEffect, useDebounceFn, useSize } from 'ahooks';
 import React, { useCallback, useMemo, useRef, useState } from 'react';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import './index.less';
 
 /** 多行文本 */

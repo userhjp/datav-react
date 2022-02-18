@@ -6,7 +6,7 @@ import { lineSeriesStyleSchema } from '@/datav/react/schema/echarts/lineSeriesSt
 import { tooltipSchema } from '@/datav/react/schema/echarts/tooltipSchema';
 import { xAxisSchema } from '@/datav/react/schema/echarts/xAxisSchema';
 import { yAxisSchema } from '@/datav/react/schema/echarts/yAxisSchema';
-import { WidgetConfig } from '@/datav/interface';
+import { WidgetConfig } from '@/datav/react/interface';
 import { lineBarSeriesSchema } from '@/datav/react/schema/echarts/series/lineBarSeriesSchema';
 
 export const config: WidgetConfig = {

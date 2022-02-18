@@ -1,7 +1,7 @@
 import { observable, define, action } from '@formily/reactive';
 import { Operation } from './Operation';
 import { HoverNodeEvent } from '../events';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 
 export interface IHoverProps {
   operation: Operation;

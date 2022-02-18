@@ -3,7 +3,7 @@ import { observer } from '@formily/react';
 import { autorun } from '@formily/reactive';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ZoomMode } from '@/datav/shared';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import { useOperation, useScreen } from '@/datav/react/hooks';
 import { RenderWidget } from '../Drawing/components/RenderWidget';
 import './index.less';

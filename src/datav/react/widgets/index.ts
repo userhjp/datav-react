@@ -1,5 +1,5 @@
 import React from 'react';
-import { WidgetConfig } from '@/datav/interface';
+import { WidgetConfig } from '@/datav/react/interface';
 
 /** 自动引入所有组件 */
 const WIDGETS: { [key: string]: any } = {};

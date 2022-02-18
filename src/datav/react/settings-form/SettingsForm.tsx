@@ -11,7 +11,7 @@ import { useCurrentNode } from '@/datav/react/hooks/useCurrentNode';
 import { createForm } from '@formily/core';
 import { Form } from '@formily/antd';
 import { ISettingFormProps } from './types';
-import { ComType, IScreenProps } from '@/datav/interface';
+import { ComType, IScreenProps } from '@/datav/react/interface';
 import { EventFields } from './EventsFields';
 import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';

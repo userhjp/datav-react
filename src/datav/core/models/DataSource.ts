@@ -1,7 +1,7 @@
 import { replaceTextParams, toJson } from '@/datav/shared';
 import { action, define, observable, toJS } from '@formily/reactive';
 import { ApiRequestMethod, ApiType, ComDataType } from '@/datav/shared';
-import { DataConfigType } from '@/datav/interface';
+import { DataConfigType } from '@/datav/react/interface';
 import { dsRequest } from '@/datav/shared';
 import { Engine } from './Engine';
 

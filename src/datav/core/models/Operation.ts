@@ -1,4 +1,4 @@
-import { BaseComp, ComType, FieldConfig, PageType } from '@/datav/interface';
+import { BaseComp, ComType, FieldConfig, PageType } from '@/datav/react/interface';
 import { generateUUID } from '@/datav/shared';
 import { observable, define, action, toJS } from '@formily/reactive';
 import { ApiType, ComDataType, FieldStatus, MoveSortType, isArr, ICustomEvent, isFn } from '../../shared';

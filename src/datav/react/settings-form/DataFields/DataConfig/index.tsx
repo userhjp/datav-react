@@ -1,5 +1,5 @@
 import { ApiRequestMethod, ApiType } from '@/datav/shared';
-import { DataConfigType, FieldConfig } from '@/datav/interface';
+import { DataConfigType, FieldConfig } from '@/datav/react/interface';
 import { Checkbox, FormDrawer, FormItem, FormLayout, Select } from '@formily/antd';
 import { Field, Observer, VoidField } from '@formily/react';
 import { Button, Input, Tooltip } from 'antd';

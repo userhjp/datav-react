@@ -1,4 +1,4 @@
-import { PageType } from '../interface';
+import { PageType } from '../react/interface';
 import { Event, IEventProps } from '../shared';
 import { Engine, Shortcut } from './models';
 

@@ -1,6 +1,6 @@
 import { Statistic } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import FlipClock from './components/FlipClock';
 const { Countdown } = Statistic;
 import './index.less';

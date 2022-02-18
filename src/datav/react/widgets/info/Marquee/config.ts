@@ -1,5 +1,5 @@
 import { fontFamilys, fontStyles, fontWeights, hAligns, justifyContents, lineStyles } from '../../../../shared';
-import { WidgetConfig } from '@/datav/interface';
+import { WidgetConfig } from '@/datav/react/interface';
 
 const config: WidgetConfig = {
   w: 300,

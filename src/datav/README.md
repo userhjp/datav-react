@@ -3,11 +3,12 @@
 ## 目录结构
 
 ```bash
-hooks                         # 共享hooks
 core                          # 核心
 shared                        # 工具
 react                         # 设计器布局代码
 ├── components                # 设计器组件
+└── hooks                     # 共享hooks
+└── schema                    # widget组件通用schema
 └── containers                # 容器组件
 └── settings-form             # 组件对应配置表单
 └── widgets                     # 设计器图表组件目录，组件无需额外引入，widgets目录下所有组件及配置文件会在编译自动解析。

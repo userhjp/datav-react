@@ -2,7 +2,7 @@ import { batch, reaction } from '@formily/reactive';
 import { message } from 'antd';
 import { useState, useEffect, useCallback, useRef } from 'react';
 import { ComDataType, FieldStatus } from '@/datav/shared';
-import { DataConfigType, DataSource, FieldConfig } from '@/datav/interface';
+import { DataConfigType, DataSource, FieldConfig } from '@/datav/react/interface';
 import { useDesigner } from './useDesigner';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;

@@ -6,7 +6,7 @@ import { legendSchema } from '@/datav/react/schema/echarts/legendSchema';
 import { tooltipSchema } from '@/datav/react/schema/echarts/tooltipSchema';
 import { xAxisSchema } from '@/datav/react/schema/echarts/xAxisSchema';
 import { yAxisSchema } from '@/datav/react/schema/echarts/yAxisSchema';
-import { WidgetConfig } from '@/datav/interface';
+import { WidgetConfig } from '@/datav/react/interface';
 
 export const config: WidgetConfig = {
   w: 380,

@@ -1,4 +1,4 @@
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 import { calcBoundingRect, cancelIdle, IPoint, isPointInRect, requestIdle } from '@/datav/shared';
 import { action, define, observable } from '@formily/reactive';
 import { Engine } from './Engine';

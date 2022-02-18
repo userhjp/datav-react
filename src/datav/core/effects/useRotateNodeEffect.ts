@@ -1,6 +1,6 @@
 import { Engine, CursorType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { ComType } from '@/datav/interface';
+import { ComType } from '@/datav/react/interface';
 
 /** 组件旋转 先放core 理论上应该放业务代码里 */
 export const useRotateEffect = (engine: Engine) => {
