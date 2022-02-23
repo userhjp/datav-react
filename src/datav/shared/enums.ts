@@ -48,7 +48,7 @@ export enum FieldStatus {
 }
 
 /** 组件数据类型 */
-export enum ComDataType {
+export enum IDataType {
   array = 'array',
   object = 'object',
 }

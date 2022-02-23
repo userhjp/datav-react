@@ -1,7 +1,7 @@
-import { BaseComp, ComType, FieldConfig, PageType } from '@/datav/react/interface';
+import { IWidgetNode, PageType } from '@/datav/react/interface';
 import { generateUUID } from '@/datav/shared';
 import { observable, define, action, toJS } from '@formily/reactive';
-import { ApiType, ComDataType, FieldStatus, MoveSortType, isArr, ICustomEvent, isFn } from '../../shared';
+import { MoveSortType, ICustomEvent, isFn } from '../../shared';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../events';
 import { MoveType } from '../types';
 import { Engine, Hover, Selection } from './index';
@@ -16,7 +16,7 @@ export class Operation {
   engine: Engine;
   hover: Hover;
   editableId: string;
-  components: ComType[] = [];
+  components: IWidgetNode[] = [];
 
   constructor(engine: Engine) {
     this.engine = engine;
@@ -31,10 +31,9 @@ export class Operation {
     define(this, {
       editableId: observable.ref,
       components: observable,
-      addCom: action,
+      addNode: action,
       removeCompSchema: action,
       copyCompSchema: action,
-      sortCom: action,
       rename: action,
       cancelRename: action,
       moveTo: action,
@@ -43,41 +42,9 @@ export class Operation {
   }
 
   /** 添加组件 */
-  addCom(obj: BaseComp) {
-    let dataType: ComDataType;
-    let _data = null;
-    if (isArr(obj.data)) {
-      _data = obj.data[0] || {};
-      dataType = ComDataType.array;
-    } else {
-      _data = obj.data || {};
-      dataType = ComDataType.object;
-    }
-    const fieldsDes = obj.fieldsDes ?? {};
-    const fields: FieldConfig = {};
-    Object.keys(_data).forEach((f) => {
-      fields[f] = { map: '', status: FieldStatus.loading, description: fieldsDes[f] ?? '' };
-    });
-    const uuid = generateUUID();
-    this.selection.safeSelect(uuid);
-    this.components = [
-      ...this.components,
-      {
-        id: uuid,
-        info: { name: obj.name, type: obj.type, ver: obj.ver },
-        attr: { x: obj.x, y: obj.y, w: obj.w, h: obj.h },
-        data: {
-          fields,
-          config: {
-            dataType,
-            data: obj.data || null,
-            apiType: ApiType.static,
-            useFilter: false,
-            filterCode: 'return res.data;',
-          },
-        },
-      },
-    ];
+  addNode(node: IWidgetNode) {
+    this.selection.safeSelect(node.id);
+    this.components = [...this.components, node];
   }
 
   /** 移除组件 */
@@ -114,7 +81,7 @@ export class Operation {
     }
   }
 
-  startMove(comp: ComType, type: MoveType) {
+  startMove(comp: IWidgetNode, type: MoveType) {
     if (!comp) return;
     const grid = this.engine.screen.props.grid;
     switch (type) {
@@ -143,7 +110,7 @@ export class Operation {
   }
 
   /** 组件权重 */
-  sortCom(id: string, moveType: MoveSortType) {
+  sortSingleNode(id: string, moveType: MoveSortType) {
     const i = this.components.findIndex((f) => f.id === id);
     if (moveType === MoveSortType.down) {
       if (i + 1 < this.components.length) {
@@ -167,7 +134,7 @@ export class Operation {
   sortComp(moveType: MoveSortType) {
     if (this.selection.length) {
       this.selection.selected.forEach((f) => {
-        this.sortCom(f, moveType);
+        this.sortSingleNode(f, moveType);
       });
     }
   }

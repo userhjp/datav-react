@@ -1,5 +1,5 @@
 import { GlobalRegistry } from '@/datav/core/registry';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 import { useReqData } from '@/datav/react/hooks';
 import { cancelIdle, requestIdle } from '@/datav/shared';
 import { observer } from '@formily/react';
@@ -11,13 +11,13 @@ const GlobalState = {
   idleRequest: null,
 };
 
-export const RenderWidget: React.FC<{ comp: ComType }> = observer(
-  ({ comp }) => {
-    if (!comp.info || !comp.info.type) return <div />;
-    const Component = GlobalRegistry.getDesignerWidget(comp.info.type);
+export const RenderWidget: React.FC<{ nodeInfo: IWidgetNode }> = observer(
+  ({ nodeInfo }) => {
+    if (!nodeInfo.info || !nodeInfo.info.type) return <div />;
+    const Component = GlobalRegistry.getDesignerWidget(nodeInfo.info.type);
     if (!Component) return <div />;
-    const data = useReqData(comp.id, comp.data);
-    const options = toJS(comp.options);
+    const data = useReqData(nodeInfo.id, nodeInfo.data);
+    const options = toJS(nodeInfo.options);
 
     if (!options) return <WidgetLoading />;
     return (

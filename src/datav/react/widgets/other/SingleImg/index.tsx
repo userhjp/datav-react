@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 import './index.less';
 
-const SingleImg: React.FC<ComType> = ({ options }) => {
+const SingleImg: React.FC<IWidgetNode> = ({ options }) => {
   const linkUrl = options?.link?.href;
 
   const goPath = () => {

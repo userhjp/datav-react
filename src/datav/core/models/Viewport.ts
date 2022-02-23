@@ -1,4 +1,4 @@
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 import { calcBoundingRect, cancelIdle, IPoint, isPointInRect, requestIdle } from '@/datav/shared';
 import { action, define, observable } from '@formily/reactive';
 import { Engine } from './Engine';
@@ -231,13 +231,13 @@ export class Viewport {
     return elementRect;
   }
 
-  getValidNodeRect(node: ComType): DOMRect {
+  getValidNodeRect(node: IWidgetNode): DOMRect {
     if (!node) return null;
     const rect = this.getElementRectById(node.id);
     return calcBoundingRect([this.innerRect, rect]);
   }
 
-  getValidNodeOffsetRect(node: ComType): DOMRect {
+  getValidNodeOffsetRect(node: IWidgetNode): DOMRect {
     if (!node) return null;
     const rect = this.getElementOffsetRectById(node.id);
     return rect;

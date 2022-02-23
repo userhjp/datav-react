@@ -1,6 +1,6 @@
 import { Engine, CursorType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { ComPosition, ComType } from '@/datav/react/interface';
+import { WidgetPosition, IWidgetNode } from '@/datav/react/interface';
 import { toJS } from '@formily/reactive';
 import { Direction, IPoint, Point } from '@/datav/shared';
 
@@ -11,8 +11,8 @@ export const useResizeNodeEffect = (engine: Engine) => {
     x: 0,
     y: 0,
   };
-  let attr: ComPosition;
-  let node: ComType;
+  let attr: WidgetPosition;
+  let node: IWidgetNode;
 
   engine.subscribeTo(DragStartEvent, (e) => {
     if (!engine?.viewport) return;
@@ -30,7 +30,7 @@ export const useResizeNodeEffect = (engine: Engine) => {
   engine.subscribeTo(DragMoveEvent, (e) => {
     if (!engine?.viewport) return;
     if (!status) return;
-    const pos = Object.create(null) as Partial<ComPosition>;
+    const pos = Object.create(null) as Partial<WidgetPosition>;
     const curPositon = new Point(e.data.clientX, e.data.clientY);
     const scale = engine.viewport.scale;
     if (status === 't') {

@@ -11,7 +11,7 @@ import { useCurrentNode } from '@/datav/react/hooks/useCurrentNode';
 import { createForm } from '@formily/core';
 import { Form } from '@formily/antd';
 import { ISettingFormProps } from './types';
-import { ComType, IScreenProps } from '@/datav/react/interface';
+import { IWidgetNode, IScreenProps } from '@/datav/react/interface';
 import { EventFields } from './EventsFields';
 import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';
@@ -29,7 +29,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     const currentNode = useCurrentNode();
     const screen = useScreen();
     const form = useMemo(() => {
-      return createForm<ComType | IScreenProps>({
+      return createForm<IWidgetNode | IScreenProps>({
         initialValues: currentNode || screen.props,
         values: currentNode || screen.props,
         effects(form) {

@@ -1,21 +1,21 @@
 import { observable, define, action } from '@formily/reactive';
 import { Operation } from './Operation';
 import { HoverNodeEvent } from '../events';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 
 export interface IHoverProps {
   operation: Operation;
 }
 
 export class Hover {
-  node: ComType = null;
+  node: IWidgetNode = null;
   operation: Operation;
   constructor(props?: IHoverProps) {
     this.operation = props?.operation;
     this.makeObservable();
   }
 
-  setHover(node?: ComType) {
+  setHover(node?: IWidgetNode) {
     if (node) {
       this.node = node;
     } else {

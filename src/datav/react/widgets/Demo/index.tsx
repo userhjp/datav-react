@@ -1,9 +1,9 @@
 import { toJS } from '@formily/reactive';
 import React from 'react';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 import './index.less';
 
-const chartDemo: React.FC<ComType> = (props) => {
+const chartDemo: React.FC<IWidgetNode> = (props) => {
   return (
     <div className="demo" style={{ backgroundColor: 'blue' }}>
       <div>测试组件1222</div>

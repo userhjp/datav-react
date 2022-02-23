@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useMemo, useRef } from 'react';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 import './index.less';
 
-const BaseBar: React.FC<ComType> = ({ options }) => {
+const BaseBar: React.FC<IWidgetNode> = ({ options }) => {
   const videoRef = useRef<HTMLVideoElement>();
   const style: React.CSSProperties = useMemo(() => {
     return {};

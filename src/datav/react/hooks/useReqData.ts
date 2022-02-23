@@ -1,7 +1,7 @@
 import { batch, reaction } from '@formily/reactive';
 import { message } from 'antd';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { ComDataType, FieldStatus } from '@/datav/shared';
+import { IDataType, FieldStatus } from '@/datav/shared';
 import { DataConfigType, DataSource, FieldConfig } from '@/datav/react/interface';
 import { useDesigner } from './useDesigner';
 
@@ -16,9 +16,9 @@ export const getFieldMap = (fields: FieldConfig) => {
   return fieldMap;
 };
 
-const checkDataType = (dataType: ComDataType, data: any) => {
+const checkDataType = (dataType: IDataType, data: any) => {
   if (Array.isArray(data)) {
-    return dataType === ComDataType.array;
+    return dataType === IDataType.array;
   }
   return typeof data === dataType;
 };

@@ -4,11 +4,12 @@ import { useCallback, useMemo } from 'react';
 import { message } from 'antd';
 import { useDrop } from 'ahooks';
 import { useOperation, useViewport } from '@/datav/react/hooks';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode, WidgetConfig } from '@/datav/react/interface';
 import { useDesigner, useSelection } from '@/datav/react/hooks';
 import { ContextMenu } from '@/datav/react/components';
 import { GlobalRegistry } from '@/datav/core/registry';
 import { RenderWidget } from '../RenderWidget';
+import { createWidgetNode } from '@/datav/core';
 import './index.less';
 
 export const WidgetDrag: React.FC = () => {
@@ -19,27 +20,28 @@ export const WidgetDrag: React.FC = () => {
 
   const addBox = useCallback(
     ({ x = 0, y = 0, name, type }) => {
-      const com = GlobalRegistry.getDesignerConfig(type);
-      if (!com) {
+      const widget: WidgetConfig = GlobalRegistry.getDesignerConfig(type);
+      if (!widget) {
         message.info('开发中，敬请期待...');
         return;
       }
       const offset = 60;
       const offsetX = (x - (viewPort.offsetX + offset) + viewPort.scrollX) / viewPort.scale;
       const offsetY = (y - (viewPort.offsetY + offset) + viewPort.scrollY) / viewPort.scale;
-      const attrx = Math.round(offsetX - com.w / 2);
-      const attry = Math.round(offsetY - com.h / 2);
-      operation.addCom({
-        w: com.w,
-        h: com.h,
+      const attrx = Math.round(offsetX - widget.w / 2);
+      const attry = Math.round(offsetY - widget.h / 2);
+      const widgetNode = createWidgetNode({
+        w: widget.w,
+        h: widget.h,
         x: attrx,
         y: attry,
         name,
         type,
-        data: com.data,
-        ver: com.attr.version || '1.0',
-        fieldsDes: com.fields,
+        data: widget.data,
+        ver: widget.attr.version || '1.0',
+        fieldsDes: widget.fields,
       });
+      operation.addNode(widgetNode);
     },
     [viewPort.scrollX, viewPort.scrollY, viewPort.offsetX, viewPort.offsetY]
   );
@@ -59,7 +61,7 @@ export const WidgetDrag: React.FC = () => {
       <Observer>
         {() => {
           if (!operation.components.length) return <div />;
-          return <>{operation.components.map((item) => <WidgetContainer key={item.id} comp={item} />).reverse()}</>;
+          return <>{operation.components.map((item) => <WidgetContainer key={item.id} node={item} />).reverse()}</>;
         }}
       </Observer>
     </div>
@@ -67,11 +69,11 @@ export const WidgetDrag: React.FC = () => {
 };
 
 type WidgetContainerProps = {
-  comp: ComType;
+  node: IWidgetNode;
 };
 
-export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ comp }) => {
-  const { attr, id } = comp;
+export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ node }) => {
+  const { attr, id } = node;
   const ref = useRef<HTMLDivElement>();
   const selection = useSelection();
   const designer = useDesigner();
@@ -101,7 +103,7 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ comp 
       <div ref={ref} style={transformStyle} className="widget-container">
         <div className="transform-handler" style={handlerStyle}>
           <div className="widget-com" style={comStyle}>
-            <RenderWidget comp={comp} />
+            <RenderWidget nodeInfo={node} />
             <div className="wrapper-event-disable" {...{ [designer.props.nodeIdAttrName]: id }} />
           </div>
         </div>

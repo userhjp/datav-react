@@ -1,12 +1,12 @@
 import { Statistic } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 import FlipClock from './components/FlipClock';
 const { Countdown } = Statistic;
 import './index.less';
 
 /** 倒计时 */
-const CountDown: React.FC<ComType> = ({ options, data }) => {
+const CountDown: React.FC<IWidgetNode> = ({ options, data }) => {
   const [deadline, setDeadline] = useState(0);
   const style = {
     ...options,

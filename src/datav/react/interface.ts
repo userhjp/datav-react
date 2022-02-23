@@ -1,7 +1,7 @@
-import { ZoomMode, ComDataType, FieldStatus, ApiType, ApiRequestMethod, MoveSortType } from '../shared';
+import { ZoomMode, IDataType, FieldStatus, ApiType, ApiRequestMethod, MoveSortType } from '../shared';
 import { ISchema } from '@formily/react';
 
-export type BaseComp = {
+export type WidgetResourceConfig = {
   w: number;
   h: number;
   x: number;
@@ -14,7 +14,7 @@ export type BaseComp = {
 };
 
 /** 组件位置信息 */
-export interface ComPosition {
+export interface WidgetPosition {
   x: number;
   y: number;
   w: number;
@@ -24,7 +24,7 @@ export interface ComPosition {
 }
 
 /** 组件描述 */
-export interface ComInfo {
+export interface WidgetInfo {
   name: string;
   type: string;
   ver?: string;
@@ -32,10 +32,10 @@ export interface ComInfo {
 
 /** 组件属性 */
 // eslint-disable-next-line @typescript-eslint/ban-types
-export interface ComType<T = { [key: string]: any }> {
+export interface IWidgetNode<T = { [key: string]: any }> {
   id: string;
-  info: ComInfo;
-  attr: ComPosition;
+  info: WidgetInfo;
+  attr: WidgetPosition;
   options?: T;
   data?: any;
   event?: any;
@@ -55,7 +55,7 @@ export interface IScreenProps {
 export interface PageType {
   /** 页面设置 */
   page?: IScreenProps;
-  components?: ComType[];
+  components?: IWidgetNode[];
 }
 
 /** 组件数据类型 */
@@ -70,8 +70,8 @@ export interface DataSource {
 export interface DataConfigType {
   /** 数据来源 1 静态数据 2 API*/
   apiType: ApiType;
-  data: Record<string, any> | Record<string, ComType>[];
-  dataType: ComDataType;
+  data: Record<string, any> | Record<string, IWidgetNode>[];
+  dataType: IDataType;
   useFilter: boolean;
   filterCode: string;
   apiUrl?: string;

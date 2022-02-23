@@ -3,7 +3,7 @@ import { observer } from '@formily/react';
 import { autorun } from '@formily/reactive';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ZoomMode } from '@/datav/shared';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 import { useOperation, useScreen } from '@/datav/react/hooks';
 import { RenderWidget } from '../Drawing/components/RenderWidget';
 import './index.less';
@@ -68,7 +68,7 @@ export const PreviewView: React.FC = observer(() => {
   const screen = useScreen();
   const [pageStyle, setPageStyle] = useState<React.CSSProperties>();
 
-  const transformStyle = useCallback((com: ComType): React.CSSProperties => {
+  const transformStyle = useCallback((com: IWidgetNode): React.CSSProperties => {
     const { attr } = com;
     return {
       position: 'absolute',
@@ -80,7 +80,7 @@ export const PreviewView: React.FC = observer(() => {
     };
   }, []);
 
-  const comStyle = useCallback((com: ComType): React.CSSProperties => {
+  const comStyle = useCallback((com: IWidgetNode): React.CSSProperties => {
     const { attr } = com;
     return {
       height: '100%',
@@ -139,7 +139,7 @@ export const PreviewView: React.FC = observer(() => {
       {operation.components.map((item) => (
         <div key={item.id} style={transformStyle(item)}>
           <div style={comStyle(item)}>
-            <RenderWidget comp={item} />
+            <RenderWidget nodeInfo={item} />
           </div>
         </div>
       ))}

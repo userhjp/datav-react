@@ -1,6 +1,6 @@
 import { Engine } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent, ViewportScrollEvent } from '../events';
-import { ComType } from '@/datav/react/interface';
+import { IWidgetNode } from '@/datav/react/interface';
 import { CursorType } from '../index';
 
 /** 位置移动 */
@@ -8,7 +8,7 @@ export const useMoveNodeEffect = (engine: Engine) => {
   let status = null;
   let startX = 0;
   let startY = 0;
-  let node: ComType;
+  let node: IWidgetNode;
   let currentDragMove: DragStartEvent = null;
 
   const moveComponent = (e: DragStartEvent) => {

@@ -1,6 +1,6 @@
 import { replaceTextParams, toJson } from '@/datav/shared';
 import { action, define, observable, toJS } from '@formily/reactive';
-import { ApiRequestMethod, ApiType, ComDataType } from '@/datav/shared';
+import { ApiRequestMethod, ApiType, IDataType } from '@/datav/shared';
 import { DataConfigType } from '@/datav/react/interface';
 import { dsRequest } from '@/datav/shared';
 import { Engine } from './Engine';
@@ -46,7 +46,7 @@ export class DataSource {
       resData = { data: toJS(config.data) };
     } else if (config.apiType === ApiType.api) {
       if (!config.apiUrl) {
-        return (resData = { data: config.dataType === ComDataType.object ? {} : [] });
+        return (resData = { data: config.dataType === IDataType.object ? {} : [] });
       }
       if (!/^[a-zA-z]+:\/\/[^\s]*$/.test(config.apiUrl)) {
         throw Error('url必须包含协议字段，如http:');
