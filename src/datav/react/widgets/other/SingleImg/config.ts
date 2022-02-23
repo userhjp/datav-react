@@ -21,7 +21,7 @@ export const Config: WidgetConfig = {
         },
         'x-component-props': {
           placeholder: '输入图片地址',
-          prefix: "{{icon('LinkOutlined')}}",
+          prefix: "{{icon('Link')}}",
         },
         default: '/images/main-img.png',
       },

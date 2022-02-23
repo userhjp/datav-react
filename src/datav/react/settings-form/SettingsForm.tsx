@@ -41,9 +41,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     const scope = {
       ...props.scope,
       icon(name: string) {
-        return {
-          LinkOutlined: <IconWidget infer="Link" style={{ paddingLeft: 6 }} />,
-        }[name];
+        return <IconWidget infer={name} style={{ paddingLeft: 6 }} />;
       },
     };
 

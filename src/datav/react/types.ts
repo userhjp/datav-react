@@ -24,6 +24,25 @@ export interface IWorkspaceContext {
   description?: string;
 }
 
+export interface IResourceDataType {
+  name: string;
+  cover: string;
+  type?: string;
+}
+
+export interface IResourceChildrenType {
+  name: string;
+  children: Array<IResourceDataType>;
+}
+
+export type IResourceDataChild = Array<IResourceDataType | IResourceChildrenType>;
+
+export interface IResourceData {
+  name: string;
+  icon: string;
+  children: IResourceDataChild;
+}
+
 // export type DnFC<P = {}> = React.FC<P> & {
 //   Resource?: IResource[];
 //   Behavior?: IBehavior[];

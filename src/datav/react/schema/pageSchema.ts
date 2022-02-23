@@ -75,7 +75,7 @@ export const pageSchema: ISchema = {
           },
           'x-component-props': {
             placeholder: '输入图片地址',
-            prefix: "{{icon('LinkOutlined')}}",
+            prefix: "{{icon('Link')}}",
           },
         },
         zoomMode: {

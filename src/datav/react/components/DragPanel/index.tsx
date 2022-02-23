@@ -48,16 +48,13 @@ export const DragPanel: React.FC = observer(() => {
             if (!toolbar.components.show) changeConfigPanel();
           }}
         >
-          {resourceData.map((m) => (
-            <TabPane tab={<RenderTab icon={m.icon} name={m.name} />} key={m.id}>
+          {resourceData.map((m, i) => (
+            <TabPane tab={<RenderTab icon={m.icon} name={m.name} />} key={i}>
               <PreviewItem data={m.children} />
             </TabPane>
           ))}
         </Tabs>
       </div>
-      {/* <div className="toggle">
-        <DoubleLeftOutlined className="toggle-icon" onClick={() => setCollapsed(!collapsed)} />
-      </div> */}
     </div>
   );
 });
