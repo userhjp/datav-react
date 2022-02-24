@@ -1,4 +1,5 @@
 import { Engine } from '../core';
+import { WidgetConfig } from './interface';
 
 export interface IDesignerLayoutProps {
   prefixCls?: string;
@@ -7,11 +8,11 @@ export interface IDesignerLayoutProps {
 }
 export interface IDesignerProps extends IDesignerLayoutProps {
   engine: Engine;
+  /** 拖拽源数据 */
+  resourceData: IResourceData[];
+  /** 物料组件 */
+  components: IDesignerComponents;
 }
-
-// export interface IDesignerComponents {
-//   [key: string]: DnFC<any>;
-// }
 
 export interface IDesignerLayoutContext {
   theme?: 'dark' | 'light' | (string & {});
@@ -43,12 +44,14 @@ export interface IResourceData {
   children: IResourceDataChild;
 }
 
-// export type DnFC<P = {}> = React.FC<P> & {
-//   Resource?: IResource[];
-//   Behavior?: IBehavior[];
-// };
+export type DnFC<P = {}> = React.FC<P> & {
+  DnConfig?: WidgetConfig;
+};
 
-// export type DnComponent<P = {}> = React.ComponentType<P> & {
-//   Resource?: IResource[];
-//   Behavior?: IBehavior[];
-// };
+export type DnComponent<P = {}> = React.ComponentType<P> & {
+  DnConfig?: WidgetConfig;
+};
+
+export interface IDesignerComponents {
+  [key: string]: DnFC<any> | DnComponent<any>;
+}

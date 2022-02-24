@@ -10,13 +10,9 @@ export type IDesignerIcons = Record<string, any>;
 
 export type IDesignerWidgets = Record<string, any>;
 
-export type IDesignerConfig = Record<string, any>;
-
 export type IDesignerIconsStore = IDesignerStore<IDesignerIcons>;
 
 export type IDesignerWidgetStore = IDesignerStore<IDesignerWidgets>;
-
-export type IDesignerConfigStore = IDesignerStore<IDesignerConfig>;
 
 export type IEngineProps<T = Event> = IEventProps<T> & {
   shortcuts?: Shortcut[];

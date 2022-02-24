@@ -92,17 +92,18 @@ export type WidgetEvent = {
   };
 };
 
-export type WidgetConfig = Partial<{
-  /** 组件宽度 */
-  w: number;
-  /** 组件高度 */
-  h: number;
+export type WidgetConfig = {
+  /** 组件默认宽度 380 */
+  w?: number;
+  /** 组件默认高度 220 */
+  h?: number;
   /** 字段映射描述 可选 */
-  fields: Record<string, string>;
-  /** 组件基础属性，高宽位置等*/
-  attr: ISchema;
+  fields?: Record<string, string>;
+  /** 组件属性Schema*/
+  schema?: ISchema;
   /** 交互数据属性 */
-  events: WidgetEvent;
-  /** 数据源 */
-  data: Array<Record<string, any>> | Record<string, any>;
-}>;
+  events?: WidgetEvent;
+  /** 默认数据 */
+  data?: Array<Record<string, any>> | Record<string, any>;
+  version?: string;
+};

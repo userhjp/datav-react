@@ -18,7 +18,6 @@ export const RenderWidget: React.FC<{ nodeInfo: IWidgetNode }> = observer(
     if (!Component) return <div />;
     const data = useReqData(nodeInfo.id, nodeInfo.data);
     const options = toJS(nodeInfo.options);
-
     if (!options) return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>

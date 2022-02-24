@@ -20,7 +20,7 @@ export const WidgetDrag: React.FC = () => {
 
   const addBox = useCallback(
     ({ x = 0, y = 0, name, type }) => {
-      const widget: WidgetConfig = GlobalRegistry.getDesignerConfig(type);
+      const widget: WidgetConfig = GlobalRegistry.getDesignerWidget(type)?.DnConfig;
       if (!widget) {
         message.info('开发中，敬请期待...');
         return;
@@ -38,7 +38,7 @@ export const WidgetDrag: React.FC = () => {
         name,
         type,
         data: widget.data,
-        ver: widget.attr.version || '1.0',
+        ver: widget.version || '1.0',
         fieldsDes: widget.fields,
       });
       operation.addNode(widgetNode);

@@ -1,33 +1,17 @@
 import { observable } from '@formily/reactive';
-import {
-  IDesignerConfig,
-  IDesignerConfigStore,
-  IDesignerIcons,
-  IDesignerIconsStore,
-  IDesignerWidgets,
-  IDesignerWidgetStore,
-} from './types';
-
-const DESIGNER_CONFIG_STORE: IDesignerConfigStore = observable.ref({});
+import { IDesignerComponents } from '../react/types';
+import { IDesignerIcons, IDesignerIconsStore, IDesignerWidgets, IDesignerWidgetStore } from './types';
 
 const DESIGNER_WIDGETS_STORE: IDesignerWidgetStore = observable.ref({});
 
 const DATAV_ICONS_STORE: IDesignerIconsStore = observable.ref({});
 
 const DATAV_GlobalRegistry = {
-  getDesignerConfig: (name: string) => {
-    return DESIGNER_CONFIG_STORE[`${name}`.toLowerCase()];
-  },
-
-  setDesignerConfig: (configs: IDesignerConfig) => {
-    Object.assign(DESIGNER_CONFIG_STORE, configs);
-  },
-
   getDesignerWidget: (name: string) => {
     return DESIGNER_WIDGETS_STORE[name];
   },
 
-  setDesignerWidget: (widgets: IDesignerWidgets) => {
+  registerDesignerWidget: (widgets: IDesignerComponents) => {
     Object.assign(DESIGNER_WIDGETS_STORE, widgets);
   },
 

@@ -3,7 +3,8 @@ import { DEFAULT_DRIVERS, DEFAULT_EFFECTS, DEFAULT_SHORTCUTS } from './presets';
 import { Engine } from './models';
 import { IEngineProps } from './types';
 import { ApiType, FieldStatus, generateUUID, IDataType, isArr } from '../shared';
-import { FieldConfig, IWidgetNode, WidgetResourceConfig } from '../react/interface';
+import { FieldConfig, IWidgetNode, WidgetConfig, WidgetResourceConfig } from '../react/interface';
+import { DnComponent, DnFC } from '../react/types';
 
 export const createDesigner = (props: IEngineProps<Engine> = {}) => {
   const drivers = props.drivers || [];
@@ -18,6 +19,15 @@ export const createDesigner = (props: IEngineProps<Engine> = {}) => {
         shortcuts: [...shortcuts, ...DEFAULT_SHORTCUTS],
       })
   );
+};
+
+/** 注册组件配置 */
+export const registerWidgetConfig = (comoinent: DnFC<any> | DnComponent<any>, config: WidgetConfig): void => {
+  comoinent.DnConfig = {
+    w: 380,
+    h: 220,
+    ...config,
+  };
 };
 
 export const createWidgetNode = (config: WidgetResourceConfig): IWidgetNode => {

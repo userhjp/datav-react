@@ -4,8 +4,8 @@ import React from 'react';
 import { PanelType } from '@/datav/shared';
 import { useToolbar } from '@/datav/react/hooks';
 import PreviewItem from './PreviewItem';
-import { resourceData } from './data';
 import { IconWidget } from '../IconWidget';
+import { IResourceData } from '../../types';
 import './index.less';
 
 const { TabPane } = Tabs;
@@ -18,7 +18,7 @@ const icons = {
   info: <IconWidget infer="RichText" />,
 };
 
-export const DragPanel: React.FC = observer(() => {
+export const DragPanel: React.FC<{ resourceData: IResourceData[] }> = observer(({ resourceData }) => {
   const toolbar = useToolbar();
   const changeConfigPanel = () => {
     toolbar.setPanelState({ type: PanelType.components, value: !toolbar.components.show });

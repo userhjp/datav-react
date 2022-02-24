@@ -56,7 +56,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     //     form.removeEffects('pageChange');
     //   };
     // }, []);
-    const compSchema = currentNode ? GlobalRegistry.getDesignerConfig(currentNode.info.type) : null;
+    const compSchema = currentNode ? GlobalRegistry.getDesignerWidget(currentNode.info.type)?.DnConfig : null;
     const tabBarStyle: React.CSSProperties = useMemo(() => {
       return {
         height: 30,
@@ -90,7 +90,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                   <Tabs className="my-form-tab" animated={false} centered tabBarStyle={tabBarStyle}>
                     <Tabs.TabPane key="1" tab="属性" forceRender>
                       <SchemaField name="attr" schema={baseAttrSchema} components={props.components} scope={scope} />
-                      <SchemaField name="options" schema={compSchema.attr} components={props.components} scope={scope} />
+                      <SchemaField name="options" schema={compSchema.schema} components={props.components} scope={scope} />
                     </Tabs.TabPane>
                     <Tabs.TabPane key="2" tab="数据" forceRender className="pl_10">
                       {compSchema.data ? (

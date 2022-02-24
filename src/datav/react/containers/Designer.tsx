@@ -8,16 +8,16 @@ import { GlobalRegistry } from '@/datav/core/registry';
 import { Engine } from '@/datav/core';
 import { LayerPanel, DesignHead, DragPanel, Drawing } from '../components';
 import { SettingsForm } from '../settings-form/SettingsForm';
-import { COMPONENT_CONFIG, WIDGETS } from '@/datav/react/widgets';
 import '../styles.less';
 
 GlobalRegistry.registerDesignerIcons(icons);
-GlobalRegistry.setDesignerConfig(COMPONENT_CONFIG);
-GlobalRegistry.setDesignerWidget(WIDGETS);
-
 export const Designer: React.FC<IDesignerProps> = (props) => {
   const engine = useDesigner();
   const ref = useRef<Engine>();
+  useEffect(() => {
+    GlobalRegistry.registerDesignerWidget(props.components);
+  }, []);
+
   useEffect(() => {
     if (props.engine) {
       if (props.engine && ref.current) {
@@ -52,7 +52,7 @@ export const Designer: React.FC<IDesignerProps> = (props) => {
           <DesignHead />
           <div className="datav-content">
             <LayerPanel />
-            <DragPanel />
+            <DragPanel resourceData={props.resourceData} />
             <Drawing />
             <SettingsForm />
           </div>
