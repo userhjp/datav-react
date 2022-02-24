@@ -1,6 +1,6 @@
 import { Engine } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent, ViewportScrollEvent } from '../events';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetNode } from '../../react/interface';
 import { CursorType } from '../index';
 
 /** 位置移动 */

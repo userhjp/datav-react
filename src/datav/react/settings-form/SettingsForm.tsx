@@ -1,22 +1,22 @@
 import React, { useMemo } from 'react';
 import { Field, ObjectField, observer } from '@formily/react';
-import { pageSchema } from '@/datav/react/schema/pageSchema';
+import { pageSchema } from '../schema/pageSchema';
 import { Tabs } from 'antd';
 import { Empty, WidgetInfo } from './components';
 import { baseAttrSchema } from '../schema/baseAttrSchema';
 import DataFields from './DataFields';
-import { useToolbar, useScreen } from '@/datav/react/hooks';
-import { cancelIdle, requestIdle } from '@/datav/shared';
-import { useCurrentNode } from '@/datav/react/hooks/useCurrentNode';
+import { useToolbar, useScreen } from '../hooks';
+import { cancelIdle, requestIdle } from '../../shared';
+import { useCurrentNode } from '../hooks/useCurrentNode';
 import { createForm } from '@formily/core';
 import { Form } from '@formily/antd';
 import { ISettingFormProps } from './types';
-import { IWidgetNode, IScreenProps } from '@/datav/react/interface';
+import { IWidgetNode, IScreenProps } from '../interface';
 import { EventFields } from './EventsFields';
 import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';
 import { SettingsFormContext } from './context';
-import { GlobalRegistry } from '@/datav/core/registry';
+import { GlobalRegistry } from '../../core/registry';
 import './styles.less';
 
 const GlobalState = {

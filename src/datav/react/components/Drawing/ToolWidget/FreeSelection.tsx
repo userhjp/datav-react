@@ -1,8 +1,8 @@
 import React from 'react';
-import { useCursor, useScreen, useViewport } from '@/datav/react/hooks';
-import { CursorStatus, CursorType } from '@/datav/core';
+import { useCursor, useScreen, useViewport } from '../../../hooks';
+import { CursorStatus, CursorType } from '../../../../core';
 import { observer } from '@formily/react';
-import { calcRectByStartEndPoint } from '@/datav/shared';
+import { calcRectByStartEndPoint } from '../../../../shared';
 
 export const FreeSelection = observer(() => {
   const cursor = useCursor();

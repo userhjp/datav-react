@@ -1,4 +1,4 @@
-import { useDesigner } from '@/datav/react/hooks';
+import { useDesigner } from '../../../hooks';
 import { useDrag } from 'ahooks';
 import React, { useRef, useState } from 'react';
 export interface DragItemProps {

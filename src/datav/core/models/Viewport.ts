@@ -1,5 +1,5 @@
-import { IWidgetNode } from '@/datav/react/interface';
-import { calcBoundingRect, cancelIdle, IPoint, isPointInRect, requestIdle } from '@/datav/shared';
+import { IWidgetNode } from '../../react/interface';
+import { calcBoundingRect, cancelIdle, IPoint, isPointInRect, requestIdle } from '../../shared';
 import { action, define, observable } from '@formily/reactive';
 import { Engine } from './Engine';
 

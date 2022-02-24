@@ -3,7 +3,7 @@ import { Input } from '@formily/antd';
 import { Upload, message, Modal } from 'antd';
 import { UploadFile, UploadChangeParam } from 'antd/lib/upload/interface';
 import React, { useContext, useEffect, useState } from 'react';
-import { IconWidget } from '@/datav/react/components';
+import { IconWidget } from '../../../components';
 import './index.less';
 import { SettingsFormContext } from '../../context';
 

@@ -1,4 +1,4 @@
-import { PageType } from '@/datav/react/interface';
+import { PageType } from '../../../react/interface';
 import { IEngineContext } from '../../types';
 
 export class AbstractButtonEvent {

@@ -1,6 +1,6 @@
 import { Engine, CursorStatus, CursorType, Viewport } from '../models';
 import { DragMoveEvent, DragStartEvent, DragStopEvent } from '../events';
-import { calcAutoScrollBasicInfo, IAutoScrollBasicInfo, IPoint, Point, scrollAnimate } from '@/datav/shared';
+import { calcAutoScrollBasicInfo, IAutoScrollBasicInfo, IPoint, Point, scrollAnimate } from '../../shared';
 
 export const useAutoScrollEffect = (engine: Engine) => {
   let xScroller: IAutoScrollBasicInfo = null;

@@ -1,5 +1,5 @@
-import { IWidgetNode, PageType } from '@/datav/react/interface';
-import { generateUUID } from '@/datav/shared';
+import { IWidgetNode, PageType } from '../../react/interface';
+import { generateUUID } from '../../shared';
 import { observable, define, action, toJS } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../events';
@@ -161,7 +161,7 @@ export class Operation {
     return this.components.find((f) => f.id === id);
   }
 
-  onOperationBtn(type: 'publish' | 'snapshot' | 'preview') {
+  onOperationBtn(type: 'publish' | 'snapshot' | 'preview' | 'help') {
     const pageData: PageType = { page: this.engine.screen.props, components: this.components };
     switch (type) {
       case 'publish':
@@ -173,6 +173,8 @@ export class Operation {
       case 'preview':
         this.dispatch(new PreviewClickEvent(pageData));
         break;
+      case 'help':
+        this.dispatch(new PreviewClickEvent(pageData));
       default:
         break;
     }

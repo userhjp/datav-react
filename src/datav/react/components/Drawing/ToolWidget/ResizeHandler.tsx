@@ -1,6 +1,6 @@
 import React, { CSSProperties, Fragment, useMemo, useRef } from 'react';
 import { useScreen, useDesigner } from '../../../hooks';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetNode } from '../../../interface';
 import { Direction, getCursors } from '../../../../shared/transform';
 import { observer } from '@formily/react';
 import './style.less';

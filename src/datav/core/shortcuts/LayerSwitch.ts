@@ -1,4 +1,4 @@
-import { PanelType } from '@/datav/shared';
+import { PanelType } from '../../shared';
 import { KeyCode, Shortcut } from '../models';
 
 export const LayerSwitch = new Shortcut({

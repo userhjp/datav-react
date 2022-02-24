@@ -1,4 +1,4 @@
-import { FieldConfig } from '@/datav/react/interface';
+import { FieldConfig } from '../../../interface';
 import React from 'react';
 import './index.less';
 

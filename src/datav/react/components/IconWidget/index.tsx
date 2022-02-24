@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef } from 'react';
 import { isStr, isFn, isObj, isPlainObj } from '@designable/shared';
 import { Tooltip, TooltipProps } from 'antd';
-import { useRegistry } from '@/datav/react/hooks';
+import { useRegistry } from '../../hooks';
 import cls from 'classnames';
 import { observer } from '@formily/react';
 import './styles.less';

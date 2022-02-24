@@ -1,5 +1,5 @@
-import { Viewport as ViewportTyp } from '@/datav/core';
-import { useDesigner, useViewport } from '@/datav/react/hooks';
+import { Viewport as ViewportTyp } from '../../../../../core';
+import { useDesigner, useViewport } from '../../../../hooks';
 import React, { useEffect, useRef } from 'react';
 import { FreeSelection } from '../../ToolWidget/FreeSelection';
 import Ruler from '../Ruler';

@@ -1,4 +1,4 @@
-import { IconWidget } from '@/datav/react/components';
+import { IconWidget } from '../../../components';
 import React from 'react';
 import './index.less';
 

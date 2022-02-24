@@ -1,4 +1,4 @@
-import { IResourceDataChild, IResourceChildrenType } from '@/datav/react/types';
+import { IResourceDataChild, IResourceChildrenType } from '../../../types';
 import React, { useMemo, useState } from 'react';
 import { DragItem } from './DragItem';
 import './index.less';

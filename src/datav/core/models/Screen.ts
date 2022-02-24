@@ -1,7 +1,7 @@
 import { Engine } from './Engine';
 import { action, define, observable } from '@formily/reactive';
-import { ZoomMode } from '@/datav/shared';
-import { IScreenProps } from '@/datav/react/interface';
+import { ZoomMode } from '../../shared';
+import { IScreenProps } from '../../react/interface';
 
 // export enum ScreenType {
 //   PC = 'PC',

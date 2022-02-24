@@ -2,7 +2,7 @@ import React from 'react';
 import { connect, mapReadPretty, mapProps } from '@formily/react';
 import { Select as AntdSelect } from 'antd';
 import { PreviewText } from '@formily/antd';
-import { IconWidget } from '@/datav/react/components';
+import { IconWidget } from '../../../components';
 import './index.less';
 export const Select = connect(
   AntdSelect,

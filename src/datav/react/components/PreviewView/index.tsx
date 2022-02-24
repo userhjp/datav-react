@@ -1,10 +1,10 @@
-import { debounce } from '@/datav/shared';
+import { debounce } from '../../../shared';
 import { observer } from '@formily/react';
 import { autorun } from '@formily/reactive';
 import React, { useCallback, useEffect, useState } from 'react';
-import { ZoomMode } from '@/datav/shared';
-import { IWidgetNode } from '@/datav/react/interface';
-import { useOperation, useScreen } from '@/datav/react/hooks';
+import { ZoomMode } from '../../../shared';
+import { IWidgetNode } from '../../interface';
+import { useOperation, useScreen } from '../../hooks';
 import { RenderWidget } from '../Drawing/components/RenderWidget';
 import './index.less';
 

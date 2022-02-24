@@ -1,6 +1,6 @@
 import { DragStopEvent } from '../events';
 import { Engine, CursorType } from '../models';
-import { calcRectByStartEndPoint, IPoint, isCrossRectInRect, Point } from '@/datav/shared';
+import { calcRectByStartEndPoint, IPoint, isCrossRectInRect, Point } from '../../shared';
 
 export const useFreeSelectionEffect = (engine: Engine) => {
   engine.subscribeTo(DragStopEvent, (event) => {

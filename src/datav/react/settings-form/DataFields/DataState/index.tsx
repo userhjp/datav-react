@@ -1,4 +1,4 @@
-import { FieldStatus } from '@/datav/shared';
+import { FieldStatus } from '../../../../shared';
 import React, { useMemo } from 'react';
 import './index.less';
 

@@ -1,4 +1,4 @@
-import { useDesigner, useScreen } from '@/datav/react/hooks';
+import { useDesigner, useScreen } from '../../../..//hooks';
 import { observer } from '@formily/react';
 import React, { useLayoutEffect, useRef } from 'react';
 import { ToolWidget } from '../../ToolWidget';

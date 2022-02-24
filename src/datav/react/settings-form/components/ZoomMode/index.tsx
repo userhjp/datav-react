@@ -1,7 +1,7 @@
-import { ZoomMode } from '@/datav/shared';
+import { ZoomMode } from '../../../../shared';
 import { Radio, Space, Tooltip } from 'antd';
 import React from 'react';
-import { IconWidget } from '@/datav/react/components';
+import { IconWidget } from '../../../components';
 import './index.less';
 
 type ZoomModeProps = {

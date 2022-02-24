@@ -1,14 +1,17 @@
 import React, { useEffect, useMemo } from 'react';
-import { PreviewView } from '@/datav/react/components';
+import { PreviewView } from '../components';
 import { DesignerEngineContext } from '../context';
-import { createDesigner } from '@/datav/core';
+import { createDesigner } from '../../core';
+import { IDesignerComponents } from '../types';
+import { PageType } from '../interface';
 
-type screenProps = {
-  data: any;
+type PreviewProps = {
+  data: PageType;
   loading?: boolean;
+  components?: IDesignerComponents;
 };
 
-export const Preview: React.FC<screenProps> = (props) => {
+export const Preview: React.FC<PreviewProps> = (props) => {
   const { data, loading = false } = props;
   const engine = useMemo(() => createDesigner(), []);
 

@@ -1,7 +1,7 @@
-import { GlobalRegistry } from '@/datav/core/registry';
-import { IWidgetNode } from '@/datav/react/interface';
-import { useReqData } from '@/datav/react/hooks';
-import { cancelIdle, requestIdle } from '@/datav/shared';
+import { GlobalRegistry } from '../../../../../core/registry';
+import { IWidgetNode } from '../../../../interface';
+import { useReqData } from '../../../../hooks';
+import { cancelIdle, requestIdle } from '../../../../../shared';
 import { observer } from '@formily/react';
 import { toJS } from '@formily/reactive';
 import React, { Suspense } from 'react';

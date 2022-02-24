@@ -1,4 +1,4 @@
-import { isFn, KeyCode } from '@/datav/shared';
+import { isFn, KeyCode } from '../../shared';
 import { IEngineContext } from '../types';
 
 export { KeyCode };

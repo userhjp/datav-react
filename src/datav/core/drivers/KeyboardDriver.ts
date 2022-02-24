@@ -1,4 +1,4 @@
-import { EventDriver } from '@/datav/shared';
+import { EventDriver } from '../../shared';
 import { KeyDownEvent, KeyUpEvent } from '../events';
 
 function filter(event: KeyboardEvent) {

@@ -1,43 +1,46 @@
 import { observer } from '@formily/react';
-import { message, Space, Tooltip } from 'antd';
+import { Space, Tooltip } from 'antd';
 import React from 'react';
-import { PanelType } from '@/datav/shared';
-import { useCursor, useOperation, useDesigner, useToolbar } from '@/datav/react/hooks';
+import { PanelType } from '../../../shared';
+import { useCursor, useOperation, useDesigner, useToolbar } from '../../hooks';
 import { IconWidget } from '../IconWidget';
-import { CursorType, Engine } from '@/datav/core';
-import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '@/datav/core/events';
+import { CursorType, Engine } from '../../../core';
+import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../../../core/events';
 import { IconPreview } from './IconPreview';
 import './index.less';
 
-const SnapshotKey = 'DataV-Snapshot';
-
 export const useButtonEffect = (engine: Engine) => {
   engine.subscribeTo(PublishClickEvent, (event) => {
-    engine.props.onPublish && engine.props.onPublish(event.data);
-    engine.toolbar.addLoading();
-    try {
-      message.success('大屏已保存');
-    } catch (error) {
-      message.error(`保存大屏失败：${error}`);
-    } finally {
-      engine.toolbar.removeLoading();
+    if (!engine.props.onPublish) return;
+    const handle = engine.props.onPublish(event.data);
+    if (handle instanceof Promise) {
+      engine.toolbar.addLoading();
+      handle.finally(() => {
+        engine.toolbar.removeLoading();
+      });
     }
   });
 
   engine.subscribeTo(SnapshotClickEvent, (event) => {
-    localStorage.setItem(SnapshotKey, JSON.stringify(event.data));
-    message.success('已保存快照');
-    engine.props.onSnapshot && engine.props.onSnapshot(event.data);
+    if (!engine.props.onSnapshot) return;
+    const handle = engine.props.onSnapshot(event.data);
+    if (handle instanceof Promise) {
+      engine.toolbar.addLoading();
+      handle.finally(() => {
+        engine.toolbar.removeLoading();
+      });
+    }
   });
 
   engine.subscribeTo(PreviewClickEvent, (event) => {
-    engine.props.onPreview && engine.props.onPreview(event.data);
-    // localStorage.setItem(SnapshotKey, JSON.stringify(event.data));
-    // const a = document.createElement('a');
-    // a.rel = 'noopener, noreferrer';
-    // a.href = '/preview';
-    // a.target = '_blank';
-    // a.click();
+    if (!engine.props.onPreview) return;
+    const handle = engine.props.onPreview(event.data);
+    if (handle instanceof Promise) {
+      engine.toolbar.addLoading();
+      handle.finally(() => {
+        engine.toolbar.removeLoading();
+      });
+    }
   });
 };
 
@@ -123,7 +126,7 @@ export const DesignHead: React.FC = observer(() => {
             </Tooltip>
 
             <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'帮助'}>
-              <div className="head-btn">
+              <div className="head-btn" onClick={() => operation.onOperationBtn('help')}>
                 <IconWidget infer="Help" style={{ color: '#fff' }} />
               </div>
             </Tooltip>

@@ -1,8 +1,8 @@
-import { replaceTextParams, toJson } from '@/datav/shared';
+import { replaceTextParams, toJson } from '../../shared';
 import { action, define, observable, toJS } from '@formily/reactive';
-import { ApiRequestMethod, ApiType, IDataType } from '@/datav/shared';
-import { DataConfigType } from '@/datav/react/interface';
-import { dsRequest } from '@/datav/shared';
+import { ApiRequestMethod, ApiType, IDataType } from '../../shared';
+import { DataConfigType } from '../../react/interface';
+import { dsRequest } from '../../shared';
 import { Engine } from './Engine';
 
 export const waitTime = (time = 100) => {

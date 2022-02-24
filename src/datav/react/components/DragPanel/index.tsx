@@ -1,8 +1,8 @@
 import { observer } from '@formily/react';
 import { Tabs } from 'antd';
 import React from 'react';
-import { PanelType } from '@/datav/shared';
-import { useToolbar } from '@/datav/react/hooks';
+import { PanelType } from '../../../shared';
+import { useToolbar } from '../../hooks';
 import PreviewItem from './PreviewItem';
 import { IconWidget } from '../IconWidget';
 import { IResourceData } from '../../types';

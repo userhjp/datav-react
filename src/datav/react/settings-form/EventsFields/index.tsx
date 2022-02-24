@@ -2,7 +2,7 @@ import React from 'react';
 import { ObjectField as ObjectFieldType } from '@formily/core';
 import { Field, ObjectField, useField } from '@formily/react';
 import { useMemo } from 'react';
-import { DataSource } from '@/datav/react/interface';
+import { DataSource } from '../../interface';
 import { Tooltip } from 'antd';
 import { BlurInput } from '../components';
 import './index.less';

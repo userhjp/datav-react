@@ -6,7 +6,7 @@ import { useField, observer, useFieldSchema, RecursionField } from '@formily/rea
 import { Schema } from '@formily/json-schema';
 import { toArr } from '@formily/shared';
 import { ArrayField, ObjectField } from '@formily/core';
-import { IconWidget } from '@/datav/react/components';
+import { IconWidget } from '../../../components';
 import './index.less';
 
 type ActiveKeys = string | number | Array<string | number>;

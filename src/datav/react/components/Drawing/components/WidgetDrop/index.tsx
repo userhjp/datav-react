@@ -3,13 +3,13 @@ import { Observer, observer } from '@formily/react';
 import { useCallback, useMemo } from 'react';
 import { message } from 'antd';
 import { useDrop } from 'ahooks';
-import { useOperation, useViewport } from '@/datav/react/hooks';
-import { IWidgetNode, WidgetConfig } from '@/datav/react/interface';
-import { useDesigner, useSelection } from '@/datav/react/hooks';
-import { ContextMenu } from '@/datav/react/components';
-import { GlobalRegistry } from '@/datav/core/registry';
+import { useOperation, useViewport } from '../../../../hooks';
+import { IWidgetNode, WidgetConfig } from '../../../../interface';
+import { useDesigner, useSelection } from '../../../../hooks';
+import { ContextMenu } from '../../../../components';
+import { GlobalRegistry } from '../../../../../core/registry';
 import { RenderWidget } from '../RenderWidget';
-import { createWidgetNode } from '@/datav/core';
+import { createWidgetNode } from '../../../../../core';
 import './index.less';
 
 export const WidgetDrag: React.FC = () => {

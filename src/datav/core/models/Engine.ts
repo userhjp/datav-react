@@ -1,6 +1,6 @@
 import { IEngineProps } from '../types';
 import { Event } from '../../shared';
-import { PageType } from '@/datav/react/interface';
+import { PageType } from '../../react/interface';
 import { Viewport, DataSource, Cursor, Toolbar, Operation, Keyboard, Screen } from './index';
 
 /**

@@ -1,4 +1,4 @@
-import { useScreen } from '@/datav/react/hooks';
+import { useScreen } from '../../../hooks';
 import { observer } from '@formily/react';
 import React from 'react';
 

@@ -10,12 +10,11 @@ import {
   languageType,
   registerDatavDarkTheme,
 } from './editor-config';
-import { debounce } from '@/datav/shared';
-import { copyText } from '@/datav/shared';
+import { debounce, copyText } from '../../../../shared';
 import { message, Modal } from 'antd';
 import { toJS } from '@formily/reactive';
 import './index.less';
-import { IconWidget } from '@/datav/react/components';
+import { IconWidget } from '../../../components';
 
 type MonacoEditorProps = Partial<{
   options: monaco.editor.IStandaloneEditorConstructionOptions;

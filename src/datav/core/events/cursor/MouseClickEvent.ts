@@ -1,4 +1,4 @@
-import { ICustomEvent } from '@/datav/shared';
+import { ICustomEvent } from '../../../shared';
 import { AbstractCursorEvent } from './AbstractCursorEvent';
 
 export class MouseClickEvent extends AbstractCursorEvent implements ICustomEvent {

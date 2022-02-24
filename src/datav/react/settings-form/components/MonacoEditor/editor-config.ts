@@ -1,5 +1,5 @@
 import * as monaco from 'monaco-editor';
-import { isObj, isArr } from '@/datav/shared';
+import { isObj, isArr } from '../../../../shared';
 
 export type languageType = 'plaintext' | 'html' | 'javascript' | 'json' | 'sql';
 

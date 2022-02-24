@@ -1,6 +1,6 @@
 import { Engine } from '../models/Engine';
 import { MouseClickEvent, MouseDoubleClickEvent } from '../events';
-import { EventDriver } from '@/datav/shared';
+import { EventDriver } from '../../shared';
 
 export class MouseClickDriver extends EventDriver<Engine> {
   onMouseClick = (e: MouseEvent) => {

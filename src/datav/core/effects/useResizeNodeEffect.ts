@@ -1,8 +1,8 @@
 import { Engine, CursorType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { WidgetPosition, IWidgetNode } from '@/datav/react/interface';
+import { WidgetPosition, IWidgetNode } from '../../react/interface';
 import { toJS } from '@formily/reactive';
-import { Direction, IPoint, Point } from '@/datav/shared';
+import { Direction, IPoint, Point } from '../../shared';
 
 /** 组件大小调整 */
 export const useResizeNodeEffect = (engine: Engine) => {

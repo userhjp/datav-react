@@ -1,8 +1,8 @@
 import { batch, reaction } from '@formily/reactive';
 import { message } from 'antd';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { IDataType, FieldStatus } from '@/datav/shared';
-import { DataConfigType, DataSource, FieldConfig } from '@/datav/react/interface';
+import { IDataType, FieldStatus } from '../../shared';
+import { DataConfigType, DataSource, FieldConfig } from '../interface';
 import { useDesigner } from './useDesigner';
 
 const hasOwnProperty = Object.prototype.hasOwnProperty;

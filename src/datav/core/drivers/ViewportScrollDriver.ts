@@ -1,6 +1,6 @@
 import { Engine } from '../models/Engine';
 import { ViewportScrollEvent } from '../events';
-import { EventDriver } from '@/datav/shared';
+import { EventDriver } from '../../shared';
 
 export class ViewportScrollDriver extends EventDriver<Engine> {
   request = null;

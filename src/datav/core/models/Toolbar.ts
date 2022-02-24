@@ -1,5 +1,5 @@
 import { action, define, observable } from '@formily/reactive';
-import { PanelType } from '@/datav/shared';
+import { PanelType } from '../../shared';
 const panelStateKey = 'panel-state';
 
 function getPanelState(key: PanelType) {

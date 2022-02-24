@@ -1,6 +1,6 @@
 import { Engine, CursorType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetNode } from '../../react/interface';
 
 /** 组件旋转 先放core 理论上应该放业务代码里 */
 export const useRotateEffect = (engine: Engine) => {

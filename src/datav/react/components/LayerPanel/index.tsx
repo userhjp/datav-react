@@ -1,9 +1,9 @@
 import { observer } from '@formily/react';
 import React, { useEffect, useRef } from 'react';
-import { MoveSortType, PanelType } from '@/datav/shared';
+import { MoveSortType, PanelType } from '../../../shared';
 import { ContextMenu } from '../ContextMenu';
 import { Input } from 'antd';
-import { useSelection, useOperation, useToolbar } from '@/datav/react/hooks';
+import { useSelection, useOperation, useToolbar } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import './index.less';
 

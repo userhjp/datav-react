@@ -5,13 +5,13 @@ import { Checkbox } from '@formily/antd';
 import DataState from './DataState';
 import { MonacoEditor, BlurInput } from '../components';
 import { useEffect, useMemo, useState } from 'react';
-import { DataSource } from '@/datav/react/interface';
+import { DataSource } from '../../interface';
 import { languageType } from '../components/MonacoEditor/editor-config';
 import { InputNumber, Tooltip } from 'antd';
 import { autorun } from '@formily/reactive';
-import { ApiType, FieldStatus } from '@/datav/shared';
+import { ApiType, FieldStatus } from '../../../shared';
 import DataConfig from './DataConfig';
-import { useDataSource } from '@/datav/react/hooks';
+import { useDataSource } from '../../hooks';
 import { IconWidget } from '../../components';
 import './index.less';
 

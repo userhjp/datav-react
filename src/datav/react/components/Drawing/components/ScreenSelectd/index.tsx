@@ -1,4 +1,4 @@
-import { useScreen, useViewport } from '@/datav/react/hooks';
+import { useScreen, useViewport } from '../../../../hooks';
 import { observer } from '@formily/react';
 import { toJS } from '@formily/reactive';
 import { Dropdown, Menu, Slider } from 'antd';

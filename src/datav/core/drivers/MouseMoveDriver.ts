@@ -1,6 +1,6 @@
 import { Engine } from '../models/Engine';
 import { MouseMoveEvent } from '../events';
-import { EventDriver } from '@/datav/shared';
+import { EventDriver } from '../../shared';
 export class MouseMoveDriver extends EventDriver<Engine> {
   request = null;
 

@@ -1,14 +1,14 @@
-import { ApiRequestMethod, ApiType } from '@/datav/shared';
-import { DataConfigType, FieldConfig } from '@/datav/react/interface';
+import { ApiRequestMethod, ApiType } from '../../../../shared';
+import { DataConfigType, FieldConfig } from '../../../interface';
 import { Checkbox, FormDrawer, FormItem, FormLayout, Select } from '@formily/antd';
 import { Field, Observer, VoidField } from '@formily/react';
 import { Button, Input, Tooltip } from 'antd';
 import React, { useMemo, useRef, useState } from 'react';
 import { MonacoEditor } from '../../components';
 import FieldGrid from '../FieldGrid';
-import { useDataSource } from '@/datav/react/hooks';
-import { DataSource } from '@/datav/core';
-import { IconWidget } from '@/datav/react/components';
+import { useDataSource } from '../../../hooks';
+import { DataSource } from '../../../../core';
+import { IconWidget } from '../../../components';
 import './index.less';
 
 type DataConfigProps = {

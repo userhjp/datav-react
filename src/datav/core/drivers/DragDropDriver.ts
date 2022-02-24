@@ -1,6 +1,6 @@
 import { Engine } from '../models/Engine';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { EventDriver } from '@/datav/shared';
+import { EventDriver } from '../../shared';
 
 const GlobalState = {
   dragging: false,

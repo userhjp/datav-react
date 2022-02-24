@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
-import { useScreen } from '@/datav/react/hooks';
-import style from './style.less';
+import { useScreen } from '../../../hooks';
 import { DashedBox } from './DashedBox';
 import { Selection } from './Selection';
+import style from './style.less';
 
 export const ToolWidget: React.FC = () => {
   const screen = useScreen();

@@ -1,7 +1,7 @@
 import { Engine } from '../models/Engine';
 import { ViewportResizeEvent } from '../events';
 import { ResizeObserver } from '@juggle/resize-observer';
-import { EventDriver } from '@/datav/shared';
+import { EventDriver } from '../../shared';
 export class ViewportResizeDriver extends EventDriver<Engine> {
   request = null;
 

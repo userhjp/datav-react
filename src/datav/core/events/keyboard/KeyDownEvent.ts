@@ -1,4 +1,4 @@
-import { ICustomEvent } from '@/datav/shared';
+import { ICustomEvent } from '../../../shared';
 import { AbstractKeyboardEvent } from './AbstractKeyboardEvent';
 
 export class KeyDownEvent extends AbstractKeyboardEvent implements ICustomEvent {

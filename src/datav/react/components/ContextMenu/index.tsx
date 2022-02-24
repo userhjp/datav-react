@@ -1,7 +1,7 @@
 import { Dropdown, Menu } from 'antd';
 import React, { useMemo } from 'react';
-import { MoveSortType } from '@/datav/shared';
-import { useSelection, useOperation } from '@/datav/react/hooks';
+import { MoveSortType } from '../../../shared';
+import { useSelection, useOperation } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import './index.less';
 

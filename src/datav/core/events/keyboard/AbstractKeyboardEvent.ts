@@ -1,4 +1,4 @@
-import { getKeyCodeFromEvent, KeyCode } from '@/datav/shared';
+import { getKeyCodeFromEvent, KeyCode } from '../../../shared';
 import { IEngineContext } from '../../types';
 
 export class AbstractKeyboardEvent {
