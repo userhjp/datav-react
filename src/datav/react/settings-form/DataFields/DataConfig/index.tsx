@@ -125,7 +125,7 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
                 component={[
                   MonacoEditor,
                   {
-                    language: 'javascript',
+                    language: 'json',
                     readOnly: false,
                     autoFormat: true,
                     height: 110,
@@ -148,7 +148,7 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
                 component={[
                   MonacoEditor,
                   {
-                    language: 'javascript',
+                    language: 'json',
                     readOnly: false,
                     autoFormat: true,
                     height: 110,
@@ -181,7 +181,7 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
                   component={[
                     MonacoEditor,
                     {
-                      language: 'javascript',
+                      language: 'json',
                       readOnly: false,
                       autoFormat: true,
                       height: 120,

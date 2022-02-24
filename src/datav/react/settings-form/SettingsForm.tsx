@@ -4,7 +4,7 @@ import { pageSchema } from '../schema/pageSchema';
 import { Tabs } from 'antd';
 import { Empty, WidgetInfo } from './components';
 import { baseAttrSchema } from '../schema/baseAttrSchema';
-import DataFields from './DataFields';
+import { DataFields } from './DataFields';
 import { useToolbar, useScreen } from '../hooks';
 import { cancelIdle, requestIdle } from '../../shared';
 import { useCurrentNode } from '../hooks/useCurrentNode';
@@ -86,7 +86,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
             >
               {currentNode && compSchema ? (
                 <>
-                  <Field name="info" component={[WidgetInfo, {}]} />
+                  <Field name="info" component={[WidgetInfo]} />
                   <Tabs className="my-form-tab" animated={false} centered tabBarStyle={tabBarStyle}>
                     <Tabs.TabPane key="1" tab="属性" forceRender>
                       <SchemaField name="attr" schema={baseAttrSchema} components={props.components} scope={scope} />

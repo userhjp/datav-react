@@ -4,7 +4,7 @@ import { useReqData } from '../../../../hooks';
 import { cancelIdle, requestIdle } from '../../../../../shared';
 import { observer } from '@formily/react';
 import { toJS } from '@formily/reactive';
-import React, { Suspense } from 'react';
+import React, { Suspense, useMemo } from 'react';
 import './index.less';
 
 const GlobalState = {
@@ -15,10 +15,10 @@ export const RenderWidget: React.FC<{ nodeInfo: IWidgetNode }> = observer(
   ({ nodeInfo }) => {
     if (!nodeInfo.info || !nodeInfo.info.type) return <div />;
     const Component = GlobalRegistry.getDesignerWidget(nodeInfo.info.type);
-    if (!Component) return <div />;
     const data = useReqData(nodeInfo.id, nodeInfo.data);
     const options = toJS(nodeInfo.options);
-    if (!options) return <WidgetLoading />;
+    console.log('111111');
+    if (!options || !Component) return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>
         <Component options={options} data={data} />

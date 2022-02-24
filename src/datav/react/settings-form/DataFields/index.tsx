@@ -15,7 +15,7 @@ import { useDataSource } from '../../hooks';
 import { IconWidget } from '../../components';
 import './index.less';
 
-const DataFields: React.FC = () => {
+export const DataFields: React.FC = () => {
   const field = useField<ObjectFieldType<DataSource>>();
   const value = useMemo(() => field.value || {}, [field.value]);
   const editorType: languageType = useMemo<'json' | 'plaintext'>(() => {
@@ -114,8 +114,6 @@ const DataFields: React.FC = () => {
     </>
   );
 };
-
-export default DataFields;
 
 const DataTotalState = ({ field }) => {
   const [totalStatus, setTotalStatus] = useState(false);

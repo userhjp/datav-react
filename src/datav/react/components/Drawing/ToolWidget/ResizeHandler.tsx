@@ -6,7 +6,6 @@ import { observer } from '@formily/react';
 import './style.less';
 export interface ISelectionBoxProps {
   node: IWidgetNode;
-  //   domRef: React.MutableRefObject<HTMLDivElement>;
 }
 
 export const ResizeHandler: React.FC<ISelectionBoxProps> = observer(({ node }) => {
