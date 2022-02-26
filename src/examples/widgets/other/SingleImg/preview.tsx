@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import './styles.less';
 
-const SingleImg: React.FC<IWidgetNode> = ({ options }) => {
+const SingleImg: React.FC<IWidgetProps> = ({ options }) => {
   const linkUrl = options?.link?.href;
 
   const goPath = () => {

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import './styles.less';
 
 export const presetImages = [
@@ -203,7 +203,7 @@ export const presetImages = [
   },
 ];
 
-const BorderBox: React.FC<IWidgetNode> = ({ options }) => {
+const BorderBox: React.FC<IWidgetProps> = ({ options }) => {
   const style: React.CSSProperties = useMemo(() => {
     const img = presetImages.find((m) => m.value === options.borderImg);
     if (!img) return {};

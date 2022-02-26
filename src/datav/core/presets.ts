@@ -10,6 +10,7 @@ import {
   useRotateEffect,
   useMoveNodeEffect,
   useResizeNodeEffect,
+  useWidgetEventEffect,
 } from './effects';
 import {
   AutoZoom,
@@ -34,6 +35,7 @@ export const DEFAULT_EFFECTS = [
   useRotateEffect,
   useMoveNodeEffect,
   useResizeNodeEffect,
+  useWidgetEventEffect,
 ];
 
 export const DEFAULT_DRIVERS = [

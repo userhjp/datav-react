@@ -3,10 +3,10 @@ import { PreviewView } from '../components';
 import { DesignerEngineContext } from '../context';
 import { createDesigner } from '../../core';
 import { IDesignerComponents } from '../types';
-import { PageType } from '../interface';
+import { IPageType } from '../interface';
 
 type PreviewProps = {
-  data: PageType;
+  data: IPageType;
   loading?: boolean;
   components?: IDesignerComponents;
 };

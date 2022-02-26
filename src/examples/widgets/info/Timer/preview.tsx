@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import { formatDate } from '@/examples/shared';
 import './styles.less';
 
-const Title: React.FC<IWidgetNode> = ({ options }) => {
+const Title: React.FC<IWidgetProps> = ({ options }) => {
   const [realDateTime, setRealDateTime] = useState(Date.now());
   const style = {
     ...options,

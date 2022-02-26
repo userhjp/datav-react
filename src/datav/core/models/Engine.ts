@@ -1,6 +1,6 @@
 import { IEngineProps } from '../types';
 import { Event } from '../../shared';
-import { PageType } from '../../react/interface';
+import { IPageType } from '../../react/interface';
 import { Viewport, DataSource, Cursor, Toolbar, Operation, Keyboard, Screen } from './index';
 
 /**
@@ -54,7 +54,7 @@ export class Engine extends Event {
     });
   }
 
-  setInitialValue(val: PageType) {
+  setInitialValue(val: IPageType) {
     if (!val) return;
     if (val.components) this.operation.components = val.components || [];
     if (val.page) this.screen.props = val.page;

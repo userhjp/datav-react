@@ -1,5 +1,6 @@
 import { observable } from '@formily/reactive';
-import { IDesignerComponents } from '../react/types';
+import { IWidgetProps } from '../react/interface';
+import { DnComponent, DnFC, IDesignerComponents } from '../react/types';
 import { IDesignerIcons, IDesignerIconsStore, IDesignerWidgets, IDesignerWidgetStore } from './types';
 
 const DESIGNER_WIDGETS_STORE: IDesignerWidgetStore = observable.ref({});
@@ -7,7 +8,7 @@ const DESIGNER_WIDGETS_STORE: IDesignerWidgetStore = observable.ref({});
 const DATAV_ICONS_STORE: IDesignerIconsStore = observable.ref({});
 
 const DATAV_GlobalRegistry = {
-  getDesignerWidget: (name: string) => {
+  getDesignerWidget: (name: string): DnFC<IWidgetProps> | DnComponent<IWidgetProps> => {
     return DESIGNER_WIDGETS_STORE[name];
   },
 

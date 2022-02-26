@@ -1,26 +1,26 @@
+import React, { useMemo, useRef, useState } from 'react';
 import { ApiRequestMethod, ApiType } from '../../../../shared';
-import { DataConfigType, FieldConfig } from '../../../interface';
+import { IDataSourceSetting, IFieldSetting } from '../../../interface';
 import { Checkbox, FormDrawer, FormItem, FormLayout, Select } from '@formily/antd';
 import { Field, Observer, VoidField } from '@formily/react';
 import { Button, Input, Tooltip } from 'antd';
-import React, { useMemo, useRef, useState } from 'react';
 import { MonacoEditor } from '../../components';
-import FieldGrid from '../FieldGrid';
+import { FieldGrid } from '../FieldGrid';
 import { useDataSource } from '../../../hooks';
 import { DataSource } from '../../../../core';
 import { IconWidget } from '../../../components';
 import './index.less';
 
 type DataConfigProps = {
-  fields: FieldConfig;
-  onChange: (value: DataConfigType) => void;
-  value: DataConfigType;
+  fields: IFieldSetting;
+  onChange: (value: IDataSourceSetting) => void;
+  value: IDataSourceSetting;
   editorType: 'json' | 'plaintext';
 };
 
 const DataConfig: React.FC<DataConfigProps> = (props) => {
   const { onChange, value, editorType, fields } = props;
-  const configForm = useRef<DataConfigType>();
+  const configForm = useRef<IDataSourceSetting>();
   const dataSource = useDataSource();
   const apiMethods = useMemo(() => {
     return Object.entries(ApiRequestMethod).map(([key, val]) => {
@@ -181,7 +181,7 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
                   component={[
                     MonacoEditor,
                     {
-                      language: 'json',
+                      language: 'javascript',
                       readOnly: false,
                       autoFormat: true,
                       height: 120,
@@ -209,7 +209,7 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
 };
 export default DataConfig;
 
-export const EditorPopover: React.FC<{ dataSource: DataSource; config: DataConfigType }> = ({ config, dataSource }) => {
+export const EditorPopover: React.FC<{ dataSource: DataSource; config: IDataSourceSetting }> = ({ config, dataSource }) => {
   const [viewData, setViewData] = useState();
 
   const loadData = async (visible: boolean) => {

@@ -1,6 +1,6 @@
 import { Engine, CursorType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { IWidgetNode } from '../../react/interface';
+import { IWidgetSetting } from '../../react/interface';
 
 /** 组件旋转 先放core 理论上应该放业务代码里 */
 export const useRotateEffect = (engine: Engine) => {
@@ -8,7 +8,7 @@ export const useRotateEffect = (engine: Engine) => {
   let startX = 0;
   let startY = 0;
   let startAngle = 0;
-  let node: IWidgetNode;
+  let node: IWidgetSetting;
 
   engine.subscribeTo(DragStartEvent, (e) => {
     if (!engine?.viewport) return;

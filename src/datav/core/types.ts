@@ -1,4 +1,4 @@
-import { PageType } from '../react/interface';
+import { IPageType } from '../react/interface';
 import { Event, IEventProps } from '../shared';
 import { Engine, Shortcut } from './models';
 
@@ -33,15 +33,15 @@ export type IEngineProps<T = Event> = IEventProps<T> & {
   /** 节点旋转dom属性名 */
   nodeRotateHanderAttrName?: string;
   /** 发布按钮点击事件 */
-  onPublish?: (data: PageType) => void | Promise<void>;
+  onPublish?: (data: IPageType) => void | Promise<void>;
   /** 生成快照按钮点击事件 */
-  onSnapshot?: (data: PageType) => void | Promise<void>;
+  onSnapshot?: (data: IPageType) => void | Promise<void>;
   /** 预览按钮点击事件 */
-  onPreview?: (data: PageType) => void | Promise<void>;
+  onPreview?: (data: IPageType) => void | Promise<void>;
 };
 
 export type IEngineContext = {
   engine: Engine;
 };
 
-export type MoveType = 'ArrowLeft' | 'ArrowUp' | 'ArrowRight' | 'ArrowDown';
+export type IMoveType = 'ArrowLeft' | 'ArrowUp' | 'ArrowRight' | 'ArrowDown';

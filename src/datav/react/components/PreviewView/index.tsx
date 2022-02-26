@@ -3,7 +3,7 @@ import { observer } from '@formily/react';
 import { autorun } from '@formily/reactive';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ZoomMode } from '../../../shared';
-import { IWidgetNode } from '../../interface';
+import { IWidgetSetting } from '../../interface';
 import { useOperation, useScreen } from '../../hooks';
 import { RenderWidget } from '../Drawing/components/RenderWidget';
 import './index.less';
@@ -68,7 +68,7 @@ export const PreviewView: React.FC = observer(() => {
   const screen = useScreen();
   const [pageStyle, setPageStyle] = useState<React.CSSProperties>();
 
-  const transformStyle = useCallback((com: IWidgetNode): React.CSSProperties => {
+  const transformStyle = useCallback((com: IWidgetSetting): React.CSSProperties => {
     const { attr } = com;
     return {
       position: 'absolute',
@@ -80,7 +80,7 @@ export const PreviewView: React.FC = observer(() => {
     };
   }, []);
 
-  const comStyle = useCallback((com: IWidgetNode): React.CSSProperties => {
+  const comStyle = useCallback((com: IWidgetSetting): React.CSSProperties => {
     const { attr } = com;
     return {
       height: '100%',

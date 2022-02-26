@@ -1,6 +1,6 @@
 import { Engine } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent, ViewportScrollEvent } from '../events';
-import { IWidgetNode } from '../../react/interface';
+import { IWidgetSetting } from '../../react/interface';
 import { CursorType } from '../index';
 
 /** 位置移动 */
@@ -8,7 +8,7 @@ export const useMoveNodeEffect = (engine: Engine) => {
   let status = null;
   let startX = 0;
   let startY = 0;
-  let node: IWidgetNode;
+  let node: IWidgetSetting;
   let currentDragMove: DragStartEvent = null;
 
   const moveComponent = (e: DragStartEvent) => {

@@ -4,7 +4,7 @@ import { useCallback, useMemo } from 'react';
 import { message } from 'antd';
 import { useDrop } from 'ahooks';
 import { useOperation, useViewport } from '../../../../hooks';
-import { IWidgetNode, WidgetConfig } from '../../../../interface';
+import { IWidgetSetting, IWidgetConfig } from '../../../../interface';
 import { useDesigner, useSelection } from '../../../../hooks';
 import { ContextMenu } from '../../../../components';
 import { GlobalRegistry } from '../../../../../core/registry';
@@ -20,7 +20,7 @@ export const WidgetDrag: React.FC = () => {
 
   const addBox = useCallback(
     ({ x = 0, y = 0, name, type }) => {
-      const widget: WidgetConfig = GlobalRegistry.getDesignerWidget(type)?.DnConfig;
+      const widget: IWidgetConfig = GlobalRegistry.getDesignerWidget(type)?.DnConfig;
       if (!widget) {
         message.info('开发中，敬请期待...');
         return;
@@ -39,7 +39,7 @@ export const WidgetDrag: React.FC = () => {
         type,
         data: widget.data,
         ver: widget.version || '1.0',
-        fieldsDes: widget.fields,
+        events: widget.events,
       });
       operation.addNode(widgetNode);
     },
@@ -69,7 +69,7 @@ export const WidgetDrag: React.FC = () => {
 };
 
 type WidgetContainerProps = {
-  node: IWidgetNode;
+  node: IWidgetSetting;
 };
 
 export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ node }) => {

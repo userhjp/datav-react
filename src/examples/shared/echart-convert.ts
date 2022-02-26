@@ -1,8 +1,9 @@
+import { IWidgetData } from '@/datav/react/interface';
 import { Path } from '@formily/path';
 import { graphic } from 'echarts/core';
 import { colorsOpt } from '../schema/echarts/colorsSchema';
 
-export function convert2Ddata(data: Array<{ [key: string]: any }>) {
+export function convert2Ddata(data: IWidgetData) {
   const c_obj = Object.create({});
   data.forEach((f) => {
     if (!f['x']) return;

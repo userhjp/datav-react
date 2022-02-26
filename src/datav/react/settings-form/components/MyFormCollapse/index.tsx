@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useState } from 'react';
 import { Collapse, Badge, Switch, Tabs, Button } from 'antd';
 import { model, markRaw, toJS } from '@formily/reactive';
 import { CollapseProps, CollapsePanelProps } from 'antd/lib/collapse';
@@ -25,13 +25,13 @@ export interface IFormCollapseProps extends CollapseProps {
   formCollapse?: IFormCollapse;
   switch?: boolean; // 开区关闭区域
   title: string;
-  key: string;
-  defaultSwitch: boolean;
-  mapSwitchKey: string; // 开关key值 默认 show
-  maxItems: string; // tab最大数
-  noPadding: boolean; // 默认true 是否保留子级Collapse内容上下边距，如果子级第一个元素就是 Collapse设置为false好看些
-  isOpen: boolean;
-  listType: 'bar' | 'line' | 'column';
+  key?: string;
+  defaultSwitch?: boolean;
+  mapSwitchKey?: string; // 开关key值 默认 show
+  maxItems?: string; // tab最大数
+  noPadding?: boolean; // 默认true 是否保留子级Collapse内容上下边距，如果子级第一个元素就是 Collapse设置为false好看些
+  isOpen?: boolean;
+  listType?: 'bar' | 'line' | 'column';
 }
 
 type ComposedFormCollapse = React.FC<IFormCollapseProps> & {
@@ -112,10 +112,8 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
     if (!value[mapSwitchKey] && _formCollapse.hasActiveKey(schema.name)) {
       _formCollapse.removeActiveKey(schema.name);
     }
-    schema.mapProperties((item) => {
-      field.form.setFieldState(`${basePath}.${item.name}`, (state) => {
-        state.display = value[mapSwitchKey] ? 'visible' : 'none';
-      });
+    field.form.setFieldState(`${basePath}.*`, (state) => {
+      state.display = value[mapSwitchKey] ? 'visible' : 'none';
     });
     return (
       <Switch

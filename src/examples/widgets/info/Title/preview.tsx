@@ -1,8 +1,8 @@
 import React from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import './styles.less';
 
-const Title: React.FC<IWidgetNode> = (props) => {
+const Title: React.FC<IWidgetProps> = (props) => {
   const style = {
     ...props.options,
     ...(props.options?.backgroundStyle || {}),

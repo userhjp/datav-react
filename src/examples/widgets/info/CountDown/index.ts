@@ -9,9 +9,11 @@ registerWidgetConfig(CountDown, {
   w: 480,
   h: 150,
   data: {
-    value: 1000 * 60 * 60 * 24,
-  },
-  fields: {
-    value: '倒计时（秒）',
+    value: {
+      value: 1000 * 60 * 60 * 24,
+    },
+    fields: {
+      value: '倒计时（秒）',
+    },
   },
 });

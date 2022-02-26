@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useMemo, useRef } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import { DatasetComponent, GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
@@ -16,7 +16,7 @@ import {
 
 use([GridComponent, CanvasRenderer, LegendComponent, DatasetComponent, TooltipComponent, LineChart]);
 
-const LineBer: React.FC<IWidgetNode> = ({ options = {}, data = [] }) => {
+const LineBer: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<ECharts>();
   const size = useSize(elemtRef);

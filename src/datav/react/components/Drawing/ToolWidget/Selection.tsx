@@ -1,11 +1,11 @@
 import React, { Fragment, useRef } from 'react';
 import { useSelection, useOperation, useToolbar } from '../../../hooks';
 import { observer } from '@formily/react';
-import { IWidgetNode } from '../../../interface';
+import { IWidgetSetting } from '../../../interface';
 import { ResizeHandler } from './ResizeHandler';
 import { NavLine } from './NavLine';
 export interface ISelectionBoxProps {
-  node: IWidgetNode;
+  node: IWidgetSetting;
   showHelpers: boolean;
 }
 

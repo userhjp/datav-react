@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Field, ObjectField, observer } from '@formily/react';
 import { pageSchema } from '../schema/pageSchema';
 import { Tabs } from 'antd';
-import { Empty, WidgetInfo } from './components';
+import { SettingsEmpty, WidgetInfo } from './components';
 import { baseAttrSchema } from '../schema/baseAttrSchema';
 import { DataFields } from './DataFields';
 import { useToolbar, useScreen } from '../hooks';
@@ -11,7 +11,7 @@ import { useCurrentNode } from '../hooks/useCurrentNode';
 import { createForm } from '@formily/core';
 import { Form } from '@formily/antd';
 import { ISettingFormProps } from './types';
-import { IWidgetNode, IScreenProps } from '../interface';
+import { IWidgetSetting, IScreenProps } from '../interface';
 import { EventFields } from './EventsFields';
 import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';
@@ -29,7 +29,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     const currentNode = useCurrentNode();
     const screen = useScreen();
     const form = useMemo(() => {
-      return createForm<IWidgetNode | IScreenProps>({
+      return createForm<IWidgetSetting | IScreenProps>({
         initialValues: currentNode || screen.props,
         values: currentNode || screen.props,
         effects(form) {
@@ -89,22 +89,23 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                   <Field name="info" component={[WidgetInfo]} />
                   <Tabs className="my-form-tab" animated={false} centered tabBarStyle={tabBarStyle}>
                     <Tabs.TabPane key="1" tab="属性" forceRender>
-                      <SchemaField name="attr" schema={baseAttrSchema} components={props.components} scope={scope} />
-                      <SchemaField name="options" schema={compSchema.schema} components={props.components} scope={scope} />
+                      <SchemaField
+                        components={props.components}
+                        scope={scope}
+                        schema={{
+                          type: 'void',
+                          properties: {
+                            attr: baseAttrSchema,
+                            options: compSchema.schema,
+                          },
+                        }}
+                      />
                     </Tabs.TabPane>
                     <Tabs.TabPane key="2" tab="数据" forceRender className="pl_10">
-                      {compSchema.data ? (
-                        <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />
-                      ) : (
-                        <Empty title="该组件无需配置数据" />
-                      )}
+                      <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />
                     </Tabs.TabPane>
                     <Tabs.TabPane key="3" tab="交互" forceRender className="pl_10">
-                      {compSchema.events ? (
-                        <ObjectField key={`${currentNode.id}`} name="event" component={[EventFields]} />
-                      ) : (
-                        <Empty title="该组件没有交互事件" />
-                      )}
+                      <ObjectField key={`${currentNode.id}`} name="events" component={[EventFields]} />
                     </Tabs.TabPane>
                   </Tabs>
                 </>

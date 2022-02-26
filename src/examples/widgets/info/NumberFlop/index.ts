@@ -9,11 +9,13 @@ registerWidgetConfig(NumberFlop, {
   w: 350,
   h: 70,
   data: {
-    title: '',
-    value: 123457,
-  },
-  fields: {
-    title: '标题',
-    value: '值',
+    value: {
+      title: '',
+      value: 123457,
+    },
+    fields: {
+      title: '标题',
+      value: '值',
+    },
   },
 });

@@ -1,12 +1,12 @@
 import { createSchemaField } from '@formily/react';
-import { FormItem, FormTab, FormGrid, Input, Switch, Radio, ArrayItems, Space } from '@formily/antd';
+import { FormItem, FormTab, FormGrid, Input, Switch, Radio, ArrayItems, Space, FormCollapse } from '@formily/antd';
 import {
   Select,
   NumberPicker,
   BgImg,
   ColorPicker,
   Divider,
-  Empty,
+  SettingsEmpty as Empty,
   FormTitle,
   USlider,
   WidgetInfo,
@@ -38,6 +38,7 @@ export const SchemaField = createSchemaField({
     MonacoEditor,
     Switch,
     ArrayTabs,
+    FormCollapse,
     MyFormCollapse,
     BorderSelect,
     Radio,

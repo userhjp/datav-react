@@ -1,12 +1,12 @@
 import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import { useSize } from 'ahooks';
 import { calcStrWidth } from '@/examples/shared';
 import TweenOne from 'rc-tween-one';
 import Children from 'rc-tween-one/lib/plugin/ChildrenPlugin';
 TweenOne.plugins.push(Children);
 
-const NumberFlop: React.FC<IWidgetNode<any>> = ({ options = {}, data }) => {
+const NumberFlop: React.FC<IWidgetProps<any>> = ({ options = {}, data }) => {
   const domRef = useRef(null);
   const size = useSize(domRef.current);
   const [animation, setAnimation] = useState(null);

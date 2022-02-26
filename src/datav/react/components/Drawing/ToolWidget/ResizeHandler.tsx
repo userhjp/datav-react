@@ -1,11 +1,11 @@
 import React, { CSSProperties, Fragment, useMemo, useRef } from 'react';
 import { useScreen, useDesigner } from '../../../hooks';
-import { IWidgetNode } from '../../../interface';
+import { IWidgetSetting } from '../../../interface';
 import { Direction, getCursors } from '../../../../shared/transform';
 import { observer } from '@formily/react';
 import './style.less';
 export interface ISelectionBoxProps {
-  node: IWidgetNode;
+  node: IWidgetSetting;
 }
 
 export const ResizeHandler: React.FC<ISelectionBoxProps> = observer(({ node }) => {

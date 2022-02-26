@@ -1,23 +1,15 @@
 import { replaceTextParams, toJson } from '../../shared';
 import { action, define, observable, toJS } from '@formily/reactive';
 import { ApiRequestMethod, ApiType, IDataType } from '../../shared';
-import { DataConfigType } from '../../react/interface';
+import { IDataSourceSetting } from '../../react/interface';
 import { dsRequest } from '../../shared';
 import { Engine } from './Engine';
-
-export const waitTime = (time = 100) => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(true);
-    }, time);
-  });
-};
 
 type ApiData = Partial<Record<string, any>> | Partial<Record<string, any>>[];
 
 export class DataSource {
   dataMap: Map<string, ApiData> = new Map();
-  variables: Record<string, any>;
+  variables: Record<string, string> = {};
   engine: Engine;
 
   constructor(engine: Engine) {
@@ -28,8 +20,18 @@ export class DataSource {
   makeObservable() {
     define(this, {
       dataMap: observable,
+      variables: observable,
       setData: action,
     });
+  }
+
+  setVariables(fields: Record<string, string>, data: Record<string, any>) {
+    const res = {};
+    for (const key in fields) {
+      const alias = fields[key] || key;
+      res[alias] = data[key];
+    }
+    this.variables = { ...this.variables, ...res };
   }
 
   setData(comId: string, data: ApiData) {
@@ -40,7 +42,7 @@ export class DataSource {
     return this.dataMap.get(comId);
   }
 
-  async requestData(config: DataConfigType) {
+  async requestData(config: IDataSourceSetting) {
     let resData: any;
     if (config.apiType === ApiType.static) {
       resData = { data: toJS(config.data) };
@@ -51,7 +53,6 @@ export class DataSource {
       if (!/^[a-zA-z]+:\/\/[^\s]*$/.test(config.apiUrl)) {
         throw Error('url必须包含协议字段，如http:');
       }
-      await waitTime(1000);
       try {
         const conf = {
           headers: toJson(config.apiHeaders, {}),

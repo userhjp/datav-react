@@ -1,9 +1,9 @@
-import { IWidgetNode, PageType } from '../../react/interface';
+import { IWidgetSetting, IPageType } from '../../react/interface';
 import { generateUUID } from '../../shared';
 import { observable, define, action, toJS } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../events';
-import { MoveType } from '../types';
+import { IMoveType } from '../types';
 import { Engine, Hover, Selection } from './index';
 export interface IOperation {
   selection: Selection;
@@ -16,7 +16,7 @@ export class Operation {
   engine: Engine;
   hover: Hover;
   editableId: string;
-  components: IWidgetNode[] = [];
+  components: IWidgetSetting[] = [];
 
   constructor(engine: Engine) {
     this.engine = engine;
@@ -42,7 +42,7 @@ export class Operation {
   }
 
   /** 添加组件 */
-  addNode(node: IWidgetNode) {
+  addNode(node: IWidgetSetting) {
     this.selection.safeSelect(node.id);
     this.components = [...this.components, node];
   }
@@ -81,7 +81,7 @@ export class Operation {
     }
   }
 
-  startMove(comp: IWidgetNode, type: MoveType) {
+  startMove(comp: IWidgetSetting, type: IMoveType) {
     if (!comp) return;
     const grid = this.engine.screen.props.grid;
     switch (type) {
@@ -102,7 +102,7 @@ export class Operation {
     }
   }
 
-  moveTo(type: MoveType) {
+  moveTo(type: IMoveType) {
     this.selection.selected.forEach((f) => {
       const comp = this.findById(f);
       this.startMove(comp, type);
@@ -162,7 +162,7 @@ export class Operation {
   }
 
   onOperationBtn(type: 'publish' | 'snapshot' | 'preview' | 'help') {
-    const pageData: PageType = { page: this.engine.screen.props, components: this.components };
+    const pageData: IPageType = { page: this.engine.screen.props, components: this.components };
     switch (type) {
       case 'publish':
         this.dispatch(new PublishClickEvent(pageData));

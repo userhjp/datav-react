@@ -1,5 +1,5 @@
 import { Engine } from '../core';
-import { WidgetConfig } from './interface';
+import { IWidgetConfig } from './interface';
 
 export interface IDesignerLayoutProps {
   prefixCls?: string;
@@ -45,11 +45,11 @@ export interface IResourceData {
 }
 
 export type DnFC<P = {}> = React.FC<P> & {
-  DnConfig?: WidgetConfig;
+  DnConfig?: IWidgetConfig;
 };
 
 export type DnComponent<P = {}> = React.ComponentType<P> & {
-  DnConfig?: WidgetConfig;
+  DnConfig?: IWidgetConfig;
 };
 
 export interface IDesignerComponents {

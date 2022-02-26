@@ -1,10 +1,10 @@
 import { useDebounceEffect, useDebounceFn, useSize } from 'ahooks';
 import React, { useMemo, useRef, useState } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import './styles.less';
 
 /** 多行文本 */
-const Text: React.FC<IWidgetNode> = ({ options, data }) => {
+const Text: React.FC<IWidgetProps> = ({ options, data }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const textRef = useRef<HTMLDivElement>(null);
   const size = useSize(containerRef);

@@ -1,13 +1,13 @@
-import { FieldConfig } from '../../../interface';
+import { IFieldSetting } from '../../../interface';
 import React from 'react';
 import './index.less';
 
 type FieldGridProps = {
-  fields: FieldConfig;
+  fields: IFieldSetting;
   typeName: '对象' | '列表';
 };
 
-const FieldGrid: React.FC<FieldGridProps> = (props) => {
+export const FieldGrid: React.FC<FieldGridProps> = (props) => {
   const { fields, typeName } = props;
   return (
     <div v-if="fields" className="field-wp">
@@ -30,4 +30,3 @@ const FieldGrid: React.FC<FieldGridProps> = (props) => {
     </div>
   );
 };
-export default FieldGrid;

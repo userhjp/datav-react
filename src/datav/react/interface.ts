@@ -1,20 +1,40 @@
 import { ZoomMode, IDataType, FieldStatus, ApiType, ApiRequestMethod, MoveSortType } from '../shared';
 import { ISchema } from '@formily/react';
 
-export type WidgetResourceConfig = {
-  w: number;
-  h: number;
-  x: number;
-  y: number;
-  name: string;
-  type: string;
-  ver: string;
-  fieldsDes: Record<string, string>;
-  data: Array<Record<string, any>> | Record<string, any>;
+export type IWidgetData = Array<Record<string, any>> | Record<string, any> | any;
+
+export type IWidgetConfig = {
+  /** 组件默认宽度 380 */
+  w?: number;
+  /** 组件默认高度 220 */
+  h?: number;
+  /** 组件属性Schema*/
+  schema?: ISchema;
+  /** 交互数据属性 */
+  events?: IWidgetEvents;
+  /** 版本号 */
+  version?: string;
+  /** 组件数据（如果有） */
+  data?: {
+    /** 默认数据 */
+    value: IWidgetData;
+    /** 字段描述映射 */
+    fields: Record<string, string>;
+  };
 };
 
+/** 组件属性 */
+export interface IWidgetProps<T = { [key: string]: any }> {
+  id: string;
+  info: IWidgetInfoSetting;
+  attr: IWidgetAttrSetting;
+  options?: T;
+  data?: IWidgetData;
+  events?: IWidgetEvents;
+}
+
 /** 组件位置信息 */
-export interface WidgetPosition {
+export interface IWidgetAttrSetting {
   x: number;
   y: number;
   w: number;
@@ -24,21 +44,19 @@ export interface WidgetPosition {
 }
 
 /** 组件描述 */
-export interface WidgetInfo {
+export interface IWidgetInfoSetting {
   name: string;
   type: string;
   ver?: string;
 }
 
-/** 组件属性 */
-// eslint-disable-next-line @typescript-eslint/ban-types
-export interface IWidgetNode<T = { [key: string]: any }> {
+export interface IWidgetSetting {
   id: string;
-  info: WidgetInfo;
-  attr: WidgetPosition;
-  options?: T;
-  data?: any;
-  event?: any;
+  info: IWidgetInfoSetting;
+  attr: IWidgetAttrSetting;
+  options?: { [key: string]: any };
+  data?: IDataSetting;
+  events?: IWidgetEvents;
 }
 
 /** 页面配置 */
@@ -52,25 +70,40 @@ export interface IScreenProps {
   zoomMode: ZoomMode;
 }
 
-export interface PageType {
+export interface IPageType {
   /** 页面设置 */
   page?: IScreenProps;
-  components?: IWidgetNode[];
+  components?: IWidgetProps[];
+}
+
+/** 数据映射 */
+export interface IFieldSetting {
+  [key: string]: { map: string; status: FieldStatus; description?: string };
 }
 
 /** 组件数据类型 */
-export interface DataSource {
-  fields: FieldConfig;
-  config: DataConfigType;
+export interface IDataSetting {
+  fields: IFieldSetting;
+  config: IDataSourceSetting;
   autoUpdate: boolean;
   updateTime: number;
 }
 
+export interface IChangedEvent {
+  description: string;
+  enable?: boolean;
+  fields?: IFieldSetting;
+}
+
+export interface IWidgetEvents {
+  changed: IChangedEvent;
+}
+
 /** 数据配置 */
-export interface DataConfigType {
+export interface IDataSourceSetting {
   /** 数据来源 1 静态数据 2 API*/
   apiType: ApiType;
-  data: Record<string, any> | Record<string, IWidgetNode>[];
+  data: Record<string, any> | Record<string, IWidgetProps>[];
   dataType: IDataType;
   useFilter: boolean;
   filterCode: string;
@@ -79,31 +112,3 @@ export interface DataConfigType {
   apiHeaders?: string;
   apiBody?: string;
 }
-
-/** 数据映射 */
-export interface FieldConfig {
-  [key: string]: { map: string; status: FieldStatus; description?: string };
-}
-
-export type WidgetEvent = {
-  changed: {
-    description: '当数据变化时';
-    fields: Record<string, string>;
-  };
-};
-
-export type WidgetConfig = {
-  /** 组件默认宽度 380 */
-  w?: number;
-  /** 组件默认高度 220 */
-  h?: number;
-  /** 字段映射描述 可选 */
-  fields?: Record<string, string>;
-  /** 组件属性Schema*/
-  schema?: ISchema;
-  /** 交互数据属性 */
-  events?: WidgetEvent;
-  /** 默认数据 */
-  data?: Array<Record<string, any>> | Record<string, any>;
-  version?: string;
-};

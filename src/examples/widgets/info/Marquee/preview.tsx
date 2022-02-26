@@ -1,10 +1,10 @@
 import { useDebounceEffect, useDebounceFn, useSize } from 'ahooks';
 import React, { useMemo, useRef, useState } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import './styles.less';
 
 /** 跑马灯 */
-const Marquee: React.FC<IWidgetNode> = ({ options, data }) => {
+const Marquee: React.FC<IWidgetProps> = ({ options, data }) => {
   const marqueeTextRef = useRef<HTMLDivElement>(null);
   const marqueeRef = useRef<HTMLDivElement>(null);
   const size = useSize(marqueeRef);

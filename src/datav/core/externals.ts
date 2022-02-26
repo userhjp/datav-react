@@ -3,8 +3,25 @@ import { DEFAULT_DRIVERS, DEFAULT_EFFECTS, DEFAULT_SHORTCUTS } from './presets';
 import { Engine } from './models';
 import { IEngineProps } from './types';
 import { ApiType, FieldStatus, generateUUID, IDataType, isArr } from '../shared';
-import { FieldConfig, IWidgetNode, WidgetConfig, WidgetResourceConfig } from '../react/interface';
+import { IFieldSetting, IWidgetSetting, IWidgetConfig, IWidgetData, IWidgetEvents } from '../react/interface';
 import { DnComponent, DnFC } from '../react/types';
+
+type ICreateWidgetConfig = {
+  w: number;
+  h: number;
+  x: number;
+  y: number;
+  name: string;
+  type: string;
+  ver: string;
+  data: {
+    /** 默认数据 */
+    value: IWidgetData;
+    /** 字段描述映射 */
+    fields: Record<string, string>;
+  };
+  events: IWidgetEvents;
+};
 
 export const createDesigner = (props: IEngineProps<Engine> = {}) => {
   const drivers = props.drivers || [];
@@ -22,7 +39,7 @@ export const createDesigner = (props: IEngineProps<Engine> = {}) => {
 };
 
 /** 注册组件配置 */
-export const registerWidgetConfig = (comoinent: DnFC<any> | DnComponent<any>, config: WidgetConfig): void => {
+export const registerWidgetConfig = (comoinent: DnFC<any> | DnComponent<any>, config: IWidgetConfig): void => {
   comoinent.DnConfig = {
     w: 380,
     h: 220,
@@ -30,34 +47,47 @@ export const registerWidgetConfig = (comoinent: DnFC<any> | DnComponent<any>, co
   };
 };
 
-export const createWidgetNode = (config: WidgetResourceConfig): IWidgetNode => {
-  let dataType: IDataType;
-  let _data = {};
-  const fieldsDes = config.fieldsDes ?? {};
-  const fields: FieldConfig = {};
-  if (isArr(config.data)) {
-    _data = config.data[0] || {};
-    dataType = IDataType.array;
-  } else {
-    _data = config.data || {};
-    dataType = IDataType.object;
-  }
-  Object.keys(_data).forEach((f) => {
-    fields[f] = { map: '', status: FieldStatus.loading, description: fieldsDes[f] ?? '' };
+export const createWidgetFields = (fieldsDes: Record<string, string>): IFieldSetting => {
+  const fields: IFieldSetting = {};
+  Object.entries(fieldsDes).forEach(([key, val]) => {
+    fields[key] = {
+      map: '',
+      status: FieldStatus.loading,
+      description: val ?? '',
+    };
   });
+  return fields;
+};
+
+export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetSetting => {
+  const fieldsDes = config.data?.fields ?? {};
+  const dataType = isArr(config.data?.value) ? IDataType.array : IDataType.object;
+  const fields: IFieldSetting = createWidgetFields(fieldsDes);
+  const eventsFields: IWidgetEvents = Object.keys(config.events || {}).reduce((pval, cval) => {
+    const eventOpt = config.events[cval];
+    pval[cval] = {
+      fields: eventOpt.fields ? createWidgetFields(eventOpt.fields) : fields,
+      description: eventOpt.description,
+      enable: !!eventOpt.enable,
+    };
+    return pval;
+  }, {} as IWidgetEvents);
   return {
     id: generateUUID(),
     info: { name: config.name, type: config.type, ver: config.ver },
     attr: { x: config.x, y: config.y, w: config.w, h: config.h },
+    events: eventsFields,
     data: {
       fields,
       config: {
         dataType,
-        data: config.data || null,
+        data: config.data?.value || null,
         apiType: ApiType.static,
         useFilter: false,
         filterCode: 'return res.data;',
       },
+      autoUpdate: false,
+      updateTime: 1,
     },
   };
 };

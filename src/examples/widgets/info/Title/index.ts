@@ -8,12 +8,14 @@ registerWidgetConfig(Title, {
   schema: TitleSchema,
   w: 300,
   h: 56,
-  fields: {
-    title: '标题',
-    url: '超链接地址',
-  },
   data: {
-    title: '标题内容',
-    url: '',
+    fields: {
+      title: '标题',
+      url: '超链接地址',
+    },
+    value: {
+      title: '标题内容',
+      url: '',
+    },
   },
 });

@@ -1,11 +1,11 @@
-import { PageType } from '../../../react/interface';
+import { IPageType } from '../../../react/interface';
 import { IEngineContext } from '../../types';
 
 export class AbstractButtonEvent {
-  data: PageType;
+  data: IPageType;
   context: IEngineContext;
 
-  constructor(data: PageType) {
+  constructor(data: IPageType) {
     this.data = data;
   }
 }

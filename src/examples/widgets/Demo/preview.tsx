@@ -1,9 +1,9 @@
 import { toJS } from '@formily/reactive';
 import React from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import './styles.less';
 
-const Demo: React.FC<IWidgetNode> = (props) => {
+const Demo: React.FC<IWidgetProps> = (props) => {
   return (
     <div className="demo" style={{ backgroundColor: 'blue' }}>
       <div>测试组件1222</div>

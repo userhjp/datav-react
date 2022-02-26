@@ -1,8 +1,8 @@
 import React, { useLayoutEffect, useMemo, useRef } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import { IWidgetProps } from '@/datav/react/interface';
 import './styles.less';
 
-const VideoPlayer: React.FC<IWidgetNode> = ({ options }) => {
+const VideoPlayer: React.FC<IWidgetProps> = ({ options }) => {
   const videoRef = useRef<HTMLVideoElement>();
   const style: React.CSSProperties = useMemo(() => {
     return {};

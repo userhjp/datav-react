@@ -1,62 +1,26 @@
 import { batch, reaction } from '@formily/reactive';
-import { message } from 'antd';
 import { useState, useEffect, useCallback, useRef } from 'react';
-import { IDataType, FieldStatus } from '../../shared';
-import { DataConfigType, DataSource, FieldConfig } from '../interface';
-import { useDesigner } from './useDesigner';
+import { checkDataType, execFilter, FieldStatus, getFieldMap, mapObject } from '../../shared';
+import { IDataSourceSetting, IDataSetting, IFieldSetting } from '../interface';
+import { useDataSource } from './useDataSource';
 
-const hasOwnProperty = Object.prototype.hasOwnProperty;
-const hasOwn = (val: any, key: string) => hasOwnProperty.call(val, key);
-
-export const getFieldMap = (fields: FieldConfig) => {
-  const fieldMap: Record<string, string> = Object.create(null);
-  for (const [key, fc] of Object.entries(fields)) {
-    fieldMap[key] = fc.map || key;
-  }
-  return fieldMap;
-};
-
-const checkDataType = (dataType: IDataType, data: any) => {
-  if (Array.isArray(data)) {
-    return dataType === IDataType.array;
-  }
-  return typeof data === dataType;
-};
-
-const execFilter = (dataFilter: string, data: any) => {
-  let res = data;
-  try {
-    const filter = `if (!data) { return data; }  return filter(data);  function filter(res){  ${dataFilter}   }`;
-    const func = new Function('data', filter);
-    res = func(res);
-  } catch (error) {
-    message.error('过滤器执行错误');
-  }
-  return res;
-};
-
-const mapComData = (obj: Record<string, any>, fieldMap: Record<string, string>) => {
-  const c_obj = Object.create(null);
-  Object.entries(fieldMap).forEach(([key, map]) => (c_obj[key] = obj[map] || obj[key] || null));
-  return c_obj;
-};
+const hasOwn = (val: any, key: string) => Object.prototype.hasOwnProperty.call(val, key);
 
 /** 组件数据 */
-export const useReqData = (comId: string, dataSource: DataSource) => {
+export const useReqData = (comId: string, dataSetting: IDataSetting) => {
   const [comData, setComData] = useState(null);
   const timer = useRef<NodeJS.Timer>();
   const fieldMap = useRef<Record<string, string>>({});
-  const designer = useDesigner();
-
+  const dataSource = useDataSource();
   const transferData = (data: Record<string, any> | Array<Record<string, any>>) => {
     if (Array.isArray(data)) {
-      return data.map((m) => mapComData(m, fieldMap.current));
+      return data.map((m) => mapObject(m, fieldMap.current));
     } else {
-      return mapComData(data, fieldMap.current);
+      return mapObject(data, fieldMap.current);
     }
   };
 
-  const changeFieldsStatus = useCallback((fields: FieldConfig, comData: any, status?: FieldStatus) => {
+  const changeFieldsStatus = useCallback((fields: IFieldSetting, comData: any, status?: FieldStatus) => {
     let _data = null;
     if (Array.isArray(comData)) {
       _data = comData[0];
@@ -77,7 +41,7 @@ export const useReqData = (comId: string, dataSource: DataSource) => {
     });
   }, []);
 
-  const changeComData = useCallback((resData: Record<string, any>, fields: FieldConfig, config: DataConfigType) => {
+  const changeComData = useCallback((resData: Record<string, any>, fields: IFieldSetting, config: IDataSourceSetting) => {
     let comData = resData;
     if (!comData?.isError) {
       comData = execFilter(config.filterCode, comData);
@@ -85,12 +49,12 @@ export const useReqData = (comId: string, dataSource: DataSource) => {
     if (!comData?.isError && !checkDataType(config.dataType, comData)) {
       comData = { isError: true, message: '数据有误，类型应为：' + config.dataType, data: `${comData || null}` };
     }
-    designer.dataSource.setData(comId, comData);
+    dataSource.setData(comId, comData);
     changeFieldsStatus(fields, comData);
     setComData(transferData(comData));
   }, []);
 
-  const autoRefreshData = useCallback(async (autoUpdate: boolean, time: number, fields: FieldConfig, config: DataConfigType) => {
+  const autoRefreshData = useCallback(async (autoUpdate: boolean, time: number, fields: IFieldSetting, config: IDataSourceSetting) => {
     clearInterval(timer.current);
     requestData(config, fields);
     if (autoUpdate && time > 0) {
@@ -100,10 +64,10 @@ export const useReqData = (comId: string, dataSource: DataSource) => {
     }
   }, []);
 
-  const requestData = useCallback(async (config: DataConfigType, fields: FieldConfig) => {
+  const requestData = useCallback(async (config: IDataSourceSetting, fields: IFieldSetting) => {
     let resData: any;
     try {
-      resData = await designer.dataSource.requestData(config);
+      resData = await dataSource.requestData(config);
     } catch (error) {
       resData = { isError: true, message: `${error}` };
     }
@@ -112,7 +76,7 @@ export const useReqData = (comId: string, dataSource: DataSource) => {
 
   useEffect(() => {
     const dispose = reaction(() => {
-      const { fields, config, updateTime, autoUpdate } = dataSource;
+      const { fields, config, updateTime, autoUpdate } = dataSetting;
       fieldMap.current = getFieldMap(fields);
       changeFieldsStatus(fields, comData, FieldStatus.loading);
       autoRefreshData(autoUpdate, updateTime, fields, config);

@@ -3,9 +3,9 @@ import { ObjectField as ObjectFieldType } from '@formily/core';
 import { Field, FormConsumer, ObjectField, observer, useField, useForm } from '@formily/react';
 import { Checkbox } from '@formily/antd';
 import DataState from './DataState';
-import { MonacoEditor, BlurInput } from '../components';
+import { MonacoEditor, BlurInput, SettingsEmpty } from '../components';
 import { useEffect, useMemo, useState } from 'react';
-import { DataSource } from '../../interface';
+import { IDataSetting } from '../../interface';
 import { languageType } from '../components/MonacoEditor/editor-config';
 import { InputNumber, Tooltip } from 'antd';
 import { autorun } from '@formily/reactive';
@@ -16,8 +16,11 @@ import { IconWidget } from '../../components';
 import './index.less';
 
 export const DataFields: React.FC = () => {
-  const field = useField<ObjectFieldType<DataSource>>();
+  const field = useField<ObjectFieldType<IDataSetting>>();
   const value = useMemo(() => field.value || {}, [field.value]);
+  if (!value.config?.data) {
+    return <SettingsEmpty title="该组件无需配置数据" />;
+  }
   const editorType: languageType = useMemo<'json' | 'plaintext'>(() => {
     return {
       array: 'json',

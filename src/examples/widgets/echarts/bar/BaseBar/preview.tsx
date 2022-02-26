@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useMemo, useRef } from 'react';
-import { IWidgetNode } from '@/datav/react/interface';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { IWidgetProps } from '@/datav/react/interface';
 import { DatasetComponent, GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import { BarChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
@@ -13,18 +13,28 @@ import {
   formJsonToxAxisData,
   formJsonToyAxisData,
 } from '@/examples/shared';
+import { useDatavEvent } from '@/datav/react/hooks';
+import { observable } from '@formily/reactive';
 
 use([GridComponent, BarChart, LineChart, CanvasRenderer, LegendComponent, DatasetComponent, TooltipComponent]);
 
-const BaseBar: React.FC<IWidgetNode> = ({ options = {}, data = [] }) => {
+const BaseBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) => {
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<ECharts>();
   const size = useSize(elemtRef);
-
+  const [test, setTest] = useState({ value: '' });
+  useDatavEvent(events.changed, test);
+  console.log('组件重载了', events);
   useLayoutEffect(() => {
     myChart.current = init(elemtRef.current);
     return () => myChart.current.dispose();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTest({ value: '1111' });
+    }, 3000);
+  }, [events.changed]);
 
   useDebounceEffect(
     () => {

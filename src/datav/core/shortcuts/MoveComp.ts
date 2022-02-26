@@ -1,5 +1,5 @@
 import { KeyCode, Shortcut } from '../models';
-import { MoveType } from '../types';
+import { IMoveType } from '../types';
 
 export const MoveCompUp = new Shortcut({
   codes: [KeyCode.ArrowUp],

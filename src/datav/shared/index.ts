@@ -11,3 +11,4 @@ export * from './coordinate';
 export * from './transform';
 export * from './scroller';
 export * from './animation';
+export * from './convertData';

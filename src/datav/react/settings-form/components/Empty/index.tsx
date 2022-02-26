@@ -7,7 +7,7 @@ type EmptyProps = {
   style?: React.CSSProperties;
 };
 
-export const Empty: React.FC<EmptyProps> = ({ style, title }) => {
+export const SettingsEmpty: React.FC<EmptyProps> = ({ style, title }) => {
   return (
     <div className="item-empty" style={style}>
       <IconWidget infer="CheckCircle" style={{ fontSize: 22, marginBottom: 16 }} />
