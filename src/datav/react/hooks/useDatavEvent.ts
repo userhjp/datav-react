@@ -12,16 +12,16 @@ import { useDataSource } from './useDataSource';
 export const useDatavEvent = (event: IChangedEvent, data: Record<string, string>) => {
   const dataSource = useDataSource();
 
-  const updateFileds = () => {
+  const updateVariables = () => {
     if (!event.enable) return;
     const fieldMap = getFieldMap(event.fields);
     dataSource.setVariables(fieldMap, data);
   };
 
-  useEffect(() => updateFileds(), [data]);
+  useEffect(() => updateVariables(), [data]);
 
   useEffect(() => {
-    const dispose = observe(event, updateFileds);
+    const dispose = observe(event, updateVariables);
     return () => dispose();
   }, []);
 };
