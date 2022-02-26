@@ -2,7 +2,7 @@ import { IWidgetSetting, IPageType } from '../../react/interface';
 import { generateUUID } from '../../shared';
 import { observable, define, action, toJS } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
-import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../events';
+import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent, HelpClickEvent } from '../events';
 import { IMoveType } from '../types';
 import { Engine, Hover, Selection } from './index';
 export interface IOperation {
@@ -174,7 +174,7 @@ export class Operation {
         this.dispatch(new PreviewClickEvent(pageData));
         break;
       case 'help':
-        this.dispatch(new PreviewClickEvent(pageData));
+        this.dispatch(new HelpClickEvent(pageData));
       default:
         break;
     }

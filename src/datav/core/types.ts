@@ -38,6 +38,8 @@ export type IEngineProps<T = Event> = IEventProps<T> & {
   onSnapshot?: (data: IPageType) => void | Promise<void>;
   /** 预览按钮点击事件 */
   onPreview?: (data: IPageType) => void | Promise<void>;
+  /** 帮助按钮点击事件 */
+  onHelp?: (data: IPageType) => void | Promise<void>;
 };
 
 export type IEngineContext = {
