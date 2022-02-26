@@ -38,12 +38,4 @@ registerWidgetConfig(BaseBar, {
       v: '值',
     },
   },
-  events: {
-    changed: {
-      description: '当点击数据项时',
-      fields: {
-        value: '值',
-      },
-    },
-  },
 });

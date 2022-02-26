@@ -12,6 +12,7 @@ export const useReqData = (comId: string, dataSetting: IDataSetting) => {
   const timer = useRef<NodeJS.Timer>();
   const fieldMap = useRef<Record<string, string>>({});
   const dataSource = useDataSource();
+
   const transferData = (data: Record<string, any> | Array<Record<string, any>>) => {
     if (Array.isArray(data)) {
       return data.map((m) => mapObject(m, fieldMap.current));

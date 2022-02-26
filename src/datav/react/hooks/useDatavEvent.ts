@@ -1,23 +1,21 @@
-import { getFieldMap, mapObject } from '@/datav/shared';
-import { autorun, isObservable, markObservable, observable, observe } from '@formily/reactive';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { getFieldMap } from '@/datav/shared';
+import { observe } from '@formily/reactive';
+import { useEffect } from 'react';
 import { IChangedEvent } from '../interface';
 import { useDataSource } from './useDataSource';
 
 /**
  * 组件事件Hook
  * @param event 事件配置
- * @param data 事件数据对象
+ * @param data 数据对象
  */
-export const useDatavEvent = (event: IChangedEvent, data: Record<string, any>) => {
+export const useDatavEvent = (event: IChangedEvent, data: Record<string, string>) => {
   const dataSource = useDataSource();
-  // const obs = useRef(observable({ value: {} }));
 
   const updateFileds = () => {
     if (!event.enable) return;
     const fieldMap = getFieldMap(event.fields);
     dataSource.setVariables(fieldMap, data);
-    console.log(dataSource.variables);
   };
 
   useEffect(() => updateFileds(), [data]);

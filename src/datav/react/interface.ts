@@ -11,14 +11,21 @@ export type IWidgetConfig = {
   /** 组件属性Schema*/
   schema?: ISchema;
   /** 交互数据属性 */
-  events?: IWidgetEvents;
+  events?: {
+    changed: {
+      /** 事件描述 */
+      description: string;
+      /** 字段映射 默认data.fields */
+      fields?: Record<string, string>;
+    };
+  };
   /** 版本号 */
   version?: string;
   /** 组件数据（如果有） */
   data?: {
     /** 默认数据 */
     value: IWidgetData;
-    /** 字段描述映射 */
+    /** 字段映射 */
     fields: Record<string, string>;
   };
 };

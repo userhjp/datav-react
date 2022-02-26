@@ -20,18 +20,16 @@ export class DataSource {
   makeObservable() {
     define(this, {
       dataMap: observable,
-      variables: observable,
+      variables: observable.shallow,
       setData: action,
     });
   }
 
   setVariables(fields: Record<string, string>, data: Record<string, any>) {
-    const res = {};
     for (const key in fields) {
       const alias = fields[key] || key;
-      res[alias] = data[key];
+      this.variables[alias] = data[key];
     }
-    this.variables = { ...this.variables, ...res };
   }
 
   setData(comId: string, data: ApiData) {
@@ -57,6 +55,9 @@ export class DataSource {
         const conf = {
           headers: toJson(config.apiHeaders, {}),
         };
+        /**
+         * 由于在 useReqData useEffect中使用了reaction 这里会自动收集 apiUrl使用到variables的字段的依赖，当依赖字段变化后会重新调用请求方法
+         */
         const url = replaceTextParams(config.apiUrl, this.variables);
         if (config.apiMethod === ApiRequestMethod.GET) {
           resData = await dsRequest.get(url, conf);

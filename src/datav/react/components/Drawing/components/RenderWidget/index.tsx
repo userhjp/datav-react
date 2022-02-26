@@ -17,7 +17,7 @@ export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
     const Component = GlobalRegistry.getDesignerWidget(nodeInfo.info.type);
     const data = useReqData(nodeInfo.id, nodeInfo.data);
     const options = toJS(nodeInfo.options);
-    console.log('重载了');
+
     if (!options || !Component) return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>
