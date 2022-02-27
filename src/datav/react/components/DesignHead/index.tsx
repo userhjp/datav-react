@@ -120,7 +120,7 @@ export const DesignHead: React.FC = observer(() => {
           </Space>
         </div>
         <div
-          style={{ color: '#c7c6c6', fontSize: 13, cursor: 'pointer' }}
+          style={{ color: '#c7c6c6', fontSize: 13, cursor: 'pointer', textAlign: 'center' }}
           onClick={() => {
             // navigate('/datav')
           }}

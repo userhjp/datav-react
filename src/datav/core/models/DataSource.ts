@@ -1,4 +1,4 @@
-import { replaceTextParams, toJson } from '../../shared';
+import { isObj, replaceTextParams, toJson } from '../../shared';
 import { action, define, observable, toJS } from '@formily/reactive';
 import { ApiRequestMethod, ApiType, IDataType } from '../../shared';
 import { IDataSourceSetting } from '../../react/interface';
@@ -26,9 +26,11 @@ export class DataSource {
   }
 
   setVariables(fields: Record<string, string>, data: Record<string, any>) {
-    for (const key in fields) {
-      const alias = fields[key] || key;
-      this.variables[alias] = data[key];
+    if (data && isObj(data)) {
+      for (const key in fields) {
+        const alias = fields[key] || key;
+        this.variables[alias] = data[key];
+      }
     }
   }
 
