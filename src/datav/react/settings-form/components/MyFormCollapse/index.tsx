@@ -173,32 +173,18 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
 
   const tabsBtnClick = (e: React.MouseEvent<HTMLSpanElement, MouseEvent>, type: 'copy' | 'add' | 'remove') => {
     e.stopPropagation();
+    const index = +activeKey.match(/-(\d+)/)?.[1];
     switch (type) {
       case 'copy':
-        const idx = +activeKey.match(/-(\d+)/)?.[1];
-        const copyVal = dataSource[idx];
+        const copyVal = dataSource[index];
         (field as ArrayField).push(toJS(copyVal));
         break;
       case 'add':
-        const id = dataSource.length;
-        let addObj: any;
-        switch (props.listType) {
-          case 'bar':
-          case 'line':
-            addObj = { type: props.listType, colorType: '1' };
-            break;
-          case 'column':
-            addObj = { title: `${props.title}${id + 1}`, mapKey: `key${id + 1}`, textAlign: 'left' };
-            break;
-          default:
-            addObj = null;
-            break;
-        }
-        (field as ArrayField).push(addObj);
-        setActiveKey(`tab-${id}`);
+        const addVal = dataSource[index];
+        (field as ArrayField).push(toJS(addVal));
+        setActiveKey(`tab-${dataSource.length}`);
         break;
       case 'remove':
-        const index = +activeKey.match(/-(\d+)/)?.[1];
         (field as ArrayField).remove(Number(index));
         const keyIdx = index - 1 < 0 ? 0 : index - 1;
         setActiveKey(`tab-${keyIdx}`);

@@ -91,7 +91,7 @@ export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | '
 }
 
 /** Echarts Series 数据差异处理 */
-export function formDataToSeriesData(options: { [key: string]: any }) {
+export function formDataToSeriesData(options: { [key: string]: any }): any[] {
   const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], areaStyle = {} } = options;
 
   const colors = colorsOpt.find((f) => f.value === options.grid.colors);

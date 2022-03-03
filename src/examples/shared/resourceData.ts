@@ -31,7 +31,7 @@ export const resourceData: IResourceData[] = [
           {
             name: '斑马柱状图',
             cover: '/menuCover/图表/柱状图/斑马柱状图.png',
-            type: 'Demo',
+            type: 'ZebraBar',
           },
           {
             name: '区间范围柱状图',
