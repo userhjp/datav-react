@@ -55,11 +55,11 @@ export const useReqData = (comId: string, dataSetting: IDataSetting) => {
     setComData(transferData(comData));
   }, []);
 
-  const autoRefreshData = useCallback(async (autoUpdate: boolean, time: number, fields: IFieldSetting, config: IDataSourceSetting) => {
+  const autoRefreshData = useCallback((autoUpdate: boolean, time: number, fields: IFieldSetting, config: IDataSourceSetting) => {
     clearInterval(timer.current);
     requestData(config, fields);
     if (autoUpdate && time > 0) {
-      timer.current = setInterval(async () => {
+      timer.current = setInterval(() => {
         requestData(config, fields);
       }, time * 1000);
     }
