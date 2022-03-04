@@ -22,7 +22,7 @@ export const animationSchema: ISchema = {
         unit: 'ms',
         min: 200,
       },
-      default: 1000,
+      default: 1500,
     },
     animationEasing: {
       type: 'string',
@@ -30,7 +30,7 @@ export const animationSchema: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Select',
       enum: AnimationEasing,
-      default: 'cubicOut',
+      default: 'quarticIn',
     },
     animationDelay: {
       type: 'number',

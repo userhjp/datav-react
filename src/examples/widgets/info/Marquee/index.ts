@@ -13,8 +13,7 @@ registerWidgetConfig(Marquee, {
       value: 'DataV 提供运营动态直播、数据综合展示、设备监控预警等多种场景模板，稍加修改就能够直接服务于您的可视化需求。',
     },
     fields: {
-      content: '段落内容',
-      url: '超链接地址',
+      value: '内容',
     },
   },
 });

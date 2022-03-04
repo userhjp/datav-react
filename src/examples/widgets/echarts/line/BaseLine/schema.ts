@@ -1,4 +1,5 @@
 import { animationSchema } from '@/examples/schema/echarts/animationSchema';
+import { areaStyleSchema } from '@/examples/schema/echarts/areaStyleSchema';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
 import { legendSchema } from '@/examples/schema/echarts/legendSchema';
 import { lineSeriesStyleSchema } from '@/examples/schema/echarts/lineSeriesStyleSchema';
@@ -17,6 +18,7 @@ export const BaseLineSchema: ISchema = {
     tooltip: tooltipSchema,
     legend: legendSchema,
     animation: animationSchema,
+    areaStyle: areaStyleSchema(false),
     lineSeriesStyle: lineSeriesStyleSchema,
     series: {
       type: 'array',

@@ -3,7 +3,7 @@ import { IWidgetProps } from '@/datav/react/interface';
 import { formatDate } from '@/examples/shared';
 import './styles.less';
 
-const Title: React.FC<IWidgetProps> = ({ options }) => {
+const Timer: React.FC<IWidgetProps> = ({ options }) => {
   const [realDateTime, setRealDateTime] = useState(Date.now());
   const style = {
     ...options,
@@ -51,4 +51,4 @@ const Title: React.FC<IWidgetProps> = ({ options }) => {
   );
 };
 
-export default Title;
+export default Timer;

@@ -8,7 +8,7 @@ export const TimerSchema: ISchema = {
       type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
-        header: '图标样式',
+        title: '图标样式',
         switch: true,
         defaultSwitch: true,
       },
@@ -51,7 +51,7 @@ export const TimerSchema: ISchema = {
       'x-component': 'MyFormCollapse',
       'x-component-props': {
         key: '1',
-        header: '文本样式',
+        title: '文本样式',
       },
       properties: {
         fontFamily: {

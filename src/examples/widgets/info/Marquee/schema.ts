@@ -174,7 +174,7 @@ export const MarqueeSchema: ISchema = {
       'x-component-props': {
         placeholder: '请输入',
         unit: 'ms',
-        min: 100,
+        min: 0,
       },
       default: 1000,
     },

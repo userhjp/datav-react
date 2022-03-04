@@ -1,13 +1,13 @@
 import { ISchema } from '@formily/react';
 
 /** 堆叠折线图区域填充样式 */
-export const areaStyleSchema: ISchema = {
+export const areaStyleSchema = (defaultSwitch = true): ISchema => ({
   type: 'object',
   'x-component': 'MyFormCollapse',
   'x-component-props': {
     title: '区域填充',
     switch: true,
-    defaultSwitch: true,
+    defaultSwitch,
   },
   properties: {
     opacity: {
@@ -28,4 +28,4 @@ export const areaStyleSchema: ISchema = {
       default: 0.6,
     },
   },
-};
+});

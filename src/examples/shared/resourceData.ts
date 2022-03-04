@@ -9,7 +9,7 @@ export const resourceData: IResourceData[] = [
         name: '通用图表',
         children: [
           {
-            name: 'Echarts通用图表',
+            name: 'Echarts配置图表',
             cover: '/menuCover/图表/通用图表/echarts_logo.png',
             type: 'ECharts',
           },
