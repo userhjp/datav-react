@@ -167,9 +167,6 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
             </div>
             <Observer>
               <div className="filter-edit" style={{ height: form.values.useFilter ? 180 : 0 }}>
-                <p title="function filter(res) {" className="fake-code">
-                  <span className="--keyword">function</span> {`filter(res) {`}
-                </p>
                 <Field
                   name="filterCode"
                   reactions={(field) => {
@@ -185,12 +182,12 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
                       readOnly: false,
                       autoFormat: true,
                       height: 120,
-                      fullScreenTitle: '数据响应结果',
+                      fullScreenTitle: '数据过滤器',
                       className: 'filter-editor',
+                      fnName: 'filter(res)',
                     },
                   ]}
                 />
-                <p className="fake-code">{'}'}</p>
               </div>
             </Observer>
             <FieldGrid typeName={value.dataType === 'object' ? '对象' : '列表'} fields={fields} />

@@ -1,33 +1,39 @@
-import { animationSchema } from '@/examples/schema/echarts/animationSchema';
-import { barSeriesStyleSchema } from '@/examples/schema/echarts/barSeriesStyleSchema';
-import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
-import { legendSchema } from '@/examples/schema/echarts/legendSchema';
-import { barSeriesSchema } from '@/examples/schema/echarts/series/barSeriesSchema';
-import { tooltipSchema } from '@/examples/schema/echarts/tooltipSchema';
-import { xAxisSchema } from '@/examples/schema/echarts/xAxisSchema';
-import { yAxisSchema } from '@/examples/schema/echarts/yAxisSchema';
 import { ISchema } from '@formily/react';
 
 export const EChartsSchema: ISchema = {
   type: 'object',
   properties: {
-    grid: echartGridSchema,
-    xAxis: xAxisSchema({ boundaryGap: true }),
-    yAxis: yAxisSchema,
-    tooltip: tooltipSchema,
-    legend: legendSchema,
-    animation: animationSchema,
-    barSeriesStyle: barSeriesStyleSchema(),
-    series: {
-      type: 'array',
-      'x-component': 'MyFormCollapse',
-      maxItems: 5,
+    options: {
+      type: 'number',
+      title: '图表配置',
+      'x-component': 'MonacoEditor',
       'x-component-props': {
-        title: '系列',
-        listType: 'bar',
+        language: 'javascript',
+        readOnly: false,
+        autoFormat: true,
+        height: 400,
+        fullScreenTitle: '数据响应结果',
+        className: 'filter-editor',
+        fnName: 'getOptions(data)',
       },
-      default: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
-      items: barSeriesSchema,
+      default: `
+        option = {
+          xAxis: {
+            type: 'category',
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [
+            {
+              data: [120, 200, 150, 80, 70, 110, 130],
+              type: 'bar'
+            }
+          ]
+        };
+        return option;
+      `,
     },
   },
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 // import * as monaco from 'monaco-editor';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import {
@@ -12,9 +12,8 @@ import {
 } from './editor-config';
 import { debounce, copyText } from '../../../../shared';
 import { message, Modal } from 'antd';
-import { toJS } from '@formily/reactive';
-import './index.less';
 import { IconWidget } from '../../../components';
+import './index.less';
 
 type MonacoEditorProps = Partial<{
   options: monaco.editor.IStandaloneEditorConstructionOptions;
@@ -28,6 +27,7 @@ type MonacoEditorProps = Partial<{
   height: number;
   value: any;
   fullScreenTitle: string;
+  fnName: string;
   onChange: (value: any) => void;
 }>;
 
@@ -42,9 +42,11 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     value = '',
     fullScreenTitle,
     useMinimap = false,
-  } = toJS(props);
+    fnName = '',
+  } = props;
   const themeName = registerDatavDarkTheme();
   const domRef = useRef<HTMLDivElement>();
+  const sectionRef = useRef<HTMLDivElement>();
   const editor = useRef<monaco.editor.IStandaloneCodeEditor>();
   const fullEditor = useRef<monaco.editor.IStandaloneCodeEditor>();
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -73,31 +75,32 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   };
   const debounceChangeHandler = debounce(changeHandler, 300);
 
+  const opts = useMemo(() => {
+    return Object.assign({}, defaultOpts, props.options, {
+      tabSize: 2,
+      value: '',
+      language,
+      theme: themeName,
+      readOnly: props.readOnly,
+      minimap: {
+        enabled: useMinimap,
+      },
+      lineNumbers,
+      wordWrap,
+    });
+  }, [props.options]);
+
   useEffect(() => {
     if (domRef.current) {
-      const opts = Object.assign({}, defaultOpts, props.options, {
-        tabSize: 2,
-        value: '',
-        language,
-        theme: themeName,
-        readOnly: props.readOnly,
-        minimap: {
-          enabled: useMinimap,
-        },
-        lineNumbers,
-        wordWrap,
-      });
       const ce = monaco.editor.create(domRef.current, opts);
       const inputCode = handleInputCode(language, value);
       ce.setValue(inputCode);
       if (props.autoFormat) {
         formatDocument(ce, language);
       }
-
       if (height > 0) {
         domRef.current.style.height = `${height}px`;
       }
-
       ce.onDidChangeModelContent(debounceChangeHandler);
       ce.onDidBlurEditorText(blurHandler);
 
@@ -110,13 +113,12 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     };
   }, []);
 
-  const closedFullScreenDialog = () => {
+  const closedFullModal = () => {
     if (fullEditor) {
       if (editor && !props.readOnly) {
         editor.current.setValue(fullEditor.current.getValue());
         editor.current.focus();
       }
-
       fullEditor.current?.dispose();
     }
   };
@@ -129,28 +131,14 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     }
   }, [props.value]);
 
-  const openedFullScreenDialog = () => {
-    const dom = document.querySelector('.fullscreen-editor > section') as HTMLElement;
+  const openedFullModal = () => {
+    const dom = sectionRef.current as HTMLElement;
     if (dom) {
-      const opts = Object.assign({}, defaultOpts, props.options, {
-        tabSize: 2,
-        value: '',
-        language,
-        theme: themeName,
-        readOnly: props.readOnly,
-        minimap: {
-          enabled: useMinimap,
-        },
-        lineNumbers: props.lineNumbers,
-        wordWrap: props.wordWrap,
-      });
       const ce = monaco.editor.create(dom, opts);
-
       ce.setValue(editor.current.getValue());
       if (props.autoFormat) {
         formatDocument(ce, language);
       }
-
       ce.onDidChangeModelContent(debounceChangeHandler);
       ce.onDidBlurEditorText(blurHandler);
 
@@ -161,12 +149,17 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   const switchFullScreen = () => {
     setIsFullScreen(!isFullScreen);
     setTimeout(() => {
-      openedFullScreenDialog();
+      openedFullModal();
     }, 100);
   };
 
   return (
-    <div>
+    <div className="monaco-editor-container">
+      {fnName && (
+        <p title="function filter(res) {" className="fake-code">
+          <span className="--keyword">function</span> {`${fnName} {`}
+        </p>
+      )}
       <div ref={domRef} className={`datav-editor ${className} ${readOnly ? '--read-only' : ''}`}>
         <div className="datav-editor-actions">
           <IconWidget infer="Copy" className="action-btn" title="点击复制" onClick={copyData} />
@@ -178,6 +171,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
           />
         </div>
       </div>
+      {fnName && <p className="fake-code">{'}'}</p>}
       <Modal
         title={`${fullScreenTitle}${readOnly ? ' ( 只读 )' : ''}`}
         width="80%"
@@ -188,10 +182,29 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
         visible={isFullScreen}
         maskClosable={false}
         onCancel={() => setIsFullScreen(false)}
-        afterClose={() => closedFullScreenDialog()}
+        afterClose={() => closedFullModal()}
       >
-        <div className={`datav-editor fullscreen-editor ${readOnly ? '--read-only' : ''}`}>
-          <section style={{ display: 'flex', position: 'relative', textAlign: 'initial', width: '100%', height: '100%' }} />
+        <div style={{ paddingBottom: fnName ? '30px' : 0 }} className={`datav-editor fullscreen-editor ${readOnly ? '--read-only' : ''}`}>
+          {fnName && (
+            <p title="function filter(res) {" className="fake-code">
+              <span className="--keyword">function</span> {`${fnName} {`}
+            </p>
+          )}
+          <section
+            ref={sectionRef}
+            style={{
+              display: 'flex',
+              position: 'relative',
+              textAlign: 'initial',
+              width: '100%',
+              height: '100%',
+            }}
+          />
+          {fnName && (
+            <p style={{}} className="fake-code">
+              {'}'}
+            </p>
+          )}
         </div>
       </Modal>
     </div>

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 import { Field, ObjectField, observer } from '@formily/react';
 import { pageSchema } from '../schema/pageSchema';
 import { Tabs } from 'antd';
-import { SettingsEmpty, WidgetInfo } from './components';
+import { WidgetInfo } from './components';
 import { baseAttrSchema } from '../schema/baseAttrSchema';
 import { DataFields } from './DataFields';
 import { useToolbar, useScreen } from '../hooks';
