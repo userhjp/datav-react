@@ -184,7 +184,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
         onCancel={() => setIsFullScreen(false)}
         afterClose={() => closedFullModal()}
       >
-        <div style={{ paddingBottom: fnName ? '30px' : 0 }} className={`datav-editor fullscreen-editor ${readOnly ? '--read-only' : ''}`}>
+        <div className={`datav-editor fullscreen-editor ${readOnly ? '--read-only' : ''}`}>
           {fnName && (
             <p title="function filter(res) {" className="fake-code">
               <span className="--keyword">function</span> {`${fnName} {`}
@@ -196,8 +196,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
               display: 'flex',
               position: 'relative',
               textAlign: 'initial',
-              width: '100%',
-              height: '100%',
+              flex: 1,
             }}
           />
           {fnName && (
