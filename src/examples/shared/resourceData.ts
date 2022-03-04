@@ -6,6 +6,16 @@ export const resourceData: IResourceData[] = [
     icon: 'chart',
     children: [
       {
+        name: '通用图表',
+        children: [
+          {
+            name: 'Echarts通用图表',
+            cover: '/menuCover/图表/通用图表/echarts_logo.png',
+            type: 'ECharts',
+          },
+        ],
+      },
+      {
         name: '柱状图',
         children: [
           {
@@ -33,21 +43,21 @@ export const resourceData: IResourceData[] = [
             cover: '/menuCover/图表/柱状图/斑马柱状图.png',
             type: 'ZebraBar',
           },
-          {
-            name: '区间范围柱状图',
-            cover: '/menuCover/图表/柱状图/区间范围柱状图.png',
-            type: 'Demo',
-          },
-          {
-            name: '瀑布图',
-            cover: '/menuCover/图表/柱状图/瀑布图.png',
-            type: 'Demo',
-          },
-          {
-            name: '梯形柱状图',
-            cover: '/menuCover/图表/柱状图/梯形柱状图.png',
-            type: 'Demo',
-          },
+          // {
+          //   name: '区间范围柱状图',
+          //   cover: '/menuCover/图表/柱状图/区间范围柱状图.png',
+          //   type: 'Demo',
+          // },
+          // {
+          //   name: '瀑布图',
+          //   cover: '/menuCover/图表/柱状图/瀑布图.png',
+          //   type: 'Demo',
+          // },
+          // {
+          //   name: '梯形柱状图',
+          //   cover: '/menuCover/图表/柱状图/梯形柱状图.png',
+          //   type: 'Demo',
+          // },
         ],
       },
       {
@@ -89,22 +99,22 @@ export const resourceData: IResourceData[] = [
             cover: '/menuCover/图表/折线图/堆叠折线图.png',
             type: 'StackLine',
           },
-          {
-            name: '区域翻牌器',
-            cover: '/menuCover/图表/折线图/区域翻牌器.png',
-          },
-          {
-            name: '区域图',
-            cover: '/menuCover/图表/折线图/区域图.png',
-          },
-          {
-            name: '双轴折线图',
-            cover: '/menuCover/图表/折线图/双轴折线图.png',
-          },
-          {
-            name: '颜色分段折线图',
-            cover: '/menuCover/图表/折线图/颜色分段折线图.png',
-          },
+          // {
+          //   name: '区域翻牌器',
+          //   cover: '/menuCover/图表/折线图/区域翻牌器.png',
+          // },
+          // {
+          //   name: '区域图',
+          //   cover: '/menuCover/图表/折线图/区域图.png',
+          // },
+          // {
+          //   name: '双轴折线图',
+          //   cover: '/menuCover/图表/折线图/双轴折线图.png',
+          // },
+          // {
+          //   name: '颜色分段折线图',
+          //   cover: '/menuCover/图表/折线图/颜色分段折线图.png',
+          // },
         ],
       },
       {

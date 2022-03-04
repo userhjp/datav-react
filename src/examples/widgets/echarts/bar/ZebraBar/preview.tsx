@@ -68,7 +68,8 @@ const ZebraBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) =
       return {
         ...m,
         symbol: 'rect',
-        // symbolRotate: '30',
+        // symbolRepeat: true,
+        // // symbolRotate: '30',
         // barGap: '20%',
         // symbolSize: ['60%', '20%'],
         // barCategoryGap: '20%',

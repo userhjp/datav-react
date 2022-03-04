@@ -108,6 +108,13 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
     }
 
     switch (f.type) {
+      case 'pictorialBar':
+        f.symbolRepeat = barSeriesStyle.symbolRepeat;
+        f.symbolRotate = barSeriesStyle.symbolRotate;
+        f.barGap = barSeriesStyle.barGap;
+        f.symbolSize = [barSeriesStyle.symbolSize.width, barSeriesStyle.symbolSize.height];
+        f.barCategoryGap = barSeriesStyle.barCategoryGap;
+        f.symbolMargin = barSeriesStyle.symbolMargin;
       case 'bar':
         f.showBackground = !!barSeriesStyle?.backgroundStyle?.show; // 背景
         f.backgroundStyle = barSeriesStyle?.backgroundStyle;

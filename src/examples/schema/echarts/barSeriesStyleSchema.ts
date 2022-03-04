@@ -16,7 +16,7 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
       'x-decorator': 'FormItem',
       'x-component': 'NumberPicker',
       'x-component-props': {
-        autoValue: 30,
+        autoValue: 18,
         placeholder: '自适应',
         unit: 'px',
         min: 0,
