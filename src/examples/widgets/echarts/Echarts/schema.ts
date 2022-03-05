@@ -12,7 +12,7 @@ export const EChartsSchema: ISchema = {
         readOnly: false,
         autoFormat: true,
         height: 400,
-        fullScreenTitle: '数据响应结果',
+        fullScreenTitle: 'Echarts配置',
         className: 'filter-editor',
         fnName: 'getOptions(data)',
       },
