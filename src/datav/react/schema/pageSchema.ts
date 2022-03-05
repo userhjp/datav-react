@@ -27,7 +27,7 @@ export const pageSchema: ISchema = {
               default: 1920,
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '宽度',
+                feedbackText: '宽度',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {
@@ -42,7 +42,7 @@ export const pageSchema: ISchema = {
               default: 1080,
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '高度',
+                feedbackText: '高度',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {

@@ -56,7 +56,7 @@ export const lineSeriesStyleSchema: ISchema = {
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '大小',
+                feedbackText: '大小',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {
@@ -70,7 +70,7 @@ export const lineSeriesStyleSchema: ISchema = {
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '旋转角度',
+                feedbackText: '旋转角度',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {
@@ -84,7 +84,7 @@ export const lineSeriesStyleSchema: ISchema = {
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: 'X偏移',
+                feedbackText: 'X偏移',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {
@@ -98,7 +98,7 @@ export const lineSeriesStyleSchema: ISchema = {
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: 'Y偏移',
+                feedbackText: 'Y偏移',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {

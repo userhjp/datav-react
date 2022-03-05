@@ -91,6 +91,20 @@
   }
 }
 
+.ds-action-btn {
+  display: inline-block;
+  width: 120px;
+  height: 28px;
+  color: @color-primary;
+  font-size: @m-font-size;
+  border: solid 1px @color-primary;
+
+  &:hover {
+    color: #fff;
+    background-color: @color-primary;
+  }
+}
+
 .data-flow-wp {
   position: relative;
   padding: 12px 10px 6px;
@@ -116,20 +130,6 @@
       background: #39414d;
       border-radius: 1px;
       box-shadow: 0 0 5px -3px #000;
-    }
-
-    .ds-action-btn {
-      display: inline-block;
-      width: 120px;
-      height: 28px;
-      color: @color-primary;
-      font-size: @m-font-size;
-      border: solid 1px @color-primary;
-
-      &:hover {
-        color: #fff;
-        background-color: @color-primary;
-      }
     }
 
     .refresh-btn {

@@ -30,6 +30,7 @@ export const execFilter = (dataFilter: string, data: any) => {
 };
 
 export const mapObject = (obj: Record<string, any>, fieldMap: Record<string, string>) => {
+  if (!fieldMap || !Object.keys(fieldMap).length) return obj;
   const c_obj = Object.create(null);
   Object.entries(fieldMap).forEach(([key, map]) => (c_obj[key] = obj[map] || obj[key] || null));
   return c_obj;

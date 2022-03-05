@@ -13,15 +13,6 @@ export const fontWeights = [
   { value: 'lighter', label: '细' },
   { value: 'normal', label: '正常' },
   { value: 'bolder', label: '粗' },
-  { value: '100', label: '100' },
-  { value: '200', label: '200' },
-  { value: '300', label: '300' },
-  { value: '400', label: '400' },
-  { value: '500', label: '500' },
-  { value: '600', label: '600' },
-  { value: '700', label: '700' },
-  { value: '800', label: '800' },
-  { value: '900', label: '900' },
 ];
 
 export const fontStyles = [
@@ -155,19 +146,6 @@ export const symbolTyles = [
   { value: 'diamond', label: '菱形' },
   { value: 'pin', label: '针形' },
   { value: 'arrow', label: '箭头' },
-];
-
-export const labelFormats = [
-  { value: 'auto', label: '默认' },
-  { value: 'd', label: '11(整数)' },
-  { value: '.1f', label: '11.1(浮点数)' },
-  { value: '.2f', label: '11.11(浮点数)' },
-  { value: '.0%', label: '11%' },
-  { value: '.1%', label: '11.1%' },
-  { value: '.2%', label: '11.11%' },
-  { value: 'th', label: '1,111(千分位)' },
-  { value: '.1t', label: '1,111.1(千分位)' },
-  { value: '.2t', label: '1,111.11(千分位)' },
 ];
 
 export const timeFormats = [

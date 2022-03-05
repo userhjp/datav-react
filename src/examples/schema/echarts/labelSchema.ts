@@ -56,7 +56,7 @@ export const labelSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字号',
+            feedbackText: '字号',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -70,7 +70,7 @@ export const labelSchema: ISchema = {
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字体粗细',
+            feedbackText: '字体粗细',
           },
           'x-component': 'Select',
           enum: fontWeights,
@@ -80,7 +80,7 @@ export const labelSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字体颜色',
+            feedbackText: '字体颜色',
             gridSpan: 2,
           },
           'x-component': 'ColorPicker',

@@ -75,7 +75,7 @@ export const barSeriesSymbolSchema = (defaultValue?: { [key: string]: any }): IS
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '宽度',
+            feedbackText: '宽度',
           },
           'x-component': 'Input',
           'x-component-props': {
@@ -89,7 +89,7 @@ export const barSeriesSymbolSchema = (defaultValue?: { [key: string]: any }): IS
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '高度',
+            feedbackText: '高度',
           },
           'x-component': 'Input',
           'x-component-props': {
@@ -155,7 +155,7 @@ export const barSeriesSymbolSchema = (defaultValue?: { [key: string]: any }): IS
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '字号',
+                feedbackText: '字号',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {
@@ -169,7 +169,7 @@ export const barSeriesSymbolSchema = (defaultValue?: { [key: string]: any }): IS
               type: 'string',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '字体粗细',
+                feedbackText: '字体粗细',
               },
               'x-component': 'Select',
               enum: fontWeights,
@@ -179,7 +179,7 @@ export const barSeriesSymbolSchema = (defaultValue?: { [key: string]: any }): IS
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '字体颜色',
+                feedbackText: '字体颜色',
                 gridSpan: 2,
               },
               'x-component': 'ColorPicker',

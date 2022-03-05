@@ -25,7 +25,7 @@ const splitLineSchema = (defaultSwitch = false): ISchema => ({
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '类型',
+            feedbackText: '类型',
           },
           'x-component': 'Select',
           enum: lineStyles,
@@ -35,7 +35,7 @@ const splitLineSchema = (defaultSwitch = false): ISchema => ({
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '粗细',
+            feedbackText: '粗细',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -49,7 +49,7 @@ const splitLineSchema = (defaultSwitch = false): ISchema => ({
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '颜色',
+            feedbackText: '颜色',
             gridSpan: 2,
           },
           'x-component': 'ColorPicker',
@@ -59,7 +59,7 @@ const splitLineSchema = (defaultSwitch = false): ISchema => ({
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '长度',
+            feedbackText: '长度',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -81,7 +81,7 @@ const splitLineSchema = (defaultSwitch = false): ISchema => ({
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '间距',
+            feedbackText: '间距',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {

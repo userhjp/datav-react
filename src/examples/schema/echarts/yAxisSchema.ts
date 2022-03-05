@@ -45,7 +45,7 @@ export const yAxisSchema: ISchema = {
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '最小值',
+            feedbackText: '最小值',
           },
           'x-component': 'Select',
           'x-component-props': {
@@ -61,7 +61,7 @@ export const yAxisSchema: ISchema = {
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '最大值',
+            feedbackText: '最大值',
           },
           'x-component': 'Select',
           'x-component-props': {

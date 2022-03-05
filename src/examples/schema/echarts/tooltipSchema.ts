@@ -25,7 +25,7 @@ export const tooltipSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字号',
+            feedbackText: '字号',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -39,7 +39,7 @@ export const tooltipSchema: ISchema = {
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字体粗细',
+            feedbackText: '字体粗细',
           },
           'x-component': 'Select',
           enum: fontWeights,
@@ -49,7 +49,7 @@ export const tooltipSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字体颜色',
+            feedbackText: '字体颜色',
             gridSpan: 2,
           },
           'x-component': 'ColorPicker',
@@ -71,7 +71,7 @@ export const tooltipSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '水平边距',
+            feedbackText: '水平边距',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -85,7 +85,7 @@ export const tooltipSchema: ISchema = {
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '垂直边距',
+            feedbackText: '垂直边距',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -99,7 +99,7 @@ export const tooltipSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '背景色',
+            feedbackText: '背景色',
             gridSpan: 2,
           },
           'x-component': 'ColorPicker',
@@ -130,7 +130,7 @@ export const tooltipSchema: ISchema = {
               type: 'string',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '类型',
+                feedbackText: '类型',
               },
               'x-component': 'Select',
               enum: lineStyles,
@@ -140,7 +140,7 @@ export const tooltipSchema: ISchema = {
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '粗细',
+                feedbackText: '粗细',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {
@@ -154,7 +154,7 @@ export const tooltipSchema: ISchema = {
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '颜色',
+                feedbackText: '颜色',
                 gridSpan: 2,
               },
               'x-component': 'ColorPicker',
@@ -164,7 +164,7 @@ export const tooltipSchema: ISchema = {
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '长度',
+                feedbackText: '长度',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {
@@ -186,7 +186,7 @@ export const tooltipSchema: ISchema = {
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '间距',
+                feedbackText: '间距',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {

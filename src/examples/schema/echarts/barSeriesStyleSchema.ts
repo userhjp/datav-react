@@ -49,7 +49,7 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '左上',
+            feedbackText: '左上',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -63,7 +63,7 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '右上',
+            feedbackText: '右上',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -77,7 +77,7 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '左下',
+            feedbackText: '左下',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -91,7 +91,7 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '右下',
+            feedbackText: '右下',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -157,7 +157,7 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '字号',
+                feedbackText: '字号',
               },
               'x-component': 'NumberPicker',
               'x-component-props': {
@@ -171,7 +171,7 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
               type: 'string',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '字体粗细',
+                feedbackText: '字体粗细',
               },
               'x-component': 'Select',
               enum: fontWeights,
@@ -181,7 +181,7 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
               type: 'number',
               'x-decorator': 'FormItem',
               'x-decorator-props': {
-                extra: '字体颜色',
+                feedbackText: '字体颜色',
                 gridSpan: 2,
               },
               'x-component': 'ColorPicker',

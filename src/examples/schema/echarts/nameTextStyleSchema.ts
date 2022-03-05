@@ -43,7 +43,7 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '旋转',
+            feedbackText: '旋转',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -57,7 +57,7 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '偏移',
+            feedbackText: '偏移',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -83,7 +83,7 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字号',
+            feedbackText: '字号',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -97,7 +97,7 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字体粗细',
+            feedbackText: '字体粗细',
           },
           'x-component': 'Select',
           enum: fontWeights,
@@ -107,7 +107,7 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '字体颜色',
+            feedbackText: '字体颜色',
             gridSpan: 2,
           },
           'x-component': 'ColorPicker',

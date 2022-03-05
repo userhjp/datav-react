@@ -25,7 +25,7 @@ export const axisLineSchema: ISchema = {
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '类型',
+            feedbackText: '类型',
           },
           'x-component': 'Select',
           enum: lineTypeList,
@@ -35,7 +35,7 @@ export const axisLineSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '粗细',
+            feedbackText: '粗细',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -49,7 +49,7 @@ export const axisLineSchema: ISchema = {
           type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '颜色',
+            feedbackText: '颜色',
             gridSpan: 2,
           },
           'x-component': 'ColorPicker',

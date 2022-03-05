@@ -7,7 +7,7 @@ import { MonacoEditor, BlurInput, SettingsEmpty } from '../components';
 import { useEffect, useMemo, useState } from 'react';
 import { IDataSetting } from '../../interface';
 import { languageType } from '../components/MonacoEditor/editor-config';
-import { InputNumber, Tooltip } from 'antd';
+import { Button, InputNumber, Tooltip } from 'antd';
 import { autorun } from '@formily/reactive';
 import { ApiType, FieldStatus } from '../../../shared';
 import DataConfig from './DataConfig';
@@ -15,7 +15,7 @@ import { useDataSource } from '../../hooks';
 import { IconWidget } from '../../components';
 import './index.less';
 
-export const DataFields: React.FC = () => {
+export const DataFields: React.FC = observer(() => {
   const field = useField<ObjectFieldType<IDataSetting>>();
   const value = useMemo(() => field.value || {}, [field.value]);
   if (!value.config?.data) {
@@ -33,46 +33,65 @@ export const DataFields: React.FC = () => {
     value.config = { ...(value.config || {}) };
   };
 
+  // const addFields = () => {
+  //   const key = Object.keys(value.fields).length + 1;
+  //   field.form.setValuesIn(`data.fields.key${key}`, {
+  //     map: '',
+  //     status: 'success',
+  //   });
+  // };
+
   return (
     <>
-      <ObjectField name="fields">
-        <div className="data-attr-table-container">
-          <table className="data-attr-table">
-            <thead className="table-head">
-              <tr className="table-head-row">
-                <th className="th-item column-item attr-name">字段</th>
-                <th className="th-item column-item attr-value">映射</th>
-                <th className="th-item column-item attr-status">状态</th>
-              </tr>
-            </thead>
-            <tbody className="table-body">
-              {Object.keys(value?.fields || {}).map((key) => (
-                <ObjectField name={key} key={key}>
-                  <tr className="table-body-row">
-                    <td className="column-item attr-name">
-                      <Tooltip
-                        overlayClassName="design-tip"
-                        color="#2681ff"
-                        placement="left"
-                        title={value?.fields[key].description || null}
-                      >
-                        <span style={{ cursor: 'help' }}>{key}</span>
-                      </Tooltip>
-                    </td>
-                    <td className="column-item attr-value">
-                      <Field name="map" component={[BlurInput, { size: 'small', placeholder: '可自定义' }]} />
-                    </td>
-                    <td className="column-item attr-status">
-                      <Field name="status" component={[DataState]} />
-                    </td>
+      {Object.keys(value?.fields || {}).length > 0 && (
+        <>
+          <ObjectField name="fields">
+            <div className="data-attr-table-container">
+              <table className="data-attr-table">
+                <thead className="table-head">
+                  <tr className="table-head-row">
+                    <th className="th-item column-item attr-name">字段</th>
+                    <th className="th-item column-item attr-value">映射</th>
+                    <th className="th-item column-item attr-status">状态</th>
                   </tr>
-                </ObjectField>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      </ObjectField>
-      <div className="data-result-title">数据响应结果</div>
+                </thead>
+                <tbody className="table-body">
+                  {Object.keys(value?.fields || {}).map((key) => (
+                    <ObjectField name={key} key={key}>
+                      <tr className="table-body-row">
+                        <td className="column-item attr-name">
+                          <Tooltip
+                            overlayClassName="design-tip"
+                            color="#2681ff"
+                            placement="left"
+                            title={value?.fields[key].description || null}
+                          >
+                            <span style={{ cursor: 'help' }}>{key}</span>
+                          </Tooltip>
+                        </td>
+                        <td className="column-item attr-value">
+                          <Field name="map" component={[BlurInput, { size: 'small', placeholder: '可自定义' }]} />
+                        </td>
+                        <td className="column-item attr-status">
+                          <Field name="status" component={[DataState]} />
+                        </td>
+                      </tr>
+                    </ObjectField>
+                  ))}
+                  {/* <tr className="table-body-row" style={{ textAlign: 'center' }}>
+                 <td className="column-item" colSpan={3}>
+                   <Button size="small" className="ds-action-btn" onClick={addFields}>
+                     添加映射字段
+                   </Button>
+                 </td>
+               </tr> */}
+                </tbody>
+              </table>
+            </div>
+          </ObjectField>
+          <div className="data-result-title">数据响应结果</div>
+        </>
+      )}
       <div className="data-auto-update">
         <label style={{ cursor: 'pointer' }}>
           <Field name="autoUpdate" initialValue={false} component={[Checkbox]} />
@@ -116,13 +135,13 @@ export const DataFields: React.FC = () => {
       <ReadOnlyEditor editorType={editorType} />
     </>
   );
-};
+});
 
 const DataTotalState = ({ field }) => {
   const [totalStatus, setTotalStatus] = useState(false);
   useEffect(() => {
     const dispose = autorun(() => {
-      const isError = field ? Object.keys(field).every((e) => field[e].status === FieldStatus.failed) : false;
+      const isError = field && Object.keys(field).length ? Object.keys(field).every((e) => field[e].status === FieldStatus.failed) : false;
       setTotalStatus(isError);
     });
     return () => dispose();
@@ -141,7 +160,7 @@ const ReadOnlyEditor: React.FC<{ editorType: languageType }> = observer(({ edito
         language: editorType,
         readOnly: true,
         autoFormat: true,
-        height: 250,
+        height: 300,
         fullScreenTitle: '数据响应结果',
         value: editorData || '',
       }}

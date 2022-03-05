@@ -20,7 +20,14 @@ type ICreateWidgetConfig = {
     /** 字段描述映射 */
     fields: Record<string, string>;
   };
-  events: IWidgetEvents;
+  events: {
+    changed: {
+      /** 事件描述 */
+      description: string;
+      /** 字段映射 默认data.fields */
+      fields?: Record<string, string>;
+    };
+  };
 };
 
 export const createDesigner = (props: IEngineProps<Engine> = {}) => {

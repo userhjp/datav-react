@@ -61,7 +61,7 @@ export const echartGridSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '左',
+            feedbackText: '左',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -75,7 +75,7 @@ export const echartGridSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '右',
+            feedbackText: '右',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -89,7 +89,7 @@ export const echartGridSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '上',
+            feedbackText: '上',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
@@ -103,7 +103,7 @@ export const echartGridSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            extra: '下',
+            feedbackText: '下',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {
