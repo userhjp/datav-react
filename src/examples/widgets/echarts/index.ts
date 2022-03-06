@@ -5,3 +5,5 @@ export * from './bar/StackBar';
 export * from './line/BaseLine';
 export * from './line/StackLine';
 export * from './bar/ZebraBar';
+export * from './bar/YCategoryBar';
+export * from './funnel/BaseFunnel';

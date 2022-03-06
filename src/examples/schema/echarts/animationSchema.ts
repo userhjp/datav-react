@@ -22,7 +22,7 @@ export const animationSchema: ISchema = {
         unit: 'ms',
         min: 200,
       },
-      default: 1500,
+      default: 1000,
     },
     animationEasing: {
       type: 'string',

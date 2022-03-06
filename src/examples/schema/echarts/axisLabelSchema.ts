@@ -67,7 +67,7 @@ export const axisLabelSchema: ISchema = {
                 unit: 'px',
                 min: 0,
               },
-              default: 8,
+              default: 12,
             },
           },
         },

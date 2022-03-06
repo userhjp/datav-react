@@ -20,9 +20,6 @@ export function convert2Ddata(data: IWidgetData) {
 
 /** form表单数据与echart xAxis数据差异处理 */
 export function formJsonToxAxisData(xAxis: any = {}) {
-  if (!xAxis.show) {
-    xAxis.type = 'category';
-  }
   const XlineStyle = Path.getIn(xAxis, 'splitLine.lineStyle');
   if (XlineStyle && XlineStyle.type === 'dashed') {
     XlineStyle.type = [XlineStyle.dashedLength, XlineStyle.dashedSpace];
@@ -111,11 +108,11 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
       case 'pictorialBar':
         f.symbolRepeat = barSeriesStyle.symbolRepeat;
         f.symbolRotate = barSeriesStyle.symbolRotate;
-        f.barGap = barSeriesStyle.barGap;
         f.symbolSize = [barSeriesStyle.symbolSize.width, barSeriesStyle.symbolSize.height];
-        f.barCategoryGap = barSeriesStyle.barCategoryGap;
         f.symbolMargin = barSeriesStyle.symbolMargin;
       case 'bar':
+        f.barGap = barSeriesStyle.barGap;
+        f.barCategoryGap = barSeriesStyle.barCategoryGap;
         f.showBackground = !!barSeriesStyle?.backgroundStyle?.show; // 背景
         f.backgroundStyle = barSeriesStyle?.backgroundStyle;
         f.label = barSeriesStyle?.label?.show ? barSeriesStyle.label : { show: false };
@@ -128,8 +125,6 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
             barSeriesStyle.borderRadius?.leftbottom || 0,
           ];
         }
-        // f.barGap = `${barSeriesStyle.barGap || 30}%`;
-        f.barCategoryGap = `${barSeriesStyle.barCategoryGap || 20}%`;
         break;
       case 'line':
         f.label = lineSeriesStyle?.label?.show ? lineSeriesStyle.label : { show: false };
@@ -141,5 +136,15 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
     }
     return f;
   });
+  return options.series;
+}
+
+/** Echarts 漏斗图Series 数据差异处理 */
+export function formDataToFunnelSeriesData(options: { [key: string]: any }, data: { name: string; value: string }[]): any[] {
+  const { series = {} } = options;
+  const colors = colorsOpt.find((f) => f.value === options.grid.colors);
+  options.color = colors?.color;
+  series.data = data;
+  options.series = [series];
   return options.series;
 }

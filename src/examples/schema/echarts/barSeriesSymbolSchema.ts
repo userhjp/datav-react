@@ -2,13 +2,12 @@ import { ISchema } from '@formily/react';
 import { echartsLablePositions, fontWeights } from '../../shared';
 
 /** 象形图系列公共配置 */
-export const barSeriesSymbolSchema = (defaultValue?: { [key: string]: any }): ISchema => ({
+export const barSeriesSymbolSchema: ISchema = {
   type: 'object',
   'x-component': 'MyFormCollapse',
   'x-component-props': {
     title: '柱条样式',
   },
-  default: defaultValue,
   properties: {
     symbolRepeat: {
       type: 'boolean',
@@ -239,4 +238,4 @@ export const barSeriesSymbolSchema = (defaultValue?: { [key: string]: any }): IS
       },
     },
   },
-});
+};

@@ -64,9 +64,9 @@ export const resourceData: IResourceData[] = [
         name: '条形图',
         children: [
           {
-            name: '水平基础条型图',
-            cover: '/menuCover/图表/条形图/水平基础条型图.png',
-            type: 'Demo',
+            name: '水平基础柱状图',
+            cover: '/menuCover/图表/条形图/水平基础柱状图.png',
+            type: 'YCategoryBar',
           },
           {
             name: '分组柱状图',
@@ -182,6 +182,7 @@ export const resourceData: IResourceData[] = [
           {
             name: '漏斗图',
             cover: '/menuCover/图表/其他/漏斗图.png',
+            type: 'BaseFunnel',
           },
           {
             name: '仪表盘',

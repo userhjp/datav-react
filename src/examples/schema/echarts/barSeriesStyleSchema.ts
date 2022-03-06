@@ -2,13 +2,12 @@ import { ISchema } from '@formily/react';
 import { echartsLablePositions, fontWeights } from '../../shared';
 
 /** 柱状图柱条系列公共配置 */
-export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISchema => ({
+export const barSeriesStyleSchema: ISchema = {
   type: 'object',
   'x-component': 'MyFormCollapse',
   'x-component-props': {
     title: '柱条样式',
   },
-  default: defaultValue,
   properties: {
     barWidth: {
       type: 'number',
@@ -24,16 +23,26 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
       default: 'auto',
     },
     barCategoryGap: {
-      type: 'number',
-      title: '同系柱条间距',
+      type: 'string',
+      title: '同系间距',
       'x-decorator': 'FormItem',
-      'x-component': 'NumberPicker',
+      'x-component': 'Input',
       'x-component-props': {
         placeholder: '请输入',
-        unit: '%',
         min: 0,
       },
-      default: 0,
+      default: '20%',
+    },
+    barGap: {
+      type: 'string',
+      title: '不同系间距',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      'x-component-props': {
+        placeholder: '请输入',
+        min: 0,
+      },
+      default: '30%',
     },
     borderRadius: {
       type: 'object',
@@ -241,4 +250,4 @@ export const barSeriesStyleSchema = (defaultValue?: { [key: string]: any }): ISc
       },
     },
   },
-});
+};

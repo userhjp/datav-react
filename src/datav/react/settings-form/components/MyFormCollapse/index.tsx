@@ -5,7 +5,7 @@ import { CollapseProps, CollapsePanelProps } from 'antd/lib/collapse';
 import { useField, observer, useFieldSchema, RecursionField } from '@formily/react';
 import { Schema } from '@formily/json-schema';
 import { toArr } from '@formily/shared';
-import { ArrayField, ObjectField } from '@formily/core';
+import { ArrayField, Field, FormPath, ObjectField } from '@formily/core';
 import { IconWidget } from '../../../components';
 import './index.less';
 
@@ -113,7 +113,11 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
       _formCollapse.removeActiveKey(schema.name);
     }
     field.form.setFieldState(`${basePath}.*`, (state) => {
-      state.display = value[mapSwitchKey] ? 'visible' : 'none';
+      if (FormPath.parse('options.*.type').match((state as Field).path.entire)) {
+        state.hidden = !value[mapSwitchKey];
+      } else {
+        state.display = value[mapSwitchKey] ? 'visible' : 'none';
+      }
     });
     return (
       <Switch

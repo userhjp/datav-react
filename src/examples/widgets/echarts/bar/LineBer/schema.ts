@@ -5,21 +5,20 @@ import { legendSchema } from '@/examples/schema/echarts/legendSchema';
 import { lineSeriesStyleSchema } from '@/examples/schema/echarts/lineSeriesStyleSchema';
 import { lineBarSeriesSchema } from '@/examples/schema/echarts/series/lineBarSeriesSchema';
 import { tooltipSchema } from '@/examples/schema/echarts/tooltipSchema';
-import { xAxisSchema } from '@/examples/schema/echarts/xAxisSchema';
-import { yAxisSchema } from '@/examples/schema/echarts/yAxisSchema';
+import { axisSchema } from '@/examples/schema/echarts/axisSchema';
 import { ISchema } from '@formily/react';
 
 export const LineBerSchema: ISchema = {
   type: 'object',
   properties: {
     grid: echartGridSchema,
-    xAxis: xAxisSchema({ boundaryGap: true }),
-    yAxis: yAxisSchema,
+    xAxis: axisSchema('category', 'X轴'),
+    yAxis: axisSchema('value', 'Y轴'),
     tooltip: tooltipSchema,
     legend: legendSchema,
     animation: animationSchema,
     lineSeriesStyle: lineSeriesStyleSchema,
-    barSeriesStyle: barSeriesStyleSchema(),
+    barSeriesStyle: barSeriesStyleSchema,
     series: {
       type: 'array',
       'x-component': 'MyFormCollapse',

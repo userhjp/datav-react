@@ -5,16 +5,50 @@ import { axisTickSchema } from './axisTickSchema';
 import { nameTextStyleSchema } from './nameTextStyleSchema';
 import { splitLineSchema } from './splitLineSchema';
 
-/** y轴配置 */
-export const yAxisSchema: ISchema = {
+/** echarts 坐标轴配置 */
+export const axisSchema = (type: 'category' | 'value', title: string): ISchema => ({
   type: 'object',
   'x-component': 'MyFormCollapse',
   'x-component-props': {
-    title: 'Y轴',
+    title,
     switch: true,
     defaultSwitch: true,
   },
   properties: {
+    ...AXISTYPE[type],
+    nameTextStyle: nameTextStyleSchema(false, { category: '类目轴', value: '数值轴', time: '时间轴' }[type]),
+    axisLine: axisLineSchema,
+    axisTick: axisTickSchema,
+    axisLabel: axisLabelSchema,
+    splitLine: splitLineSchema(true),
+  },
+});
+
+const AXISTYPE = {
+  category: {
+    type: {
+      type: 'string',
+      title: '类型',
+      'x-decorator': 'FormItem',
+      'x-component': 'Radio.Group',
+      enum: [
+        { label: '类目型', value: 'category' },
+        { label: '时间型', value: 'time' },
+      ],
+      default: 'category',
+    },
+    boundaryGap: {
+      type: 'string',
+      title: '两测留白',
+      'x-decorator': 'FormItem',
+      'x-component': 'Switch',
+      default: true,
+    },
+  },
+  value: {
+    type: {
+      default: 'value',
+    },
     splitNumber: {
       type: 'number',
       title: '标签数量',
@@ -52,10 +86,10 @@ export const yAxisSchema: ISchema = {
             placeholder: '自适应',
           },
           enum: [
-            { label: '自适应', value: 'auto' },
+            { label: '自适应', value: null },
             { label: '最小值', value: 'dataMin' },
           ],
-          default: 'auto',
+          default: null,
         },
         max: {
           type: 'string',
@@ -68,17 +102,12 @@ export const yAxisSchema: ISchema = {
             placeholder: '自适应',
           },
           enum: [
-            { label: '自适应', value: 'auto' },
+            { label: '自适应', value: null },
             { label: '最大值', value: 'dataMax' },
           ],
-          default: 'auto',
+          default: null,
         },
       },
     },
-    nameTextStyle: nameTextStyleSchema(false, 'Y轴'),
-    axisLine: axisLineSchema,
-    axisTick: axisTickSchema,
-    axisLabel: axisLabelSchema,
-    splitLine: splitLineSchema(true),
   },
 };
