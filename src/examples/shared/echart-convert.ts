@@ -143,6 +143,7 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
 export function formDataToFunnelSeriesData(options: { [key: string]: any }, data: { name: string; value: string }[]): any[] {
   const { series = {} } = options;
   const colors = colorsOpt.find((f) => f.value === options.grid.colors);
+  options.legend = formJsonToLegendData(options.legend);
   options.color = colors?.color;
   series.data = data;
   options.series = [series];
