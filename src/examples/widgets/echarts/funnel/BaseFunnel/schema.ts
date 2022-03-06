@@ -1,4 +1,3 @@
-import { animationSchema } from '@/examples/schema/echarts/animationSchema';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
 import { legendSchema } from '@/examples/schema/echarts/legendSchema';
 import { funnelSeriesStyleSchema } from '@/examples/schema/echarts/funnelSeriesStyleSchema';
@@ -11,7 +10,6 @@ export const BaseFunnelSchema: ISchema = {
     grid: echartGridSchema,
     tooltip: tooltipSchema,
     legend: legendSchema,
-    animation: animationSchema,
     series: funnelSeriesStyleSchema,
   },
 };

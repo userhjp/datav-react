@@ -1,3 +1,4 @@
+import { echartsFunnelLablePositions, fontWeights } from '@/examples/shared';
 import { ISchema } from '@formily/react';
 
 /** 漏斗图 Series 配置*/
@@ -6,10 +7,79 @@ export const funnelSeriesStyleSchema: ISchema = {
   'x-component': 'MyFormCollapse',
   'x-component-props': {
     title: '漏斗图样式',
+    noPadding: true,
+    switch: true,
+    defaultSwitch: true,
+    isOpen: true,
   },
   properties: {
     type: {
       default: 'funnel',
+    },
+    label: {
+      type: 'object',
+      'x-component': 'MyFormCollapse',
+      'x-component-props': {
+        title: '柱条标签',
+        switch: true,
+        defaultSwitch: true,
+      },
+      properties: {
+        position: {
+          type: 'string',
+          title: '位置',
+          'x-decorator': 'FormItem',
+          'x-component': 'Select',
+          enum: echartsFunnelLablePositions,
+          default: 'inside',
+        },
+        textStyle: {
+          type: 'void',
+          title: '文本样式',
+          'x-decorator': 'FormItem',
+          'x-component': 'FormGrid',
+          'x-component-props': {
+            minColumns: 2,
+            rowGap: 0,
+          },
+          properties: {
+            fontSize: {
+              type: 'number',
+              'x-decorator': 'FormItem',
+              'x-decorator-props': {
+                feedbackText: '字号',
+              },
+              'x-component': 'NumberPicker',
+              'x-component-props': {
+                placeholder: '请输入',
+                unit: 'px',
+                min: 8,
+              },
+              default: 10,
+            },
+            fontWeight: {
+              type: 'string',
+              'x-decorator': 'FormItem',
+              'x-decorator-props': {
+                feedbackText: '字体粗细',
+              },
+              'x-component': 'Select',
+              enum: fontWeights,
+              default: 'normal',
+            },
+            color: {
+              type: 'number',
+              'x-decorator': 'FormItem',
+              'x-decorator-props': {
+                feedbackText: '字体颜色',
+                gridSpan: 2,
+              },
+              'x-component': 'ColorPicker',
+              default: '#000',
+            },
+          },
+        },
+      },
     },
     voidMimMax: {
       type: 'void',
@@ -111,6 +181,74 @@ export const funnelSeriesStyleSchema: ISchema = {
         min: 0,
       },
       default: 0,
+    },
+    distance: {
+      type: 'void',
+      title: '图表边距',
+      'x-decorator': 'FormItem',
+      'x-component': 'FormGrid',
+      'x-component-props': {
+        minColumns: 2,
+        rowGap: 0,
+      },
+      properties: {
+        left: {
+          type: 'number',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '左',
+          },
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'px',
+            min: 0,
+          },
+          default: 60,
+        },
+        right: {
+          type: 'number',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '右',
+          },
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'px',
+            min: 0,
+          },
+          default: 60,
+        },
+        top: {
+          type: 'number',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '上',
+          },
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'px',
+            min: 0,
+          },
+          default: 40,
+        },
+        bottom: {
+          type: 'number',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '下',
+          },
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'px',
+            min: 0,
+          },
+          default: 30,
+        },
+      },
     },
   },
 };

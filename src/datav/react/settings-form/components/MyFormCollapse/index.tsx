@@ -23,10 +23,10 @@ export interface IFormCollapse {
 
 export interface IFormCollapseProps extends CollapseProps {
   formCollapse?: IFormCollapse;
-  switch?: boolean; // 开区关闭区域
+  switch?: boolean; // 是否显示switch开关
   title: string;
   key?: string;
-  defaultSwitch?: boolean;
+  defaultSwitch?: boolean; // 默认是否开启
   mapSwitchKey?: string; // 开关key值 默认 show
   maxItems?: string; // tab最大数
   noPadding?: boolean; // 默认true 是否保留子级Collapse内容上下边距，如果子级第一个元素就是 Collapse设置为false好看些
@@ -79,13 +79,13 @@ export const createFormCollapse = (defaultActiveKeys?: ActiveKeys) => {
 
 export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ...props }) => {
   const field: ArrayField | ObjectField = useField();
-  const { mapSwitchKey = 'show' } = props;
+  const { mapSwitchKey = 'show', defaultSwitch } = props;
   const schema: any = useFieldSchema();
   const arrValue = Array.isArray(field.value) ? field.value : [];
   const [activeKey, setActiveKey] = useState('tab-0');
   const dataSource = arrValue?.length ? arrValue : [{}];
   const _formCollapse = useMemo(() => {
-    return formCollapse ? formCollapse : createFormCollapse();
+    return formCollapse ? formCollapse : createFormCollapse(props.isOpen ? [schema.name] : []);
   }, []);
 
   const getFieldValue = (schema: Schema) => {
@@ -196,11 +196,11 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
     }
   };
 
-  useLayoutEffect(() => {
-    if (props.isOpen && !_formCollapse.hasActiveKey(schema.name)) {
-      _formCollapse?.setActiveKeys?.(schema.name);
-    }
-  }, [props.isOpen]);
+  // useLayoutEffect(() => {
+  //   if (props.isOpen && !_formCollapse.hasActiveKey(schema.name)) {
+  //     _formCollapse?.setActiveKeys?.(schema.name);
+  //   }
+  // }, [props.isOpen]);
 
   return (
     <Collapse

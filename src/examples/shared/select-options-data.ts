@@ -94,6 +94,18 @@ export const echartsLablePositions = [
   { value: 'insideBottomRight', label: '内-顶部居右' },
 ];
 
+export const echartsFunnelLablePositions = [
+  { value: 'left', label: '左侧' },
+  { value: 'right', label: '右侧' },
+  { value: 'inside', label: '内部' },
+  { value: 'leftTop', label: '左上' },
+  { value: 'leftBottom', label: '左下' },
+  { value: 'rightTop', label: '右上' },
+  { value: 'rightBottom', label: '右下' },
+  { value: 'insideLeft', label: '内-左侧' },
+  { value: 'insideRight', label: '内-右侧' },
+];
+
 export const selectSuggests = [
   { value: 'auto', label: '自适应' },
   { value: 'dataMin', label: '数据最小值' },
