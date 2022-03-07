@@ -123,6 +123,7 @@ export const resourceData: IResourceData[] = [
           {
             name: '单值百分比饼图',
             cover: '/menuCover/图表/饼图/单值百分比饼图.png',
+            type: 'PercentagePie',
           },
           {
             name: '多维度饼图',

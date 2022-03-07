@@ -42,7 +42,6 @@ const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   useLayoutEffect(() => {
     options.series = formDataToFunnelSeriesData(options, dataset);
     myChart.current.setOption(options, true);
-    console.log(options);
   }, [options]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;

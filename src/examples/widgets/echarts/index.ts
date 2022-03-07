@@ -7,3 +7,4 @@ export * from './line/StackLine';
 export * from './bar/ZebraBar';
 export * from './bar/YCategoryBar';
 export * from './funnel/BaseFunnel';
+export * from './pie/PercentagePie';

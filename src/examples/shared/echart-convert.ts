@@ -90,10 +90,7 @@ export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | '
 /** Echarts Series 数据差异处理 */
 export function formDataToSeriesData(options: { [key: string]: any }): any[] {
   const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], areaStyle = {} } = options;
-
-  const colors = colorsOpt.find((f) => f.value === options.grid.colors);
-  options.color = colors?.color;
-
+  options.color = getChartColors(options.grid.colors);
   options.series = series.map((f) => {
     if (!f) return;
     f.itemStyle = f.itemStyle || {};
@@ -142,10 +139,15 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
 /** Echarts 漏斗图Series 数据差异处理 */
 export function formDataToFunnelSeriesData(options: { [key: string]: any }, data: { name: string; value: string }[]): any[] {
   const { series = {} } = options;
-  const colors = colorsOpt.find((f) => f.value === options.grid.colors);
   options.legend = formJsonToLegendData(options.legend);
-  options.color = colors?.color;
+  options.color = getChartColors(options.grid.colors);
   series.data = data;
   options.series = [series];
   return options.series;
+}
+
+/** 获取颜色组 */
+export function getChartColors(type: number) {
+  const colors = colorsOpt.find((f) => f.value === type);
+  return colors.color || colorsOpt[0].color;
 }

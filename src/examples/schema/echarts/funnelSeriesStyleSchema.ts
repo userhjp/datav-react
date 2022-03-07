@@ -97,7 +97,7 @@ export const funnelSeriesStyleSchema: ISchema = {
           'x-decorator-props': {
             feedbackText: '最小值',
           },
-          'x-component': 'Input',
+          'x-component': 'NumberPicker',
           'x-component-props': {
             placeholder: '请输入',
             unit: 'px',
@@ -111,7 +111,7 @@ export const funnelSeriesStyleSchema: ISchema = {
           'x-decorator-props': {
             feedbackText: '最大值',
           },
-          'x-component': 'Input',
+          'x-component': 'NumberPicker',
           'x-component-props': {
             placeholder: '请输入',
             unit: 'px',

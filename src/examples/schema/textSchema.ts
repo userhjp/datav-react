@@ -37,7 +37,6 @@ export const textSchema: ISchema = {
       title: '字体颜色',
       'x-decorator': 'FormItem',
       'x-component': 'ColorPicker',
-      enum: fontWeights,
       default: '#fff',
     },
   },
