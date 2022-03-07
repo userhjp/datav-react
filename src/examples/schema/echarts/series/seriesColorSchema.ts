@@ -32,7 +32,6 @@ export const seriesColorSchema: ISchema = {
       },
     },
   },
-  maxItems: 3,
   properties: {
     add: {
       type: 'void',
