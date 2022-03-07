@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useRef } from 'react';
-import { isStr, isFn, isObj, isPlainObj } from '@designable/shared';
+import { isStr, isFn, isObj, isPlainObj } from '../../../shared';
 import { Tooltip, TooltipProps } from 'antd';
 import { useRegistry } from '../../hooks';
 import cls from 'classnames';

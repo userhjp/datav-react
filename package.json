@@ -21,7 +21,6 @@
   "dependencies": {
     "@formily/antd": "^2.0.14",
     "@formily/core": "^2.0.14",
-    "@formily/designable-antd": "^2.0.0-rc.7",
     "@formily/react": "^2.0.14",
     "@formily/reactive": "^2.0.14",
     "ahooks": "^3.1.13",

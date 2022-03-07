@@ -1,9 +1,8 @@
 import { observable, define, action } from '@formily/reactive';
-import { KeyCode } from '@designable/shared';
 import { Engine } from './Engine';
 import { AbstractKeyboardEvent } from '../events/keyboard/AbstractKeyboardEvent';
 import { IEngineContext } from '../types';
-import { Shortcut } from './Shortcut';
+import { KeyCode, Shortcut } from './Shortcut';
 
 const Modifiers: [string, KeyCode][] = [
   ['metaKey', KeyCode.Meta],
