@@ -25,7 +25,11 @@ export const YCategoryBarSchema: ISchema = {
         title: '系列',
         listType: 'bar',
       },
-      default: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }],
+      default: [
+        { type: 'bar', itemStyle: { gradientDirection: 'horizontal' } },
+        { type: 'bar', itemStyle: { gradientDirection: 'horizontal' } },
+        { type: 'bar', itemStyle: { gradientDirection: 'horizontal' } },
+      ],
       items: barSeriesSchema,
     },
   },

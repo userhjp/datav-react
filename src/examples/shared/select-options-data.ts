@@ -67,8 +67,8 @@ export const lineStyles = [
 ];
 
 export const fillTypes = [
-  { value: 'solid', label: '实体填充' },
-  { value: 'gradient', label: '渐变填充' },
+  { label: '垂直渐变', value: 'vertical' },
+  { label: '水平渐变', value: 'horizontal' },
 ];
 
 export const repeatTypes = [

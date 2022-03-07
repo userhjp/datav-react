@@ -94,11 +94,8 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
   options.series = series.map((f) => {
     if (!f) return;
     f.itemStyle = f.itemStyle || {};
-    if (f?.itemStyle?.startColor && f?.itemStyle?.toColor) {
-      f.itemStyle.color = new graphic.LinearGradient(0, 0, 0, 1, [
-        { offset: 0, color: f.itemStyle.startColor },
-        { offset: 1, color: f.itemStyle.toColor },
-      ]);
+    if (f?.itemStyle?.color) {
+      f.itemStyle.color = convertEChartColors(f.itemStyle.color, f.itemStyle.gradientDirection);
     }
 
     switch (f.type) {
@@ -149,20 +146,23 @@ export function formDataToFunnelSeriesData(options: { [key: string]: any }, data
 /** 获取颜色组 */
 export function getChartColors(type: number) {
   const colors = colorsOpt.find((f) => f.value === type);
-  return colors.color || colorsOpt[0].color;
+  return (colors.color || colorsOpt[0]?.color || []).map((m) => convertEChartColors(m));
 }
 
 /** 转换为echart颜色类型 */
-export function convertEChartColors(colors: Array<string> | string): string | graphic.LinearGradient {
+export function convertEChartColors(
+  colors: Array<string> | string,
+  type: 'vertical' | 'horizontal' = 'vertical'
+): string | graphic.LinearGradient {
   if (!colors) return '';
   if (typeof colors === 'string') return colors;
 
   if (colors && colors.length > 1) {
     const offset = 1 / (colors.length - 1);
-    return new graphic.LinearGradient(
+    return new graphic.LinearGradient( // 右 下 左 上
       0,
-      1,
-      0,
+      type === 'vertical' ? 1 : 0,
+      type === 'horizontal' ? 1 : 0,
       0,
       colors.map((m, i) => {
         return { offset: i === colors.length ? 1 : offset * i, color: m };

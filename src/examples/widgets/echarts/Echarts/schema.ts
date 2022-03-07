@@ -154,7 +154,6 @@ const option = {
       {
           "type": "bar",
           "itemStyle": {
-              "colorType": "1",
               "borderRadius": 0
           },
           "barWidth": 18,

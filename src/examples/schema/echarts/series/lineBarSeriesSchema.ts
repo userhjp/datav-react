@@ -1,3 +1,4 @@
+import { fillTypes } from '@/examples/shared';
 import { ISchema } from '@formily/react';
 import { seriesColorSchema } from './seriesColorSchema';
 
@@ -28,16 +29,13 @@ export const lineBarSeriesSchema: ISchema = {
         rowGap: 0,
       },
       properties: {
-        colorType: {
+        gradientDirection: {
           type: 'string',
           title: '渐变类型',
           'x-decorator': 'FormItem',
           'x-component': 'Radio.Group',
-          enum: [
-            { label: '水平渐变', value: '1' },
-            { label: '垂直渐变', value: '2' },
-          ],
-          default: '1',
+          enum: fillTypes,
+          default: 'vertical',
         },
         color: seriesColorSchema,
       },
