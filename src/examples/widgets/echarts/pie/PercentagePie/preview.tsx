@@ -6,7 +6,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import { graphic } from 'echarts/core';
-import { getChartColors } from '@/examples/shared';
+import { convertEChartColors, getChartColors } from '@/examples/shared';
 
 use([CanvasRenderer, PieChart, GridComponent, TitleComponent, PolarComponent, BarChart]);
 /** 单值百分比饼图 */
@@ -37,22 +37,25 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
   }, [data]);
 
   const chartOptions = useMemo(() => {
+    const { pieStyle, grid, textStyle, valueStyle } = options;
+    const dcolor = getChartColors(grid.colors);
     return {
-      color: getChartColors(options.grid.colors),
+      color: convertEChartColors(pieStyle?.color ?? dcolor[0]),
+      grid,
       title: [
         {
-          show: options.textStyle.show,
+          show: textStyle.show,
           text: dataset.text,
           x: 'center',
           top: '55%',
-          textStyle: options.textStyle.textStyle,
+          textStyle: textStyle.textStyle,
         },
         {
-          show: options.valueStyle.show,
+          show: valueStyle.show,
           text: `${dataset.value}%`,
           x: 'center',
           y: 'center',
-          textStyle: options.valueStyle.textStyle,
+          textStyle: valueStyle.textStyle,
         },
       ],
       polar: {
@@ -99,7 +102,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
           itemStyle: {
             color: 'rgba(66, 66, 66, .1)',
             borderWidth: 1,
-            borderColor: options?.innerBorderColor,
+            borderColor: pieStyle?.innerBorderColor,
           },
           data: [100],
         },
@@ -113,7 +116,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
           itemStyle: {
             color: 'rgba(66, 66, 66, .1)',
             borderWidth: 1,
-            borderColor: options?.outerBorderColor,
+            borderColor: pieStyle?.outerBorderColor,
           },
           data: [100],
         },

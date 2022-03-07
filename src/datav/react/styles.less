@@ -150,8 +150,38 @@
   .ant-input-number-handler-down-inner,
   .ant-formily-item-control .ant-formily-item-help,
   .ant-formily-item-control .ant-formily-item-extra,
+  .ant-formily-array-items-item-inner,
   .ant-radio-wrapper {
     color: @m-text-color-grey;
+  }
+
+  .ant-formily-array-base-sort-handle {
+    color: #888!important;
+    cursor: move;
+  }
+
+  .ant-formily-array-items {
+    .ant-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 24px;
+      margin-top: 6px;
+      padding: 0 15px;
+      line-height: 24px;
+      &:hover {
+        background-color: transparent;
+      }
+    }
+    .ant-btn-dashed {
+      color: @m-text-color-grey;
+      line-height: 26px;
+      border-color: @m-text-color-grey;
+      &:hover {
+        color: @color-primary;
+        border-color: @color-primary;
+      }
+    }
   }
 
   .ant-switch:not(.ant-switch-checked) {
@@ -260,7 +290,7 @@
 
 .ant-tabs-dropdown-menu-item {
   padding: 2px 10px;
-  color: rgba(255, 255, 255, 0.85);
+  color: @m-text-color;
   background-color: #111b26;
 
   &:hover {

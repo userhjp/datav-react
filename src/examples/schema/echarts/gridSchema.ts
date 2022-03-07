@@ -23,14 +23,14 @@ export const echartGridSchema: ISchema = {
           title: '网格背景色',
           'x-decorator': 'FormItem',
           'x-component': 'ColorPicker',
-          default: 'rgba(0,0,0,0)',
+          default: 'rgba(0,0,0,0.2)',
         },
         borderColor: {
           type: 'string',
           title: '边框颜色',
           'x-decorator': 'FormItem',
           'x-component': 'ColorPicker',
-          default: 'rgba(0,0,0,0)',
+          default: 'rgba(0,0,0,0.2)',
         },
         borderWidth: {
           type: 'number',

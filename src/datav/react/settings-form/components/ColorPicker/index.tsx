@@ -11,7 +11,7 @@ type ColorPickerProps = {
 export const ColorPicker: React.FC<ColorPickerProps> = (props) => {
   const { value, onChange } = props;
   const [visible, setVisible] = useState(false);
-  const [color, setColor] = useState(value);
+  const [color, setColor] = useState(value || '');
   const handleColorChange = (color: any) => {
     const rgb = color.rgb;
     const val = rgb.a === 1 ? color.hex : `rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a})`;

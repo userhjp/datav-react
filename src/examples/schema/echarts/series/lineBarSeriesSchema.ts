@@ -1,4 +1,5 @@
 import { ISchema } from '@formily/react';
+import { seriesColorSchema } from './seriesColorSchema';
 
 /** 折线柱状图系列配置 */
 export const lineBarSeriesSchema: ISchema = {
@@ -29,62 +30,16 @@ export const lineBarSeriesSchema: ISchema = {
       properties: {
         colorType: {
           type: 'string',
-          title: '填充类型',
+          title: '渐变类型',
           'x-decorator': 'FormItem',
           'x-component': 'Radio.Group',
           enum: [
-            { label: '实体填充', value: '1' },
-            { label: '渐变填充', value: '2' },
+            { label: '水平渐变', value: '1' },
+            { label: '垂直渐变', value: '2' },
           ],
           default: '1',
         },
-        color: {
-          type: 'string',
-          title: '填充颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          'x-component-props': {
-            placeholder: '自动',
-          },
-          'x-reactions': {
-            dependencies: ['.colorType'],
-            fulfill: {
-              state: {
-                visible: '{{$deps[0] === "1"}}',
-              },
-            },
-          },
-        },
-        startColor: {
-          type: 'string',
-          title: '开始颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          'x-reactions': {
-            dependencies: ['.colorType'],
-            fulfill: {
-              state: {
-                visible: '{{$deps[0] === "2"}}',
-              },
-            },
-          },
-          default: '#75d6ff',
-        },
-        toColor: {
-          type: 'string',
-          title: '结束颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          'x-reactions': {
-            dependencies: ['.colorType'],
-            fulfill: {
-              state: {
-                visible: '{{$deps[0] === "2"}}',
-              },
-            },
-          },
-          default: '#1179ff',
-        },
+        color: seriesColorSchema,
       },
     },
   },

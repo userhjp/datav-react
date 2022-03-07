@@ -151,3 +151,24 @@ export function getChartColors(type: number) {
   const colors = colorsOpt.find((f) => f.value === type);
   return colors.color || colorsOpt[0].color;
 }
+
+/** 转换为echart颜色类型 */
+export function convertEChartColors(colors: Array<string> | string): string | graphic.LinearGradient {
+  if (!colors) return '';
+  if (typeof colors === 'string') return colors;
+
+  if (colors && colors.length > 1) {
+    const offset = 1 / (colors.length - 1);
+    return new graphic.LinearGradient(
+      0,
+      1,
+      0,
+      0,
+      colors.map((m, i) => {
+        return { offset: i === colors.length ? 1 : offset * i, color: m };
+      })
+    );
+  } else {
+    return colors[0] || '';
+  }
+}
