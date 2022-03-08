@@ -8,3 +8,4 @@ export * from './bar/ZebraBar';
 export * from './bar/YCategoryBar';
 export * from './funnel/BaseFunnel';
 export * from './pie/PercentagePie';
+export * from './pie/RosePie';

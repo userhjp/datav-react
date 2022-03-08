@@ -26,26 +26,85 @@ export const PercentagePieSchema: ISchema = {
       'x-component': 'MyFormCollapse',
       'x-component-props': {
         title: '饼图样式',
+        noPadding: true,
       },
       properties: {
         color: seriesColorSchema,
-        innerBorderColor: {
-          type: 'string',
-          title: '内边框颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          default: '#5269EE',
-        },
-        outerBorderColor: {
-          type: 'string',
-          title: '外边框颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          default: '#5269EE',
-        },
       },
       default: {
         color: ['#75d6ff', '#1179ff'],
+      },
+    },
+    outerPie: {
+      type: 'object',
+      'x-component': 'MyFormCollapse',
+      'x-component-props': {
+        title: '外环装饰',
+        switch: true,
+      },
+      properties: {
+        borderWidth: {
+          type: 'number',
+          title: '边框宽度',
+          'x-decorator': 'FormItem',
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'px',
+            min: 0,
+          },
+          default: 1,
+        },
+        color: {
+          type: 'string',
+          // title: '背景色',
+          // 'x-decorator': 'FormItem',
+          // 'x-component': 'ColorPicker',
+          default: 'rgba(66, 66, 66, .1)',
+        },
+        borderColor: {
+          type: 'string',
+          title: '边框颜色',
+          'x-decorator': 'FormItem',
+          'x-component': 'ColorPicker',
+          default: '#1179ff',
+        },
+      },
+    },
+    innerPie: {
+      type: 'object',
+      'x-component': 'MyFormCollapse',
+      'x-component-props': {
+        title: '内环装饰',
+        switch: true,
+      },
+      properties: {
+        borderWidth: {
+          type: 'number',
+          title: '边框宽度',
+          'x-decorator': 'FormItem',
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'px',
+            min: 0,
+          },
+          default: 1,
+        },
+        color: {
+          type: 'string',
+          title: '背景色',
+          'x-decorator': 'FormItem',
+          'x-component': 'ColorPicker',
+          default: 'rgba(66, 66, 66, .1)',
+        },
+        borderColor: {
+          type: 'string',
+          title: '边框颜色',
+          'x-decorator': 'FormItem',
+          'x-component': 'ColorPicker',
+          default: '#1179ff',
+        },
       },
     },
     textStyle: {

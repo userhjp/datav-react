@@ -45,7 +45,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props) => {
         {...props}
         value={colorText}
         onChange={(e) => {
-          setColorText(e);
+          setColorText(e.target.value);
           run();
         }}
         addonAfter={<div style={{ backgroundColor: value, width: 20, height: 16 }} onClick={() => setVisible(!visible)} />}

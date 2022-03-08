@@ -29,7 +29,7 @@ export interface IFormCollapseProps extends CollapseProps {
   defaultSwitch?: boolean; // 默认是否开启
   mapSwitchKey?: string; // 开关key值 默认 show
   maxItems?: string; // tab最大数
-  noPadding?: boolean; // 默认true 是否保留子级Collapse内容上下边距，如果子级第一个元素就是 Collapse设置为false好看些
+  noPadding?: boolean; // 是否保留子级Collapse内容上下边距，如果子级第一个元素就是 Collapse设置为false好看些
   isOpen?: boolean;
   listType?: 'bar' | 'line' | 'column';
 }
@@ -186,7 +186,7 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
       case 'add':
         const addVal = dataSource[index];
         (field as ArrayField).push(toJS(addVal));
-        setActiveKey(`tab-${dataSource.length}`);
+        setActiveKey(`tab-${dataSource.length - 1}`);
         break;
       case 'remove':
         (field as ArrayField).remove(Number(index));

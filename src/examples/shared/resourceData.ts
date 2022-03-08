@@ -68,22 +68,22 @@ export const resourceData: IResourceData[] = [
             cover: '/menuCover/图表/条形图/水平基础柱状图.png',
             type: 'YCategoryBar',
           },
-          {
-            name: '分组柱状图',
-            cover: '/menuCover/图表/条形图/分组柱状图.png',
-          },
-          {
-            name: '水平胶囊柱状图',
-            cover: '/menuCover/图表/条形图/水平胶囊柱状图.png',
-          },
-          {
-            name: '百分比占比条形图',
-            cover: '/menuCover/图表/条形图/百分比占比条形图.png',
-          },
-          {
-            name: '堆叠条形图',
-            cover: '/menuCover/图表/条形图/堆叠条形图.png',
-          },
+          // {
+          //   name: '分组柱状图',
+          //   cover: '/menuCover/图表/条形图/分组柱状图.png',
+          // },
+          // {
+          //   name: '水平胶囊柱状图',
+          //   cover: '/menuCover/图表/条形图/水平胶囊柱状图.png',
+          // },
+          // {
+          //   name: '百分比占比条形图',
+          //   cover: '/menuCover/图表/条形图/百分比占比条形图.png',
+          // },
+          // {
+          //   name: '堆叠条形图',
+          //   cover: '/menuCover/图表/条形图/堆叠条形图.png',
+          // },
         ],
       },
       {
@@ -130,6 +130,11 @@ export const resourceData: IResourceData[] = [
             cover: '/menuCover/图表/饼图/多维度饼图.png',
           },
           {
+            name: '分类玫瑰图',
+            cover: '/menuCover/图表/饼图/分类玫瑰图.png',
+            type: 'RosePie',
+          },
+          {
             name: '目标占比饼图',
             cover: '/menuCover/图表/饼图/目标占比饼图.png',
           },
@@ -144,10 +149,6 @@ export const resourceData: IResourceData[] = [
           {
             name: '标注对比饼图',
             cover: '/menuCover/图表/饼图/标注对比饼图.png',
-          },
-          {
-            name: '分类玫瑰图',
-            cover: '/menuCover/图表/饼图/分类玫瑰图.png',
           },
         ],
       },
