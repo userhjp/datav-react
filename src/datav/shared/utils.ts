@@ -90,18 +90,6 @@ export const replaceTextParams = (text: string, data: Record<string, string>) =>
   });
 };
 
-export function debounce(fn: () => void, wait: number) {
-  let timer: number;
-  return function (...arg) {
-    if (timer) {
-      window.clearTimeout(timer);
-    }
-    timer = window.setTimeout(() => {
-      fn.apply(this, arg);
-    }, wait);
-  };
-}
-
 export function generateUUID(len = 24, radix = 62) {
   const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
   const uuid = [];

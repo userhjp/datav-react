@@ -55,8 +55,11 @@ const BaseBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) =>
     options.legend = formJsonToLegendData(legend);
     options.tooltip = formDataToTooltipData(tooltip, 'cross');
     options.series = formDataToSeriesData(options);
-    myChart.current.setOption(options, true);
-    console.log(options);
+    try {
+      myChart.current.setOption(options, true);
+    } catch (error) {
+      console.log(error);
+    }
   }, [options]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;

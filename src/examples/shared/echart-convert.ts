@@ -1,6 +1,5 @@
 import { IWidgetData } from '@/datav/react/interface';
 import { Path } from '@formily/path';
-import { graphic } from 'echarts/core';
 import { colorsOpt } from '../schema/echarts/colorsSchema';
 
 export function convert2Ddata(data: IWidgetData) {
@@ -150,24 +149,23 @@ export function getChartColors(type: number) {
 }
 
 /** 转换为echart颜色类型 */
-export function convertEChartColors(
-  colors: Array<string> | string,
-  type: 'vertical' | 'horizontal' = 'vertical'
-): string | graphic.LinearGradient {
+export function convertEChartColors(colors: Array<string> | string, type: 'vertical' | 'horizontal' = 'vertical'): string | object {
   if (!colors) return '';
   if (typeof colors === 'string') return colors;
 
   if (colors && colors.length > 1) {
     const offset = 1 / (colors.length - 1);
-    return new graphic.LinearGradient( // 右 下 左 上
-      0,
-      type === 'vertical' ? 1 : 0,
-      type === 'horizontal' ? 1 : 0,
-      0,
-      colors.map((m, i) => {
+    return {
+      type: 'linear',
+      x: 0,
+      y: type === 'vertical' ? 1 : 0,
+      x2: type === 'horizontal' ? 1 : 0,
+      y2: 0,
+      colorStops: colors.map((m, i) => {
         return { offset: i === colors.length ? 1 : offset * i, color: m };
-      })
-    );
+      }),
+      global: false, // 缺省为 false
+    };
   } else {
     return colors[0] || '';
   }

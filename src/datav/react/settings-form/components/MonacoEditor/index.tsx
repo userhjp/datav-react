@@ -10,10 +10,11 @@ import {
   languageType,
   registerDatavDarkTheme,
 } from './editor-config';
-import { debounce, copyText } from '../../../../shared';
+import { copyText } from '../../../../shared';
 import { message, Modal } from 'antd';
 import { IconWidget } from '../../../components';
 import './index.less';
+import { useDebounceFn } from 'ahooks';
 
 type MonacoEditorProps = Partial<{
   options: monaco.editor.IStandaloneEditorConstructionOptions;
@@ -51,6 +52,10 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   const fullEditor = useRef<monaco.editor.IStandaloneCodeEditor>();
   const [isFullScreen, setIsFullScreen] = useState(false);
 
+  const { run } = useDebounceFn(() => changeHandler(), {
+    wait: 300,
+  });
+
   const copyData = () => {
     if (editor) {
       copyText(editor.current.getValue());
@@ -73,7 +78,6 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       }
     }
   };
-  const debounceChangeHandler = debounce(changeHandler, 300);
 
   const opts = useMemo(() => {
     return Object.assign({}, defaultOpts, props.options, {
@@ -101,7 +105,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       if (height > 0) {
         domRef.current.style.height = `${height}px`;
       }
-      ce.onDidChangeModelContent(debounceChangeHandler);
+      ce.onDidChangeModelContent(run);
       ce.onDidBlurEditorText(blurHandler);
 
       editor.current = ce;
@@ -139,7 +143,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       if (props.autoFormat) {
         formatDocument(ce, language);
       }
-      ce.onDidChangeModelContent(debounceChangeHandler);
+      ce.onDidChangeModelContent(run);
       ce.onDidBlurEditorText(blurHandler);
 
       fullEditor.current = ce;

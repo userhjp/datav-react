@@ -97,7 +97,9 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
           type: 'pie',
           startAngle: 80,
           radius: ['64%'],
-          hoverAnimation: false,
+          emphasis: {
+            show: false,
+          },
           center: ['50%', '50%'],
           itemStyle: {
             color: 'rgba(66, 66, 66, .1)',
@@ -111,7 +113,9 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
           type: 'pie',
           startAngle: 80,
           radius: ['86%'],
-          hoverAnimation: false,
+          emphasis: {
+            show: false,
+          },
           center: ['50%', '50%'],
           itemStyle: {
             color: 'rgba(66, 66, 66, .1)',

@@ -1,4 +1,3 @@
-import { debounce } from '../../../shared';
 import { observer } from '@formily/react';
 import { autorun } from '@formily/reactive';
 import React, { useCallback, useEffect, useState } from 'react';
@@ -6,6 +5,7 @@ import { ZoomMode } from '../../../shared';
 import { IWidgetSetting } from '../../interface';
 import { useOperation, useScreen } from '../../hooks';
 import { RenderWidget } from '../Drawing/components/RenderWidget';
+import { useDebounceFn } from 'ahooks';
 import './index.less';
 
 const resizeAuto = (width: number, height: number): React.CSSProperties => {
@@ -120,9 +120,12 @@ export const PreviewView: React.FC = observer(() => {
     });
   };
 
+  const { run } = useDebounceFn(() => changePageStyle(), {
+    wait: 100,
+  });
+
   useEffect(() => {
-    const handler = debounce(changePageStyle, 100);
-    window.addEventListener('resize', handler);
+    window.addEventListener('resize', run);
     const dispose = autorun(() => {
       if (screen) {
         changePageStyle();
@@ -130,7 +133,7 @@ export const PreviewView: React.FC = observer(() => {
     });
     return () => {
       dispose();
-      window.removeEventListener('resize', handler);
+      window.removeEventListener('resize', run);
     };
   }, []);
 
