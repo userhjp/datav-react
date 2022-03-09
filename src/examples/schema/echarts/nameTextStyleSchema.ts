@@ -1,5 +1,6 @@
 import { ISchema } from '@formily/react';
 import { fontWeights, titleLocations } from '../../shared';
+import { textSchema } from '../textSchema';
 
 /** 轴标题 */
 export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): ISchema => ({
@@ -69,51 +70,6 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
         },
       },
     },
-    textStyle: {
-      type: 'void',
-      title: '文本样式',
-      'x-decorator': 'FormItem',
-      'x-component': 'FormGrid',
-      'x-component-props': {
-        minColumns: 2,
-        rowGap: 0,
-      },
-      properties: {
-        fontSize: {
-          type: 'number',
-          'x-decorator': 'FormItem',
-          'x-decorator-props': {
-            feedbackText: '字号',
-          },
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 12,
-          },
-          default: 16,
-        },
-        fontWeight: {
-          type: 'string',
-          'x-decorator': 'FormItem',
-          'x-decorator-props': {
-            feedbackText: '字体粗细',
-          },
-          'x-component': 'Select',
-          enum: fontWeights,
-          default: 'normal',
-        },
-        color: {
-          type: 'number',
-          'x-decorator': 'FormItem',
-          'x-decorator-props': {
-            feedbackText: '字体颜色',
-            gridSpan: 2,
-          },
-          'x-component': 'ColorPicker',
-          default: '#e6e9ed',
-        },
-      },
-    },
+    textStyle: textSchema,
   },
 });

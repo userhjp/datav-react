@@ -1,8 +1,13 @@
-import { fontFamilys, fontStyles, fontWeights, justifyContents, lineStyles, writingModes } from '@/examples/shared';
+import { textSchema } from '@/examples/schema/textSchema';
+import { justifyContents, lineStyles, writingModes } from '@/examples/shared';
 import { ISchema } from '@formily/react';
 
 export const TitleSchema: ISchema = {
   type: 'object',
+  default: {
+    fontSize: 22,
+    color: '#fff',
+  },
   properties: {
     justifyContent: {
       type: 'string',
@@ -38,50 +43,7 @@ export const TitleSchema: ISchema = {
         title: '文本样式',
       },
       properties: {
-        fontFamily: {
-          type: 'string',
-          title: '字体',
-          'x-decorator': 'FormItem',
-          'x-component': 'Select',
-          enum: fontFamilys,
-          default: 'Microsoft Yahei',
-        },
-        fontSize: {
-          type: 'number',
-          title: '字号',
-          'x-decorator': 'FormItem',
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 12,
-          },
-          default: 24,
-        },
-        fontWeight: {
-          type: 'string',
-          title: '字体粗细',
-          'x-decorator': 'FormItem',
-          'x-component': 'Select',
-          enum: fontWeights,
-          default: 'normal',
-        },
-        color: {
-          type: 'string',
-          title: '字体颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          enum: fontWeights,
-          default: '#fff',
-        },
-        fontStyle: {
-          type: 'string',
-          title: '字体样式',
-          'x-decorator': 'FormItem',
-          'x-component': 'Select',
-          enum: fontStyles,
-          default: 'normal',
-        },
+        textStyle: textSchema,
       },
     },
     backgroundStyle: {

@@ -64,7 +64,7 @@ const NumberFlop: React.FC<IWidgetProps<any>> = ({ options = {}, data }) => {
       alignItems: 'center',
       color: textStyle?.color,
       fontWeight: textStyle?.fontWeight as any,
-      fontFamily: `${fontFamily}, Arial, sans-serif`,
+      fontFamily: `${textStyle?.fontFamily || fontFamily}, Arial, sans-serif`,
       fontSize: `${textStyle?.fontSize}px`,
       textOverflow: 'ellipsis',
       whiteSpace: 'nowrap',

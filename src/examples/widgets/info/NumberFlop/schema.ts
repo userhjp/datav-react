@@ -1,4 +1,5 @@
-import { fontFamilys, fontWeights, hAligns } from '@/examples/shared';
+import { textSchema } from '@/examples/schema/textSchema';
+import { fontFamilys, hAligns } from '@/examples/shared';
 import { ISchema } from '@formily/react';
 
 export const NumberFlopSchema: ISchema = {
@@ -64,35 +65,11 @@ export const NumberFlopSchema: ISchema = {
         },
         textStyle: {
           type: 'object',
+          default: {
+            color: '#79daff',
+          },
           properties: {
-            fontSize: {
-              type: 'number',
-              title: '字号',
-              'x-decorator': 'FormItem',
-              'x-component': 'NumberPicker',
-              'x-component-props': {
-                placeholder: '请输入',
-                unit: 'px',
-                min: 12,
-              },
-              default: 18,
-            },
-            fontWeight: {
-              type: 'string',
-              title: '字体粗细',
-              'x-decorator': 'FormItem',
-              'x-component': 'Select',
-              enum: fontWeights,
-              default: 'normal',
-            },
-            color: {
-              type: 'string',
-              title: '字体颜色',
-              'x-decorator': 'FormItem',
-              'x-component': 'ColorPicker',
-              enum: fontWeights,
-              default: '#79daff',
-            },
+            textStyle: textSchema,
           },
         },
       },
@@ -153,6 +130,11 @@ export const NumberFlopSchema: ISchema = {
           'x-component-props': {
             title: '前缀',
           },
+          default: {
+            fontSize: 32,
+            fontWeight: 'bolder',
+            color: '#006fff',
+          },
           properties: {
             content: {
               type: 'string',
@@ -164,33 +146,7 @@ export const NumberFlopSchema: ISchema = {
               },
               default: '￥',
             },
-            fontSize: {
-              type: 'number',
-              title: '字号',
-              'x-decorator': 'FormItem',
-              'x-component': 'NumberPicker',
-              'x-component-props': {
-                placeholder: '请输入',
-                unit: 'px',
-                min: 12,
-              },
-              default: 32,
-            },
-            fontWeight: {
-              type: 'string',
-              title: '字体粗细',
-              'x-decorator': 'FormItem',
-              'x-component': 'Select',
-              enum: fontWeights,
-              default: 'bolder',
-            },
-            color: {
-              type: 'string',
-              title: '字体颜色',
-              'x-decorator': 'FormItem',
-              'x-component': 'ColorPicker',
-              default: '#006fff',
-            },
+            textStyle: textSchema,
             marginRight: {
               type: 'number',
               title: '间距',
@@ -216,6 +172,11 @@ export const NumberFlopSchema: ISchema = {
           'x-component-props': {
             title: '后缀',
           },
+          default: {
+            fontSize: 30,
+            fontWeight: 'bolder',
+            color: '#006fff',
+          },
           properties: {
             content: {
               type: 'string',
@@ -227,33 +188,7 @@ export const NumberFlopSchema: ISchema = {
               },
               default: '',
             },
-            fontSize: {
-              type: 'number',
-              title: '字号',
-              'x-decorator': 'FormItem',
-              'x-component': 'NumberPicker',
-              'x-component-props': {
-                placeholder: '请输入',
-                unit: 'px',
-                min: 12,
-              },
-              default: 30,
-            },
-            fontWeight: {
-              type: 'string',
-              title: '字体粗细',
-              'x-decorator': 'FormItem',
-              'x-component': 'Select',
-              enum: fontWeights,
-              default: 'bolder',
-            },
-            color: {
-              type: 'string',
-              title: '字体颜色',
-              'x-decorator': 'FormItem',
-              'x-component': 'ColorPicker',
-              default: '#006fff',
-            },
+            textStyle: textSchema,
             marginLeft: {
               type: 'number',
               title: '间距',
@@ -290,34 +225,13 @@ export const NumberFlopSchema: ISchema = {
           'x-component-props': {
             title: '文本样式',
           },
+          default: {
+            fontSize: 36,
+            fontWeight: 'bolder',
+            color: '#006fff',
+          },
           properties: {
-            fontSize: {
-              type: 'number',
-              title: '字号',
-              'x-decorator': 'FormItem',
-              'x-component': 'NumberPicker',
-              'x-component-props': {
-                placeholder: '请输入',
-                unit: 'px',
-                min: 12,
-              },
-              default: 36,
-            },
-            fontWeight: {
-              type: 'string',
-              title: '字体粗细',
-              'x-decorator': 'FormItem',
-              'x-component': 'Select',
-              enum: fontWeights,
-              default: 'bolder',
-            },
-            color: {
-              type: 'string',
-              title: '字体颜色',
-              'x-decorator': 'FormItem',
-              'x-component': 'ColorPicker',
-              default: '#006fff',
-            },
+            textStyle: textSchema,
           },
         },
         separating: {

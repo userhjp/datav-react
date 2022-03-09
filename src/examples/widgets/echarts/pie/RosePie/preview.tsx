@@ -57,7 +57,7 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
         textStyle: {
           rich: {
             name: nameStyle,
-            val: title?.valueStyle.textStyle || {},
+            val: title?.valueStyle?.textStyle || {},
           },
         },
       },
@@ -73,8 +73,8 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
           },
           itemStyle: {
             normal: {
-              borderColor: bgColor,
-              borderWidth: 2,
+              // borderColor: bgColor,
+              // borderWidth: 2,
             },
           },
           labelLine: {

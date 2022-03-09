@@ -117,19 +117,7 @@ export const RosePieSchema: ISchema = {
         defaultSwitch: true,
       },
       properties: {
-        void: {
-          type: 'void',
-          title: '文本样式',
-          'x-decorator': 'FormItem',
-          'x-component': 'FormGrid',
-          'x-component-props': {
-            minColumns: 2,
-            rowGap: 0,
-          },
-          properties: {
-            textStyle: textSchema,
-          },
-        },
+        textStyle: textSchema,
       },
     },
     valueStyle: {

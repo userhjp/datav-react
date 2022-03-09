@@ -1,5 +1,6 @@
 import { echartsFunnelLablePositions, fontWeights } from '@/examples/shared';
 import { ISchema } from '@formily/react';
+import { textSchema } from '../textSchema';
 
 /** 漏斗图 Series 配置*/
 export const funnelSeriesStyleSchema: ISchema = {
@@ -24,6 +25,10 @@ export const funnelSeriesStyleSchema: ISchema = {
         switch: true,
         defaultSwitch: true,
       },
+      default: {
+        fontSize: 10,
+        color: '#000',
+      },
       properties: {
         position: {
           type: 'string',
@@ -33,52 +38,7 @@ export const funnelSeriesStyleSchema: ISchema = {
           enum: echartsFunnelLablePositions,
           default: 'inside',
         },
-        textStyle: {
-          type: 'void',
-          title: '文本样式',
-          'x-decorator': 'FormItem',
-          'x-component': 'FormGrid',
-          'x-component-props': {
-            minColumns: 2,
-            rowGap: 0,
-          },
-          properties: {
-            fontSize: {
-              type: 'number',
-              'x-decorator': 'FormItem',
-              'x-decorator-props': {
-                feedbackText: '字号',
-              },
-              'x-component': 'NumberPicker',
-              'x-component-props': {
-                placeholder: '请输入',
-                unit: 'px',
-                min: 8,
-              },
-              default: 10,
-            },
-            fontWeight: {
-              type: 'string',
-              'x-decorator': 'FormItem',
-              'x-decorator-props': {
-                feedbackText: '字体粗细',
-              },
-              'x-component': 'Select',
-              enum: fontWeights,
-              default: 'normal',
-            },
-            color: {
-              type: 'number',
-              'x-decorator': 'FormItem',
-              'x-decorator-props': {
-                feedbackText: '字体颜色',
-                gridSpan: 2,
-              },
-              'x-component': 'ColorPicker',
-              default: '#000',
-            },
-          },
-        },
+        textStyle: textSchema,
       },
     },
     voidMimMax: {

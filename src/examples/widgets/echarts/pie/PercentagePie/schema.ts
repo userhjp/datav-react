@@ -12,12 +12,6 @@ export const PercentagePieSchema: ISchema = {
       top: 0,
       bottom: 0,
     },
-    valueStyle: {
-      textStyle: {
-        fontSize: 30,
-        fontWeight: 'bolder',
-      },
-    },
   },
   properties: {
     grid: echartGridSchema,
@@ -115,6 +109,10 @@ export const PercentagePieSchema: ISchema = {
         switch: true,
         defaultSwitch: true,
       },
+      default: {
+        color: '#fff',
+        fontSize: 14,
+      },
       properties: {
         textStyle: textSchema,
       },
@@ -126,6 +124,10 @@ export const PercentagePieSchema: ISchema = {
         title: '百分比值',
         switch: true,
         defaultSwitch: true,
+      },
+      default: {
+        color: '#fff',
+        fontSize: 18,
       },
       properties: {
         textStyle: textSchema,

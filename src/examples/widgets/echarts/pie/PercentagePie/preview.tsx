@@ -91,14 +91,14 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
           text: dataset.text,
           x: 'center',
           top: '55%',
-          textStyle: textStyle.textStyle,
+          textStyle,
         },
         {
           show: valueStyle.show,
           text: `${dataset.value}%`,
           x: 'center',
           y: 'center',
-          textStyle: valueStyle.textStyle,
+          textStyle: valueStyle,
         },
       ],
       polar: {
