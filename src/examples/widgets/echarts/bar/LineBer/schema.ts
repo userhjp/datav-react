@@ -14,7 +14,7 @@ export const LineBerSchema: ISchema = {
     grid: echartGridSchema,
     xAxis: axisSchema('category', 'X轴'),
     yAxis: axisSchema('value', 'Y轴'),
-    tooltip: tooltipSchema,
+    tooltip: tooltipSchema({ axisPointer: true }),
     legend: legendSchema,
     animation: animationSchema,
     lineSeriesStyle: lineSeriesStyleSchema,

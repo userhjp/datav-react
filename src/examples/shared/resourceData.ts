@@ -134,14 +134,14 @@ export const resourceData: IResourceData[] = [
             cover: '/menuCover/图表/饼图/分类玫瑰图.png',
             type: 'RosePie',
           },
-          {
-            name: '目标占比饼图',
-            cover: '/menuCover/图表/饼图/目标占比饼图.png',
-          },
-          {
-            name: '指标占比饼图',
-            cover: '/menuCover/图表/饼图/指标占比饼图.png',
-          },
+          // {
+          //   name: '目标占比饼图',
+          //   cover: '/menuCover/图表/饼图/目标占比饼图.png',
+          // },
+          // {
+          //   name: '指标占比饼图',
+          //   cover: '/menuCover/图表/饼图/指标占比饼图.png',
+          // },
           {
             name: '环图',
             cover: '/menuCover/图表/饼图/环图.png',
@@ -158,6 +158,7 @@ export const resourceData: IResourceData[] = [
           {
             name: '基础雷达图',
             cover: '/menuCover/图表/雷达图/基础雷达图.png',
+            type: 'BaseRadar',
           },
         ],
       },

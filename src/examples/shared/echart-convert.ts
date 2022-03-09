@@ -64,15 +64,16 @@ export function formJsonToLegendData(legend: any = {}) {
 }
 
 /** Echarts tooltip 数据差异处理 */
-export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | 'shadow' | 'line') {
+export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | 'shadow' | 'line'): { [key: string]: any } {
+  tooltip.padding = [tooltip.horizontalPadding, tooltip.verticalPadding];
+  tooltip.borderWidth = 0;
   if (tooltip?.show && tooltip?.axisPointer) {
-    tooltip.padding = [tooltip.horizontalPadding, tooltip.verticalPadding];
     tooltip.trigger = tooltip.axisPointer?.show ? 'axis' : 'item';
-    tooltip.axisPointer.type = tooltip.axisPointer?.show ? axisPointerType : 'none';
-    tooltip.axisPointer.label = {
-      show: false,
-    };
     if (tooltip.axisPointer?.show) {
+      tooltip.axisPointer.type = tooltip.axisPointer?.show ? axisPointerType : 'none';
+      tooltip.axisPointer.label = {
+        show: false,
+      };
       const lineStyle = tooltip.axisPointer.lineStyle;
       if (lineStyle && lineStyle.type === 'dashed') {
         lineStyle.type = [lineStyle.dashedLength, lineStyle.dashedSpace];
@@ -81,7 +82,6 @@ export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | '
       }
       tooltip.axisPointer.crossStyle = tooltip.axisPointer.lineStyle;
     }
-    tooltip.borderWidth = 0;
   }
   return tooltip;
 }

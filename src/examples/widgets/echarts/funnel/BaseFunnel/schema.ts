@@ -8,7 +8,7 @@ export const BaseFunnelSchema: ISchema = {
   type: 'object',
   properties: {
     grid: echartGridSchema,
-    tooltip: tooltipSchema,
+    tooltip: tooltipSchema(),
     legend: legendSchema,
     series: funnelSeriesStyleSchema,
   },

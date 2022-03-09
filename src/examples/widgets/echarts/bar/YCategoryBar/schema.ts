@@ -13,7 +13,7 @@ export const YCategoryBarSchema: ISchema = {
     grid: echartGridSchema,
     xAxis: axisSchema('value', 'X轴'),
     yAxis: axisSchema('category', 'Y轴'),
-    tooltip: tooltipSchema,
+    tooltip: tooltipSchema({ axisPointer: true }),
     legend: legendSchema,
     animation: animationSchema,
     barSeriesStyle: barSeriesStyleSchema,

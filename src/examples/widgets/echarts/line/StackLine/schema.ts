@@ -14,7 +14,7 @@ export const StackLineSchema: ISchema = {
     grid: echartGridSchema,
     xAxis: axisSchema('category', 'X轴'),
     yAxis: axisSchema('value', 'Y轴'),
-    tooltip: tooltipSchema,
+    tooltip: tooltipSchema(),
     legend: legendSchema,
     animation: animationSchema,
     areaStyle: areaStyleSchema(),
