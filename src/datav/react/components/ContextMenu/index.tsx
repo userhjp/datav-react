@@ -22,6 +22,10 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
       <Menu style={{ minWidth: 100, padding: 0 }} onMouseDown={(e) => e.stopPropagation()}>
         <Menu.Item key="1" onClick={moveTop}>
           <IconWidget infer="ZhiDing" />
+          &nbsp; 锁定
+        </Menu.Item>
+        <Menu.Item key="1" onClick={moveTop}>
+          <IconWidget infer="ZhiDing" />
           &nbsp; 置顶
         </Menu.Item>
         <Menu.Item key="2" onClick={moveBottom}>
