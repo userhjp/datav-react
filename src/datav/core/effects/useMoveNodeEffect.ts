@@ -2,27 +2,32 @@ import { Engine } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent, ViewportScrollEvent } from '../events';
 import { IWidgetSetting } from '../../react/interface';
 import { CursorType } from '../index';
+import { action } from '@formily/reactive';
 
 /** 位置移动 */
 export const useMoveNodeEffect = (engine: Engine) => {
-  let status = null;
-  let startX = 0;
-  let startY = 0;
+  let status: { x: number; y: number; node: IWidgetSetting }[] = null;
+  // const startX = 0;
+  // const startY = 0;
   let node: IWidgetSetting;
   let currentDragMove: DragStartEvent = null;
 
   const moveComponent = (e: DragStartEvent) => {
-    const viewport = engine.viewport;
-    const startPoint = engine.cursor.dragStartPosition;
-    const startScroll = engine.cursor.dragStartScrollOffset;
-    const scrollX = viewport.scrollX - startScroll.scrollX;
-    const scrollY = viewport.scrollY - startScroll.scrollY;
-    const clientX = e.data.clientX - startPoint.clientX + scrollX;
-    const clientY = e.data.clientY - startPoint.clientY + scrollY;
-    const attrX = startX + Math.round(clientX / viewport.scale / viewport.grid) * viewport.grid;
-    const attrY = startY + Math.round(clientY / viewport.scale / viewport.grid) * viewport.grid;
-    node.attr.x = attrX - (attrX % viewport.grid);
-    node.attr.y = attrY - (attrY % viewport.grid);
+    action(() => {
+      status.forEach((f) => {
+        const viewport = engine.viewport;
+        const startPoint = engine.cursor.dragStartPosition;
+        const startScroll = engine.cursor.dragStartScrollOffset;
+        const scrollX = viewport.scrollX - startScroll.scrollX;
+        const scrollY = viewport.scrollY - startScroll.scrollY;
+        const clientX = e.data.clientX - startPoint.clientX + scrollX;
+        const clientY = e.data.clientY - startPoint.clientY + scrollY;
+        const attrX = f.x + Math.round(clientX / viewport.scale / viewport.grid) * viewport.grid;
+        const attrY = f.y + Math.round(clientY / viewport.scale / viewport.grid) * viewport.grid;
+        f.node.attr.x = attrX - (attrX % viewport.grid);
+        f.node.attr.y = attrY - (attrY % viewport.grid);
+      });
+    });
   };
 
   engine.subscribeTo(DragStartEvent, (e) => {
@@ -32,9 +37,23 @@ export const useMoveNodeEffect = (engine: Engine) => {
       const nodeId = el?.getAttribute(engine.props.nodeIdAttrName);
       node = engine.operation.findById(nodeId);
       if (node.attr.isHide || node.attr.isLock) return;
-      status = nodeId;
-      startX = node.attr.x;
-      startY = node.attr.y;
+      status = [];
+      if (engine.operation.selection.length > 1) {
+        engine.operation.selection.selected.forEach((f) => {
+          node = engine.operation.findById(f);
+          status.push({
+            x: node.attr.x,
+            y: node.attr.y,
+            node,
+          });
+        });
+      } else {
+        status.push({
+          x: node.attr.x,
+          y: node.attr.y,
+          node,
+        });
+      }
     }
   });
   engine.subscribeTo(DragMoveEvent, (e) => {
