@@ -172,6 +172,7 @@ export const resourceData: IResourceData[] = [
           {
             name: '气泡图',
             cover: '/menuCover/图表/散点图/气泡图.png',
+            type: 'HorizontalScatter',
           },
         ],
       },

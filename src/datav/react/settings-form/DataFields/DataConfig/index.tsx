@@ -2,7 +2,7 @@ import React, { useMemo, useRef, useState } from 'react';
 import { ApiRequestMethod, ApiType } from '../../../../shared';
 import { IDataSourceSetting, IFieldSetting } from '../../../interface';
 import { Checkbox, FormDrawer, FormItem, FormLayout, Select } from '@formily/antd';
-import { Field, Observer, VoidField } from '@formily/react';
+import { Field, VoidField } from '@formily/react';
 import { Button, Input, Tooltip } from 'antd';
 import { MonacoEditor } from '../../components';
 import { FieldGrid } from '../FieldGrid';
@@ -165,31 +165,29 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
                 <span className="update-txt">&nbsp;数据过滤器</span>
               </label>
             </div>
-            <Observer>
-              <div className="filter-edit" style={{ height: form.values.useFilter ? 180 : 0 }}>
-                <Field
-                  name="filterCode"
-                  reactions={(field) => {
-                    const autoUpdate = field.query('.useFilter');
-                    field.setComponentProps({
-                      disabled: !autoUpdate.get('value'),
-                    });
-                  }}
-                  component={[
-                    MonacoEditor,
-                    {
-                      language: 'javascript',
-                      readOnly: false,
-                      autoFormat: true,
-                      height: 120,
-                      fullScreenTitle: '数据过滤器',
-                      className: 'filter-editor',
-                      fnName: 'filter(res)',
-                    },
-                  ]}
-                />
-              </div>
-            </Observer>
+            <div className="filter-edit" style={{ height: form.values.useFilter ? 180 : 0 }}>
+              <Field
+                name="filterCode"
+                reactions={(field) => {
+                  const autoUpdate = field.query('.useFilter');
+                  field.setComponentProps({
+                    disabled: !autoUpdate.get('value'),
+                  });
+                }}
+                component={[
+                  MonacoEditor,
+                  {
+                    language: 'javascript',
+                    readOnly: false,
+                    autoFormat: true,
+                    height: 120,
+                    fullScreenTitle: '数据过滤器',
+                    className: 'filter-editor',
+                    fnName: 'filter(res)',
+                  },
+                ]}
+              />
+            </div>
             <FieldGrid typeName={value.dataType === 'object' ? '对象' : '列表'} fields={fields} />
           </FormLayout>
         );
