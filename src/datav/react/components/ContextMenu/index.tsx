@@ -42,20 +42,22 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
         <Menu.Divider style={{ backgroundColor: '#3a4659', margin: 0 }} />
         <Menu.Item key="5" onClick={() => lockCom(!com.attr.isLock)}>
           <Observer>
-            {() => {
-              return (
-                <>
-                  <IconWidget infer="ZhiDing" />
-                  &nbsp; {com.attr.isLock ? '解锁' : '锁定'}
-                </>
-              );
-            }}
+            {() => (
+              <>
+                <IconWidget infer="lock" />
+                &nbsp; {com.attr.isLock ? '解锁' : '锁定'}
+              </>
+            )}
           </Observer>
         </Menu.Item>
         <Menu.Item key="6" onClick={() => hideCom(!com.attr.isHide)}>
           <Observer>
-            <IconWidget infer="EyeClose" />
-            &nbsp; 隐藏
+            {() => (
+              <>
+                <IconWidget infer={com.attr.isHide ? 'Eye' : 'EyeClose'} />
+                &nbsp; {com.attr.isHide ? '显示' : '隐藏'}
+              </>
+            )}
           </Observer>
         </Menu.Item>
         <Menu.Divider style={{ backgroundColor: '#3a4659', margin: 0 }} />

@@ -91,7 +91,7 @@ export const LayerPanel: React.FC = observer(() => {
                                 {com.attr.isLock && !com.attr.isHide && (
                                   <IconWidget
                                     className="com-icon-hover"
-                                    infer="Title"
+                                    infer="lock"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       operation.lockCom(item.id, false);

@@ -39,6 +39,7 @@ export class Operation {
       moveTo: action,
       sortComp: action,
       lockCom: action,
+      singleCopy: action,
     });
   }
 
