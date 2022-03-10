@@ -24,7 +24,9 @@ export const useFreeSelectionEffect = (engine: Engine) => {
     components.forEach((node) => {
       const nodeRect = engine.viewport.getValidNodeOffsetRect(node);
       if (nodeRect && isCrossRectInRect(selectionRect, nodeRect)) {
-        selectedId.push(node.id);
+        if (!node.attr.isHide && !node.attr.isLock) {
+          selectedId.push(node.id);
+        }
       }
     });
     engine.operation.selection.batchSafeSelect(selectedId);
