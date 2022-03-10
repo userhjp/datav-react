@@ -89,10 +89,9 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ node 
       zIndex: selected ? 2 : 'auto',
     };
   }, [attr.w, attr.h, attr.x, attr.y, selected]);
-
   const handlerStyle = useMemo(() => {
-    return { cursor: 'move', transform: `rotate(${attr.deg || 0}deg)` };
-  }, [attr.deg]);
+    return { cursor: attr.isLock || attr.isHide ? 'default' : 'move', transform: `rotate(${attr.deg || 0}deg)` };
+  }, [attr.deg, attr.isLock, attr.isHide]);
 
   const comStyle = useMemo(() => {
     return { opacity: attr.opacity };

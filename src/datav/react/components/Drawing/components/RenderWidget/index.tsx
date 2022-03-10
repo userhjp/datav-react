@@ -13,11 +13,11 @@ const GlobalState = {
 
 export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
   ({ nodeInfo }) => {
-    if (!nodeInfo.info || !nodeInfo.info.type) return <div />;
     const Component = GlobalRegistry.getDesignerWidget(nodeInfo.info.type);
     const data = useReqData(nodeInfo.id, nodeInfo.data);
     const options = toJS(nodeInfo.options);
 
+    if (!nodeInfo.info || !nodeInfo.info.type || nodeInfo.attr.isHide) return <div />;
     if (!options || !Component) return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>

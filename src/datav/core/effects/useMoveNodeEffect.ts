@@ -31,6 +31,7 @@ export const useMoveNodeEffect = (engine: Engine) => {
     if (el?.closest(`*[${engine.props.nodeIdAttrName}]`)) {
       const nodeId = el?.getAttribute(engine.props.nodeIdAttrName);
       node = engine.operation.findById(nodeId);
+      if (node.attr.isHide || node.attr.isLock) return;
       status = nodeId;
       startX = node.attr.x;
       startY = node.attr.y;

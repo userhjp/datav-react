@@ -54,10 +54,10 @@ export const useCursorEffect = (engine: Engine) => {
     const id = nodeId || outlineNodeId || rotateNodeId || ResizeNodeId;
     if (operation.hover.node?.id === id) return;
     const node = operation.findById(id);
-    if (node) {
-      operation.hover.setHover(node);
-    } else {
+    if ((node.attr.isLock && !outlineNodeId) || node.attr.isHide) {
       operation.hover.clear();
+      return;
     }
+    operation.hover.setHover(node);
   });
 };

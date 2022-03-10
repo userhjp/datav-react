@@ -1,6 +1,6 @@
 import { IWidgetSetting, IPageType } from '../../react/interface';
 import { generateUUID } from '../../shared';
-import { observable, define, action, toJS } from '@formily/reactive';
+import { observable, define, action, toJS, batch } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent, HelpClickEvent } from '../events';
 import { IMoveType } from '../types';
@@ -38,6 +38,7 @@ export class Operation {
       cancelRename: action,
       moveTo: action,
       sortComp: action,
+      lockCom: action,
     });
   }
 
@@ -139,11 +140,40 @@ export class Operation {
     }
   }
 
+  /** 组件锁定 */
+  lockCom(id: string, isLock: boolean) {
+    if (this.selection.length > 1) {
+      this.selection.selected.forEach((id) => {
+        const com = this.findById(id);
+        com.attr.isLock = isLock;
+      });
+      this.selection.clear();
+    } else {
+      const comp = this.findById(id);
+      comp.attr.isLock = isLock;
+      this.selection.remove(id);
+    }
+  }
+
+  /** 隐藏显示组件 */
+  hideCom(id: string, isHide: boolean) {
+    if (this.selection.length > 1) {
+      this.selection.selected.forEach((id) => {
+        const com = this.findById(id);
+        com.attr.isHide = isHide;
+      });
+    } else {
+      const comp = this.findById(id);
+      comp.attr.isHide = isHide;
+    }
+  }
+
   /** 重命名组件 */
   rename(uuid: string) {
     this.editableId = uuid;
     this.engine.toolbar.layer.show = true;
-    this.selection.safeSelect(uuid);
+    const comp = this.findById(uuid);
+    if (!comp.attr.isHide) this.selection.safeSelect(uuid);
   }
 
   /** 取消编辑 */

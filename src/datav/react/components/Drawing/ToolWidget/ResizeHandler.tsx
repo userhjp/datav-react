@@ -12,7 +12,6 @@ export const ResizeHandler: React.FC<ISelectionBoxProps> = observer(({ node }) =
   const screen = useScreen();
   const domRef = useRef<HTMLDivElement>();
   const designer = useDesigner();
-
   const cursor = useMemo(() => getCursors(node.attr.deg), [node.attr.deg]);
 
   const points = useMemo<{

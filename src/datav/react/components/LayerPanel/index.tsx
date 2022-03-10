@@ -1,4 +1,4 @@
-import { observer } from '@formily/react';
+import { Observer, observer } from '@formily/react';
 import React, { useEffect, useRef } from 'react';
 import { MoveSortType, PanelType } from '../../../shared';
 import { ContextMenu } from '../ContextMenu';
@@ -68,7 +68,42 @@ export const LayerPanel: React.FC = observer(() => {
                       }}
                     />
                   ) : (
-                    <span className="com-name">{item.info?.name}</span>
+                    <div style={{ display: 'flex', flex: 1 }}>
+                      <span style={{ flex: 1 }} className="com-name">
+                        {item.info?.name}
+                      </span>
+                      <div>
+                        <Observer>
+                          {() => {
+                            const com = operation.findById(item.id);
+                            return (
+                              <>
+                                {com.attr.isHide && (
+                                  <IconWidget
+                                    infer="Eye"
+                                    className="com-icon-hover"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      operation.hideCom(item.id, false);
+                                    }}
+                                  />
+                                )}
+                                {com.attr.isLock && !com.attr.isHide && (
+                                  <IconWidget
+                                    className="com-icon-hover"
+                                    infer="Title"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      operation.lockCom(item.id, false);
+                                    }}
+                                  />
+                                )}
+                              </>
+                            );
+                          }}
+                        </Observer>
+                      </div>
+                    </div>
                   )}
                 </div>
               </ContextMenu>

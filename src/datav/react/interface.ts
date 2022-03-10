@@ -48,6 +48,8 @@ export interface IWidgetAttrSetting {
   h: number;
   deg?: number;
   opacity?: number;
+  isLock?: boolean;
+  isHide?: boolean;
 }
 
 /** 组件描述 */
