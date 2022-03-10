@@ -21,7 +21,7 @@ export const funnelSeriesStyleSchema: ISchema = {
       type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
-        title: '柱条标签',
+        title: '文本标签',
         switch: true,
         defaultSwitch: true,
       },

@@ -9,6 +9,7 @@ import { formDataToFunnelSeriesData } from '@/examples/shared';
 
 use([CanvasRenderer, LegendComponent, FunnelChart, TooltipComponent, GridComponent]);
 
+/** 漏斗图 */
 const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<ECharts>();
@@ -41,6 +42,7 @@ const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
 
   useLayoutEffect(() => {
     options.series = formDataToFunnelSeriesData(options, dataset);
+    debugger;
     myChart.current.setOption(options, true);
   }, [options]);
 

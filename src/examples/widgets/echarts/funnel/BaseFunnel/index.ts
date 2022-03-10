@@ -6,7 +6,7 @@ export const BaseFunnel = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(BaseFunnel, {
   schema: BaseFunnelSchema,
-  w: 340,
+  w: 410,
   h: 280,
   data: {
     value: [
