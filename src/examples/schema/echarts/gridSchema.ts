@@ -6,7 +6,7 @@ export const echartGridSchema: ISchema = {
   type: 'object',
   'x-component': 'MyFormCollapse',
   'x-component-props': {
-    title: '图表',
+    title: '图表网格',
     noPadding: true,
   },
   properties: {

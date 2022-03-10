@@ -47,7 +47,7 @@ export const axisTickSchema: ISchema = {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
-            feedbackText: '粗细',
+            feedbackText: '线宽',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {

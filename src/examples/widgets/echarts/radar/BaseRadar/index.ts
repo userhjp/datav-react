@@ -5,39 +5,47 @@ import { BaseRadarSchema } from './schema';
 export const BaseRadar = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(BaseRadar, {
-  w: 550,
-  h: 350,
+  w: 420,
+  h: 260,
   schema: BaseRadarSchema,
   data: {
-    value: [
-      {
-        name: 'A类',
-        value: '3720',
-      },
-      {
-        name: 'B类',
-        value: '2920',
-      },
-      {
-        name: 'C类',
-        value: '2200',
-      },
-      {
-        name: 'D类',
-        value: '1420',
-      },
-      {
-        name: 'E类',
-        value: '3200',
-      },
-      {
-        name: 'F类',
-        value: '2420',
-      },
-    ],
+    value: {
+      indicator: [
+        {
+          name: '特殊人群',
+          max: 100,
+        },
+        {
+          name: '信访',
+          max: 100,
+        },
+        {
+          name: '12345',
+          max: 100,
+        },
+        {
+          name: '事件',
+          max: 100,
+        },
+        {
+          name: '矛盾调解',
+          max: 100,
+        },
+        {
+          name: '人民调解',
+          max: 100,
+        },
+      ],
+      data: [
+        {
+          name: '预算分配',
+          value: [20, 50, 60, 60, 90, 80],
+        },
+      ],
+    },
     fields: {
-      name: '分类名称',
-      value: '值',
+      indicator: '维度',
+      data: '数据组',
     },
   },
 });

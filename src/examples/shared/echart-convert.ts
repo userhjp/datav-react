@@ -90,6 +90,9 @@ export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | '
 export function formDataToSeriesData(options: { [key: string]: any }): any[] {
   const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], areaStyle = {} } = options;
   options.color = getChartColors(options.grid.colors);
+  // 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
+  // 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
+  // options.colorBy = 'series';
   options.series = series.map((f) => {
     if (!f) return;
     f.itemStyle = f.itemStyle || {};

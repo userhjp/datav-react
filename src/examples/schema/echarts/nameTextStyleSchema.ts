@@ -54,7 +54,7 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
           },
           default: 0,
         },
-        nameGap: {
+        axisNameGap: {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {

@@ -158,6 +158,7 @@ export const symbolTyles = [
   { value: 'diamond', label: '菱形' },
   { value: 'pin', label: '针形' },
   { value: 'arrow', label: '箭头' },
+  { value: 'none', label: '无' },
 ];
 
 export const timeFormats = [
