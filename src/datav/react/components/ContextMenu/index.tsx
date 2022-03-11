@@ -10,10 +10,10 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
   const operation = useOperation();
   const com = operation.findById(currentId);
 
-  const moveUp = () => operation.sortComp(MoveSortType.up);
-  const moveDown = () => operation.sortComp(MoveSortType.down);
-  const moveTop = () => operation.sortComp(MoveSortType.top);
-  const moveBottom = () => operation.sortComp(MoveSortType.bottom);
+  const moveUp = () => operation.sortComp(MoveSortType.up, currentId);
+  const moveDown = () => operation.sortComp(MoveSortType.down, currentId);
+  const moveTop = () => operation.sortComp(MoveSortType.top, currentId);
+  const moveBottom = () => operation.sortComp(MoveSortType.bottom, currentId);
   const copyComp = () => operation.copyCompSchema(currentId);
   const removeComp = () => operation.removeCompSchema(currentId);
   const rename = () => operation.rename(currentId);
@@ -83,7 +83,7 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
   );
 
   return (
-    <Dropdown overlay={menu} trigger={['contextMenu']} overlayClassName="context-menu-weidget">
+    <Dropdown destroyPopupOnHide overlay={menu} trigger={['contextMenu']} overlayClassName="context-menu-weidget">
       {children}
     </Dropdown>
   );

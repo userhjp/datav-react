@@ -5,6 +5,7 @@ import { MoveSortType, ICustomEvent, isFn } from '../../shared';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent, HelpClickEvent } from '../events';
 import { IMoveType } from '../types';
 import { Engine, Hover, Selection } from './index';
+import { arrayMoveMutable } from 'array-move';
 export interface IOperation {
   selection: Selection;
   hover: Hover;
@@ -115,29 +116,24 @@ export class Operation {
   sortSingleNode(id: string, moveType: MoveSortType) {
     const i = this.components.findIndex((f) => f.id === id);
     if (moveType === MoveSortType.down) {
-      if (i + 1 < this.components.length) {
-        this.components.splice(i + 1, 0, ...this.components.splice(i, 1));
-      }
+      arrayMoveMutable(this.components, i, i + 1);
     } else if (moveType === MoveSortType.up) {
-      if (i > 0) {
-        this.components.splice(i - 1, 0, ...this.components.splice(i, 1));
-      }
+      arrayMoveMutable(this.components, i, i - 1);
     } else if (moveType === MoveSortType.bottom) {
-      if (i + 1 < this.components.length) {
-        this.components.push(...this.components.splice(i, 1));
-      }
+      arrayMoveMutable(this.components, i, this.components.length - 1);
     } else if (moveType === MoveSortType.top) {
-      if (i > 0) {
-        this.components.unshift(...this.components.splice(i, 1));
-      }
+      arrayMoveMutable(this.components, i, 0);
     }
   }
 
-  sortComp(moveType: MoveSortType) {
+  sortComp(moveType: MoveSortType, id: string) {
+    if (!id) return;
     if (this.selection.length) {
       this.selection.selected.forEach((f) => {
         this.sortSingleNode(f, moveType);
       });
+    } else {
+      this.sortSingleNode(id, moveType);
     }
   }
 
