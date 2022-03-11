@@ -32,10 +32,9 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) 
     const { options: opt } = options;
     let echartOpt: any = {};
     try {
-      const context: any = { echarts };
-      const fun = `const fun = (resData) => {  ${opt}   }; return fun(resData);`;
-      const func = new Function('resData', fun).call(context);
-      echartOpt = func(data);
+      const fun = `const fun = (resData, myChart, echarts) => {  ${opt}   }; return fun(resData, myChart, echarts);`;
+      const func = new Function('resData', 'myChart', 'echarts', fun);
+      echartOpt = func(data, myChart.current, echarts);
     } catch (error) {
       message.error('函数执行错误');
       console.log(error);

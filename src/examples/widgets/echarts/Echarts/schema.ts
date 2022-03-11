@@ -14,7 +14,7 @@ export const EChartsSchema: ISchema = {
         height: 400,
         fullScreenTitle: 'Echarts配置',
         className: 'filter-editor',
-        fnName: 'getOptions(resData)',
+        fnName: 'getOptions(resData, myChart, echarts)',
       },
       default: `
 const hours = [
