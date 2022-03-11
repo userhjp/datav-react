@@ -20,6 +20,7 @@ import {
   MoveCompLeft,
   MoveCompRight,
   MoveCompUp,
+  MoveScreen,
   SettingsSwitch,
 } from './shortcuts';
 
@@ -55,4 +56,5 @@ export const DEFAULT_SHORTCUTS = [
   MoveCompUp,
   SettingsSwitch,
   DeleteComp,
+  MoveScreen,
 ];

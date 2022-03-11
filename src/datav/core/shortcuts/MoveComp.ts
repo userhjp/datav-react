@@ -1,5 +1,4 @@
 import { KeyCode, Shortcut } from '../models';
-import { IMoveType } from '../types';
 
 export const MoveCompUp = new Shortcut({
   codes: [KeyCode.ArrowUp],
@@ -38,5 +37,12 @@ export const MoveCompLeft = new Shortcut({
     if (engine) {
       engine.operation.moveTo('ArrowLeft');
     }
+  },
+});
+
+export const MoveScreen = new Shortcut({
+  codes: [KeyCode.Space],
+  handler: (context) => {
+    // ...
   },
 });
