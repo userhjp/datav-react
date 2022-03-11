@@ -10,13 +10,13 @@ export const areaStyleSchema = (defaultSwitch = true): ISchema => ({
     defaultSwitch,
   },
   properties: {
-    color: {
-      type: 'string',
-      title: '填充颜色',
-      'x-decorator': 'FormItem',
-      'x-component': 'ColorPicker',
-      default: 'rgba(5, 213, 255, .8)',
-    },
+    // color: {
+    //   type: 'string',
+    //   title: '填充颜色',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'ColorPicker',
+    //   default: 'rgba(5, 213, 255, .8)',
+    // },
     opacity: {
       type: 'number',
       title: '透明度',

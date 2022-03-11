@@ -1,10 +1,8 @@
 import { ISchema } from '@formily/react';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
 import { textSchema } from '@/examples/schema/textSchema';
-import { seriesColorSchema } from '@/examples/schema/echarts/series/seriesColorSchema';
-import { echartTitleSchema } from '@/examples/schema/echarts/echartTitleSchema';
-import { fontWeights } from '@/examples/shared';
 import { tooltipSchema } from '@/examples/schema/echarts/tooltipSchema';
+import { singleAxisSchema } from '@/examples/schema/echarts/singleAxisSchema';
 
 export const HorizontalScatterSchema: ISchema = {
   type: 'object',
@@ -96,6 +94,7 @@ export const HorizontalScatterSchema: ISchema = {
         },
       },
     },
+    singleAxis: singleAxisSchema,
     // radarSeries: radarSeriesSchema,
   },
 };

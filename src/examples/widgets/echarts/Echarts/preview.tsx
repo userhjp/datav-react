@@ -5,7 +5,7 @@ import { useDebounceEffect, useSize } from 'ahooks';
 import { message } from 'antd';
 import { colorsOpt } from '@/examples/schema/echarts/colorsSchema';
 
-/** Echarts 图表通用组件，接收所有配置文件，组件只负责渲染 */
+/** Echarts 图表通用组件，接收options配置文件，组件只负责渲染 */
 const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) => {
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<echarts.ECharts>();
@@ -32,12 +32,13 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) 
     const { options: opt } = options;
     let echartOpt: any = {};
     try {
-      if (!data || JSON.stringify(data) === '{}') return;
-      const fun = `if (!data) { return data; }  return fun(data);  function fun(data){  ${opt}   }`;
-      const func = new Function('data', fun);
+      const context: any = { echarts };
+      const fun = `const fun = (resData) => {  ${opt}   }; return fun(resData);`;
+      const func = new Function('resData', fun).call(context);
       echartOpt = func(data);
     } catch (error) {
       message.error('函数执行错误');
+      console.log(error);
     }
     try {
       if (echartOpt && !echartOpt.color) {
