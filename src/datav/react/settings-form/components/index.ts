@@ -14,3 +14,4 @@ export * from './MyFormCollapse';
 export * from './BorderSelect';
 export * from './Select';
 export * from './BlurInput';
+export * from './ImageSelect';

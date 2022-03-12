@@ -16,6 +16,7 @@ import {
   ArrayTabs,
   MyFormCollapse,
   BorderSelect,
+  ImageSelect,
 } from './components';
 
 export const SchemaField = createSchemaField({
@@ -44,5 +45,6 @@ export const SchemaField = createSchemaField({
     Radio,
     ArrayItems,
     Space,
+    ImageSelect,
   },
 });

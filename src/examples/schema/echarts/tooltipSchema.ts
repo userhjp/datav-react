@@ -58,7 +58,7 @@ export const tooltipSchema = ({ axisPointer } = { axisPointer: false }): ISchema
           default: 5,
         },
         backgroundColor: {
-          type: 'number',
+          type: 'string',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
             feedbackText: '背景色',

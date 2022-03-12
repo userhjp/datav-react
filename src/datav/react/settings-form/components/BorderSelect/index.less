@@ -1,13 +1,24 @@
 @import '../../../theme.less';
 
 .border-select-dropdown {
+  padding: 0;
   color: @m-text-color;
-  background-color: #1f1f1f;
+  background-color: @input-bg-color;
+  border: 1px solid #272b33;
+
+  .ant-select-item:not(.ant-select-selector) {
+    font-size: 13px;
+  }
+
   .ant-select-item-option-active {
     background-color: rgba(255, 255, 255, 0.08);
   }
   .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
     background-color: #111b26;
+  }
+
+  .rc-virtual-list-holder-inner {
+    flex-wrap: wrap;
   }
 }
 
@@ -27,9 +38,12 @@
 }
 
 .border-option-item {
-  display: flex;
-  align-items: center;
   color: @m-text-color;
+  text-align: center;
+
+  & > div {
+    flex: 1;
+  }
 
   img {
     width: 100%;

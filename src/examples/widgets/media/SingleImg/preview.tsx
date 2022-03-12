@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
-import './styles.less';
 
 const SingleImg: React.FC<IWidgetProps> = ({ options }) => {
   const linkUrl = options?.link?.href;
@@ -34,10 +33,12 @@ const SingleImg: React.FC<IWidgetProps> = ({ options }) => {
       imageRendering: '-webkit-optimize-contrast',
       borderRadius: options.borderRadius || 0,
       cursor: linkUrl ? 'pointer' : 'default',
+      width: '100%',
+      height: '100%',
     };
   }, [options]);
 
-  return <div style={style} className="widget-single-img" onClick={linkUrl ? goPath : null} />;
+  return <div style={style} onClick={linkUrl ? goPath : null} />;
 };
 
 export default SingleImg;

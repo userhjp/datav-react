@@ -1,5 +1,5 @@
 import { ISchema } from '@formily/react';
-import { presetImages } from './preview';
+import { presetImages } from './data';
 
 export const BorderBoxSchema: ISchema = {
   type: 'object',

@@ -268,22 +268,32 @@ export const resourceData: IResourceData[] = [
         cover: '/menuCover/媒体/视频播放器.png',
         type: 'VideoPlayer',
       },
+      {
+        name: '边框',
+        cover: '/menuCover/媒体/边框.png',
+        type: 'BorderBox',
+      },
+      {
+        name: '装饰',
+        cover: './menuCover/媒体/装饰.png',
+        type: 'Decorate',
+      },
+      {
+        name: '单张图片',
+        cover: '/menuCover/媒体/单张图片.png',
+        type: 'SingleImg',
+      },
+      {
+        name: '自定义背景块',
+        cover: '/menuCover/媒体/自定义背景块.png',
+        type: 'BgBox',
+      },
     ],
   },
   {
     name: '其他',
     icon: 'other',
     children: [
-      {
-        name: '边框',
-        cover: '/menuCover/其他/边框.png',
-        type: 'BorderBox',
-      },
-      {
-        name: '单张图片',
-        cover: '/menuCover/其他/单张图片.png',
-        type: 'SingleImg',
-      },
       {
         name: '弦图',
         cover: '/menuCover/其他/弦图.png',

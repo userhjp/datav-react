@@ -1,7 +1,3 @@
-import React, { useMemo } from 'react';
-import { IWidgetProps } from '@/datav/react/interface';
-import './styles.less';
-
 export const presetImages = [
   {
     value: 'box1',
@@ -202,22 +198,3 @@ export const presetImages = [
     },
   },
 ];
-
-const BorderBox: React.FC<IWidgetProps> = ({ options }) => {
-  const style: React.CSSProperties = useMemo(() => {
-    const img = presetImages.find((m) => m.value === options.borderImg);
-    if (!img) return {};
-
-    return {
-      background: 'none',
-      borderRadius: 0,
-      borderStyle: 'solid',
-      borderWidth: 1,
-      borderImage: `url(${img.src}) ${img.border.slice} / ${img.border.width} / ${img.border.outset} ${img.border.repeat}`,
-    };
-  }, [options]);
-
-  return <div style={style} className="widget-border-box" />;
-};
-
-export default BorderBox;
