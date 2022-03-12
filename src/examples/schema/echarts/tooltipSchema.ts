@@ -18,12 +18,7 @@ export const tooltipSchema = ({ axisPointer } = { axisPointer: false }): ISchema
     },
   },
   properties: {
-    textStyle: {
-      type: 'object',
-      properties: {
-        fontSize: textSchema,
-      },
-    },
+    textStyle: textSchema('object'),
     bgVoid: {
       type: 'void',
       title: '弹框背景',

@@ -58,7 +58,7 @@ export const TimerSchema: ISchema = {
         title: '文本样式',
       },
       properties: {
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
     format: {

@@ -43,6 +43,6 @@ export const labelSchema: ISchema = {
       },
       default: 0,
     },
-    textStyle: textSchema,
+    voidTextStyle: textSchema(),
   },
 };

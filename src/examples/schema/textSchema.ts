@@ -1,8 +1,8 @@
 import { ISchema } from '@formily/react';
 import { fontFamilys, fontWeights } from '../shared';
 
-export const textSchema: ISchema = {
-  type: 'void',
+export const textSchema = (type: 'object' | 'void' = 'void'): ISchema => ({
+  type,
   properties: {
     void: {
       type: 'void',
@@ -60,4 +60,4 @@ export const textSchema: ISchema = {
       },
     },
   },
-};
+});

@@ -1,5 +1,5 @@
 import { ISchema } from '@formily/react';
-import { echartsLablePositions, fontWeights } from '../../shared';
+import { echartsLablePositions } from '../../shared';
 import { textSchema } from '../textSchema';
 
 /** echart图表标题配置 */
@@ -43,6 +43,6 @@ export const echartTitleSchema: ISchema = {
       },
       default: 0,
     },
-    textStyle: textSchema,
+    voidTextStyle: textSchema(),
   },
 };

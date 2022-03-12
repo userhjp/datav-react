@@ -1,5 +1,5 @@
 import { ISchema } from '@formily/react';
-import { echartsLablePositions, fontWeights } from '../../shared';
+import { echartsLablePositions } from '../../shared';
 import { textSchema } from '../textSchema';
 
 /** 象形图系列公共配置 */
@@ -141,7 +141,7 @@ export const barSeriesSymbolSchema: ISchema = {
           },
           default: 0,
         },
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
     backgroundStyle: {

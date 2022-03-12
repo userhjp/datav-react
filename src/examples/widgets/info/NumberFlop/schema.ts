@@ -69,7 +69,7 @@ export const NumberFlopSchema: ISchema = {
             color: '#79daff',
           },
           properties: {
-            textStyle: textSchema,
+            voidTextStyle: textSchema(),
           },
         },
       },
@@ -146,7 +146,7 @@ export const NumberFlopSchema: ISchema = {
               },
               default: '￥',
             },
-            textStyle: textSchema,
+            voidTextStyle: textSchema(),
             marginRight: {
               type: 'number',
               title: '间距',
@@ -188,7 +188,7 @@ export const NumberFlopSchema: ISchema = {
               },
               default: '',
             },
-            textStyle: textSchema,
+            voidTextStyle: textSchema(),
             marginLeft: {
               type: 'number',
               title: '间距',
@@ -231,7 +231,7 @@ export const NumberFlopSchema: ISchema = {
             color: '#006fff',
           },
           properties: {
-            textStyle: textSchema,
+            voidTextStyle: textSchema(),
           },
         },
         separating: {

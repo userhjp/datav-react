@@ -70,6 +70,6 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
         },
       },
     },
-    textStyle: textSchema,
+    voidTextStyle: textSchema(),
   },
 });

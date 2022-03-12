@@ -64,7 +64,7 @@ export const HorizontalScatterSchema: ISchema = {
               },
               default: 10,
             },
-            textStyle: textSchema,
+            voidTextStyle: textSchema(),
           },
           default: {
             textStyle: {
@@ -82,7 +82,7 @@ export const HorizontalScatterSchema: ISchema = {
             defaultSwitch: true,
           },
           properties: {
-            textStyle: textSchema,
+            voidTextStyle: textSchema(),
           },
           default: {
             textStyle: {

@@ -43,7 +43,7 @@ export const TitleSchema: ISchema = {
         title: '文本样式',
       },
       properties: {
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
     backgroundStyle: {

@@ -90,7 +90,7 @@ export const radarSchema: ISchema = {
         defaultSwitch: true,
       },
       properties: {
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
     axisLine: {

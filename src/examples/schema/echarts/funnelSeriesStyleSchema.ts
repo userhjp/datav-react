@@ -38,7 +38,7 @@ export const funnelSeriesStyleSchema: ISchema = {
           enum: echartsFunnelLablePositions,
           default: 'inside',
         },
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
     voidMimMax: {

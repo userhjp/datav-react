@@ -81,7 +81,7 @@ export const axisLabelSchema: ISchema = {
           enum: hAligns,
           default: 'center',
         },
-        fontStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
   },

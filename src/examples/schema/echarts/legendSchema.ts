@@ -28,7 +28,7 @@ export const legendSchema: ISchema = {
       enum: orients,
       default: 'horizontal',
     },
-    textStyle: textSchema,
+    textStyle: textSchema('object'),
     iconVoid: {
       type: 'void',
       'x-component': 'MyFormCollapse',

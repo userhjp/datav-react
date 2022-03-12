@@ -64,7 +64,7 @@ export const RosePieSchema: ISchema = {
               },
               default: 10,
             },
-            textStyle: textSchema,
+            voidTextStyle: textSchema(),
           },
           default: {
             textStyle: {
@@ -82,7 +82,7 @@ export const RosePieSchema: ISchema = {
             defaultSwitch: true,
           },
           properties: {
-            textStyle: textSchema,
+            voidTextStyle: textSchema(),
           },
           default: {
             textStyle: {
@@ -117,7 +117,7 @@ export const RosePieSchema: ISchema = {
         defaultSwitch: true,
       },
       properties: {
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
     valueStyle: {
@@ -129,7 +129,7 @@ export const RosePieSchema: ISchema = {
         defaultSwitch: true,
       },
       properties: {
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
   },

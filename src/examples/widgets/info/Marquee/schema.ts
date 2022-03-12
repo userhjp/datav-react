@@ -16,7 +16,7 @@ export const MarqueeSchema: ISchema = {
         title: '文本样式',
       },
       properties: {
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
         fontStyle: {
           type: 'string',
           title: '字体样式',

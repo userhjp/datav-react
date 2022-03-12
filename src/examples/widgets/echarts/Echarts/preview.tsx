@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useMemo, useRef } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import * as echarts from 'echarts';
 import { useDebounceEffect, useSize } from 'ahooks';

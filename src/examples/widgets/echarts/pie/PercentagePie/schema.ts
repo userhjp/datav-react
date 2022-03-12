@@ -114,7 +114,7 @@ export const PercentagePieSchema: ISchema = {
         fontSize: 14,
       },
       properties: {
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
     valueStyle: {
@@ -130,7 +130,7 @@ export const PercentagePieSchema: ISchema = {
         fontSize: 18,
       },
       properties: {
-        textStyle: textSchema,
+        voidTextStyle: textSchema(),
       },
     },
   },
