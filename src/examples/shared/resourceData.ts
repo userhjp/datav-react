@@ -274,7 +274,7 @@ export const resourceData: IResourceData[] = [
         type: 'BorderBox',
       },
       {
-        name: '装饰',
+        name: '装饰条',
         cover: './menuCover/媒体/装饰.png',
         type: 'Decorate',
       },

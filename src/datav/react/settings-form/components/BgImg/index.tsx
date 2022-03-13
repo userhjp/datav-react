@@ -1,6 +1,6 @@
 import rcUpload from '../../rc-upload';
 import { Input } from '@formily/antd';
-import { Upload, message, Modal } from 'antd';
+import { Upload, message, Modal, Divider } from 'antd';
 import { UploadFile, UploadChangeParam } from 'antd/lib/upload/interface';
 import React, { useContext, useEffect, useState } from 'react';
 import { IconWidget } from '../../../components';
@@ -59,16 +59,7 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
 
   /** 删除图片 */
   const deleteImage = () => {
-    Modal.confirm({
-      title: '删除',
-      icon: <IconWidget infer="Delete" />,
-      content: '确认删除图片吗？',
-      okText: '确认',
-      cancelText: '取消',
-      onOk: () => {
-        onChange('');
-      },
-    });
+    onChange('');
   };
 
   return (
@@ -87,16 +78,21 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
           customRequest={rcUpload}
         >
           {value ? (
-            <div
-              className="image-show"
-              onClick={(e) => {
-                deleteImage();
-                e.stopPropagation();
-              }}
-            >
+            <div className="image-show">
               <img src={value} className="image-value" />
               <div className="upload-cover">
-                <IconWidget infer="Delete" />
+                <div className="upload-del-btn">
+                  <span>更改</span>
+                  <Divider type="vertical" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }} />
+                  <span
+                    onClick={(e) => {
+                      deleteImage();
+                      e.stopPropagation();
+                    }}
+                  >
+                    删除
+                  </span>
+                </div>
               </div>
             </div>
           ) : (
@@ -105,8 +101,8 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
                 <IconWidget
                   infer="Inbox"
                   style={{
-                    color: 'rgb(86 84 84)',
-                    fontSize: 40,
+                    fontSize: 28,
+                    color: '#999',
                   }}
                 />
               </p>

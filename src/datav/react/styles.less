@@ -283,6 +283,23 @@
     }
   }
 
+  .ant-radio-button-wrapper:not(:first-child)::before {
+    z-index: 9;
+    background-color: #2196f3;
+  }
+
+  .ant-tabs-content .ant-radio-group-solid {
+    display: flex;
+    margin-top: 4px;
+    .ant-radio-button-wrapper {
+      flex: 1;
+      height: 24px;
+      font-size: @m-font-size;
+      line-height: 22px;
+      text-align: center;;
+    }
+  }
+
   .ant-drawer-header {
     color: @m-text-color-grey;
   }

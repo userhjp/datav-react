@@ -32,6 +32,10 @@ export const lineSeriesSchema: ISchema = {
           title: '渐变类型',
           'x-decorator': 'FormItem',
           'x-component': 'Radio.Group',
+          'x-component-props': {
+            optionType: 'button',
+            buttonStyle: 'solid',
+          },
           enum: fillTypes,
           default: 'vertical',
         },

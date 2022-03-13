@@ -1,3 +1,5 @@
+@import '../../../theme.less';
+
 .bg-img {
   .upload-drag-icon {
     margin-bottom: 8px;
@@ -9,35 +11,46 @@
   }
 
   .noimg-cover {
-    padding: 16px 0;
+    padding: 30px 0;
   }
 
   .upload-text {
-    color: #999;
+    color: @m-text-color-grey;
     font-weight: normal;
     font-size: 12px;
   }
 
   .image-show {
     position: relative;
-    height: 108px;
-    padding: 10px 8px;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 120px;
+    padding: 4px;
     img {
+      width: 100%;
       height: 100%;
+      object-fit: contain;
     }
 
     .upload-cover {
       position: absolute;
-      top: 4px;
       display: none;
-      width: 91%;
-      height: 98px;
-      color: #00b8d6;
-      font-size: 26px;
-      line-height: 98px;
+      width: 100%;
+      height: 100%;
+      color: @m-text-color;
+      font-size: 12px;
+      line-height: 120px;
       background: rgba(0, 0, 0, 0.6);
+
+      .upload-del-btn {
+        display: inline-block;
+        & > span:hover {
+          color: @color-primary;
+        }
+      }
     }
+
   }
 
   .image-show:hover .upload-cover {
@@ -49,6 +62,7 @@
   }
 
   .ant-upload.ant-upload-drag {
+    min-height: 122px;
     background: rgba(255, 255, 255, 0.04) !important;
     border-color: #434343;
   }
