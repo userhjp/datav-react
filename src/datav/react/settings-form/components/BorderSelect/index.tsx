@@ -14,7 +14,7 @@ export const BorderSelect: React.FC = (props) => {
         if (e) setOpen(true);
       }}
       {...props}
-      // onBlur={() => setOpen(false)}
+      onBlur={() => setOpen(false)}
       className="border-select"
       dropdownClassName="border-select-dropdown"
     >
@@ -23,7 +23,7 @@ export const BorderSelect: React.FC = (props) => {
           <div className="border-option-item">
             <div
               style={{
-                height: 80,
+                height: 40,
                 borderStyle: 'solid',
                 borderWidth: 1,
                 borderImage: `url(${item.src}) ${item.border.slice} / ${item.border.width} / ${item.border.outset} ${item.border.repeat}`,

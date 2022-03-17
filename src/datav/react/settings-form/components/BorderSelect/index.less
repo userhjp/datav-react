@@ -24,11 +24,12 @@
 
 .border-select {
   .ant-select-selector {
-    height: 90px !important;
-    padding: 6px 10px;
+    height: 60px !important;
 
     .ant-select-selection-item {
-      line-height: 90px !important;
+      .border-option-item {
+        margin-top: 6px;
+      }
     }
   }
 }
@@ -38,6 +39,7 @@
 }
 
 .border-option-item {
+  padding: 2px 0;
   color: @m-text-color;
   text-align: center;
 
@@ -47,6 +49,6 @@
 
   img {
     width: 100%;
-    height: 80px;
+    height: 40px;
   }
 }
