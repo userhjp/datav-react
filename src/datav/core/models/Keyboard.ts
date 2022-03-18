@@ -88,8 +88,6 @@ export class Keyboard {
         this.sequence = [];
       }
       this.requestClean();
-      event.preventDefault();
-      event.stopPropagation();
       if (this.preventCodes()) {
         event.preventDefault();
         event.stopPropagation();
