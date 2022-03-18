@@ -1,4 +1,4 @@
-import { Engine, CursorType } from '../models';
+import { Engine, CursorType, CursorDragType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
 import { IWidgetAttrSetting, IWidgetSetting } from '../../react/interface';
 import { toJS } from '@formily/reactive';
@@ -15,13 +15,13 @@ export const useResizeNodeEffect = (engine: Engine) => {
   let node: IWidgetSetting;
 
   engine.subscribeTo(DragStartEvent, (e) => {
-    if (!engine?.viewport) return;
+    if (engine.cursor.type !== CursorType.Normal) return;
     const el = e.data.target as HTMLElement;
     if (el?.closest(`*[${engine.props?.nodeResizeHandlerAttrName}]`)) {
       const nodeId = el?.getAttribute(`${engine.props?.nodeResizeHandlerAttrName}`);
       status = el?.getAttribute('direction-type') as Direction;
       node = engine.operation.findById(nodeId);
-      engine.cursor.setType(status);
+      engine.cursor.setDragType(CursorDragType.Resize);
       startPoint = new Point(e.data.clientX, e.data.clientY);
       attr = toJS(node.attr);
     }
@@ -66,6 +66,6 @@ export const useResizeNodeEffect = (engine: Engine) => {
   engine.subscribeTo(DragStopEvent, () => {
     if (!status) return;
     status = null;
-    engine.cursor.setType(CursorType.Move);
+    engine.cursor.setDragType(CursorDragType.Normal);
   });
 };

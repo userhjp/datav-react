@@ -1,4 +1,4 @@
-import { Engine } from '../models';
+import { CursorDragType, Engine } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent, ViewportScrollEvent } from '../events';
 import { IWidgetSetting } from '../../react/interface';
 import { CursorType } from '../index';
@@ -31,13 +31,14 @@ export const useMoveNodeEffect = (engine: Engine) => {
   };
 
   engine.subscribeTo(DragStartEvent, (e) => {
-    if (!engine?.viewport || engine.cursor.type === CursorType.Selection) return;
+    if (!engine?.viewport || engine.cursor.type !== CursorType.Normal) return;
     const el = e.data.target as HTMLElement;
     if (el?.closest(`*[${engine.props.nodeIdAttrName}]`)) {
       const nodeId = el?.getAttribute(engine.props.nodeIdAttrName);
       node = engine.operation.findById(nodeId);
       if (node.attr.isHide || node.attr.isLock) return;
       status = [];
+      engine.cursor.setDragType(CursorDragType.Translate);
       if (engine.operation.selection.length > 1) {
         engine.operation.selection.selected.forEach((f) => {
           node = engine.operation.findById(f);
@@ -73,5 +74,6 @@ export const useMoveNodeEffect = (engine: Engine) => {
     status = null;
     node = null;
     currentDragMove = null;
+    engine.cursor.setDragType(CursorDragType.Normal);
   });
 };

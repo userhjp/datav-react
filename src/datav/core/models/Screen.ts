@@ -37,7 +37,13 @@ export class Screen {
   }
 
   setScale(scale: number) {
-    this.scale = scale;
+    if (scale < 0.18) {
+      this.scale = 0.18;
+    } else if (scale > 2) {
+      this.scale = 2;
+    } else {
+      this.scale = scale;
+    }
   }
 
   setSize(width?: number, height?: number) {

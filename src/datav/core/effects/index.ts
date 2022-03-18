@@ -8,3 +8,5 @@ export * from './useAutoScrollEffect';
 export * from './useRotateNodeEffect';
 export * from './useMoveNodeEffect';
 export * from './useResizeNodeEffect';
+export * from './useMouseScrollEffect';
+export * from './useMoveScreenEffect';

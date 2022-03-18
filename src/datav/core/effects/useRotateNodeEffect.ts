@@ -1,8 +1,7 @@
-import { Engine, CursorType } from '../models';
+import { Engine, CursorType, CursorDragType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
 import { IWidgetSetting } from '../../react/interface';
 
-/** 组件旋转 先放core 理论上应该放业务代码里 */
 export const useRotateEffect = (engine: Engine) => {
   let status = null;
   let startX = 0;
@@ -11,7 +10,7 @@ export const useRotateEffect = (engine: Engine) => {
   let node: IWidgetSetting;
 
   engine.subscribeTo(DragStartEvent, (e) => {
-    if (!engine?.viewport) return;
+    if (engine.cursor.type !== CursorType.Normal) return;
     const el = e.data.target as HTMLElement;
 
     if (el?.closest('*[data-designer-node-rotate-id]') && el?.getAttribute) {
@@ -21,7 +20,6 @@ export const useRotateEffect = (engine: Engine) => {
       const rect = engine.viewport.getElementRectById(nodeId);
       if (!rect) return;
       status = nodeId;
-      engine.cursor.setType(status);
       // 获取元素中心点位置
       startX = rect.left + (rect.width * engine.viewport.scale) / 2;
       startY = rect.top + (rect.height * engine.viewport.scale) / 2;
@@ -40,6 +38,6 @@ export const useRotateEffect = (engine: Engine) => {
   engine.subscribeTo(DragStopEvent, () => {
     if (!status) return;
     status = null;
-    engine.cursor.setType(CursorType.Move);
+    engine.cursor.setDragType(CursorDragType.Normal);
   });
 };

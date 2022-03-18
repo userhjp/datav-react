@@ -8,10 +8,17 @@ export enum CursorStatus {
   DragStop = 'DRAG_STOP',
 }
 
-export enum CursorType {
-  Move = 'MOVE',
-  Selection = 'SELECTION',
+export enum CursorDragType {
+  Normal = 'NORMAL',
+  Resize = 'RESIZE',
   Rotate = 'ROTATE',
+  Translate = 'TRANSLATE',
+  Screen = 'SCREEN',
+}
+
+export enum CursorType {
+  Normal = 'NORMAL',
+  Selection = 'SELECTION',
 }
 
 export interface ICursorPosition {
@@ -65,21 +72,12 @@ const DEFAULT_SCROLL_OFFSET = {
   scrollY: 0,
 };
 
-const setCursorStyle = (contentWindow: Window, style: string) => {
-  const currentRoot = document?.getElementsByTagName?.('html')?.[0];
-  const root = contentWindow?.document?.getElementsByTagName('html')?.[0];
-  if (root && root.style.cursor !== style) {
-    root.style.cursor = style;
-  }
-  if (currentRoot && currentRoot.style.cursor !== style) {
-    currentRoot.style.cursor = style;
-  }
-};
-
 export class Cursor {
   engine: Engine;
 
-  type: CursorType | string = CursorType.Move;
+  type: CursorType | string = CursorType.Normal;
+
+  dragType: CursorDragType | string = CursorDragType.Normal;
 
   status: CursorStatus = CursorStatus.Normal;
 
@@ -113,6 +111,7 @@ export class Cursor {
       setPosition: action,
       setStatus: action,
       setType: action,
+      setDragType: action,
     });
   }
 
@@ -120,8 +119,21 @@ export class Cursor {
     this.status = status;
   }
 
+  setDragType(type: CursorDragType | string) {
+    this.dragType = type;
+  }
+
   setType(type: CursorType | string) {
     this.type = type;
+  }
+
+  setStyle(style: string) {
+    const el = this.engine.viewport.contentWindow?.document?.body.querySelector(
+      `*[${this.engine.props.canvasNodeAttrName}]`
+    ) as HTMLDivElement;
+    if (el) {
+      el.style.cursor = style;
+    }
   }
 
   setPosition(position?: ICursorPosition) {

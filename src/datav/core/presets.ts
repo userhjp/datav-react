@@ -1,4 +1,12 @@
-import { DragDropDriver, MouseMoveDriver, KeyboardDriver, MouseClickDriver, ViewportResizeDriver, ViewportScrollDriver } from './drivers';
+import {
+  DragDropDriver,
+  MouseMoveDriver,
+  MouseScrollDriver,
+  KeyboardDriver,
+  MouseClickDriver,
+  ViewportResizeDriver,
+  ViewportScrollDriver,
+} from './drivers';
 import {
   useContentEditableEffect,
   useCursorEffect,
@@ -10,6 +18,8 @@ import {
   useRotateEffect,
   useMoveNodeEffect,
   useResizeNodeEffect,
+  useMouseScrollEffect,
+  useMoveScreenEffect,
 } from './effects';
 import {
   AutoZoom,
@@ -35,11 +45,14 @@ export const DEFAULT_EFFECTS = [
   useRotateEffect,
   useMoveNodeEffect,
   useResizeNodeEffect,
+  useMouseScrollEffect,
+  useMoveScreenEffect,
 ];
 
 export const DEFAULT_DRIVERS = [
   MouseMoveDriver,
   MouseClickDriver,
+  MouseScrollDriver,
   DragDropDriver,
   KeyboardDriver,
   ViewportResizeDriver,
