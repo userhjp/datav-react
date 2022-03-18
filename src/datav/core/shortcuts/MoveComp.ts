@@ -41,7 +41,7 @@ export const MoveCompLeft = new Shortcut({
 });
 
 export const MoveScreen = new Shortcut({
-  codes: [KeyCode.Space],
+  codes: [KeyCode.Control, KeyCode.Space],
   handler: (context) => {
     // ...
   },

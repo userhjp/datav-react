@@ -6,9 +6,9 @@ export const useMouseScrollEffect = (engine: Engine) => {
     if (engine.cursor.dragType !== CursorDragType.Normal) return;
     if (event.wheel.ctrlKey) {
       if (event.scrollType === 'up') {
-        engine.screen.setScale(engine.screen.scale + 0.1);
+        engine.screen.setScale(engine.screen.scale + 0.05);
       } else {
-        engine.screen.setScale(engine.screen.scale - 0.1);
+        engine.screen.setScale(engine.screen.scale - 0.05);
       }
     }
   });

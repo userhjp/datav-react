@@ -23,22 +23,39 @@ export const useMoveScreenEffect = (engine: Engine) => {
     changeStyle();
   });
 
-  engine.subscribeTo(DragStartEvent, (e) => {
-    if (engine.cursor.type !== CursorType.Normal) return;
+  engine.subscribeTo(DragStartEvent, () => {
+    if (engine.cursor.type !== CursorType.Normal || !isMove) return;
     engine.cursor.setDragType(CursorDragType.Screen);
   });
 
   engine.subscribeTo(DragMoveEvent, (e) => {
-    if (!engine?.viewport) return;
-    const el = e.data.target as HTMLElement;
-    const x = engine.viewport.scrollX;
-    const y = engine.viewport.scrollY;
-    const x2 = engine.viewport.scrollHeight - engine.viewport.height;
-    const y2 = engine.viewport.scrollWidth - engine.viewport.width;
-    console.log(x, y, x2, y2);
+    if (engine.cursor.dragType !== CursorDragType.Screen) return;
+    const viewport = engine.viewport;
+    const startPoint = engine.cursor.dragStartPosition;
+    const startScroll = engine.cursor.dragStartScrollOffset;
+    const clientX = startPoint.clientX - e.data.clientX + startScroll.scrollX;
+    const clientY = startPoint.clientY - e.data.clientY + startScroll.scrollY;
+    const element = viewport.scrollContainer;
+    if (clientX <= 0) {
+      element.scrollLeft = 0;
+    } else if (clientX >= element.scrollWidth) {
+      element.scrollLeft = element.scrollWidth;
+    } else {
+      element.scrollLeft = clientX;
+    }
+    if (clientY <= 0) {
+      element.scrollTop = 0;
+    } else if (clientY >= element.scrollHeight) {
+      element.scrollTop = element.scrollHeight;
+    } else {
+      element.scrollTop = clientY;
+    }
+    engine.viewport.digestViewport();
   });
 
   engine.subscribeTo(DragStopEvent, () => {
+    if (engine.cursor.dragType !== CursorDragType.Screen) return;
     engine.cursor.setDragType(CursorDragType.Normal);
+    isMove = false;
   });
 };

@@ -1,4 +1,4 @@
-import { Engine, CursorStatus, CursorType, Viewport } from '../models';
+import { Engine, CursorStatus, CursorType, Viewport, CursorDragType } from '../models';
 import { DragMoveEvent, DragStartEvent, DragStopEvent } from '../events';
 import { calcAutoScrollBasicInfo, IAutoScrollBasicInfo, IPoint, Point, scrollAnimate } from '../../shared';
 
@@ -36,7 +36,12 @@ export const useAutoScrollEffect = (engine: Engine) => {
   };
 
   engine.subscribeTo(DragStartEvent, (event) => {
-    if (engine.cursor.type !== CursorType.Normal && engine.cursor.type !== CursorType.Selection) return;
+    if (
+      engine.cursor.type !== CursorType.Normal &&
+      engine.cursor.type !== CursorType.Selection &&
+      engine.cursor.dragType !== CursorDragType.Screen
+    )
+      return;
     const viewport = engine.viewport;
     const point = new Point(event.data.topClientX, event.data.topClientY);
     if (!viewport.isPointInViewport(point)) return;
@@ -47,7 +52,12 @@ export const useAutoScrollEffect = (engine: Engine) => {
   });
 
   engine.subscribeTo(DragMoveEvent, (event) => {
-    if (engine.cursor.type !== CursorType.Normal && engine.cursor.type !== CursorType.Selection) return;
+    if (
+      engine.cursor.type !== CursorType.Normal &&
+      engine.cursor.type !== CursorType.Selection &&
+      engine.cursor.dragType !== CursorDragType.Screen
+    )
+      return;
     const viewport = engine.viewport;
     const point = new Point(event.data.topClientX, event.data.topClientY);
     if (viewport.isPointInViewport(point)) {
@@ -55,7 +65,12 @@ export const useAutoScrollEffect = (engine: Engine) => {
     }
   });
   engine.subscribeTo(DragStopEvent, () => {
-    if (engine.cursor.type !== CursorType.Normal && engine.cursor.type !== CursorType.Selection) return;
+    if (
+      engine.cursor.type !== CursorType.Normal &&
+      engine.cursor.type !== CursorType.Selection &&
+      engine.cursor.dragType !== CursorDragType.Screen
+    )
+      return;
     xScroller = null;
     yScroller = null;
     if (xScrollerAnimationStop) {
