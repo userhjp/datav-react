@@ -1,8 +1,8 @@
 import { IWidgetSetting, IPageType } from '../../react/interface';
 import { generateUUID } from '../../shared';
-import { observable, define, action, toJS, batch } from '@formily/reactive';
+import { observable, define, action, toJS } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
-import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent, HelpClickEvent } from '../events';
+import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../events';
 import { IMoveType } from '../types';
 import { Engine, Hover, Selection } from './index';
 import { arrayMoveMutable } from 'array-move';
@@ -200,8 +200,6 @@ export class Operation {
       case 'preview':
         this.dispatch(new PreviewClickEvent(pageData));
         break;
-      case 'help':
-        this.dispatch(new HelpClickEvent(pageData));
       default:
         break;
     }

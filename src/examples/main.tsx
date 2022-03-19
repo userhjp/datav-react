@@ -26,9 +26,9 @@ export const Main: React.FC = () => {
         onPublish: (data) => {
           message.info('点击发布按钮');
         },
-        onHelp: (data) => {
-          message.info('点击帮助按钮');
-        },
+        // onHelp: (data) => {
+        //   message.info('点击帮助按钮');
+        // },
         onSnapshot: (data) => {
           return new Promise((resolve) => {
             setTimeout(() => {

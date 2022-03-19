@@ -5,8 +5,9 @@ import { PanelType } from '../../../shared';
 import { useCursor, useOperation, useDesigner, useToolbar } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import { CursorType, Engine } from '../../../core';
-import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent, HelpClickEvent } from '../../../core/events';
+import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../../../core/events';
 import { IconPreview } from './IconPreview';
+import { HelpPreview } from './HelpPreview';
 import './index.less';
 
 export const useButtonEffect = (engine: Engine) => {
@@ -35,17 +36,6 @@ export const useButtonEffect = (engine: Engine) => {
   engine.subscribeTo(PreviewClickEvent, (event) => {
     if (!engine.props.onPreview) return;
     const handle = engine.props.onPreview(event.data);
-    if (handle instanceof Promise) {
-      engine.toolbar.addLoading();
-      handle.finally(() => {
-        engine.toolbar.removeLoading();
-      });
-    }
-  });
-
-  engine.subscribeTo(HelpClickEvent, (event) => {
-    if (!engine.props.onHelp) return;
-    const handle = engine.props.onHelp(event.data);
     if (handle instanceof Promise) {
       engine.toolbar.addLoading();
       handle.finally(() => {
@@ -136,11 +126,7 @@ export const DesignHead: React.FC = observer(() => {
               </div>
             </Tooltip>
 
-            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'帮助'}>
-              <div className="head-btn" onClick={() => operation.onOperationBtn('help')}>
-                <IconWidget infer="Help" style={{ color: '#fff' }} />
-              </div>
-            </Tooltip>
+            <HelpPreview />
 
             <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'发布'}>
               <div className="head-btn" onClick={() => operation.onOperationBtn('publish')}>
