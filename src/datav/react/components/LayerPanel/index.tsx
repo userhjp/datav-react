@@ -80,7 +80,11 @@ export const LayerPanel: React.FC = observer(() => {
                   [operation.engine.props.contentEditableAttrName]: item.id,
                 }}
               >
-                <IconWidget className="com-icon" infer="Title" />
+                <IconWidget
+                  className="com-icon"
+                  infer="Title"
+                  style={{ color: item.attr.isHide ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.85)' }}
+                />
                 {operation.editableId === item.id ? (
                   <Input
                     ref={iptRef}
@@ -100,7 +104,10 @@ export const LayerPanel: React.FC = observer(() => {
                   />
                 ) : (
                   <div style={{ display: 'flex', flex: 1 }}>
-                    <span style={{ flex: 1 }} className="com-name">
+                    <span
+                      style={{ flex: 1, color: item.attr.isHide ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.85)' }}
+                      className="com-name"
+                    >
                       {item.info?.name}
                     </span>
                     <div />

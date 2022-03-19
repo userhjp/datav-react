@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Collapse, Badge, Switch, Tabs, Button } from 'antd';
 import { model, markRaw, toJS } from '@formily/reactive';
 import { CollapseProps, CollapsePanelProps } from 'antd/lib/collapse';

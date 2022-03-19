@@ -1,4 +1,4 @@
-import { Engine, CursorStatus } from '../models';
+import { Engine, CursorStatus, CursorDragType, CursorType } from '../models';
 import { MouseMoveEvent, DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
 import { requestIdle } from '../../shared';
 
@@ -33,7 +33,7 @@ export const useCursorEffect = (engine: Engine) => {
   });
   engine.subscribeTo(MouseMoveEvent, (event) => {
     const operation = engine.operation;
-    if (engine.cursor.status !== CursorStatus.Normal) {
+    if (engine.cursor.status !== CursorStatus.Normal || engine.cursor.type !== CursorType.Normal) {
       return;
     }
     const target = event.data.target as HTMLElement;

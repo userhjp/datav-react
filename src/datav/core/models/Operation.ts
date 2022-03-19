@@ -159,9 +159,11 @@ export class Operation {
         const com = this.findById(id);
         com.attr.isHide = isHide;
       });
+      this.selection.remove(...this.selection.selected);
     } else {
       const comp = this.findById(id);
       comp.attr.isHide = isHide;
+      this.selection.remove(id);
     }
   }
 

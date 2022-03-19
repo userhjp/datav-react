@@ -95,13 +95,7 @@ export const EventFields: React.FC = observer(() => {
     >
       {Object.keys(value).map((f) => {
         return (
-          <Panel
-            forceRender
-            header={value[f].description}
-            key={f}
-            collapsible={value[f].enable ? null : 'disabled'}
-            extra={renderExtra(value[f], f)}
-          >
+          <Panel header={value[f].description} key={f} collapsible={value[f].enable ? null : 'disabled'} extra={renderExtra(value[f], f)}>
             <ObjectField name={f}>
               <div>
                 <table className="data-attr-table">

@@ -88,7 +88,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                 <>
                   <Field name="info" component={[WidgetInfo]} />
                   <Tabs className="my-form-tab" animated={false} centered tabBarStyle={tabBarStyle}>
-                    <Tabs.TabPane key="1" tab="属性" forceRender>
+                    <Tabs.TabPane key="1" tab="属性">
                       <SchemaField
                         components={props.components}
                         scope={scope}
@@ -101,10 +101,10 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                         }}
                       />
                     </Tabs.TabPane>
-                    <Tabs.TabPane key="2" tab="数据" forceRender className="pl_10">
+                    <Tabs.TabPane key="2" tab="数据" className="pl_10">
                       <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />
                     </Tabs.TabPane>
-                    <Tabs.TabPane key="3" tab="交互" forceRender className="pl_10">
+                    <Tabs.TabPane key="3" tab="交互" className="pl_10">
                       <ObjectField key={`${currentNode.id}`} name="events" component={[EventFields]} />
                     </Tabs.TabPane>
                   </Tabs>
