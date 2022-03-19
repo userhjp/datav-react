@@ -6,6 +6,7 @@ import Webpackbar from 'webpackbar';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 import { Configuration } from 'webpack';
+import ESLintPlugin from 'eslint-webpack-plugin';
 
 const lessLoadder = {
   loader: 'less-loader',
@@ -155,6 +156,9 @@ export const commonConfig: Configuration = {
     }),
     new MonacoWebpackPlugin( {
       languages: ['json', 'javascript', 'typescript'],
+    }),
+    new ESLintPlugin({
+      exclude: ['node_modules', 'public'],
     })
   ],
   cache: {

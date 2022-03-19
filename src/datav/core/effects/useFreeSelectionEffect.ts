@@ -3,7 +3,7 @@ import { Engine, CursorType } from '../models';
 import { calcRectByStartEndPoint, isCrossRectInRect, Point } from '../../shared';
 
 export const useFreeSelectionEffect = (engine: Engine) => {
-  engine.subscribeTo(DragStopEvent, (event) => {
+  engine.subscribeTo(DragStopEvent, () => {
     if (engine.cursor.type !== CursorType.Selection) return;
     const dragStartPoint = new Point(engine.cursor.dragStartPosition.topClientX, engine.cursor.dragStartPosition.topClientY);
     const dragStartOffsetPoint = engine.viewport.getOffsetPoint(
@@ -17,8 +17,8 @@ export const useFreeSelectionEffect = (engine: Engine) => {
     const selectionRect = calcRectByStartEndPoint(
       dragStartOffsetPoint,
       dragEndOffsetPoint,
-      engine.viewport.scrollX,
-      engine.viewport.scrollY
+      engine.viewport.dragScrollXDelta,
+      engine.viewport.dragScrollYDelta
     );
     const selectedId: string[] = [];
     components.forEach((node) => {

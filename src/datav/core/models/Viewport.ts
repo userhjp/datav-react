@@ -10,6 +10,15 @@ export interface IViewportProps {
   contentWindow: Window;
 }
 
+export interface IViewportData {
+  scrollX?: number;
+  scrollY?: number;
+  width?: number;
+  height?: number;
+  scrollWidth?: number;
+  scrollHeight?: number;
+}
+
 /**
  * 视口模型
  */
@@ -17,6 +26,10 @@ export class Viewport {
   engine: Engine;
 
   viewportElement: HTMLElement;
+
+  contentWindow: Window;
+
+  dragStartSnapshot: IViewportData;
 
   scrollX = 0;
 
@@ -33,8 +46,6 @@ export class Viewport {
   attachRequest: number;
 
   nodeIdAttrName: string;
-
-  contentWindow: Window;
 
   constructor(props: IViewportProps) {
     this.engine = props.engine;
@@ -98,6 +109,14 @@ export class Viewport {
     return this.engine.screen.props.grid;
   }
 
+  get dragScrollXDelta() {
+    return this.scrollX - this.dragStartSnapshot.scrollX;
+  }
+
+  get dragScrollYDelta() {
+    return this.scrollY - this.dragStartSnapshot.scrollY;
+  }
+
   autoScale = () => {
     const w = (this.width - 110) / this.engine.screen.props.width;
     const h = (this.height - 110) / this.engine.screen.props.height;
@@ -106,15 +125,23 @@ export class Viewport {
     this.engine.screen.setScale(scale);
   };
 
+  takeDragStartSnapshot() {
+    this.dragStartSnapshot = this.getCurrentData();
+  }
+
   digestViewport() {
-    if (this.viewportElement) {
-      this.scrollX = this.viewportElement?.scrollLeft || 0;
-      this.scrollY = this.viewportElement?.scrollTop || 0;
-      this.width = this.viewportElement?.clientWidth || 0;
-      this.height = this.viewportElement?.clientHeight || 0;
-      this.scrollHeight = this.viewportElement?.scrollHeight || 0;
-      this.scrollWidth = this.viewportElement?.scrollWidth || 0;
-    }
+    Object.assign(this, this.getCurrentData());
+  }
+
+  getCurrentData() {
+    const data: IViewportData = {};
+    data.scrollX = this.viewportElement?.scrollLeft || 0;
+    data.scrollY = this.viewportElement?.scrollTop || 0;
+    data.width = this.viewportElement?.clientWidth || 0;
+    data.height = this.viewportElement?.clientHeight || 0;
+    data.scrollWidth = this.viewportElement?.scrollWidth || 0;
+    data.scrollHeight = this.viewportElement?.scrollHeight || 0;
+    return data;
   }
 
   elementFromPoint(point: IPoint) {
@@ -191,9 +218,10 @@ export class Viewport {
   }
 
   getOffsetPoint(topPoint: IPoint) {
+    const data = this.getCurrentData();
     return {
-      x: topPoint.x - this.offsetX + this.scrollX,
-      y: topPoint.y - this.offsetY + this.scrollY,
+      x: topPoint.x - this.offsetX + data.scrollX,
+      y: topPoint.y - this.offsetY + data.scrollY,
     };
   }
 

@@ -32,9 +32,8 @@ export const useMoveScreenEffect = (engine: Engine) => {
     if (engine.cursor.dragType !== CursorDragType.Screen) return;
     const viewport = engine.viewport;
     const startPoint = engine.cursor.dragStartPosition;
-    const startScroll = engine.cursor.dragStartScrollOffset;
-    const clientX = startPoint.clientX - e.data.clientX + startScroll.scrollX;
-    const clientY = startPoint.clientY - e.data.clientY + startScroll.scrollY;
+    const clientX = startPoint.clientX - e.data.clientX + viewport.dragStartSnapshot.scrollX;
+    const clientY = startPoint.clientY - e.data.clientY + viewport.dragStartSnapshot.scrollY;
     const element = viewport.scrollContainer;
     if (clientX <= 0) {
       element.scrollLeft = 0;

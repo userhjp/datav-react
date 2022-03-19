@@ -35,20 +35,14 @@ export const useAutoScrollEffect = (engine: Engine) => {
     }
   };
 
-  engine.subscribeTo(DragStartEvent, (event) => {
+  engine.subscribeTo(DragStartEvent, () => {
     if (
       engine.cursor.type !== CursorType.Normal &&
       engine.cursor.type !== CursorType.Selection &&
       engine.cursor.dragType !== CursorDragType.Screen
     )
       return;
-    const viewport = engine.viewport;
-    const point = new Point(event.data.topClientX, event.data.topClientY);
-    if (!viewport.isPointInViewport(point)) return;
-    engine.cursor.setDragStartScrollOffset({
-      scrollX: viewport.scrollX,
-      scrollY: viewport.scrollY,
-    });
+    engine.viewport.takeDragStartSnapshot();
   });
 
   engine.subscribeTo(DragMoveEvent, (event) => {
@@ -60,9 +54,7 @@ export const useAutoScrollEffect = (engine: Engine) => {
       return;
     const viewport = engine.viewport;
     const point = new Point(event.data.topClientX, event.data.topClientY);
-    if (viewport.isPointInViewport(point)) {
-      scrolling(point, viewport);
-    }
+    scrolling(point, viewport);
   });
   engine.subscribeTo(DragStopEvent, () => {
     if (

@@ -87,10 +87,12 @@ export class Keyboard {
       if (this.matchCodes(context)) {
         this.sequence = [];
       }
-      this.requestClean();
+      this.requestClean(500);
       if (this.preventCodes()) {
         event.preventDefault();
         event.stopPropagation();
+      } else if (this.isModifier(event.data)) {
+        this.sequence = [];
       }
     } else {
       this.keyDown = null;
@@ -101,13 +103,13 @@ export class Keyboard {
     return this.keyDown === code;
   }
 
-  requestClean() {
+  requestClean(duration = 320) {
     clearTimeout(this.requestTimer);
     this.requestTimer = setTimeout(() => {
       this.keyDown = null;
       this.sequence = [];
       clearTimeout(this.requestTimer);
-    }, 500);
+    }, duration);
   }
 
   makeObservable() {

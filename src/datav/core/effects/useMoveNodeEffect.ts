@@ -7,21 +7,17 @@ import { action } from '@formily/reactive';
 /** 位置移动 */
 export const useMoveNodeEffect = (engine: Engine) => {
   let status: { x: number; y: number; node: IWidgetSetting }[] = null;
-  // const startX = 0;
-  // const startY = 0;
   let node: IWidgetSetting;
   let currentDragMove: DragStartEvent = null;
 
-  const moveComponent = (e: DragStartEvent) => {
+  const moveComponent = () => {
+    if (!currentDragMove) return;
     action(() => {
       status.forEach((f) => {
         const viewport = engine.viewport;
         const startPoint = engine.cursor.dragStartPosition;
-        const startScroll = engine.cursor.dragStartScrollOffset;
-        const scrollX = viewport.scrollX - startScroll.scrollX;
-        const scrollY = viewport.scrollY - startScroll.scrollY;
-        const clientX = e.data.clientX - startPoint.clientX + scrollX;
-        const clientY = e.data.clientY - startPoint.clientY + scrollY;
+        const clientX = currentDragMove.data.clientX - startPoint.clientX + viewport.dragScrollXDelta;
+        const clientY = currentDragMove.data.clientY - startPoint.clientY + viewport.dragScrollYDelta;
         const attrX = f.x + Math.round(clientX / viewport.scale / viewport.grid) * viewport.grid;
         const attrY = f.y + Math.round(clientY / viewport.scale / viewport.grid) * viewport.grid;
         f.node.attr.x = attrX - (attrX % viewport.grid);
@@ -61,12 +57,12 @@ export const useMoveNodeEffect = (engine: Engine) => {
     if (!engine?.viewport) return;
     if (!status) return;
     currentDragMove = e;
-    moveComponent(currentDragMove);
+    moveComponent();
   });
 
   /** 容器时滚动也需要更新组件位置 */
   engine.subscribeTo(ViewportScrollEvent, () => {
-    currentDragMove && moveComponent(currentDragMove);
+    currentDragMove && moveComponent();
   });
 
   engine.subscribeTo(DragStopEvent, () => {

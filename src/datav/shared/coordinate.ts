@@ -60,10 +60,15 @@ export function getRectPoints(source: IRect) {
   return [p1, p2, p3, p4];
 }
 
-// export function isRectInRect(target: IRect, source: IRect) {
-//   const [p1, p2, p3, p4] = getRectPoints(source);
-//   return isPointInRect(p1, target, false) && isPointInRect(p2, target, false) && isPointInRect(p3, target, false) && isPointInRect(p4, target, false);
-// }
+export function isRectInRect(target: IRect, source: IRect) {
+  const [p1, p2, p3, p4] = getRectPoints(source);
+  return (
+    isPointInRect(p1, target, false) &&
+    isPointInRect(p2, target, false) &&
+    isPointInRect(p3, target, false) &&
+    isPointInRect(p4, target, false)
+  );
+}
 
 export function isCrossRectInRect(target: IRect, source: IRect) {
   const targetCenterPoint = new Point(target.x + target.width / 2, target.y + target.height / 2);
@@ -202,8 +207,8 @@ export function calcRectByStartEndPoint(startPoint: IPoint, endPoint: IPoint, sc
     return new DOMRect(
       drawStartX,
       drawStartY,
-      Math.abs(endPoint.x - startPoint.x) - scrollX,
-      Math.abs(endPoint.y - startPoint.y) - scrollY
+      Math.abs(endPoint.x - startPoint.x + scrollX),
+      Math.abs(endPoint.y - startPoint.y + scrollY)
     );
   } else if (endPoint.x + scrollX < startPoint.x && endPoint.y + scrollY >= startPoint.y) {
     // 3象限
@@ -222,8 +227,8 @@ export function calcRectByStartEndPoint(startPoint: IPoint, endPoint: IPoint, sc
     return new DOMRect(
       drawStartX,
       drawStartY,
-      Math.abs(endPoint.x - startPoint.x) - scrollX,
-      Math.abs(endPoint.y - startPoint.y) - scrollY
+      Math.abs(endPoint.x - startPoint.x + scrollX),
+      Math.abs(endPoint.y - startPoint.y + scrollY)
     );
   }
 }

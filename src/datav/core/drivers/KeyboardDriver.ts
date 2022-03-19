@@ -5,7 +5,12 @@ function filter(event: KeyboardEvent) {
   const target: any = event.target;
   const { tagName } = target;
   let flag = true;
-  if (target['isContentEditable'] || ((tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT') && !target.readOnly)) {
+  if (
+    target['isContentEditable'] ||
+    ((tagName === 'INPUT' || tagName === 'TEXTAREA' || tagName === 'SELECT') &&
+      customElements.get(tagName.toLocaleLowerCase()) &&
+      !target.readOnly)
+  ) {
     flag = false;
   }
   return flag;
