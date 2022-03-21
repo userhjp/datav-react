@@ -1,4 +1,4 @@
-import { Engine, CursorStatus, CursorDragType, CursorType } from '../models';
+import { Engine, CursorStatus, CursorType } from '../models';
 import { MouseMoveEvent, DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
 import { requestIdle } from '../../shared';
 

@@ -36,33 +36,15 @@ export const useAutoScrollEffect = (engine: Engine) => {
   };
 
   engine.subscribeTo(DragStartEvent, () => {
-    if (
-      engine.cursor.type !== CursorType.Normal &&
-      engine.cursor.type !== CursorType.Selection &&
-      engine.cursor.dragType !== CursorDragType.Screen
-    )
-      return;
     engine.viewport.takeDragStartSnapshot();
   });
 
   engine.subscribeTo(DragMoveEvent, (event) => {
-    if (
-      engine.cursor.type !== CursorType.Normal &&
-      engine.cursor.type !== CursorType.Selection &&
-      engine.cursor.dragType !== CursorDragType.Screen
-    )
-      return;
     const viewport = engine.viewport;
     const point = new Point(event.data.topClientX, event.data.topClientY);
     scrolling(point, viewport);
   });
   engine.subscribeTo(DragStopEvent, () => {
-    if (
-      engine.cursor.type !== CursorType.Normal &&
-      engine.cursor.type !== CursorType.Selection &&
-      engine.cursor.dragType !== CursorDragType.Screen
-    )
-      return;
     xScroller = null;
     yScroller = null;
     if (xScrollerAnimationStop) {

@@ -23,6 +23,10 @@ export const ColorPicker: React.FC<ColorPickerProps> = (props) => {
     }
   );
 
+  useEffect(() => {
+    setColorText(value);
+  }, [value]);
+
   const handleColorChange = (color: any) => {
     const rgb = color.rgb;
     const val = rgb.a === 1 ? color.hex : `rgba(${rgb.r},${rgb.g},${rgb.b},${rgb.a})`;
