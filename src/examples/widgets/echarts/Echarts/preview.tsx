@@ -31,8 +31,6 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) 
   useLayoutEffect(() => {
     const { options: opt } = options;
     let echartOpt: any = {};
-    data;
-    debugger;
     try {
       const fun = `const fun = (resData, myChart, echarts) => {  ${opt}   }; return fun(resData, myChart, echarts);`;
       const func = new Function('resData', 'myChart', 'echarts', fun);

@@ -21,15 +21,8 @@ export class DragDropDriver extends EventDriver<Engine> {
     if (e.target['isContentEditable'] || e.target['contentEditable'] === 'true') {
       return true;
     }
-    if (
-      e.target?.['closest']?.(`
-      '.monaco-editor',
-        '.screen-selectd',
-        '.u-slider',
-        '.sketch-picker'
-      `)
-    )
-      return false;
+    if (e.target?.['closest']?.('.monaco-editor,.screen-selectd,.u-slider,.sketch-picker')) return false;
+
     GlobalState.startEvent = e;
     GlobalState.dragging = false;
     GlobalState.onMouseDownAt = Date.now();
