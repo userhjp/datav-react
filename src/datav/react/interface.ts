@@ -25,8 +25,8 @@ export type IWidgetConfig = {
   data?: {
     /** 默认数据 */
     value: IWidgetData;
-    /** 字段映射 */
-    fields: Record<string, string>;
+    /** 字段映射 未设置则返回全部字段*/
+    fields?: Record<string, string>;
   };
 };
 
