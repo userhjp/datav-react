@@ -30,23 +30,28 @@ export const barSeriesSymbolSchema: ISchema = {
     },
     barCategoryGap: {
       type: 'string',
-      title: '同系间距',
       'x-decorator': 'FormItem',
-      'x-component': 'Input',
+      'x-decorator-props': {
+        feedbackText: '同系间距',
+      },
+      'x-component': 'NumberPickerUnit',
       'x-component-props': {
         placeholder: '请输入',
+        unit: ['%', 'px'],
         min: 0,
       },
       default: '20%',
     },
     barGap: {
       type: 'string',
-      title: '不同系间距',
       'x-decorator': 'FormItem',
-      'x-component': 'Input',
+      'x-decorator-props': {
+        feedbackText: '不同系间距',
+      },
+      'x-component': 'NumberPickerUnit',
       'x-component-props': {
         placeholder: '请输入',
-        min: 0,
+        unit: ['%', 'px'],
       },
       default: '30%',
     },
@@ -57,7 +62,6 @@ export const barSeriesSymbolSchema: ISchema = {
       'x-component': 'Input',
       'x-component-props': {
         placeholder: '请输入',
-        min: 0,
       },
       default: '35%',
     },

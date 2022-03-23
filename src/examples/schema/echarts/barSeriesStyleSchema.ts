@@ -23,27 +23,43 @@ export const barSeriesStyleSchema: ISchema = {
       },
       default: 'auto',
     },
-    barCategoryGap: {
-      type: 'string',
-      title: '同系间距',
+    iconVoid: {
+      type: 'void',
+      title: '系列间距',
       'x-decorator': 'FormItem',
-      'x-component': 'Input',
+      'x-component': 'FormGrid',
       'x-component-props': {
-        placeholder: '请输入',
-        min: 0,
+        minColumns: 2,
+        rowGap: 0,
       },
-      default: '20%',
-    },
-    barGap: {
-      type: 'string',
-      title: '不同系间距',
-      'x-decorator': 'FormItem',
-      'x-component': 'Input',
-      'x-component-props': {
-        placeholder: '请输入',
-        min: 0,
+      properties: {
+        barCategoryGap: {
+          type: 'string',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '同系间距',
+          },
+          'x-component': 'NumberPickerUnit',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: ['%', 'px'],
+          },
+          default: '20%',
+        },
+        barGap: {
+          type: 'string',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '不同系间距',
+          },
+          'x-component': 'NumberPickerUnit',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: ['%', 'px'],
+          },
+          default: '30%',
+        },
       },
-      default: '30%',
     },
     borderRadius: {
       type: 'object',

@@ -39,14 +39,11 @@ export const baseAttrSchema: ISchema = {
       type: 'void',
       title: '图表位置',
       'x-decorator': 'FormItem',
-      'x-decorator-props': {
-        feedbackLayout: 'none',
-      },
+      'x-component': 'FormGrid',
       'x-component-props': {
         minColumns: 2,
         rowGap: 0,
       },
-      'x-component': 'FormGrid',
       properties: {
         x: {
           type: 'number',

@@ -17,6 +17,7 @@ import {
   MyFormCollapse,
   BorderSelect,
   ImageSelect,
+  NumberPickerUnit,
 } from './components';
 
 export const SchemaField = createSchemaField({
@@ -46,5 +47,6 @@ export const SchemaField = createSchemaField({
     ArrayItems,
     Space,
     ImageSelect,
+    NumberPickerUnit,
   },
 });

@@ -155,17 +155,17 @@ export function getChartColors(type: number) {
 export function convertEChartColors(colors: Array<string> | string, type: 'vertical' | 'horizontal' = 'vertical'): string | object {
   if (!colors) return '';
   if (typeof colors === 'string') return colors;
-
-  if (colors && colors.length > 1) {
-    const offset = 1 / (colors.length - 1);
+  const col = colors.filter((f) => !!f);
+  if (col && col.length > 1) {
+    const offset = 1 / (col.length - 1);
     return {
       type: 'linear',
       x: 0,
       y: type === 'vertical' ? 1 : 0,
       x2: type === 'horizontal' ? 1 : 0,
       y2: 0,
-      colorStops: colors.map((m, i) => {
-        return { offset: i === colors.length ? 1 : offset * i, color: m };
+      colorStops: col.map((m, i) => {
+        return { offset: i === col.length ? 1 : offset * i, color: m };
       }),
       global: false, // 缺省为 false
     };

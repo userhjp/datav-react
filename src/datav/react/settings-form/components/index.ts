@@ -15,3 +15,4 @@ export * from './BorderSelect';
 export * from './Select';
 export * from './BlurInput';
 export * from './ImageSelect';
+export * from './NumberPickerUnit';

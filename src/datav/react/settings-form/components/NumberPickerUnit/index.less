@@ -1,0 +1,63 @@
+@import '../../../theme.less';
+
+.my-input-number-unit {
+  position: relative;
+  display: flex;
+
+  .ant-input-number:focus,
+  .ant-input-number-focused {
+    box-shadow: none;
+  }
+
+  .ant-input-number-handler-wrap {
+    background: @background-color;
+    opacity: 1;
+  }
+
+  .ant-input-number-handler-up-inner {
+    margin-top: -7px;
+  }
+
+  .ant-input-number-handler-down-inner {
+    transform: translateY(-61%);
+  }
+
+  .ant-input-number-handler:hover .ant-input-number-handler-up-inner,
+  .ant-input-number-handler:hover .ant-input-number-handler-down-inner {
+    color: @color-primary;
+  }
+
+  .ant-input-number-disabled {
+    color: @m-disabled-color;
+  }
+
+  .number-unit {
+    position: absolute;
+    top: 5px;
+    right: 28px;
+    color: @m-disabled-color;
+    font-size: 13px;
+    line-height: 22px;
+    user-select: none;
+  }
+
+  &.show-unit .ant-input-number-input {
+    padding-right: 45px;
+  }
+
+  .number-picker-checkbox {
+    width: 100px;
+    padding-left: 10px;
+    color: @m-text-color-grey;
+    font-size: @m-font-size;
+
+    .ant-checkbox + span {
+      padding: 0 0 0 4px;
+    }
+
+    .ant-checkbox-inner {
+      width: 14px;
+      height: 14px;
+    }
+  }
+}

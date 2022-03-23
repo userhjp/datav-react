@@ -31,35 +31,30 @@ export const legendSchema: ISchema = {
     textStyle: textSchema('object'),
     iconVoid: {
       type: 'void',
-      'x-component': 'MyFormCollapse',
+      title: '图例样式',
+      'x-decorator': 'FormItem',
+      'x-component': 'FormGrid',
       'x-component-props': {
-        title: '图例图标',
+        minColumns: 2,
+        rowGap: 0,
       },
       properties: {
         icon: {
-          type: 'string',
-          title: '图标',
+          type: 'number',
           'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '图形',
+          },
           'x-component': 'Select',
           enum: legendIcons,
           default: '',
         },
-        itemWidth: {
+        itemGap: {
           type: 'number',
-          title: '宽度',
           'x-decorator': 'FormItem',
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 1,
+          'x-decorator-props': {
+            feedbackText: '间隔',
           },
-          default: 26,
-        },
-        itemHeight: {
-          type: 'number',
-          title: '高度',
-          'x-decorator': 'FormItem',
           'x-component': 'NumberPicker',
           'x-component-props': {
             placeholder: '请输入',
@@ -68,17 +63,33 @@ export const legendSchema: ISchema = {
           },
           default: 14,
         },
-        itemGap: {
+        itemWidth: {
           type: 'number',
-          title: '间隔',
           'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '宽度',
+          },
           'x-component': 'NumberPicker',
           'x-component-props': {
             placeholder: '请输入',
             unit: 'px',
-            min: 1,
+            min: 0,
           },
-          default: 10,
+          default: 14,
+        },
+        itemHeight: {
+          type: 'number',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            feedbackText: '高度',
+          },
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'px',
+            min: 0,
+          },
+          default: 14,
         },
       },
     },
