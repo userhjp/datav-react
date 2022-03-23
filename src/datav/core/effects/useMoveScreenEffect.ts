@@ -5,7 +5,7 @@ export const useMoveScreenEffect = (engine: Engine) => {
   let isMove = false;
   const changeStyle = () => {
     engine.viewport.viewportElement.style.cursor = isMove ? 'grab' : 'default';
-    const el = engine.viewport.contentWindow?.document?.body.querySelector(`*[${engine.props.canvasNodeAttrName}]`) as HTMLDivElement;
+    const el = engine.viewport.viewportElement.querySelector(`*[${engine.props.canvasNodeAttrName}]`) as HTMLDivElement;
     if (el) {
       el.style.pointerEvents = isMove ? 'none' : 'auto';
     }
