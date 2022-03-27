@@ -1,3 +1,4 @@
+import { textSchema } from '@/examples/schema/textSchema';
 import { hAligns } from '@/examples/shared';
 import { ISchema } from '@formily/react';
 
@@ -30,7 +31,7 @@ export const ScrollBoardSchema: ISchema = {
       'x-component': 'NumberPicker',
       'x-component-props': {
         placeholder: '请输入',
-        unit: 'ms',
+        unit: '行',
         min: 1,
       },
       default: 5,
@@ -48,6 +49,19 @@ export const ScrollBoardSchema: ISchema = {
       'x-decorator': 'FormItem',
       'x-component': 'ColorPicker',
       default: 'rgba(111,111,159,0.15)',
+    },
+    textStyle: {
+      type: 'object',
+      'x-component': 'MyFormCollapse',
+      'x-component-props': {
+        title: '列表样式',
+      },
+      properties: {
+        void: textSchema(),
+      },
+      default: {
+        fontSize: 14,
+      },
     },
     indexHeader: {
       type: 'object',
@@ -100,6 +114,11 @@ export const ScrollBoardSchema: ISchema = {
         title: '表头',
         switch: true,
       },
+      default: {
+        textStyle: {
+          fontSize: 14,
+        },
+      },
       properties: {
         height: {
           type: 'number',
@@ -111,7 +130,7 @@ export const ScrollBoardSchema: ISchema = {
             unit: 'px',
             min: 0,
           },
-          default: 35,
+          default: 36,
         },
         backgroundColor: {
           type: 'string',
@@ -120,6 +139,7 @@ export const ScrollBoardSchema: ISchema = {
           'x-component': 'ColorPicker',
           default: '#003b51',
         },
+        textStyle: textSchema('object'),
       },
     },
     column: {

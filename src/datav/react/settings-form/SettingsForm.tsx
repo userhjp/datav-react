@@ -101,10 +101,10 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                         }}
                       />
                     </Tabs.TabPane>
-                    <Tabs.TabPane key="2" tab="数据" className="pl_10">
+                    <Tabs.TabPane forceRender key="2" tab="数据" className="pl_10">
                       <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />
                     </Tabs.TabPane>
-                    <Tabs.TabPane key="3" tab="交互" className="pl_10">
+                    <Tabs.TabPane forceRender key="3" tab="交互" className="pl_10">
                       <ObjectField key={`${currentNode.id}`} name="events" component={[EventFields]} />
                     </Tabs.TabPane>
                   </Tabs>

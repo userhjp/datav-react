@@ -60,7 +60,7 @@ export const RosePieSchema: ISchema = {
           },
           default: 10,
         },
-        voidTextStyle: textSchema('object', '标题样式'),
+        nameStyle: textSchema('object', '标题样式'),
         unit: {
           type: 'string',
           title: '数值后缀',
@@ -140,10 +140,6 @@ export const RosePieSchema: ISchema = {
             },
           },
         },
-        color: seriesColorSchema,
-      },
-      default: {
-        color: ['#75d6ff', '#1179ff'],
       },
     },
   },

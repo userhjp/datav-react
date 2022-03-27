@@ -110,27 +110,18 @@ export const PercentagePieSchema: ISchema = {
         defaultSwitch: true,
       },
       default: {
-        color: '#fff',
-        fontSize: 14,
+        nameStyle: {
+          color: '#fff',
+          fontSize: 14,
+        },
+        valueStyle: {
+          color: '#fff',
+          fontSize: 16,
+        },
       },
       properties: {
-        voidTextStyle: textSchema(),
-      },
-    },
-    valueStyle: {
-      type: 'object',
-      'x-component': 'MyFormCollapse',
-      'x-component-props': {
-        title: '百分比值',
-        switch: true,
-        defaultSwitch: true,
-      },
-      default: {
-        color: '#fff',
-        fontSize: 18,
-      },
-      properties: {
-        voidTextStyle: textSchema(),
+        nameStyle: textSchema('object', '标签样式'),
+        valueStyle: textSchema('object', '值样式'),
       },
     },
   },

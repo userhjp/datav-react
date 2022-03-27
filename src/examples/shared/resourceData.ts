@@ -291,6 +291,17 @@ export const resourceData: IResourceData[] = [
       {
         name: 'Iframe',
         cover: '/menuCover/媒体/iframe.png',
+        type: 'Iframe',
+      },
+    ],
+  },
+  {
+    name: '控件',
+    icon: 'other',
+    children: [
+      {
+        name: '弦图',
+        cover: '/menuCover/其他/弦图.png',
       },
     ],
   },

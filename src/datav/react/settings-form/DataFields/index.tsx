@@ -7,7 +7,7 @@ import { MonacoEditor, BlurInput, SettingsEmpty } from '../components';
 import { useEffect, useMemo, useState } from 'react';
 import { IDataSetting } from '../../interface';
 import { languageType } from '../components/MonacoEditor/editor-config';
-import { Button, InputNumber, Tooltip } from 'antd';
+import { InputNumber, Tooltip } from 'antd';
 import { autorun } from '@formily/reactive';
 import { ApiType, FieldStatus } from '../../../shared';
 import DataConfig from './DataConfig';
@@ -56,7 +56,7 @@ export const DataFields: React.FC = observer(() => {
                   </tr>
                 </thead>
                 <tbody className="table-body">
-                  {Object.keys(value?.fields || {}).map((key) => (
+                  {Object.keys(value.fields).map((key) => (
                     <ObjectField name={key} key={key}>
                       <tr className="table-body-row">
                         <td className="column-item attr-name">

@@ -72,7 +72,7 @@ function calcHeaderData({ column, indexHeader, header }) {
   return headerList;
 }
 
-function calcRows({ data, indexHeader, rowNum, column }) {
+function calcRows({ data, indexHeader, rowNum, column, textStyle }) {
   data = data.map((row) => {
     return column.map((col) => {
       return row[col?.mapKey] || '-';
@@ -81,11 +81,12 @@ function calcRows({ data, indexHeader, rowNum, column }) {
 
   if (indexHeader?.show) {
     data = data.map((row, i) => {
-      const indexTag = `<span class="index" style="background-color: ${indexHeader.backgroundColor};">${i + 1}</span>`;
+      const indexTag = `<span class="index" style="background-color: ${indexHeader.backgroundColor || ''};">${i + 1}</span>`;
       row.unshift(indexTag);
       return row;
     });
   }
+
   data = data.map((ceils, i) => ({ ceils, rowIndex: i }));
   const rowLength = data.length;
   if (rowLength > rowNum && rowLength < 2 * rowNum) {
@@ -278,7 +279,6 @@ const ScrollBoard = forwardRef<any, any>(({ onClick, options = {}, data, onMouse
       wait: 300,
     }
   );
-
   return (
     <div className="dv-scroll-board" ref={domRef}>
       {!!header.length && !!mergedConfig && (
@@ -292,6 +292,7 @@ const ScrollBoard = forwardRef<any, any>(({ onClick, options = {}, data, onMouse
                 lineHeight: `${mergedConfig.header?.height}px`,
                 width: `${widths[i]}px`,
                 textAlign: aligns[i],
+                ...(mergedConfig.header.textStyle || {}),
               }}
               dangerouslySetInnerHTML={{ __html: headerItem }}
             />
@@ -304,6 +305,7 @@ const ScrollBoard = forwardRef<any, any>(({ onClick, options = {}, data, onMouse
           className="rows"
           style={{
             height: `${size?.height - (mergedConfig.header?.show ? mergedConfig.header?.height || 0 : 0)}px`,
+            ...(mergedConfig.textStyle || {}),
           }}
         >
           {rows.map((row, ri) => (
