@@ -5,10 +5,10 @@ import { PieChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
-import { convertEChartColors, getChartColors } from '@/examples/shared';
+import { convertEChartColors, formJsonToLegendData, getChartColors } from '@/examples/shared';
 
 use([CanvasRenderer, PieChart, GridComponent, TitleComponent, PolarComponent, BarChart]);
-/** 玫瑰饼图 */
+/** 分类玫瑰图 */
 const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<ECharts>();
@@ -39,25 +39,24 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
     return a + b.value * 1;
   }, 0);
 
-  const bgColor = '#001037';
   const chartOptions = useMemo(() => {
-    const { pieStyle, grid, title } = options;
+    const { pieStyle, grid, title, legend, series = {} } = options;
     const pieStyleColor = convertEChartColors(pieStyle.color);
-    const nameStyle = title?.nameStyle?.textStyle ? { ...title.nameStyle.textStyle, padding: [title.nameStyle.padding, 0] } : {};
     return {
       color: getChartColors(grid.colors),
       // tooltip: {
       //     trigger: 'item'
       // },
+      legend: formJsonToLegendData(legend),
       title: {
         show: !!title.show,
-        text: '{name|' + title?.nameStyle?.name + '}\n{val|' + formatNumber(total) + '}',
+        text: '{name|' + title?.name + '}\n{val|' + formatNumber(total) + (title.unit || '') + '}',
         top: 'center',
         left: 'center',
         textStyle: {
           rich: {
-            name: nameStyle,
-            val: title?.valueStyle?.textStyle || {},
+            name: { ...(title?.nameStyle || {}), padding: [0, 0, title?.paddingBottom || 0, 0] },
+            val: title?.valueStyle,
           },
         },
       },
@@ -77,13 +76,7 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
               // borderWidth: 2,
             },
           },
-          labelLine: {
-            normal: {
-              length: 20,
-              length2: 60,
-              lineStyle: {},
-            },
-          },
+          ...series,
           label: {
             normal: {
               formatter: (params) => {
@@ -95,7 +88,7 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
                   color: 'inherit',
                 },
                 name: {
-                  fontSize: 18,
+                  fontSize: 14,
                   padding: [0, 0, 0, 10],
                   color: '#fefefe',
                 },

@@ -288,6 +288,10 @@ export const resourceData: IResourceData[] = [
         cover: '/menuCover/媒体/自定义背景块.png',
         type: 'BgBox',
       },
+      {
+        name: 'Iframe',
+        cover: '/menuCover/媒体/iframe.png',
+      },
     ],
   },
   {

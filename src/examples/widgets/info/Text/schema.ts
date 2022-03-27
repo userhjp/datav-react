@@ -16,7 +16,7 @@ export const TextSchema: ISchema = {
         color: '#fff',
       },
       properties: {
-        testStyle: textSchema,
+        testStyle: textSchema(),
         fontStyle: {
           type: 'string',
           title: '字体样式',

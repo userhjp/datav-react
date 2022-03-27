@@ -1,5 +1,5 @@
 import { Input } from '@formily/antd';
-import { observer } from '@formily/react';
+import { observer, useField } from '@formily/react';
 import { useDebounceFn } from 'ahooks';
 import React, { useEffect, useState } from 'react';
 import { SketchPicker } from 'react-color';
@@ -42,6 +42,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
   const [visible, setVisible] = useState(false);
   const [color, setColor] = useState<any>();
   const [colorText, setColorText] = useState<any>(value || '');
+  const field = useField();
   const { run } = useDebounceFn(() => onChange(colorText), {
     wait: 500,
   });

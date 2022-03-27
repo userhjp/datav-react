@@ -69,7 +69,7 @@ export const echartGridSchema: ISchema = {
             unit: 'px',
             min: 0,
           },
-          default: 50,
+          default: 40,
         },
         right: {
           type: 'number',
@@ -97,7 +97,7 @@ export const echartGridSchema: ISchema = {
             unit: 'px',
             min: 0,
           },
-          default: 50,
+          default: 40,
         },
         bottom: {
           type: 'number',
@@ -111,7 +111,7 @@ export const echartGridSchema: ISchema = {
             unit: 'px',
             min: 0,
           },
-          default: 50,
+          default: 40,
         },
       },
     },

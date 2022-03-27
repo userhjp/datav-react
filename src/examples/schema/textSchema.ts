@@ -1,12 +1,12 @@
 import { ISchema } from '@formily/react';
 import { fontFamilys, fontWeights } from '../shared';
 
-export const textSchema = (type: 'object' | 'void' = 'void'): ISchema => ({
+export const textSchema = (type: 'object' | 'void' = 'void', title = '文本样式'): ISchema => ({
   type,
   properties: {
     void: {
       type: 'void',
-      title: '文本样式',
+      title,
       'x-decorator': 'FormItem',
       'x-component': 'FormGrid',
       'x-component-props': {

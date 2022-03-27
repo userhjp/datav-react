@@ -96,6 +96,8 @@ export const pageSchema: ISchema = {
               marginBottom: 8,
               borderBottom: 'solid 1px #333',
             },
+            tooltip: '画布组件拖拽时每次移动栅格',
+            tooltipLayout: 'text',
           },
           'x-component': 'NumberPicker',
           'x-component-props': {

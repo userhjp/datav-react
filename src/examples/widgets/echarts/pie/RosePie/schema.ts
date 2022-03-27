@@ -4,6 +4,7 @@ import { textSchema } from '@/examples/schema/textSchema';
 import { seriesColorSchema } from '@/examples/schema/echarts/series/seriesColorSchema';
 import { echartTitleSchema } from '@/examples/schema/echarts/echartTitleSchema';
 import { fontWeights } from '@/examples/shared';
+import { legendSchema } from '@/examples/schema/echarts/legendSchema';
 
 export const RosePieSchema: ISchema = {
   type: 'object',
@@ -14,12 +15,6 @@ export const RosePieSchema: ISchema = {
       top: 0,
       bottom: 0,
     },
-    valueStyle: {
-      textStyle: {
-        fontSize: 30,
-        fontWeight: 'bolder',
-      },
-    },
   },
   properties: {
     grid: echartGridSchema,
@@ -27,74 +22,60 @@ export const RosePieSchema: ISchema = {
       type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
-        title: '类别标题',
+        title: '图表标题',
         switch: true,
         defaultSwitch: true,
         noPadding: true,
       },
-      properties: {
+      default: {
         nameStyle: {
-          type: 'object',
-          'x-component': 'MyFormCollapse',
-          'x-component-props': {
-            title: '标题名称',
-            switch: true,
-            defaultSwitch: true,
-          },
-          properties: {
-            name: {
-              type: 'string',
-              title: '名称',
-              'x-decorator': 'FormItem',
-              'x-component': 'Input',
-              'x-component-props': {
-                placeholder: '请输入',
-                min: 0,
-              },
-              default: '总量',
-            },
-            padding: {
-              type: 'string',
-              title: '间距',
-              'x-decorator': 'FormItem',
-              'x-component': 'NumberPicker',
-              'x-component-props': {
-                placeholder: '请输入',
-                min: 0,
-              },
-              default: 10,
-            },
-            voidTextStyle: textSchema(),
-          },
-          default: {
-            textStyle: {
-              fontSize: 14,
-              color: '#fefefe',
-            },
-          },
+          fontSize: 14,
+          color: '#fefefe',
         },
         valueStyle: {
-          type: 'object',
-          'x-component': 'MyFormCollapse',
-          'x-component-props': {
-            title: '数值样式',
-            switch: true,
-            defaultSwitch: true,
-          },
-          properties: {
-            voidTextStyle: textSchema(),
-          },
-          default: {
-            textStyle: {
-              fontSize: 32,
-              fontWeight: 'bolder',
-              color: '#fefefe',
-            },
-          },
+          fontSize: 16,
+          color: '#fefefe',
         },
       },
+      properties: {
+        name: {
+          type: 'string',
+          title: '名称',
+          'x-decorator': 'FormItem',
+          'x-component': 'Input',
+          'x-component-props': {
+            placeholder: '请输入',
+            min: 0,
+          },
+          default: '总量',
+        },
+        paddingBottom: {
+          type: 'string',
+          title: '间距',
+          'x-decorator': 'FormItem',
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            min: 0,
+          },
+          default: 10,
+        },
+        voidTextStyle: textSchema('object', '标题样式'),
+        unit: {
+          type: 'string',
+          title: '数值后缀',
+          'x-decorator': 'FormItem',
+          'x-component': 'Input',
+          'x-component-props': {
+            placeholder: '请输入',
+          },
+          default: '个',
+        },
+        valueStyle: textSchema('object', '数值样式'),
+      },
     },
-    pieStyle: {
+    legend: legendSchema,
+    series: {
       type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
@@ -102,34 +83,67 @@ export const RosePieSchema: ISchema = {
         noPadding: true,
       },
       properties: {
+        labelLine: {
+          type: 'object',
+          'x-component': 'MyFormCollapse',
+          'x-component-props': {
+            title: '引导线配置',
+            switch: true,
+            defaultSwitch: true,
+            noPadding: true,
+          },
+          properties: {
+            voidLen: {
+              type: 'void',
+              title: '线长配置',
+              'x-decorator': 'FormItem',
+              'x-component': 'FormGrid',
+              'x-component-props': {
+                minColumns: 2,
+                rowGap: 0,
+              },
+              properties: {
+                length: {
+                  type: 'string',
+                  'x-decorator': 'FormItem',
+                  'x-decorator-props': {
+                    feedbackText: '线一长度',
+                  },
+                  'x-component': 'NumberPicker',
+                  'x-component-props': {
+                    placeholder: '请输入',
+                    min: 0,
+                  },
+                  default: 20,
+                },
+                length2: {
+                  type: 'string',
+                  'x-decorator': 'FormItem',
+                  'x-decorator-props': {
+                    feedbackText: '线二长度',
+                  },
+                  'x-component': 'NumberPicker',
+                  'x-component-props': {
+                    placeholder: '请输入',
+                    min: 0,
+                  },
+                  default: 40,
+                },
+              },
+            },
+            smooth: {
+              type: 'boolean',
+              title: '是否平滑',
+              'x-decorator': 'FormItem',
+              'x-component': 'Switch',
+              default: false,
+            },
+          },
+        },
         color: seriesColorSchema,
       },
       default: {
         color: ['#75d6ff', '#1179ff'],
-      },
-    },
-    textStyle: {
-      type: 'object',
-      'x-component': 'MyFormCollapse',
-      'x-component-props': {
-        title: '文本样式',
-        switch: true,
-        defaultSwitch: true,
-      },
-      properties: {
-        voidTextStyle: textSchema(),
-      },
-    },
-    valueStyle: {
-      type: 'object',
-      'x-component': 'MyFormCollapse',
-      'x-component-props': {
-        title: '百分比值',
-        switch: true,
-        defaultSwitch: true,
-      },
-      properties: {
-        voidTextStyle: textSchema(),
       },
     },
   },
