@@ -3,7 +3,7 @@ import { IWidgetProps } from '@/datav/react/interface';
 import { DatasetComponent, GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import { BarChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
-import { useDebounceEffect, useSize } from 'ahooks';
+import { useDebounceEffect, useSize, useWhyDidYouUpdate } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import {
   convert2Ddata,
@@ -50,7 +50,6 @@ const YCategoryBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events 
 
   useLayoutEffect(() => {
     options.dataset = dataset;
-    console.log(options.dataset);
     const { legend = {}, series = [], tooltip = {}, xAxis = {}, yAxis = {}, grid = {} } = options;
     if (!series.length) return;
     options.xAxis = formJsonToxAxisData(xAxis);

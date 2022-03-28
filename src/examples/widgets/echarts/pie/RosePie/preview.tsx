@@ -41,7 +41,7 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
 
   const chartOptions = useMemo(() => {
     const { pieStyle, grid, title, legend, series = {} } = options;
-    const pieStyleColor = convertEChartColors(pieStyle.color);
+    // const pieStyleColor = convertEChartColors(pieStyle.color);
     return {
       color: getChartColors(grid.colors),
       // tooltip: {

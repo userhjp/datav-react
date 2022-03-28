@@ -18,7 +18,7 @@ type ICreateWidgetConfig = {
     /** 默认数据 */
     value: IWidgetData;
     /** 字段描述映射 */
-    fields: Record<string, string>;
+    fields?: Record<string, string>;
   };
   events: {
     changed: {
