@@ -14,7 +14,7 @@ registerWidgetConfig(Title, {
       url: '超链接地址',
     },
     value: {
-      title: '标题内容',
+      title: '',
       url: '',
     },
   },

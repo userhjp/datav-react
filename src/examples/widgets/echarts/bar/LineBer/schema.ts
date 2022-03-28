@@ -7,10 +7,12 @@ import { lineBarSeriesSchema } from '@/examples/schema/echarts/series/lineBarSer
 import { tooltipSchema } from '@/examples/schema/echarts/tooltipSchema';
 import { axisSchema } from '@/examples/schema/echarts/axisSchema';
 import { ISchema } from '@formily/react';
+import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 
 export const LineBerSchema: ISchema = {
   type: 'object',
   properties: {
+    colors: colorsSchema,
     grid: echartGridSchema,
     xAxis: axisSchema('category', 'X轴'),
     yAxis: axisSchema('value', 'Y轴'),

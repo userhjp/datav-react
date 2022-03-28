@@ -1,6 +1,7 @@
 import { animationSchema } from '@/examples/schema/echarts/animationSchema';
 import { axisSchema } from '@/examples/schema/echarts/axisSchema';
 import { barSeriesStyleSchema } from '@/examples/schema/echarts/barSeriesStyleSchema';
+import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
 import { legendSchema } from '@/examples/schema/echarts/legendSchema';
 import { barSeriesSchema } from '@/examples/schema/echarts/series/barSeriesSchema';
@@ -10,6 +11,7 @@ import { ISchema } from '@formily/react';
 export const YCategoryBarSchema: ISchema = {
   type: 'object',
   properties: {
+    colors: colorsSchema,
     grid: echartGridSchema,
     xAxis: axisSchema('value', 'X轴'),
     yAxis: axisSchema('category', 'Y轴'),

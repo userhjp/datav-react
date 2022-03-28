@@ -30,7 +30,7 @@ export const radarSchema: ISchema = {
         rowGap: 0,
       },
       properties: {
-        axisNameGap: {
+        nameGap: {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {

@@ -1255,7 +1255,7 @@
             "fontFamily": "Microsoft Yahei",
             "fontWeight": "normal"
           },
-          "axisNameGap": 15,
+          "nameGap": 15,
           "splitNumber": 5,
           "shape": "polygon",
           "axisLine": {

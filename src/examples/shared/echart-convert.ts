@@ -25,12 +25,6 @@ export function formJsonToxAxisData(xAxis: any = {}) {
     delete XlineStyle['dashedLength'];
     delete XlineStyle['dashedSpace'];
   }
-
-  const Xname = Path.getIn(xAxis, 'nameTextStyle.name');
-  if (Xname) Path.setIn(xAxis, 'name', Xname || '');
-
-  const XnameLocation = Path.getIn(xAxis, 'nameTextStyle.nameLocation');
-  Path.setIn(xAxis, 'nameLocation', XnameLocation);
   return xAxis;
 }
 
@@ -43,11 +37,6 @@ export function formJsonToyAxisData(yAxis: any = {}) {
     delete YlineStyle['dashedSpace'];
   }
 
-  const yname = Path.getIn(yAxis, 'nameTextStyle.name');
-  if (yname) Path.setIn(yAxis, 'name', yname || '');
-
-  const ynameLocation = Path.getIn(yAxis, 'nameTextStyle.nameLocation');
-  Path.setIn(yAxis, 'nameLocation', ynameLocation);
   if (yAxis.max === 'auto') yAxis.max = null;
   if (yAxis.min === 'auto') yAxis.min = null;
   return yAxis;
@@ -89,7 +78,7 @@ export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | '
 /** Echarts Series 数据差异处理 */
 export function formDataToSeriesData(options: { [key: string]: any }): any[] {
   const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], areaStyle = {} } = options;
-  options.color = getChartColors(options.grid.colors);
+  options.color = getChartColors(options.colors);
   // 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
   // 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
   // options.colorBy = 'series';
@@ -132,16 +121,6 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
     }
     return f;
   });
-  return options.series;
-}
-
-/** Echarts 漏斗图Series 数据差异处理 */
-export function formDataToFunnelSeriesData(options: { [key: string]: any }, data: { name: string; value: string }[]): any[] {
-  const { series = {} } = options;
-  options.legend = formJsonToLegendData(options.legend);
-  options.color = getChartColors(options.grid.colors);
-  series.data = data;
-  options.series = [series];
   return options.series;
 }
 

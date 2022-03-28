@@ -3,6 +3,7 @@ import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
 import { textSchema } from '@/examples/schema/textSchema';
 import { tooltipSchema } from '@/examples/schema/echarts/tooltipSchema';
 import { singleAxisSchema } from '@/examples/schema/echarts/singleAxisSchema';
+import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 
 export const HorizontalScatterSchema: ISchema = {
   type: 'object',
@@ -21,6 +22,7 @@ export const HorizontalScatterSchema: ISchema = {
     },
   },
   properties: {
+    colors: colorsSchema,
     grid: echartGridSchema,
     tooltip: tooltipSchema(),
     title: {

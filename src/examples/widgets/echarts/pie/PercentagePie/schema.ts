@@ -2,6 +2,7 @@ import { ISchema } from '@formily/react';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
 import { textSchema } from '@/examples/schema/textSchema';
 import { seriesColorSchema } from '@/examples/schema/echarts/series/seriesColorSchema';
+import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 
 export const PercentagePieSchema: ISchema = {
   type: 'object',
@@ -14,6 +15,7 @@ export const PercentagePieSchema: ISchema = {
     },
   },
   properties: {
+    colors: colorsSchema,
     grid: echartGridSchema,
     pieStyle: {
       type: 'object',

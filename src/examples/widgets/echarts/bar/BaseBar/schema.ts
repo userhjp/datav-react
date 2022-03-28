@@ -6,10 +6,12 @@ import { barSeriesSchema } from '@/examples/schema/echarts/series/barSeriesSchem
 import { tooltipSchema } from '@/examples/schema/echarts/tooltipSchema';
 import { axisSchema } from '@/examples/schema/echarts/axisSchema';
 import { ISchema } from '@formily/react';
+import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 
 export const BaseBarSchema: ISchema = {
   type: 'object',
   properties: {
+    colors: colorsSchema,
     grid: echartGridSchema,
     xAxis: axisSchema('category', 'X轴'),
     yAxis: axisSchema('value', 'Y轴'),

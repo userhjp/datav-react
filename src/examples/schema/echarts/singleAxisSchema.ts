@@ -78,42 +78,42 @@ export const singleAxisSchema: ISchema = {
         },
       },
     },
-    gridVoid: {
-      type: 'void',
-      'x-component': 'MyFormCollapse',
-      'x-component-props': {
-        title: '网格样式',
-        switch: true,
-      },
-      properties: {
-        backgroundColor: {
-          type: 'string',
-          title: '网格背景色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          default: 'rgba(0,0,0,0.2)',
-        },
-        borderColor: {
-          type: 'string',
-          title: '边框颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          default: 'rgba(0,0,0,0.2)',
-        },
-        borderWidth: {
-          type: 'number',
-          title: '网格线宽',
-          'x-decorator': 'FormItem',
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 0,
-          },
-          default: 1,
-        },
-      },
-    },
+    // gridVoid: {
+    //   type: 'void',
+    //   'x-component': 'MyFormCollapse',
+    //   'x-component-props': {
+    //     title: '网格样式',
+    //     switch: true,
+    //   },
+    //   properties: {
+    //     backgroundColor: {
+    //       type: 'string',
+    //       title: '网格背景色',
+    //       'x-decorator': 'FormItem',
+    //       'x-component': 'ColorPicker',
+    //       default: 'rgba(0,0,0,0.2)',
+    //     },
+    //     borderColor: {
+    //       type: 'string',
+    //       title: '边框颜色',
+    //       'x-decorator': 'FormItem',
+    //       'x-component': 'ColorPicker',
+    //       default: 'rgba(0,0,0,0.2)',
+    //     },
+    //     borderWidth: {
+    //       type: 'number',
+    //       title: '网格线宽',
+    //       'x-decorator': 'FormItem',
+    //       'x-component': 'NumberPicker',
+    //       'x-component-props': {
+    //         placeholder: '请输入',
+    //         unit: 'px',
+    //         min: 0,
+    //       },
+    //       default: 1,
+    //     },
+    //   },
+    // },
     colors: colorsSchema,
   },
 };

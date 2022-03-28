@@ -5,6 +5,7 @@ import { seriesColorSchema } from '@/examples/schema/echarts/series/seriesColorS
 import { echartTitleSchema } from '@/examples/schema/echarts/echartTitleSchema';
 import { fontWeights } from '@/examples/shared';
 import { legendSchema } from '@/examples/schema/echarts/legendSchema';
+import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 
 export const RosePieSchema: ISchema = {
   type: 'object',
@@ -17,6 +18,7 @@ export const RosePieSchema: ISchema = {
     },
   },
   properties: {
+    colors: colorsSchema,
     grid: echartGridSchema,
     title: {
       type: 'object',

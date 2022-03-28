@@ -142,12 +142,12 @@ export const legendIcons = [
   { value: 'triangle', label: '三矩形', icon: 'shape-triangle' },
   { value: 'diamond', label: '菱形', icon: 'shape-diamond' },
   { value: 'arrow', label: '箭头', icon: 'shape-arrow' },
-  { value: 'emptyCircle', label: '空心圆形', icon: 'shape-circle' },
-  { value: 'emptyRect', label: '空心矩形', icon: 'shape-rect' },
-  { value: 'emptyRoundRect', label: '空心圆角矩形', icon: 'shape-round-rect' },
-  { value: 'emptyTriangle', label: '空心三角形', icon: 'shape-triangle' },
-  { value: 'emptyDiamond', label: '空心菱形', icon: 'shape-diamond' },
-  { value: 'emptyArrow', label: '空心箭头', icon: 'shape-arrow' },
+  // { value: 'emptyCircle', label: '空心圆形', icon: 'shape-circle' },
+  // { value: 'emptyRect', label: '空心矩形', icon: 'shape-rect' },
+  // { value: 'emptyRoundRect', label: '空心圆角矩形', icon: 'shape-round-rect' },
+  // { value: 'emptyTriangle', label: '空心三角形', icon: 'shape-triangle' },
+  // { value: 'emptyDiamond', label: '空心菱形', icon: 'shape-diamond' },
+  // { value: 'emptyArrow', label: '空心箭头', icon: 'shape-arrow' },
 ];
 
 export const symbolTyles = [

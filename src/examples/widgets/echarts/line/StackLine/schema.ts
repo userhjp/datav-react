@@ -1,6 +1,7 @@
 import { animationSchema } from '@/examples/schema/echarts/animationSchema';
 import { areaStyleSchema } from '@/examples/schema/echarts/areaStyleSchema';
 import { axisSchema } from '@/examples/schema/echarts/axisSchema';
+import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
 import { legendSchema } from '@/examples/schema/echarts/legendSchema';
 import { lineSeriesStyleSchema } from '@/examples/schema/echarts/lineSeriesStyleSchema';
@@ -11,6 +12,7 @@ import { ISchema } from '@formily/react';
 export const StackLineSchema: ISchema = {
   type: 'object',
   properties: {
+    colors: colorsSchema,
     grid: echartGridSchema,
     xAxis: axisSchema('category', 'X轴'),
     yAxis: axisSchema('value', 'Y轴'),

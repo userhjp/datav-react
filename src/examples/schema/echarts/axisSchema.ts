@@ -16,7 +16,7 @@ export const axisSchema = (type: 'category' | 'value', title: string): ISchema =
   },
   properties: {
     ...AXISTYPE[type],
-    nameTextStyle: nameTextStyleSchema(false, { category: '类目轴', value: '数值轴', time: '时间轴' }[type]),
+    nameTextStyle: nameTextStyleSchema,
     axisLine: axisLineSchema,
     axisTick: axisTickSchema,
     axisLabel: axisLabelSchema,

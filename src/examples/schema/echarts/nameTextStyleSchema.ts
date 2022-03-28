@@ -1,26 +1,24 @@
 import { ISchema } from '@formily/react';
-import { fontWeights, titleLocations } from '../../shared';
+import { titleLocations } from '../../shared';
 import { textSchema } from '../textSchema';
 
 /** 轴标题 */
-export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): ISchema => ({
-  type: 'object',
+export const nameTextStyleSchema = {
+  type: 'void',
   'x-component': 'MyFormCollapse',
   'x-component-props': {
     title: '轴标题',
-    switch: true,
-    defaultSwitch,
   },
   properties: {
     name: {
       type: 'string',
-      title,
+      title: '标题',
       'x-decorator': 'FormItem',
       'x-component': 'Input',
       'x-component-props': {
         placeholder: '请输入',
       },
-      default: '标题',
+      default: '',
     },
     nameLocation: {
       type: 'string',
@@ -54,7 +52,7 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
           },
           default: 0,
         },
-        axisNameGap: {
+        nameGap: {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
@@ -70,6 +68,6 @@ export const nameTextStyleSchema = (defaultSwitch = true, title = '轴标题'): 
         },
       },
     },
-    voidTextStyle: textSchema(),
+    nameTextStyle: textSchema('object'),
   },
-});
+};

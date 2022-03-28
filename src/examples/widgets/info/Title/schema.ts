@@ -9,6 +9,13 @@ export const TitleSchema: ISchema = {
     color: '#fff',
   },
   properties: {
+    content: {
+      type: 'string',
+      title: '文本内容',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      default: '标题内容',
+    },
     justifyContent: {
       type: 'string',
       title: '对齐方式',
@@ -36,16 +43,7 @@ export const TitleSchema: ISchema = {
       },
       default: '0',
     },
-    textStyle: {
-      type: 'void',
-      'x-component': 'MyFormCollapse',
-      'x-component-props': {
-        title: '文本样式',
-      },
-      properties: {
-        voidTextStyle: textSchema(),
-      },
-    },
+    textStyle: textSchema(),
     backgroundStyle: {
       type: 'object',
       'x-component': 'MyFormCollapse',

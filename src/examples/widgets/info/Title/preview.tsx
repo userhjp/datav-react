@@ -18,7 +18,7 @@ const Title: React.FC<IWidgetProps> = (props) => {
 
   return (
     <div style={style} className={`widget-title-comp ${linkUrl ? 'cursor_p' : ''}`} onClick={linkUrl ? goPath : null}>
-      <span>{props.data?.title}</span>
+      <span>{props.options?.content || props.data?.title}</span>
     </div>
   );
 };
