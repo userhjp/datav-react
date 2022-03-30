@@ -30,7 +30,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     const screen = useScreen();
     const form = useMemo(() => {
       return createForm<IWidgetSetting | IScreenProps>({
-        initialValues: currentNode || screen.props,
+        // initialValues: currentNode || screen.props,
         values: currentNode || screen.props,
         effects(form) {
           props.effects?.(form);
