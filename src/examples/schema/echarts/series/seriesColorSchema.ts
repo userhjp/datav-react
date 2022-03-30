@@ -23,7 +23,6 @@ export const seriesColorSchema: ISchema = {
         type: 'string',
         'x-decorator': 'FormItem',
         'x-component': 'ColorPicker',
-        default: '#1179ff',
       },
       remove: {
         type: 'void',
@@ -37,6 +36,9 @@ export const seriesColorSchema: ISchema = {
       type: 'void',
       title: '添加颜色',
       'x-component': 'ArrayItems.Addition',
+      'x-component-props': {
+        defaultValue: '#1179ff',
+      },
     },
   },
 };
