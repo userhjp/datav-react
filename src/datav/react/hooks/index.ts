@@ -11,3 +11,4 @@ export * from './useToolbar';
 export * from './useHover';
 export * from './useViewport';
 export * from './useDatavEvent';
+export * from './usePrefix';

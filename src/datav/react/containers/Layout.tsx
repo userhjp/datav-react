@@ -1,10 +1,11 @@
 import React, { useContext, Fragment, useRef, useLayoutEffect } from 'react';
 import { DesignerLayoutContext } from '../context';
 import { IDesignerLayoutProps } from '../types';
+import { useLayout } from '../hooks/useLayout';
 import cls from 'classnames';
 
 export const Layout: React.FC<IDesignerLayoutProps> = (props) => {
-  const layout = useContext(DesignerLayoutContext);
+  const layout = useLayout();
   const ref = useRef<HTMLDivElement>();
 
   useLayoutEffect(() => {

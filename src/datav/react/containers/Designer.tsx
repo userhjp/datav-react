@@ -9,8 +9,10 @@ import { Engine } from '../../core';
 import { LayerPanel, DesignHead, DragPanel, Drawing } from '../components';
 import { SettingsForm } from '../settings-form/SettingsForm';
 import '../styles.less';
+import { setNpmCDNRegistry } from '../settings-form/registry';
 
 GlobalRegistry.registerDesignerIcons(icons);
+setNpmCDNRegistry('//unpkg.com');
 export const Designer: React.FC<IDesignerProps> = (props) => {
   const engine = useDesigner();
   const ref = useRef<Engine>();

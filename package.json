@@ -23,6 +23,7 @@
     "@formily/core": "^2.0.18",
     "@formily/react": "^2.0.18",
     "@formily/reactive": "^2.0.18",
+    "@monaco-editor/react": "^4.4.1",
     "ahooks": "^3.3.0",
     "antd": "4.19.3",
     "array-move": "^4.0.0",
