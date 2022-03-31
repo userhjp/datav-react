@@ -19,11 +19,11 @@
     "**/*.{js,jsx,tsx,ts,less,md,json}": "npm run prettier"
   },
   "dependencies": {
-    "@formily/antd": "^2.0.17",
-    "@formily/core": "^2.0.17",
-    "@formily/react": "^2.0.17",
-    "@formily/reactive": "^2.0.17",
-    "ahooks": "^3.2.0",
+    "@formily/antd": "^2.0.18",
+    "@formily/core": "^2.0.18",
+    "@formily/react": "^2.0.18",
+    "@formily/reactive": "^2.0.18",
+    "ahooks": "^3.3.0",
     "antd": "4.19.3",
     "array-move": "^4.0.0",
     "axios": "^0.26.1",
