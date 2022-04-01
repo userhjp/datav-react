@@ -278,7 +278,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
             },
             snippetSuggestions: 'none', // 启用代码建议
             wordBasedSuggestions: false, // 控制是否应根据文档中的单词计算完成。默认为true。
-            wordWrap: 'wordWrapColumn', // 控制代码换行时机
+            wordWrap: 'off', // 控制代码换行时机
             cursorStyle: 'line', // 光标样式
             selectOnLineNumbers: true, // 单击行号时是否应选择相应的行？默认为true
             autoIndent: 'advanced', // 控制当用户键入、粘贴、移动或缩进行时，编辑器是否应自动调整缩进。默认为高级。
