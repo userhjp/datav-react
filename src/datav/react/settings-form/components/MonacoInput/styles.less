@@ -3,18 +3,26 @@
 .dv-monaco-input {
   position: relative;
   display: flex;
+  flex-direction: column;
   width: 100%;
   height: 100%;
   border: 1px solid @monaco-border-color;
   opacity: 0;
   transition: all 0.15s ease-in-out;
 
+  &.--read-only {
+    .margin,
+    .monaco-editor-background {
+      background-color: @monaco-bgcolor-readonly;
+    }
+  }
+
   &.loaded {
     opacity: 1;
   }
 
   &-view {
-    flex-grow: 2;
+    flex: 1;
     height: 100%;
   }
 
@@ -53,6 +61,77 @@
       &:hover {
         color: #1890ff;
       }
+    }
+  }
+
+  .filter-edit {
+    overflow: hidden;
+    transition: height 0.3s ease-out;
+  }
+  .fake-code {
+    height: 28px;
+    margin-bottom: 0;
+    padding-left: 8px;
+    color: #ccc;
+    font-family: Menlo-Regular, monospace;
+    line-height: 28px;
+    background: #0e1013;
+
+    .--keyword {
+      color: #569cd6;
+    }
+  }
+}
+
+.fullscreen-editor-dialog {
+  z-index: 10000;
+  overflow: hidden;
+
+  .ant-modal {
+    height: 90%;
+    padding: 0;
+  }
+
+  .ant-modal-header,
+  .ant-modal-content {
+    background-color: @monaco-fullscreen-dialog-bgcolor;
+    border-color: @m-input-border-color;
+  }
+
+  .ant-modal-title {
+    color: @m-text-color;
+  }
+
+  .ant-modal-close {
+    color: @m-text-color-grey;
+    &:hover {
+      color: @m-text-color;
+    }
+  }
+
+  .ant-modal-content,
+  .fullscreen-editor-wp {
+    height: 100%;
+  }
+
+  .fullscreen-editor {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+
+  .fake-code {
+    height: 28px;
+    margin-bottom: 0;
+    padding-left: 8px;
+    color: #ccc;
+    font-family: Menlo-Regular, monospace;
+    line-height: 28px;
+    background: #0e1013;
+
+    .--keyword {
+      color: #569cd6;
     }
   }
 }

@@ -1,5 +1,7 @@
 import * as monaco from 'monaco-editor';
 import { isObj, isArr } from '../../../../shared';
+import chromeTheme from './themes/chrome';
+import monokaiTheme from './themes/monokai';
 
 export type languageType = 'plaintext' | 'html' | 'javascript' | 'json' | 'sql';
 
@@ -40,7 +42,7 @@ export const defaultOpts: monaco.editor.IStandaloneEditorConstructionOptions = {
   // glyphMargin: false,
   renderLineHighlight: 'line', // 启用当前行高亮显示的渲染。默认为所有
   renderWhitespace: 'selection', // 启用空白的呈现。默认为“选择”。
-  scrollBeyondLastColumn: 5, // 使滚动可以超出最后一列多少列。默认为5。
+  scrollBeyondLastColumn: 0, // 使滚动可以超出最后一列多少列。默认为5。
 };
 
 export const registerDatavDarkTheme = () => {

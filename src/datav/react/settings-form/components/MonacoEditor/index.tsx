@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
+import cls from 'classnames';
 import {
   defaultOpts,
   equalsInputCode,
@@ -7,13 +8,14 @@ import {
   handleCodeInput,
   handleInputCode,
   languageType,
+  registerApiCompletion,
   registerDatavDarkTheme,
 } from './editor-config';
 import { copyText } from '../../../../shared';
 import { message, Modal } from 'antd';
 import { IconWidget } from '../../../components';
 import './index.less';
-import { format } from './format';
+import { usePrefix } from '@/datav/react/hooks';
 
 type MonacoEditorProps = Partial<{
   options: monaco.editor.IStandaloneEditorConstructionOptions;
@@ -26,6 +28,7 @@ type MonacoEditorProps = Partial<{
   className: string;
   height: number;
   value: any;
+  completions: string[];
   fullScreenTitle: string;
   fnName: string;
   onChange: (value: any) => void;
@@ -43,7 +46,9 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     fullScreenTitle,
     useMinimap = false,
     fnName = '',
+    completions = [],
   } = props;
+  const [loaded, setLoaded] = useState(false);
   const changedRef = useRef(false);
   const valueRef = useRef('');
   const themeName = registerDatavDarkTheme();
@@ -52,6 +57,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   const editor = useRef<monaco.editor.IStandaloneCodeEditor>();
   const fullEditor = useRef<monaco.editor.IStandaloneCodeEditor>();
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const prefix = usePrefix('monaco-input');
 
   const copyData = () => {
     if (editor.current) {
@@ -60,9 +66,9 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     }
   };
 
-  const changeHandler = (val: string) => {
+  const onChangeHandler = (value: string) => {
     changedRef.current = true;
-    valueRef.current = val;
+    valueRef.current = value;
   };
 
   const blurHandler = () => {
@@ -70,15 +76,6 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       const currentValue = editor.current.getValue();
       props.onChange && props.onChange(handleCodeInput(language, currentValue));
       if (props.autoFormat && currentValue) {
-        format(language, currentValue)
-          .then((content) => {
-            editor.current.setValue(content);
-          })
-          .catch(() => {
-            // setLoaded(true);
-          });
-      }
-      if (props.autoFormat) {
         formatDocument(editor.current, language);
       }
     }
@@ -104,15 +101,15 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       const ce = monaco.editor.create(domRef.current, opts);
       const inputCode = handleInputCode(language, value);
       ce.setValue(inputCode);
-      if (props.autoFormat) {
-        formatDocument(ce, language);
-      }
       if (height > 0) {
         domRef.current.style.height = `${height}px`;
       }
-      ce.onDidChangeModelContent(() => changeHandler(editor.current.getValue()));
+      ce.onDidChangeModelContent(() => onChangeHandler(ce.getValue()));
       ce.onDidBlurEditorText(blurHandler);
-
+      if (props.autoFormat && inputCode) {
+        formatDocument(ce, language);
+      }
+      setLoaded(true);
       editor.current = ce;
     }
 
@@ -138,17 +135,14 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       const inputCode = handleInputCode(language, value);
       editor.current.setValue(inputCode);
     }
-  }, [props.value]);
+  }, [value]);
 
   const openedFullModal = () => {
     const dom = sectionRef.current as HTMLElement;
     if (dom) {
       const ce = monaco.editor.create(dom, opts);
       ce.setValue(editor.current.getValue());
-      if (props.autoFormat) {
-        formatDocument(ce, language);
-      }
-      ce.onDidChangeModelContent(() => changeHandler(fullEditor.current.getValue()));
+      ce.onDidChangeModelContent(() => onChangeHandler(ce.getValue()));
       fullEditor.current = ce;
     }
   };
@@ -167,7 +161,13 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
           <span className="--keyword">function</span> {`${fnName} {`}
         </p>
       )}
-      <div ref={domRef} className={`datav-editor ${className} ${readOnly ? '--read-only' : ''}`}>
+      <div
+        ref={domRef}
+        className={cls(prefix, className, 'datav-editor', {
+          loaded,
+          '--read-only': readOnly,
+        })}
+      >
         <div className="datav-editor-actions">
           <IconWidget infer="Copy" className="action-btn" title="点击复制" onClick={copyData} />
           <IconWidget

@@ -1,3 +1,5 @@
+export { MonacoInput as MonacoEditor } from './MonacoInput';
+
 export * from './BgImg';
 export * from './ColorPicker';
 export * from './Divider';
@@ -7,7 +9,7 @@ export * from './USlider';
 export * from './WidgetInfo';
 export * from './ZoomMode';
 export * from './CutCover';
-export * from './MonacoEditor';
+// export * from './MonacoEditor';
 export * from './NumberPicker';
 export * from './ArrayTabs';
 export * from './MyFormCollapse';

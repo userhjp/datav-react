@@ -52,6 +52,7 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
         style: { position: 'fixed', marginTop: 40, height: 'calc(100% - 40px)' },
         width: 500,
         className: 'data-settings-drawer',
+        getContainer: false,
         onClose: () => {
           onChange && onChange(configForm.current);
         },

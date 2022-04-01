@@ -4,9 +4,8 @@ import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { parseExpression, parse } from '@babel/parser';
 import { format } from './format';
 import cls from 'classnames';
-import { defaultOpts, initMonaco } from './config';
+import { defaultOpts, handleCodeInput, handleInputCode, initMonaco } from './config';
 import { copyText, generateUUID } from '@/datav/shared';
-import { usePrefix } from '@/datav/react/hooks';
 import { IconWidget } from '@/datav/react/components';
 import { message, Modal } from 'antd';
 import './config';
@@ -17,12 +16,14 @@ export interface MonacoInputProps extends EditorProps {
   extraLib?: string;
   readOnly?: boolean;
   fullScreenTitle: string;
+  fnName?: string;
+  autoFormat?: boolean;
   onChange?: (value: string) => void;
 }
 
 export const MonacoInput: React.FC<MonacoInputProps> & {
   loader?: typeof loader;
-} = ({ className, language, defaultLanguage, width, readOnly, height, fullScreenTitle, onMount, onChange, ...props }) => {
+} = ({ className = '', language, defaultLanguage, width, readOnly, height, fullScreenTitle, fnName, onMount, onChange, ...props }) => {
   const [loaded, setLoaded] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const valueRef = useRef('');
@@ -39,7 +40,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const unmountedRef = useRef(false);
   const changedRef = useRef(false);
   const uidRef = useRef(generateUUID());
-  const prefix = usePrefix('monaco-input');
+  const prefix = 'dv-monaco-input';
   const input = props.value || props.defaultValue;
   const theme = 'dark';
 
@@ -143,7 +144,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const submit = () => {
     clearTimeout(submitRef.current);
     submitRef.current = setTimeout(() => {
-      onChange?.(valueRef.current);
+      onChange?.(handleCodeInput(language, valueRef.current));
     }, 1000);
   };
 
@@ -215,12 +216,9 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   realLanguage.current = /(?:javascript|typescript)/gi.test(computedLanguage.current) ? 'javascript' : computedLanguage.current;
 
   const closedFullModal = () => {
-    if (modalEditorRef.current) {
-      if (modalEditorRef.current && !readOnly) {
-        editorRef.current.setValue(modalEditorRef.current.getValue());
-        editorRef.current.focus();
-      }
-      modalEditorRef.current?.dispose();
+    if (modalEditorRef.current && !readOnly) {
+      editorRef.current.setValue(modalEditorRef.current.getValue());
+      editorRef.current.focus();
     }
   };
 
@@ -238,37 +236,37 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
         onCancel={() => setIsFullScreen(false)}
         afterClose={() => closedFullModal()}
       >
-        <Editor
-          value={editorRef.current?.getValue()}
-          theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
-          defaultLanguage={realLanguage.current}
-          language={realLanguage.current}
-          options={opts}
-          width="100%"
-          height="100%"
-          onMount={onModalMountHandler}
-        />
-        {/* <div className={`datav-editor fullscreen-editor ${readOnly ? '--read-only' : ''}`}>
+        <div className={cls('datav-editor fullscreen-editor', { '--read-only': readOnly })}>
           {fnName && (
             <p title="function filter(res) {" className="fake-code">
               <span className="--keyword">function</span> {`${fnName} {`}
             </p>
           )}
           <section
-            ref={sectionRef}
             style={{
               display: 'flex',
               position: 'relative',
               textAlign: 'initial',
               flex: 1,
             }}
-          />
+          >
+            <Editor
+              value={editorRef.current?.getValue()}
+              theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
+              defaultLanguage={realLanguage.current}
+              language={realLanguage.current}
+              options={opts}
+              width="100%"
+              height="100%"
+              onMount={onModalMountHandler}
+            />
+          </section>
           {fnName && (
             <p style={{}} className="fake-code">
               {'}'}
             </p>
           )}
-        </div> */}
+        </div>
       </Modal>
     );
   };
@@ -294,16 +292,20 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
       })}
       style={{ width, height }}
     >
-      <div className={prefix + '-view'}>
+      {fnName && (
+        <p title="function filter(res) {" className="fake-code">
+          <span className="--keyword">function</span> {`${fnName} {`}
+        </p>
+      )}
+      <div className={cls(prefix + '-view', { '--read-only': readOnly })}>
         <Editor
           {...props}
           theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
           defaultLanguage={realLanguage.current}
           language={realLanguage.current}
           options={opts}
-          value={input}
+          value={handleInputCode(language, input)}
           width="100%"
-          height="100%"
           onMount={onMountHandler}
         />
         <div className="monaco-editor-actions">
@@ -316,6 +318,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
           />
         </div>
       </div>
+      {fnName && <p className="fake-code">{'}'}</p>}
       {/* {renderHelpCode()} */}
       {renderFullModal()}
     </div>

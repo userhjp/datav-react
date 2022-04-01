@@ -4,7 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import Autoprefixer from 'autoprefixer';
 import Webpackbar from 'webpackbar';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
+// import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 import { Configuration } from 'webpack';
 import ESLintPlugin from 'eslint-webpack-plugin';
 
@@ -154,9 +154,9 @@ export const commonConfig: Configuration = {
         }
       ]
     }),
-    new MonacoWebpackPlugin( {
-      languages: ['json', 'javascript', 'typescript'],
-    }),
+    // new MonacoWebpackPlugin( {
+    //   languages: ['json', 'javascript', 'typescript'],
+    // }),
     new ESLintPlugin({
       exclude: ['node_modules', 'public'],
     })

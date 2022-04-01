@@ -2,7 +2,10 @@ import { loader } from '@monaco-editor/react';
 import chromeTheme from './themes/chrome';
 import monokaiTheme from './themes/monokai';
 import { format } from './format';
+import { isArr, isObj } from '@/datav/shared';
+import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 
+export type languageType = 'plaintext' | 'html' | 'javascript' | 'json' | 'sql' | string;
 let initialized = false;
 
 export const initMonaco = () => {
@@ -78,4 +81,45 @@ export const defaultOpts = {
   renderLineHighlight: 'line', // 启用当前行高亮显示的渲染。默认为所有
   renderWhitespace: 'selection', // 启用空白的呈现。默认为“选择”。
   scrollBeyondLastColumn: 5, // 使滚动可以超出最后一列多少列。默认为5。
+};
+
+export const handleInputCode = (languageId: languageType, code: string | any[] | { [key: string]: any }): string => {
+  let val = code;
+  if (isObj(val) || isArr(val)) {
+    val = JSON.stringify(val, null, 2);
+  }
+  return typeof val === 'string' ? val : `${val}`;
+};
+
+export const handleCodeInput = (languageId: languageType, code: string | any[] | { [key: string]: any }): any => {
+  if (languageId === 'json') {
+    if (isObj(code) || isArr(code)) {
+      return code;
+    }
+    let val = '';
+    try {
+      val = JSON.parse(code as string);
+    } catch (error) {
+      val = `${code}`;
+    }
+    return val;
+  } else {
+    return code;
+  }
+};
+
+export const equalsInputCode = (old: any, newData: any): boolean => {
+  const oldStr = typeof old === 'string' ? old : JSON.stringify(old);
+  const newStr = typeof newData === 'string' ? newData : JSON.stringify(newData);
+  const a = oldStr.replace(/\r|\n|\s/g, '');
+  const b = newStr.replace(/\r|\n|\s/g, '');
+  return a === b;
+};
+
+export const formatDocument = (editor: monaco.editor.IStandaloneCodeEditor, languageId: languageType) => {
+  if (languageId === 'sql') {
+    // todo
+  } else {
+    editor.getAction('editor.action.formatDocument').run();
+  }
 };
