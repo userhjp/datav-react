@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-// import * as monaco from 'monaco-editor';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import {
   defaultOpts,
@@ -14,7 +13,7 @@ import { copyText } from '../../../../shared';
 import { message, Modal } from 'antd';
 import { IconWidget } from '../../../components';
 import './index.less';
-import { useDebounceFn } from 'ahooks';
+import { format } from './format';
 
 type MonacoEditorProps = Partial<{
   options: monaco.editor.IStandaloneEditorConstructionOptions;
@@ -36,7 +35,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   const {
     language = 'json',
     lineNumbers = 'on',
-    wordWrap = 'on',
+    wordWrap = 'off',
     height = 240,
     className = '',
     readOnly = false,
@@ -45,6 +44,8 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
     useMinimap = false,
     fnName = '',
   } = props;
+  const changedRef = useRef(false);
+  const valueRef = useRef('');
   const themeName = registerDatavDarkTheme();
   const domRef = useRef<HTMLDivElement>();
   const sectionRef = useRef<HTMLDivElement>();
@@ -52,27 +53,31 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   const fullEditor = useRef<monaco.editor.IStandaloneCodeEditor>();
   const [isFullScreen, setIsFullScreen] = useState(false);
 
-  const { run } = useDebounceFn(() => changeHandler(), {
-    wait: 300,
-  });
-
   const copyData = () => {
-    if (editor) {
+    if (editor.current) {
       copyText(editor.current.getValue());
       message.success('复制成功');
     }
   };
 
-  const changeHandler = () => {
-    // if (editor.current && props.onChange) {
-    //   const val = editor.current.getValue();
-    //   props.onChange(handleCodeInput(language, val));
-    // }
+  const changeHandler = (val: string) => {
+    changedRef.current = true;
+    valueRef.current = val;
   };
+
   const blurHandler = () => {
-    if (editor && !readOnly) {
-      const val = editor.current.getValue();
-      props.onChange && props.onChange(handleCodeInput(language, val));
+    if (changedRef.current && !readOnly) {
+      const currentValue = editor.current.getValue();
+      props.onChange && props.onChange(handleCodeInput(language, currentValue));
+      if (props.autoFormat && currentValue) {
+        format(language, currentValue)
+          .then((content) => {
+            editor.current.setValue(content);
+          })
+          .catch(() => {
+            // setLoaded(true);
+          });
+      }
       if (props.autoFormat) {
         formatDocument(editor.current, language);
       }
@@ -85,7 +90,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       value: '',
       language,
       theme: themeName,
-      readOnly: props.readOnly,
+      readOnly,
       minimap: {
         enabled: useMinimap,
       },
@@ -105,7 +110,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       if (height > 0) {
         domRef.current.style.height = `${height}px`;
       }
-      ce.onDidChangeModelContent(run);
+      ce.onDidChangeModelContent(() => changeHandler(editor.current.getValue()));
       ce.onDidBlurEditorText(blurHandler);
 
       editor.current = ce;
@@ -118,8 +123,8 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   }, []);
 
   const closedFullModal = () => {
-    if (fullEditor) {
-      if (editor && !props.readOnly) {
+    if (fullEditor.current) {
+      if (editor.current && !readOnly) {
         editor.current.setValue(fullEditor.current.getValue());
         editor.current.focus();
       }
@@ -143,9 +148,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
       if (props.autoFormat) {
         formatDocument(ce, language);
       }
-      ce.onDidChangeModelContent(run);
-      ce.onDidBlurEditorText(blurHandler);
-
+      ce.onDidChangeModelContent(() => changeHandler(fullEditor.current.getValue()));
       fullEditor.current = ce;
     }
   };

@@ -1,28 +1,30 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Editor, { EditorProps, loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { parseExpression, parse } from '@babel/parser';
 import { format } from './format';
 import cls from 'classnames';
-import { initMonaco } from './config';
-import { generateUUID } from '@/datav/shared';
+import { defaultOpts, initMonaco } from './config';
+import { copyText, generateUUID } from '@/datav/shared';
 import { usePrefix } from '@/datav/react/hooks';
+import { IconWidget } from '@/datav/react/components';
+import { message, Modal } from 'antd';
 import './config';
 import './styles.less';
 
 export type Monaco = typeof monaco;
 export interface MonacoInputProps extends EditorProps {
-  helpLink?: string | boolean;
-  helpCode?: string;
-  helpCodeViewWidth?: number | string;
   extraLib?: string;
+  readOnly?: boolean;
+  fullScreenTitle: string;
   onChange?: (value: string) => void;
 }
 
 export const MonacoInput: React.FC<MonacoInputProps> & {
   loader?: typeof loader;
-} = ({ className, language, defaultLanguage, width, helpLink, helpCode, helpCodeViewWidth, height, onMount, onChange, ...props }) => {
+} = ({ className, language, defaultLanguage, width, readOnly, height, fullScreenTitle, onMount, onChange, ...props }) => {
   const [loaded, setLoaded] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(false);
   const valueRef = useRef('');
   const validateRef = useRef(null);
   const submitRef = useRef(null);
@@ -30,6 +32,8 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const extraLibRef = useRef<monaco.IDisposable>(null);
   const monacoRef = useRef<Monaco>();
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
+  const modalMonacoRef = useRef<Monaco>();
+  const modalEditorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
   const computedLanguage = useRef<string>(language || defaultLanguage);
   const realLanguage = useRef<string>('');
   const unmountedRef = useRef(false);
@@ -38,6 +42,15 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const prefix = usePrefix('monaco-input');
   const input = props.value || props.defaultValue;
   const theme = 'dark';
+
+  const opts = useMemo(() => {
+    return Object.assign({}, defaultOpts, props.options, {
+      tabSize: 2,
+      value: '',
+      language,
+      readOnly,
+    });
+  }, [props.options]);
 
   useEffect(() => {
     unmountedRef.current = false;
@@ -73,35 +86,36 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     return lang === 'javascript.expression' || lang === 'typescript.expression';
   };
 
-  // const renderHelper = () => {
-  //   const getHref = () => {
-  //     if (typeof helpLink === 'string') return helpLink;
-  //     if (isFileLanguage()) {
-  //       return 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript';
-  //     }
-  //     if (isExpLanguage()) {
-  //       return 'https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators';
-  //     }
-  //     return '';
-  //   };
-  //   if (helpLink === false) return null;
-  //   const href = getHref();
-  //   return (
-  //     href && (
-  //       <Tooltip title={'标题啊啊啊啊'}>
-  //         <div className={prefix + '-helper'}>
-  //           <a target="_blank" href={href} rel="noreferrer">
-  //             <IconWidget infer="Help" />
-  //           </a>
-  //         </div>
-  //       </Tooltip>
-  //     )
-  //   );
-  // };
-
   const onMountHandler = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
+    onMount?.(editor, monaco);
+    const model = editor.getModel();
+    const currentValue = editor.getValue();
+    model['getDesignerLanguage'] = () => computedLanguage.current;
+    if (currentValue) {
+      format(computedLanguage.current, currentValue)
+        .then((content) => {
+          editor.setValue(content);
+          setLoaded(true);
+        })
+        .catch(() => {
+          setLoaded(true);
+        });
+    } else {
+      setLoaded(true);
+    }
+    if (props.extraLib) {
+      updateExtraLib();
+    }
+    editor.onDidChangeModelContent(() => {
+      onChangeHandler(editor.getValue());
+    });
+  };
+
+  const onModalMountHandler = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
+    modalEditorRef.current = editor;
+    modalMonacoRef.current = monaco;
     onMount?.(editor, monaco);
     const model = editor.getModel();
     const currentValue = editor.getValue();
@@ -198,41 +212,79 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     validate();
   };
   computedLanguage.current = language || defaultLanguage;
-  realLanguage.current = /(?:javascript|typescript)/gi.test(computedLanguage.current) ? 'typescript' : computedLanguage.current;
+  realLanguage.current = /(?:javascript|typescript)/gi.test(computedLanguage.current) ? 'javascript' : computedLanguage.current;
 
-  const renderHelpCode = () => {
-    if (!helpCode) return null;
+  const closedFullModal = () => {
+    if (modalEditorRef.current) {
+      if (modalEditorRef.current && !readOnly) {
+        editorRef.current.setValue(modalEditorRef.current.getValue());
+        editorRef.current.focus();
+      }
+      modalEditorRef.current?.dispose();
+    }
+  };
+
+  const renderFullModal = () => {
     return (
-      <div className={prefix + '-view'} style={{ width: helpCodeViewWidth || '50%' }}>
+      <Modal
+        title={`${fullScreenTitle}${readOnly ? ' ( 只读 )' : ''}`}
+        width="80%"
+        style={{ top: 40 }}
+        bodyStyle={{ padding: '20px', height: '90%' }}
+        wrapClassName="fullscreen-editor-dialog"
+        footer={null}
+        visible={isFullScreen}
+        maskClosable={false}
+        onCancel={() => setIsFullScreen(false)}
+        afterClose={() => closedFullModal()}
+      >
         <Editor
-          value={helpCode}
+          value={editorRef.current?.getValue()}
           theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
           defaultLanguage={realLanguage.current}
           language={realLanguage.current}
-          options={{
-            ...props.options,
-            lineNumbers: 'off',
-            readOnly: true,
-            glyphMargin: false,
-            folding: false,
-            lineDecorationsWidth: 0,
-            lineNumbersMinChars: 0,
-            minimap: {
-              enabled: false,
-            },
-            tabSize: 2,
-            smoothScrolling: true,
-            scrollbar: {
-              verticalScrollbarSize: 5,
-              horizontalScrollbarSize: 5,
-              alwaysConsumeMouseWheel: false,
-            },
-          }}
+          options={opts}
           width="100%"
           height="100%"
+          onMount={onModalMountHandler}
         />
-      </div>
+        {/* <div className={`datav-editor fullscreen-editor ${readOnly ? '--read-only' : ''}`}>
+          {fnName && (
+            <p title="function filter(res) {" className="fake-code">
+              <span className="--keyword">function</span> {`${fnName} {`}
+            </p>
+          )}
+          <section
+            ref={sectionRef}
+            style={{
+              display: 'flex',
+              position: 'relative',
+              textAlign: 'initial',
+              flex: 1,
+            }}
+          />
+          {fnName && (
+            <p style={{}} className="fake-code">
+              {'}'}
+            </p>
+          )}
+        </div> */}
+      </Modal>
     );
+  };
+
+  const switchFullScreen = () => {
+    setIsFullScreen(!isFullScreen);
+    setTimeout(() => {
+      // openedFullModal();
+    }, 100);
+  };
+
+  const copyData = () => {
+    if (editorRef.current) {
+      copyText(editorRef.current.getValue());
+      message.success('复制成功');
+    }
   };
 
   return (
@@ -242,58 +294,30 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
       })}
       style={{ width, height }}
     >
-      {/* {renderHelper()} */}
       <div className={prefix + '-view'}>
         <Editor
           {...props}
           theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
           defaultLanguage={realLanguage.current}
           language={realLanguage.current}
-          options={{
-            ...props.options,
-            glyphMargin: false,
-            tabSize: 2,
-            smoothScrolling: true,
-
-            automaticLayout: true,
-            contextmenu: false,
-            fixedOverflowWidgets: true,
-            // fontFamily: 'Menlo-Regular, Monaco, Menlo, Consolas, "Ubuntu Mono", monospace',
-            formatOnPaste: true,
-            formatOnType: true,
-            lineDecorationsWidth: 0, // 为线条装饰保留的宽度（以像素为单位）默认10
-            lineHeight: 15,
-            lineNumbersMinChars: 5, // 控制行号的宽度，方法是为渲染至少一定数量的数字保留水平空间。默认为5。
-            minimap: {
-              enabled: false,
-            },
-            quickSuggestions: false,
-            roundedSelection: true, // 使用圆角边框渲染编辑器选择。默认为true
-            scrollBeyondLastLine: false, // 设置编辑器是否可以滚动到最后一行之后
-            scrollbar: {
-              verticalScrollbarSize: 5, // 滚动条
-              horizontalScrollbarSize: 5,
-              alwaysConsumeMouseWheel: false,
-              arrowSize: 0,
-            },
-            snippetSuggestions: 'none', // 启用代码建议
-            wordBasedSuggestions: false, // 控制是否应根据文档中的单词计算完成。默认为true。
-            wordWrap: 'off', // 控制代码换行时机
-            cursorStyle: 'line', // 光标样式
-            selectOnLineNumbers: true, // 单击行号时是否应选择相应的行？默认为true
-            autoIndent: 'advanced', // 控制当用户键入、粘贴、移动或缩进行时，编辑器是否应自动调整缩进。默认为高级。
-            // glyphMargin: false,
-            renderLineHighlight: 'line', // 启用当前行高亮显示的渲染。默认为所有
-            renderWhitespace: 'selection', // 启用空白的呈现。默认为“选择”。
-            scrollBeyondLastColumn: 5, // 使滚动可以超出最后一列多少列。默认为5。
-          }}
+          options={opts}
           value={input}
           width="100%"
           height="100%"
           onMount={onMountHandler}
         />
+        <div className="monaco-editor-actions">
+          <IconWidget infer="Copy" className="action-btn" title="点击复制" onClick={copyData} />
+          <IconWidget
+            infer="FullScreen"
+            className={`action-btn ${isFullScreen ? 'v-icon-fullscreen-exit' : 'v-icon-fullscreen'}`}
+            title={`${isFullScreen ? '退出全屏' : '全屏模式下编辑或查看'}`}
+            onClick={switchFullScreen}
+          />
+        </div>
       </div>
-      {renderHelpCode()}
+      {/* {renderHelpCode()} */}
+      {renderFullModal()}
     </div>
   );
 };
