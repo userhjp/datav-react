@@ -178,7 +178,7 @@ const DataConfig: React.FC<DataConfigProps> = (props) => {
                 component={[
                   MonacoEditor,
                   {
-                    language: 'javascript',
+                    language: 'typescript',
                     readOnly: false,
                     autoFormat: true,
                     height: 120,

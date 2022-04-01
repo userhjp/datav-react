@@ -3,12 +3,11 @@ import Editor, { EditorProps, loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { parseExpression, parse } from '@babel/parser';
 import { format } from './format';
-import cls from 'classnames';
-import { defaultOpts, handleCodeInput, handleInputCode, initMonaco } from './config';
+import { defaultOpts, formatDocument, handleCodeInput, handleInputCode, initMonaco } from './config';
 import { copyText, generateUUID } from '@/datav/shared';
 import { IconWidget } from '@/datav/react/components';
 import { message, Modal } from 'antd';
-import './config';
+import cls from 'classnames';
 import './styles.less';
 
 export type Monaco = typeof monaco;
@@ -28,12 +27,10 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const valueRef = useRef('');
   const validateRef = useRef(null);
-  const submitRef = useRef(null);
   const declarationRef = useRef<string[]>([]);
   const extraLibRef = useRef<monaco.IDisposable>(null);
   const monacoRef = useRef<Monaco>();
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
-  const modalMonacoRef = useRef<Monaco>();
   const modalEditorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
   const computedLanguage = useRef<string>(language || defaultLanguage);
   const realLanguage = useRef<string>('');
@@ -93,6 +90,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     onMount?.(editor, monaco);
     const model = editor.getModel();
     const currentValue = editor.getValue();
+    valueRef.current = currentValue;
     model['getDesignerLanguage'] = () => computedLanguage.current;
     if (currentValue) {
       format(computedLanguage.current, currentValue)
@@ -111,41 +109,22 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     }
     editor.onDidChangeModelContent(() => {
       onChangeHandler(editor.getValue());
+    });
+    editor.onDidBlurEditorText(() => {
+      if (props.autoFormat && valueRef.current) {
+        formatDocument(editor, language);
+      }
+      onChange?.(handleCodeInput(language, valueRef.current));
     });
   };
 
   const onModalMountHandler = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     modalEditorRef.current = editor;
-    modalMonacoRef.current = monaco;
-    onMount?.(editor, monaco);
-    const model = editor.getModel();
-    const currentValue = editor.getValue();
-    model['getDesignerLanguage'] = () => computedLanguage.current;
-    if (currentValue) {
-      format(computedLanguage.current, currentValue)
-        .then((content) => {
-          editor.setValue(content);
-          setLoaded(true);
-        })
-        .catch(() => {
-          setLoaded(true);
-        });
-    } else {
-      setLoaded(true);
-    }
-    if (props.extraLib) {
-      updateExtraLib();
-    }
+    const currentValue = editorRef.current.getValue();
+    editor.setValue(currentValue);
     editor.onDidChangeModelContent(() => {
       onChangeHandler(editor.getValue());
     });
-  };
-
-  const submit = () => {
-    clearTimeout(submitRef.current);
-    submitRef.current = setTimeout(() => {
-      onChange?.(handleCodeInput(language, valueRef.current));
-    }, 1000);
   };
 
   const validate = () => {
@@ -172,7 +151,6 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
               options: {},
             },
           ]);
-          submit();
         } catch (e) {
           declarationRef.current = editorRef.current.deltaDecorations(declarationRef.current, [
             {
@@ -197,7 +175,6 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
         }
       }, 240);
     } else {
-      submit();
       declarationRef.current = editorRef.current.deltaDecorations(declarationRef.current, [
         {
           range: new monacoRef.current.Range(1, 1, 1, 1),
@@ -271,13 +248,6 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     );
   };
 
-  const switchFullScreen = () => {
-    setIsFullScreen(!isFullScreen);
-    setTimeout(() => {
-      // openedFullModal();
-    }, 100);
-  };
-
   const copyData = () => {
     if (editorRef.current) {
       copyText(editorRef.current.getValue());
@@ -314,12 +284,11 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
             infer="FullScreen"
             className={`action-btn ${isFullScreen ? 'v-icon-fullscreen-exit' : 'v-icon-fullscreen'}`}
             title={`${isFullScreen ? '退出全屏' : '全屏模式下编辑或查看'}`}
-            onClick={switchFullScreen}
+            onClick={() => setIsFullScreen(!isFullScreen)}
           />
         </div>
       </div>
       {fnName && <p className="fake-code">{'}'}</p>}
-      {/* {renderHelpCode()} */}
       {renderFullModal()}
     </div>
   );

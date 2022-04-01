@@ -8,8 +8,8 @@ import { GlobalRegistry } from '../../core/registry';
 import { Engine } from '../../core';
 import { LayerPanel, DesignHead, DragPanel, Drawing } from '../components';
 import { SettingsForm } from '../settings-form/SettingsForm';
-import '../styles.less';
 import { setNpmCDNRegistry } from '../settings-form/registry';
+import '../styles.less';
 
 GlobalRegistry.registerDesignerIcons(icons);
 setNpmCDNRegistry('//unpkg.com');

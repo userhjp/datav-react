@@ -13,32 +13,32 @@ export const initMonaco = () => {
   loader.init().then((monaco) => {
     monaco.editor.defineTheme('monokai', monokaiTheme as any);
     monaco.editor.defineTheme('chrome-devtools', chromeTheme as any);
-    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-      target: monaco.languages.typescript.ScriptTarget.Latest,
-      allowNonTsExtensions: true,
-      moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
-      module: monaco.languages.typescript.ModuleKind.CommonJS,
-      noEmit: true,
-      esModuleInterop: true,
-      jsx: monaco.languages.typescript.JsxEmit.React,
-      reactNamespace: 'React',
-      allowJs: true,
-    });
+    // monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+    //   target: monaco.languages.typescript.ScriptTarget.Latest,
+    //   allowNonTsExtensions: true,
+    //   moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+    //   module: monaco.languages.typescript.ModuleKind.CommonJS,
+    //   noEmit: true,
+    //   esModuleInterop: true,
+    //   jsx: monaco.languages.typescript.JsxEmit.React,
+    //   reactNamespace: 'React',
+    //   allowJs: true,
+    // });
 
-    monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
-      noSemanticValidation: false,
-      noSyntaxValidation: true,
-    });
-    monaco.languages.registerDocumentFormattingEditProvider('typescript', {
-      async provideDocumentFormattingEdits(model) {
-        return [
-          {
-            text: await format(model['getDesignerLanguage']?.() || 'typescript', model.getValue()),
-            range: model.getFullModelRange(),
-          },
-        ];
-      },
-    });
+    // monaco.languages.typescript.typescriptDefaults.setDiagnosticsOptions({
+    //   noSemanticValidation: false,
+    //   noSyntaxValidation: true,
+    // });
+    // monaco.languages.registerDocumentFormattingEditProvider('typescript', {
+    //   async provideDocumentFormattingEdits(model) {
+    //     return [
+    //       {
+    //         text: await format(model['getDesignerLanguage']?.() || 'typescript', model.getValue()),
+    //         range: model.getFullModelRange(),
+    //       },
+    //     ];
+    //   },
+    // });
     initialized = true;
   });
 };
@@ -106,14 +106,6 @@ export const handleCodeInput = (languageId: languageType, code: string | any[] |
   } else {
     return code;
   }
-};
-
-export const equalsInputCode = (old: any, newData: any): boolean => {
-  const oldStr = typeof old === 'string' ? old : JSON.stringify(old);
-  const newStr = typeof newData === 'string' ? newData : JSON.stringify(newData);
-  const a = oldStr.replace(/\r|\n|\s/g, '');
-  const b = newStr.replace(/\r|\n|\s/g, '');
-  return a === b;
 };
 
 export const formatDocument = (editor: monaco.editor.IStandaloneCodeEditor, languageId: languageType) => {
