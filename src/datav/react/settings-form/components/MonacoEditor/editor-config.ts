@@ -1,7 +1,5 @@
 import * as monaco from 'monaco-editor';
 import { isObj, isArr } from '../../../../shared';
-import chromeTheme from './themes/chrome';
-import monokaiTheme from './themes/monokai';
 
 export type languageType = 'plaintext' | 'html' | 'javascript' | 'json' | 'sql';
 

@@ -10,13 +10,6 @@
   opacity: 0;
   transition: all 0.15s ease-in-out;
 
-  &.--read-only {
-    .margin,
-    .monaco-editor-background {
-      background-color: @monaco-bgcolor-readonly;
-    }
-  }
-
   &.loaded {
     opacity: 1;
   }
@@ -24,6 +17,13 @@
   &-view {
     flex: 1;
     height: 100%;
+
+    &.--read-only {
+      .margin,
+      .monaco-editor-background {
+        background-color: @monaco-bgcolor-readonly;
+      }
+    }
   }
 
   &-helper {
@@ -119,6 +119,13 @@
     flex-direction: column;
     width: 100%;
     height: 100%;
+    
+    &.--read-only {
+      .margin,
+      .monaco-editor-background {
+        background-color: @monaco-bgcolor-readonly;
+      }
+    }
   }
 
   .fake-code {

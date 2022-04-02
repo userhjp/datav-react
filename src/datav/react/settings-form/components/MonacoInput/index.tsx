@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Editor, { EditorProps, loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { parseExpression, parse } from '@babel/parser';
-import { format } from './format';
-import { defaultOpts, formatDocument, handleCodeInput, handleInputCode, initMonaco } from './config';
+import { format, formatDocument } from './format';
+import { defaultOpts, handleCodeInput, handleInputCode, initMonaco } from './config';
 import { copyText, generateUUID } from '@/datav/shared';
 import { IconWidget } from '@/datav/react/components';
 import { message, Modal } from 'antd';
@@ -40,6 +40,9 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const prefix = 'dv-monaco-input';
   const input = props.value || props.defaultValue;
   const theme = 'dark';
+
+  computedLanguage.current = language || defaultLanguage;
+  realLanguage.current = /(?:javascript|typescript)/gi.test(computedLanguage.current) ? 'javascript' : computedLanguage.current;
 
   const opts = useMemo(() => {
     return Object.assign({}, defaultOpts, props.options, {
@@ -84,6 +87,13 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     return lang === 'javascript.expression' || lang === 'typescript.expression';
   };
 
+  const copyData = () => {
+    if (editorRef.current) {
+      copyText(editorRef.current.getValue());
+      message.success('复制成功');
+    }
+  };
+
   const onMountHandler = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
@@ -99,7 +109,10 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
           setLoaded(true);
         })
         .catch(() => {
-          setLoaded(true);
+          setTimeout(() => {
+            formatDocument(editor, computedLanguage.current);
+            setLoaded(true);
+          }, 0);
         });
     } else {
       setLoaded(true);
@@ -112,16 +125,21 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     });
     editor.onDidBlurEditorText(() => {
       if (props.autoFormat && valueRef.current) {
-        formatDocument(editor, language);
+        format(computedLanguage.current, currentValue)
+          .then((content) => {
+            editor.setValue(content);
+          })
+          .catch(() => {
+            setTimeout(() => formatDocument(editorRef.current, computedLanguage.current), 0);
+          });
       }
       onChange?.(handleCodeInput(language, valueRef.current));
     });
   };
 
-  const onModalMountHandler = (editor: monaco.editor.IStandaloneCodeEditor, monaco: Monaco) => {
+  const onModalMountHandler = (editor: monaco.editor.IStandaloneCodeEditor) => {
     modalEditorRef.current = editor;
-    const currentValue = editorRef.current.getValue();
-    editor.setValue(currentValue);
+    editor.setValue(editorRef.current.getValue());
     editor.onDidChangeModelContent(() => {
       onChangeHandler(editor.getValue());
     });
@@ -189,8 +207,6 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     valueRef.current = value;
     validate();
   };
-  computedLanguage.current = language || defaultLanguage;
-  realLanguage.current = /(?:javascript|typescript)/gi.test(computedLanguage.current) ? 'javascript' : computedLanguage.current;
 
   const closedFullModal = () => {
     if (modalEditorRef.current && !readOnly) {
@@ -213,7 +229,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
         onCancel={() => setIsFullScreen(false)}
         afterClose={() => closedFullModal()}
       >
-        <div className={cls('datav-editor fullscreen-editor', { '--read-only': readOnly })}>
+        <div className={cls('fullscreen-editor', { '--read-only': readOnly })}>
           {fnName && (
             <p title="function filter(res) {" className="fake-code">
               <span className="--keyword">function</span> {`${fnName} {`}
@@ -246,13 +262,6 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
         </div>
       </Modal>
     );
-  };
-
-  const copyData = () => {
-    if (editorRef.current) {
-      copyText(editorRef.current.getValue());
-      message.success('复制成功');
-    }
   };
 
   return (

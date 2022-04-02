@@ -38,7 +38,7 @@ export const SchemaField = createSchemaField({
     WidgetInfo,
     ZoomMode: ZoomModeRadio,
     CutCover,
-    MonacoEditor: MonacoInput,
+    MonacoEditor,
     Switch,
     ArrayTabs,
     FormCollapse,

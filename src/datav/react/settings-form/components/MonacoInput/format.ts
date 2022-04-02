@@ -1,5 +1,8 @@
 import { parse } from '@babel/parser';
 import { getNpmCDNRegistry } from '../../registry';
+import { languageType } from './config';
+import type monaco from 'monaco-editor/esm/vs/editor/editor.api';
+
 interface IPrettierModule {
   default: {
     format(
@@ -38,4 +41,12 @@ export const format = async (language: string, source: string) => {
     }
     return source;
   });
+};
+
+export const formatDocument = (editor: monaco.editor.IStandaloneCodeEditor, languageId: languageType) => {
+  if (languageId === 'sql') {
+    // todo
+  } else {
+    editor.getAction('editor.action.formatDocument').run();
+  }
 };
