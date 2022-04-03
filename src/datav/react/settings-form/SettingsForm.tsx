@@ -90,6 +90,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                   <Tabs className="my-form-tab" animated={false} centered tabBarStyle={tabBarStyle}>
                     <Tabs.TabPane key="1" tab="属性">
                       <SchemaField
+                        key={currentNode.id}
                         components={props.components}
                         scope={scope}
                         schema={{

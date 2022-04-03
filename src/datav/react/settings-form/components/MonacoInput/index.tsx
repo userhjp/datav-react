@@ -38,7 +38,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const changedRef = useRef(false);
   const uidRef = useRef(generateUUID());
   const prefix = 'dv-monaco-input';
-  const input = props.value || props.defaultValue;
+  const input = handleInputCode(language, props.value || props.defaultValue);
   const theme = 'dark';
 
   computedLanguage.current = language || defaultLanguage;
@@ -244,6 +244,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
             }}
           >
             <Editor
+              {...props}
               value={editorRef.current?.getValue()}
               theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
               defaultLanguage={realLanguage.current}
@@ -283,7 +284,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
           defaultLanguage={realLanguage.current}
           language={realLanguage.current}
           options={opts}
-          value={handleInputCode(language, input)}
+          value={input}
           width="100%"
           onMount={onMountHandler}
         />
