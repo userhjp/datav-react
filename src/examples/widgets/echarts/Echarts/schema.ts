@@ -14,7 +14,7 @@ export const EChartsSchema: ISchema = {
         height: 400,
         fullScreenTitle: 'Echarts配置',
         className: 'filter-editor',
-        fnName: 'getOptions(resData, myChart, echarts)',
+        fnName: 'getOptions(data, myChart, echarts)',
       },
       default: `const orData = resData;
 const color = ['#38cafb', '#4caff9', '#4adeca', '#2aa7ee', '#0270f2', '#488cf7'];

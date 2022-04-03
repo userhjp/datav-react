@@ -47,7 +47,7 @@ export const handleInputCode = (languageId: languageType, code: string | any[] |
   if (isObj(val) || isArr(val)) {
     val = JSON.stringify(val, null, 2);
   }
-  return typeof val === 'string' ? val : `${val}`;
+  return typeof val === 'string' ? val : `${val || ''}`;
 };
 
 export const handleCodeInput = (languageId: languageType, code: string | any[] | { [key: string]: any }): any => {
