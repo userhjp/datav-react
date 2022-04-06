@@ -94,7 +94,7 @@ const Ruler: React.FC = observer(() => {
   }, [toolbar.toolbox.referline]);
 
   return (
-    <div className="canvas-ruler-wp">
+    <div className="canvas-ruler-wp" onClick={(e) => e.stopPropagation()}>
       <div ref={hRulerWpRef} className="ruler-wrapper h-container" style={{ transform: `translateX(-${viewport.scrollX}px)` }} />
       <div
         ref={vRulerWpRef}

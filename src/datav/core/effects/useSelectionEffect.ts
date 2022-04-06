@@ -12,7 +12,7 @@ export const useSelectionEffect = (engine: Engine) => {
     if (!el) {
       const canvasEl = target?.closest?.(`
         *[${engine.props.canvasNodeAttrName}],
-        [class="canvas-panel-wrap"]  
+        [class="canvas-panel-wrap"]
       `);
       if (canvasEl) {
         engine.operation.selection.clear();
