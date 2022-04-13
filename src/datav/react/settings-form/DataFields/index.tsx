@@ -160,9 +160,9 @@ const ReadOnlyEditor: React.FC<{ editorType: languageType }> = observer(({ edito
         language: editorType,
         readOnly: true,
         autoFormat: true,
-        height: 300,
+        height: 350,
         fullScreenTitle: '数据响应结果',
-        value: editorData || '',
+        value: (editorData as any) || '',
       }}
     />
   );

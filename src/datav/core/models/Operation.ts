@@ -70,17 +70,21 @@ export class Operation {
     comp.attr.y += 20;
     comp.id = generateUUID();
     this.components.push(comp);
-    this.selection.safeSelect(comp.id);
+    return comp.id;
   }
 
   /** 复制组件 */
   copyCompSchema(id?: string) {
     if (this.selection.length > 1) {
+      const ids = [];
       this.selection.selected.forEach((id) => {
-        this.singleCopy(id);
+        const newId = this.singleCopy(id);
+        ids.push(newId);
       });
+      this.selection.batchSafeSelect(ids);
     } else {
-      this.singleCopy(id);
+      const newId = this.singleCopy(id);
+      this.selection.safeSelect(newId);
     }
   }
 
