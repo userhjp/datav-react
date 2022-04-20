@@ -41,11 +41,11 @@ const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   }, [data]);
 
   useLayoutEffect(() => {
-    const { series = {} } = options;
+    const { series = {}, legend, colors } = options;
     const opt = {
       ...options,
-      legend: formJsonToLegendData(options.legend),
-      color: getChartColors(options.colors),
+      legend: formJsonToLegendData(legend),
+      color: getChartColors(colors),
       series: [{ ...series, data }],
     };
     myChart.current.setOption(opt, true);

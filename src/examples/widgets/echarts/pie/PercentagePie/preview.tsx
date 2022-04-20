@@ -36,7 +36,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
   }, [data]);
 
   const chartOptions = useMemo(() => {
-    const { pieStyle, innerPie, outerPie, grid, textStyle } = options;
+    const { pieStyle, innerPie, outerPie, grid, textStyle, colors } = options;
     const pieStyleColor = convertEChartColors(pieStyle.color);
 
     const series: any = [
@@ -83,7 +83,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
     }
     return {
       series,
-      color: pieStyleColor ? pieStyleColor : getChartColors(grid.colors),
+      color: pieStyleColor ? pieStyleColor : getChartColors(colors),
       grid,
       title: {
         show: !!textStyle.show,

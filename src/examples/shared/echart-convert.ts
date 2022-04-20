@@ -77,8 +77,8 @@ export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | '
 
 /** Echarts Series 数据差异处理 */
 export function formDataToSeriesData(options: { [key: string]: any }): any[] {
-  const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], areaStyle = {} } = options;
-  options.color = getChartColors(options.colors);
+  const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], areaStyle = {}, colors } = options;
+  options.color = getChartColors(colors);
   // 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
   // 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
   // options.colorBy = 'series';
