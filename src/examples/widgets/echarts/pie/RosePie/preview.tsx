@@ -40,10 +40,10 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   }, 0);
 
   const chartOptions = useMemo(() => {
-    const { pieStyle, grid, title, legend, series = {} } = options;
+    const { colors, grid, title, legend, series = {} } = options;
     // const pieStyleColor = convertEChartColors(pieStyle.color);
     return {
-      color: getChartColors(grid.colors),
+      color: getChartColors(colors),
       // tooltip: {
       //     trigger: 'item'
       // },

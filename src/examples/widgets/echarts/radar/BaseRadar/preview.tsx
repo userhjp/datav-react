@@ -46,10 +46,10 @@ const BaseRadar: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
   }, [data]);
 
   const chartOptions = useMemo(() => {
-    const { grid, tooltip = {}, radar = {}, radarSeries = {} } = options;
+    const { grid, tooltip = {}, radar = {}, radarSeries = {}, colors } = options;
     if (!dataset.indicator?.length) return {};
     return {
-      color: getChartColors(grid.colors),
+      color: getChartColors(colors),
       grid,
       tooltip: {
         ...tooltip,
