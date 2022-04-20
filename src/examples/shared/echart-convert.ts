@@ -130,7 +130,7 @@ export function getChartColors(type: number) {
   return (colors.color || colorsOpt[0]?.color || []).map((m) => convertEChartColors(m));
 }
 
-/** 转换为echart颜色类型 */
+/** 转换echart颜色渐变 */
 export function convertEChartColors(colors: Array<string> | string, type: 'vertical' | 'horizontal' = 'vertical'): string | object {
   if (!colors) return '';
   if (typeof colors === 'string') return colors;
