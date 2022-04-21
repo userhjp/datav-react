@@ -1,5 +1,5 @@
 import { ISchema } from '@formily/react';
-import { ZoomMode } from '../../shared';
+import { ZoomMode } from '../../../shared';
 
 export const pageSchema: ISchema = {
   type: 'object',

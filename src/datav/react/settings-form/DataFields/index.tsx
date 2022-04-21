@@ -99,7 +99,7 @@ export const DataFields: React.FC = observer(() => {
         </label>
         <Field
           name="updateTime"
-          initialValue={1}
+          initialValue={3}
           reactions={(field) => {
             const autoUpdate = field.query('.autoUpdate');
             field.setComponentProps({
