@@ -1,11 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createDesigner } from '@/datav/core';
-import { Designer, Preview } from '@/datav/react/containers';
+import { Designer, Preview } from '@/datav/react';
 import { resourceData } from './shared/resourceData';
-import * as components from './widgets';
 import { message } from 'antd';
 import { waitTime } from '@/datav/shared';
 import axios from 'axios';
+import * as components from './widgets';
 
 const SnapshotKey = 'DataV-Snapshot';
 

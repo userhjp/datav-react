@@ -13,6 +13,11 @@ export const resourceData: IResourceData[] = [
             cover: '/menuCover/图表/通用图表/echarts_logo.png',
             type: 'ECharts',
           },
+          {
+            name: '测试组件',
+            cover: '/menuCover/图表/柱状图/区间范围柱状图.png',
+            type: 'Demo',
+          },
         ],
       },
       {
@@ -300,8 +305,9 @@ export const resourceData: IResourceData[] = [
     icon: 'other',
     children: [
       {
-        name: '弦图',
-        cover: '/menuCover/其他/弦图.png',
+        name: '选择卡',
+        cover: '/menuCover/控件/选择卡.png',
+        type: 'Tab',
       },
     ],
   },
