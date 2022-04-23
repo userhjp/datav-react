@@ -6,18 +6,31 @@ export const Tab = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(Tab, {
   schema: TabSchema,
-  h: 60,
+  h: 44,
   w: 340,
   data: {
-    value: { title: '标题', value: 23 },
+    value: [
+      {
+        label: '按钮1',
+        value: '1',
+      },
+      {
+        label: '按钮2',
+        value: '2',
+      },
+      {
+        label: '按钮3',
+        value: '3',
+      },
+    ],
     fields: {
-      title: '标题',
+      label: '标题',
       value: '值',
     },
   },
   events: {
     changed: {
-      description: '当数据变化时',
+      description: '当Tab切换时',
     },
   },
 });

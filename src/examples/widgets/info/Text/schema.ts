@@ -77,7 +77,7 @@ export const TextSchema: ISchema = {
           'x-component': 'NumberPicker',
           'x-component-props': {
             placeholder: '请输入',
-            unit: 'ms',
+            unit: 'px',
             min: 0,
           },
           default: 0,
