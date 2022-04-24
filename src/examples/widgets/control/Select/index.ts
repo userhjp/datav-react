@@ -7,7 +7,7 @@ export const Select = React.lazy(() => import('./preview'));
 registerWidgetConfig(Select, {
   schema: SelectSchema,
   h: 44,
-  w: 300,
+  w: 280,
   data: {
     value: [
       {

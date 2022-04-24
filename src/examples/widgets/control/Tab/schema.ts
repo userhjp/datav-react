@@ -24,7 +24,7 @@ export const TabSchema: ISchema = {
       type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
-        title: 'Tab样式',
+        title: '按钮样式',
       },
       properties: {
         backgroundColor: {
@@ -34,17 +34,45 @@ export const TabSchema: ISchema = {
           'x-component': 'ColorPicker',
           default: 'rgba(0, 0, 0, 0)',
         },
-        btnSpacing: {
-          type: 'number',
-          title: '按钮间距',
+        padding: {
+          type: 'object',
+          title: '内边距',
           'x-decorator': 'FormItem',
-          'x-component': 'NumberPicker',
+          'x-component': 'FormGrid',
           'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 0,
+            minColumns: 2,
+            rowGap: 0,
           },
-          default: 10,
+          properties: {
+            vertical: {
+              type: 'number',
+              'x-decorator-props': {
+                feedbackText: '左右',
+              },
+              'x-decorator': 'FormItem',
+              'x-component': 'NumberPicker',
+              'x-component-props': {
+                placeholder: '请输入',
+                unit: 'px',
+                min: 0,
+              },
+              default: 6,
+            },
+            horizontal: {
+              type: 'number',
+              'x-decorator-props': {
+                feedbackText: '上下',
+              },
+              'x-decorator': 'FormItem',
+              'x-component': 'NumberPicker',
+              'x-component-props': {
+                placeholder: '请输入',
+                unit: 'px',
+                min: 0,
+              },
+              default: 10,
+            },
+          },
         },
         voidTextStyle: textSchema(),
       },
