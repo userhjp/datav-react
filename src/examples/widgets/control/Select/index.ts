@@ -1,36 +1,36 @@
 import React from 'react';
 import { registerWidgetConfig } from '@/datav/core';
-import { TabSchema } from './schema';
+import { SelectSchema } from './schema';
 
-export const Tab = React.lazy(() => import('./preview'));
+export const Select = React.lazy(() => import('./preview'));
 
-registerWidgetConfig(Tab, {
-  schema: TabSchema,
+registerWidgetConfig(Select, {
+  schema: SelectSchema,
   h: 44,
-  w: 340,
+  w: 300,
   data: {
     value: [
       {
-        label: '按钮1',
+        label: '选择项1',
         value: '1',
       },
       {
-        label: '按钮2',
+        label: '选择项2',
         value: '2',
       },
       {
-        label: '按钮3',
+        label: '选择项3',
         value: '3',
       },
     ],
     fields: {
-      label: '标题',
+      label: '名称',
       value: '值',
     },
   },
   events: {
     changed: {
-      description: '当Tab切换时',
+      description: '当选中项变化时',
       fields: {
         value: '选中值',
       },

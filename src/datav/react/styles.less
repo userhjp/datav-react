@@ -5,6 +5,7 @@
   flex-direction: column;
   height: 100vh;
   overflow: hidden;
+  color: @m-text-color;
   font-size: @m-font-size;
   background-color: @background-color;
 
@@ -54,10 +55,9 @@
 }
 
 // 重置antd样式
-.visual-design,
+.dv-settings-form, 
+.sidebar-content,
 .data-settings-drawer {
-  color: @m-text-color;
-
   input,
   button,
   select,
@@ -289,7 +289,11 @@
 
   .ant-radio-button-wrapper:not(:first-child)::before {
     z-index: 9;
-    background-color: #2196f3;
+    background-color: transparent;
+  }
+
+  .ant-radio-button-wrapper-checked:not([class*=' ant-radio-button-wrapper-disabled']).ant-radio-button-wrapper:first-child {
+    border-right-color: transparent !important;
   }
 
   .ant-tabs-content .ant-radio-group-solid {

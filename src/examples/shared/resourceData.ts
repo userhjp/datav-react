@@ -309,6 +309,11 @@ export const resourceData: IResourceData[] = [
         cover: '/menuCover/控件/选择卡.png',
         type: 'Tab',
       },
+      {
+        name: '下拉选择器',
+        cover: '/menuCover/控件/下拉选择器.png',
+        type: 'Select',
+      },
     ],
   },
   {

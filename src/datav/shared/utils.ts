@@ -86,7 +86,7 @@ export const getTextParams = (text: string) => {
 export const replaceTextParams = (text: string, data: Record<string, string>) => {
   const reg = /:([\d\w\u4e00-\u9fa5_$@*]+)/gi;
   return text.replace(reg, (key: string) => {
-    return data[key.substring(1)] ?? key;
+    return data[key.substring(1)] ?? '';
   });
 };
 
