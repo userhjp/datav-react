@@ -72,7 +72,7 @@ export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
         value={colorText}
         onChange={(e) => {
           setColorText(e.target.value);
-          if (checkIsColor(value)) {
+          if (!checkIsColor(e.target.value)) {
             run();
           } else {
           }

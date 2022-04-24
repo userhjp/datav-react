@@ -18,7 +18,7 @@ const Tab: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
   }, [data]);
 
   return (
-    <div className="widgets-tab">
+    <div className="widgets-tab" style={{ flexDirection: options.layout === 'vertical' ? 'column' : 'row' }}>
       {(data || []).map((m, i) => (
         <span
           onClick={() => setActivate(m)}
@@ -26,7 +26,8 @@ const Tab: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
             ...style,
             ...options.borderStyle,
             ...(m.value === activate?.value ? options.activeStyle : {}),
-            marginRight: i != data.length - 1 ? btnSpacing : 0,
+            marginRight: i != data.length - 1 && options.layout === 'horizontal' ? btnSpacing : 0,
+            marginBottom: i != data.length - 1 && options.layout === 'vertical' ? btnSpacing : 0,
           }}
           key={i}
           className={cls({

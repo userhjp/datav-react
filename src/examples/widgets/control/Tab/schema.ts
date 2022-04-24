@@ -5,6 +5,21 @@ import { ISchema } from '@formily/react';
 export const TabSchema: ISchema = {
   type: 'object',
   properties: {
+    layout: {
+      type: 'string',
+      title: '按钮布局',
+      'x-decorator': 'FormItem',
+      'x-component': 'Radio.Group',
+      'x-component-props': {
+        optionType: 'button',
+        buttonStyle: 'solid',
+      },
+      enum: [
+        { value: 'horizontal', label: '水平' },
+        { value: 'vertical', label: '垂直' },
+      ],
+      default: 'horizontal',
+    },
     style: {
       type: 'object',
       'x-component': 'MyFormCollapse',
@@ -49,7 +64,7 @@ export const TabSchema: ISchema = {
           title: '背景颜色',
           'x-decorator': 'FormItem',
           'x-component': 'ColorPicker',
-          default: '#1890ff',
+          default: '#0a73ff',
         },
         voidTextStyle: textSchema(),
       },

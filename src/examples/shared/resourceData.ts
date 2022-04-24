@@ -305,8 +305,8 @@ export const resourceData: IResourceData[] = [
     icon: 'other',
     children: [
       {
-        name: '选择卡',
-        cover: '/menuCover/控件/选择卡.png',
+        name: 'Tab切换',
+        cover: '/menuCover/控件/tab切换.png',
         type: 'Tab',
       },
       {

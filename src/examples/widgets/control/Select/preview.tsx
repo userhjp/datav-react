@@ -6,19 +6,19 @@ import './styles.less';
 
 const Select: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
   const [selectd, setSelectd] = useState<any>();
-
+  const { defaultSelectd, ...config } = options.config;
   const evData = useMemo(() => {
     return data?.find((f) => f.value === selectd) || {};
   }, [selectd]);
   useDatavEvent(events.changed, evData);
 
   useEffect(() => {
-    if (!selectd && data?.length && options.config?.defaultSelectd) {
+    if (!selectd && data?.length && defaultSelectd) {
       setSelectd(data[0].value);
     } else {
       setSelectd(null);
     }
-  }, [data, options.config.defaultSelectd]);
+  }, [data, defaultSelectd]);
 
   const selectStyle: React.CSSProperties = {
     width: '100%',
@@ -33,7 +33,7 @@ const Select: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
   return (
     <div className="widgets-select">
       <AntdSelect
-        {...(options.config || {})}
+        {...(config || {})}
         options={data || []}
         value={selectd}
         showSearch
