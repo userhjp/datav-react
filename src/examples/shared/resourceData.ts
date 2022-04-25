@@ -314,6 +314,21 @@ export const resourceData: IResourceData[] = [
         cover: '/menuCover/控件/下拉选择器.png',
         type: 'Select',
       },
+      {
+        name: '按钮',
+        cover: '/menuCover/控件/按钮.png',
+        type: 'Button',
+      },
+      {
+        name: '输入框',
+        cover: '/menuCover/控件/输入框.png',
+        type: 'Input',
+      },
+      {
+        name: '全屏切换',
+        cover: '/menuCover/控件/全屏切换.png',
+        type: 'FullScreen',
+      },
     ],
   },
   {

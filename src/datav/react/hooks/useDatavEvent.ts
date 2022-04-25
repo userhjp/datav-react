@@ -8,20 +8,23 @@ import { useDataSource } from './useDataSource';
  * 组件事件Hook
  * @param event 事件配置
  * @param data 数据对象
+ * @param monitor 是否自动监听依赖数据更新
  */
-export const useDatavEvent = (event: IChangedEvent, data: Record<string, string>) => {
+export const useDatavEvent = (event: IChangedEvent, data: Record<string, string>, monitor = true) => {
   const dataSource = useDataSource();
 
-  const updateVariables = () => {
+  const updateVariables = (currentData?: Record<string, string>) => {
     if (!event.enable) return;
     const fieldMap = getFieldMap(event.fields);
-    dataSource.setVariables(fieldMap, data);
+    dataSource.setVariables(fieldMap, currentData ?? data);
   };
 
-  useEffect(() => updateVariables(), [data]);
+  useEffect(() => monitor && updateVariables(), [data]);
 
   useEffect(() => {
-    const dispose = observe(event, updateVariables);
-    return () => dispose();
+    const dispose = monitor && observe(event, () => updateVariables());
+    return () => monitor && dispose();
   }, []);
+
+  return updateVariables;
 };

@@ -1,15 +1,12 @@
 import { textSchema } from '@/examples/schema/textSchema';
+import { lineStyles } from '@/examples/shared';
 import { ISchema } from '@formily/react';
 
-export const SelectSchema: ISchema = {
+export const InputSchema: ISchema = {
   type: 'object',
   properties: {
     style: {
       type: 'object',
-      'x-component': 'MyFormCollapse',
-      'x-component-props': {
-        title: '选择器样式',
-      },
       properties: {
         backgroundColor: {
           type: 'string',
@@ -25,6 +22,13 @@ export const SelectSchema: ISchema = {
           'x-component': 'ColorPicker',
           default: '#1890ff',
         },
+        btnColor: {
+          type: 'string',
+          title: '按钮颜色',
+          'x-decorator': 'FormItem',
+          'x-component': 'ColorPicker',
+          default: '#1890ff',
+        },
         voidTextStyle: textSchema(),
       },
       default: {
@@ -36,7 +40,7 @@ export const SelectSchema: ISchema = {
       properties: {
         size: {
           type: 'string',
-          title: '选择器大小',
+          title: '输入框大小',
           'x-decorator': 'FormItem',
           'x-component': 'Radio.Group',
           'x-component-props': {
@@ -58,49 +62,7 @@ export const SelectSchema: ISchema = {
           'x-component-props': {
             placeholder: '请输入',
           },
-          default: '请选择',
-        },
-        bordered: {
-          type: 'boolean',
-          title: '是否有边框',
-          'x-decorator': 'FormItem',
-          'x-component': 'Switch',
-          default: true,
-        },
-        allowClear: {
-          type: 'boolean',
-          title: '支持清除',
-          'x-decorator': 'FormItem',
-          'x-component': 'Switch',
-          default: true,
-        },
-        showSearch: {
-          type: 'boolean',
-          title: '支持搜索',
-          'x-decorator': 'FormItem',
-          'x-component': 'Switch',
-          default: true,
-        },
-        multiple: {
-          type: 'boolean',
-          title: '支持多选',
-          'x-decorator': 'FormItem',
-          'x-component': 'Switch',
-          default: false,
-        },
-        showArrow: {
-          type: 'boolean',
-          title: '显示下拉箭头',
-          'x-decorator': 'FormItem',
-          'x-component': 'Switch',
-          default: true,
-        },
-        defaultSelectd: {
-          type: 'boolean',
-          title: '默认选中',
-          'x-decorator': 'FormItem',
-          'x-component': 'Switch',
-          default: true,
+          default: '请输入',
         },
       },
     },

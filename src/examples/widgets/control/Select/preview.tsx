@@ -6,7 +6,7 @@ import './styles.less';
 
 const Select: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
   const [selectd, setSelectd] = useState<any>();
-  const { defaultSelectd, ...config } = options.config;
+  const { defaultSelectd, multiple, ...config } = options.config;
   const evData = useMemo(() => {
     return data?.find((f) => f.value === selectd) || {};
   }, [selectd]);
@@ -34,6 +34,8 @@ const Select: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
     <div className="widgets-select">
       <AntdSelect
         {...(config || {})}
+        multiple
+        mode={multiple ? 'multiple' : false}
         options={data || []}
         value={selectd}
         showSearch
