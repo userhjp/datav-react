@@ -7,7 +7,7 @@ export const Tab = React.lazy(() => import('./preview'));
 registerWidgetConfig(Tab, {
   schema: TabSchema,
   h: 44,
-  w: 300,
+  w: 220,
   data: {
     value: [
       {
