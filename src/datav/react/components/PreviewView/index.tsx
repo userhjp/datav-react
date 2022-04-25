@@ -139,13 +139,15 @@ export const PreviewView: React.FC = observer(() => {
 
   return (
     <div className="screen-view" style={pageStyle}>
-      {operation.components.map((item) => (
-        <div key={item.id} style={transformStyle(item)}>
-          <div style={comStyle(item)}>
-            <RenderWidget nodeInfo={item} />
+      {operation.components
+        .map((item) => (
+          <div key={item.id} style={transformStyle(item)}>
+            <div style={comStyle(item)}>
+              <RenderWidget nodeInfo={item} />
+            </div>
           </div>
-        </div>
-      ))}
+        ))
+        .reverse()}
     </div>
   );
 });
