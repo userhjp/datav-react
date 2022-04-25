@@ -22,13 +22,6 @@ export const InputSchema: ISchema = {
           'x-component': 'ColorPicker',
           default: '#1890ff',
         },
-        btnColor: {
-          type: 'string',
-          title: '按钮颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          default: '#1890ff',
-        },
         voidTextStyle: textSchema(),
       },
       default: {
@@ -65,6 +58,29 @@ export const InputSchema: ISchema = {
           default: '请输入',
         },
       },
+    },
+    btnColor: {
+      type: 'string',
+      title: '按钮颜色',
+      'x-decorator': 'FormItem',
+      'x-component': 'ColorPicker',
+      default: '#1890ff',
+    },
+    btnWidth: {
+      type: 'number',
+      title: '按钮宽度',
+      'x-decorator': 'FormItem',
+      'x-decorator-props': {
+        tooltip: '宽度设置为0隐藏按钮，隐藏按钮时输入值变化触发交互事件，反之点击按钮触发交互事件。',
+        tooltipLayout: 'text',
+      },
+      'x-component': 'NumberPicker',
+      'x-component-props': {
+        placeholder: '请输入',
+        unit: 'px',
+        min: 0,
+      },
+      default: 50,
     },
   },
 };

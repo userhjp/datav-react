@@ -10,7 +10,7 @@ registerWidgetConfig(Input, {
   w: 300,
   events: {
     changed: {
-      description: '当点击按钮时',
+      description: '当点击按钮或数据变化时',
       fields: {
         value: '输入值',
       },
