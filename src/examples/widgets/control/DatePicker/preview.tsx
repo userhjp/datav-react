@@ -3,6 +3,7 @@ import { IWidgetProps } from '@/datav/react/interface';
 import { useDatavEvent } from '@/datav/react/hooks';
 import { DatePicker as AntDatePicker } from 'antd';
 import { useDebounceFn } from 'ahooks';
+import 'moment/locale/zh-cn';
 import locale from 'antd/es/date-picker/locale/zh_CN';
 import './styles.less';
 
