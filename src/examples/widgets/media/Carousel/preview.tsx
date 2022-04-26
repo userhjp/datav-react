@@ -1,22 +1,20 @@
-import React, { useMemo, useState } from 'react';
+import React from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
-import { useDatavEvent } from '@/datav/react/hooks';
-import { useDebounceFn } from 'ahooks';
 import { Carousel as AntCarousel } from 'antd';
 import './styles.less';
 
 const Carousel: React.FC<IWidgetProps> = ({ options, events, data, attr }) => {
-  const [value, setValue] = useState<string>('');
-  const updateVariables = useDatavEvent(events.changed, null, false);
+  // const [value, setValue] = useState<string>('');
+  // const updateVariables = useDatavEvent(events.changed, null, false);
 
-  const { run } = useDebounceFn(
-    () => {
-      updateVariables({ dateStr: value });
-    },
-    {
-      wait: 500,
-    }
-  );
+  // const { run } = useDebounceFn(
+  //   () => {
+  //     updateVariables({ dateStr: value });
+  //   },
+  //   {
+  //     wait: 500,
+  //   }
+  // );
 
   const config = {
     slidesToShow: 1, // 显示3个
@@ -30,6 +28,10 @@ const Carousel: React.FC<IWidgetProps> = ({ options, events, data, attr }) => {
     lazyLoad: true, // 延迟加载
     ...options.config,
     ...options.advancedSetting,
+  };
+
+  const openUrl = (herf: string) => {
+    if (herf) window.open(herf);
   };
 
   return (
@@ -46,7 +48,9 @@ const Carousel: React.FC<IWidgetProps> = ({ options, events, data, attr }) => {
                 }}
               >
                 <div
+                  onClick={() => openUrl(m.herf)}
                   style={{
+                    cursor: m.herf ? 'pointer' : 'default',
                     width: '100%',
                     height: '100%',
                     background: `url(${m.url}) 0% 0% / 100% 100% no-repeat`,
