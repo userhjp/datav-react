@@ -19,7 +19,7 @@ const Carousel: React.FC<IWidgetProps> = ({ options, events, data, attr }) => {
   const config = {
     slidesToShow: 1, // 显示3个
     slidesToScroll: 1, // 每次滚动1个
-    draggable: true, // 允许拖拽滚动
+    draggable: false, // 允许拖拽滚动
     swipeToSlide: true,
     easing: 'linear',
     pauseOnFocus: false, // focus时暂停
