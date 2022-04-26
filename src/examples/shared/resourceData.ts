@@ -274,6 +274,11 @@ export const resourceData: IResourceData[] = [
         type: 'SingleImg',
       },
       {
+        name: '轮播图',
+        cover: '/menuCover/媒体/轮播图.png',
+        type: 'Carousel',
+      },
+      {
         name: '自定义背景块',
         cover: '/menuCover/媒体/自定义背景块.png',
         type: 'BgBox',
