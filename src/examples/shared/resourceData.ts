@@ -269,9 +269,14 @@ export const resourceData: IResourceData[] = [
     icon: 'media',
     children: [
       {
-        name: '视频播放器',
-        cover: '/menuCover/媒体/视频播放器.png',
-        type: 'VideoPlayer',
+        name: '单张图片',
+        cover: '/menuCover/媒体/单张图片.png',
+        type: 'SingleImg',
+      },
+      {
+        name: '自定义背景块',
+        cover: '/menuCover/媒体/自定义背景块.png',
+        type: 'BgBox',
       },
       {
         name: '边框',
@@ -284,14 +289,9 @@ export const resourceData: IResourceData[] = [
         type: 'Decorate',
       },
       {
-        name: '单张图片',
-        cover: '/menuCover/媒体/单张图片.png',
-        type: 'SingleImg',
-      },
-      {
-        name: '自定义背景块',
-        cover: '/menuCover/媒体/自定义背景块.png',
-        type: 'BgBox',
+        name: '视频播放器',
+        cover: '/menuCover/媒体/视频播放器.png',
+        type: 'VideoPlayer',
       },
       {
         name: 'Iframe',
@@ -305,9 +305,9 @@ export const resourceData: IResourceData[] = [
     icon: 'other',
     children: [
       {
-        name: 'Tab切换',
-        cover: '/menuCover/控件/tab切换.png',
-        type: 'Tab',
+        name: '全屏切换',
+        cover: '/menuCover/控件/全屏切换.png',
+        type: 'FullScreen',
       },
       {
         name: '下拉选择器',
@@ -315,19 +315,19 @@ export const resourceData: IResourceData[] = [
         type: 'Select',
       },
       {
-        name: '按钮',
-        cover: '/menuCover/控件/按钮.png',
-        type: 'Button',
+        name: '日期选择框',
+        cover: '/menuCover/控件/日期选择框.png',
+        type: 'DatePicker',
+      },
+      {
+        name: 'Tab切换',
+        cover: '/menuCover/控件/tab切换.png',
+        type: 'Tab',
       },
       {
         name: '输入框',
         cover: '/menuCover/控件/输入框.png',
         type: 'Input',
-      },
-      {
-        name: '全屏切换',
-        cover: '/menuCover/控件/全屏切换.png',
-        type: 'FullScreen',
       },
     ],
   },

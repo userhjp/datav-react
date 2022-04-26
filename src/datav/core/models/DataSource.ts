@@ -29,9 +29,10 @@ export class DataSource {
     if (data && isObj(data)) {
       for (const key in fields) {
         const alias = fields[key] || key;
-        this.variables[alias] = data[key] || '';
+        this.variables[alias] = data[key] === undefined ? '' : data[key];
       }
     }
+    console.log(this.variables);
   }
 
   setData(comId: string, data: ApiData) {

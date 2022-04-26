@@ -1,42 +1,43 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import { useDatavEvent } from '@/datav/react/hooks';
-import cls from 'classnames';
+import { useFullscreen } from 'ahooks';
 import './styles.less';
 
-const FullScreen: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
-  const [activate, setActivate] = useState<any>();
+const FullScreen: React.FC<IWidgetProps> = ({ options, events }) => {
+  const updateVariables = useDatavEvent(events.changed, null, false);
+  const [isFullscreen, { enterFullscreen, exitFullscreen }] = useFullscreen(document.body);
 
-  const { btnSpacing, padding, ...style } = options.style;
-
-  // 事件使用hook方式，参数为 事件配置和数据，注意传入数据key需要和fields的匹配
-  useDatavEvent(events.changed, activate);
-
-  useEffect(() => {
-    if (!activate && data?.length) {
-      setActivate(data[0]);
+  const checkFullScreen = () => {
+    if (isFullscreen) {
+      exitFullscreen();
+      updateVariables({ isFullScreen: false });
+    } else {
+      enterFullscreen();
+      updateVariables({ isFullScreen: true });
     }
-  }, [data]);
+  };
+
+  const style: React.CSSProperties = {
+    width: '100%',
+    height: '100%',
+    cursor: 'pointer',
+    background: `url(${isFullscreen ? options.exitFullScreen : options.fullScreen}) 0% 0% / 100% 100% no-repeat`,
+  };
 
   return (
-    <div className="widgets-FullScreen" style={{ flexDirection: options.layout === 'vertical' ? 'column' : 'row' }}>
-      {(data || []).map((m, i) => (
-        <span
-          onClick={() => setActivate(m)}
-          style={{
-            padding: `${padding?.vertical || 2}px ${padding?.horizontal || 10}px`,
-            ...style,
-            ...options.borderStyle,
-            ...(m.value === activate?.value ? options.activeStyle : {}),
-          }}
-          key={i}
-          className={cls({
-            'widgets-FullScreen-activate': m.value === activate?.value,
-          })}
-        >
-          {m.label}
-        </span>
-      ))}
+    <div
+      className="full-screen-widget"
+      title={isFullscreen ? '退出全屏' : '全屏'}
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: options.backgroundColor,
+        borderRadius: options.borderRadius || 0,
+        overflow: 'hidden',
+      }}
+    >
+      <div style={style} onClick={checkFullScreen} />
     </div>
   );
 };

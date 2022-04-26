@@ -1,8 +1,7 @@
 import { textSchema } from '@/examples/schema/textSchema';
-import { lineStyles } from '@/examples/shared';
 import { ISchema } from '@formily/react';
 
-export const InputSchema: ISchema = {
+export const DatePickerSchema: ISchema = {
   type: 'object',
   properties: {
     config: {
@@ -10,7 +9,7 @@ export const InputSchema: ISchema = {
       properties: {
         size: {
           type: 'string',
-          title: '输入框大小',
+          title: '选择框大小',
           'x-decorator': 'FormItem',
           'x-component': 'Radio.Group',
           'x-component-props': {
@@ -24,6 +23,20 @@ export const InputSchema: ISchema = {
           ],
           default: 'middle',
         },
+        picker: {
+          type: 'string',
+          title: '选择类型',
+          'x-decorator': 'FormItem',
+          'x-component': 'Select',
+          enum: [
+            { value: 'date', label: '日' },
+            { value: 'month', label: '月' },
+            { value: 'year', label: '年' },
+            { value: 'week', label: '周' },
+            { value: 'quarter', label: '季度' },
+          ],
+          default: 'date',
+        },
         placeholder: {
           type: 'string',
           title: '默认填充文本',
@@ -32,7 +45,7 @@ export const InputSchema: ISchema = {
           'x-component-props': {
             placeholder: '请输入',
           },
-          default: '请输入',
+          default: '请选择',
         },
       },
     },
@@ -58,29 +71,6 @@ export const InputSchema: ISchema = {
       default: {
         fontSize: 16,
       },
-    },
-    btnColor: {
-      type: 'string',
-      title: '按钮颜色',
-      'x-decorator': 'FormItem',
-      'x-component': 'ColorPicker',
-      default: '#1890ff',
-    },
-    btnWidth: {
-      type: 'number',
-      title: '按钮宽度',
-      'x-decorator': 'FormItem',
-      'x-decorator-props': {
-        tooltip: '宽度设置为0隐藏按钮，隐藏按钮时输入值变化触发交互事件，反之点击按钮触发交互事件。',
-        tooltipLayout: 'text',
-      },
-      'x-component': 'NumberPicker',
-      'x-component-props': {
-        placeholder: '请输入',
-        unit: 'px',
-        min: 0,
-      },
-      default: 50,
     },
   },
 };

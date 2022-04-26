@@ -47,7 +47,7 @@ export const DataFields: React.FC = observer(() => {
         <>
           <ObjectField name="fields">
             <div className="data-attr-table-container">
-              <table className="data-attr-table">
+              <table className="data-field-table">
                 <thead className="table-head">
                   <tr className="table-head-row">
                     <th className="th-item column-item attr-name">字段</th>

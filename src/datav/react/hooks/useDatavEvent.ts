@@ -10,10 +10,10 @@ import { useDataSource } from './useDataSource';
  * @param data 数据对象
  * @param monitor 是否自动监听依赖数据更新
  */
-export const useDatavEvent = (event: IChangedEvent, data: Record<string, string>, monitor = true) => {
+export const useDatavEvent = (event: IChangedEvent, data: Record<string, any>, monitor = true) => {
   const dataSource = useDataSource();
 
-  const updateVariables = (currentData?: Record<string, string>) => {
+  const updateVariables = (currentData?: Record<string, any>) => {
     if (!event.enable) return;
     const fieldMap = getFieldMap(event.fields);
     dataSource.setVariables(fieldMap, currentData ?? data);
