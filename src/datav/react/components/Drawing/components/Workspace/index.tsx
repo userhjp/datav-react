@@ -12,7 +12,7 @@ const Workspace: React.FC = observer(() => {
   const domRef = useRef<HTMLDivElement>();
 
   const style: React.CSSProperties = {
-    background: screenProps?.backgroundImg ? `url(${screenProps.backgroundImg})` : 'none',
+    background: screenProps?.backgroundImg ? `url(${screenProps.backgroundImg}) 0% 0% / 100% 100% no-repeat` : 'none',
     width: screenProps.width,
     height: screenProps.height,
     transform: `scale(${screen.scale})`,

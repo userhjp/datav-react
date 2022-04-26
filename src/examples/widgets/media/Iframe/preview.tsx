@@ -23,6 +23,7 @@ const Iframe: React.FC<IWidgetProps> = ({ options }) => {
           fontSize: '30px',
           width: '100%',
           height: '100%',
+          color: '#fff',
           backgroundColor: 'rgba(0,0,0,0.1)',
         }}
       >

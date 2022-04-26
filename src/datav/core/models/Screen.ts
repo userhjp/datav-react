@@ -28,7 +28,7 @@ export class Screen {
 
   makeObservable() {
     define(this, {
-      props: observable.ref,
+      props: observable,
       scale: observable.ref,
       setScale: action,
       setSize: action,
