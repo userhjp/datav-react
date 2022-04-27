@@ -129,6 +129,10 @@ export const commonConfig: Configuration = {
       '@': resolve(__dirname, '../src/'),
     },
   },
+  performance: {
+    maxAssetSize: 40000,
+    maxEntrypointSize: 40000
+  },
   plugins: [
     new Webpackbar({}),
     new HtmlWebpackPlugin({

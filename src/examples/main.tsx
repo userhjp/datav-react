@@ -7,7 +7,7 @@ import axios from 'axios';
 import * as components from './widgets';
 import { GlobalRegistry } from '@/datav/core/registry';
 
-const resourceData = [
+const widgetMenu = [
   { name: '图表', icon: 'chart' },
   { name: '信息', icon: 'info' },
   { name: '地图', icon: 'map' },
@@ -70,7 +70,7 @@ export const Main: React.FC = () => {
   }, []);
   return (
     <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-      <Designer engine={engine} resourceData={resourceData} components={{ ...components }} />;
+      <Designer engine={engine} widgetMenu={widgetMenu} components={{ ...components }} />;
       {previewData && (
         <div style={{ width: '100%', height: '100%', position: 'fixed', top: 0, left: 0, zIndex: 9999999 }}>
           <a style={{ position: 'absolute', top: 10, right: 10, zIndex: 9999 }} onClick={() => setPreviewData(null)}>

@@ -56,8 +56,8 @@ export class Engine extends Event {
 
   setInitialValue(val: IPageType) {
     if (!val) return;
-    if (val.components) this.operation.components = val.components || [];
-    if (val.page) this.screen.props = val.page;
+    if (val.components) this.operation.batchAddNode(val.components || []);
+    if (val.page) this.screen.setProps(val.page);
   }
 
   mount() {

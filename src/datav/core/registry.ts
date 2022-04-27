@@ -1,6 +1,6 @@
 import { observable } from '@formily/reactive';
 import { IWidgetProps } from '../react/interface';
-import { DnComponent, DnFC, IDesignerComponents, IResourceData } from '../react/types';
+import { DnComponent, DnFC, IDesignerComponents, IWidgetMenu } from '../react/types';
 import { IDesignerIcons, IDesignerIconsStore, IDesignerWidgetStore } from './types';
 
 const DESIGNER_WIDGETS_STORE: IDesignerWidgetStore = observable.ref({});

@@ -1,18 +1,17 @@
-import { IResourceDataChild, IResourceChildrenType } from '../../../types';
+import { IWidgetMenuChild, IWidgetMenuChildData } from '../../../types';
 import React, { useMemo, useState } from 'react';
 import { DragItem } from './DragItem';
+import { SettingsEmpty } from '../../../settings-form/components';
 import './index.less';
-import { SettingsEmpty } from '@/datav/react/settings-form/components';
 
 type PreviewItemProps = {
-  data: IResourceDataChild;
+  data: IWidgetMenuChild;
 };
 const PreviewItem: React.FC<PreviewItemProps> = (props) => {
   const [activate, setActivate] = useState('全部');
   const { data = [] } = props;
-
-  const childrenData: IResourceChildrenType[] = useMemo(() => {
-    return data.filter((f) => f['children']) as IResourceChildrenType[];
+  const childrenData: IWidgetMenuChildData[] = useMemo(() => {
+    return data.filter((f) => f['children']) as IWidgetMenuChildData[];
   }, data);
 
   const activateList = useMemo(() => {

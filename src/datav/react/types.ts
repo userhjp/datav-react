@@ -1,3 +1,4 @@
+import React from 'react';
 import { Engine } from '../core';
 import { IWidgetConfig } from './interface';
 
@@ -8,8 +9,8 @@ export interface IDesignerLayoutProps {
 }
 export interface IDesignerProps extends IDesignerLayoutProps {
   engine: Engine;
-  /** 拖拽源数据 */
-  resourceData: IResourceData[];
+  /** 拖拽源数据分类配置 */
+  widgetMenu: IWidgetMenu[];
   /** 物料组件 */
   components: IDesignerComponents;
 }
@@ -25,23 +26,24 @@ export interface IWorkspaceContext {
   description?: string;
 }
 
-export interface IResourceDataType {
+export interface IWidgetMenuData {
   name: string;
   cover: string;
-  type?: string;
+  type: string;
+  dnConfig: IWidgetConfig;
 }
 
-export interface IResourceChildrenType {
+export interface IWidgetMenuChildData {
   name: string;
-  children: Array<IResourceDataType>;
+  children: Array<IWidgetMenuData>;
 }
 
-export type IResourceDataChild = Array<IResourceDataType | IResourceChildrenType>;
+export type IWidgetMenuChild = Array<IWidgetMenuData | IWidgetMenuChildData>;
 
-export interface IResourceData {
+export interface IWidgetMenu {
   name: string;
   icon: string;
-  children?: IResourceDataChild;
+  children?: IWidgetMenuChild;
 }
 
 export type DnFC<P = {}> = React.FC<P> & {

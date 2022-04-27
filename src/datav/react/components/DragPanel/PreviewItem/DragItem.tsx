@@ -1,19 +1,14 @@
 import { useDesigner } from '../../../hooks';
 import { useDrag } from 'ahooks';
 import React, { useRef, useState } from 'react';
-export interface DragItemProps {
-  id: string | number;
-  cover: string;
-  name: string;
-  type: string;
-}
+import { IWidgetMenuData } from '../../../../react/types';
 
-export const DragItem: React.FC<DragItemProps> = (props) => {
-  const { id, name, type, cover } = props;
+export const DragItem: React.FC<IWidgetMenuData> = (props) => {
+  const { name, type, cover } = props;
   const dragRef = useRef();
   const designer = useDesigner();
   const [dragging, setDragging] = useState<boolean>(false);
-  useDrag({ id, name, type }, dragRef, {
+  useDrag(props, dragRef, {
     onDragStart: () => {
       setDragging(true);
     },
@@ -27,7 +22,6 @@ export const DragItem: React.FC<DragItemProps> = (props) => {
     style: { opacity: dragging ? 0.4 : 1, cursor: 'move' },
     title: '拖拽添加图表',
     className: 'item-warp',
-    key: id,
   };
 
   return (

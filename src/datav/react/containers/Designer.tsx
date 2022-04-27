@@ -51,7 +51,7 @@ export const Designer: React.FC<IDesignerProps> = (props) => {
           <DesignHead />
           <div className="datav-content">
             <LayerPanel />
-            <DragPanel resourceData={props.resourceData} />
+            <DragPanel widgetMenu={props.widgetMenu} />
             <Drawing />
             <SettingsForm />
           </div>

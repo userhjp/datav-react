@@ -4,12 +4,12 @@ import { useCallback, useMemo } from 'react';
 import { message } from 'antd';
 import { useDrop } from 'ahooks';
 import { useOperation, useViewport } from '../../../../hooks';
-import { IWidgetSetting, IWidgetConfig } from '../../../../interface';
+import { IWidgetSetting } from '../../../../interface';
 import { useDesigner, useSelection } from '../../../../hooks';
 import { ContextMenu } from '../../../../components';
-import { GlobalRegistry } from '../../../../../core/registry';
 import { RenderWidget } from '../RenderWidget';
 import { createWidgetNode } from '../../../../../core';
+import { IWidgetMenuData } from '../../../../../react/types';
 import './index.less';
 
 export const WidgetDrag: React.FC = () => {
@@ -19,27 +19,26 @@ export const WidgetDrag: React.FC = () => {
   const [isHovering, setIsHovering] = useState(false);
 
   const addBox = useCallback(
-    ({ x = 0, y = 0, name, type }) => {
-      const widget: IWidgetConfig = GlobalRegistry.getDesignerWidget(type)?.DnConfig;
-      if (!widget) {
+    ({ x = 0, y = 0, name, type, dnConfig }) => {
+      if (!dnConfig) {
         message.info('开发中，敬请期待...');
         return;
       }
       const offset = 60;
       const offsetX = (x - (viewPort.offsetX + offset) + viewPort.scrollX) / viewPort.scale;
       const offsetY = (y - (viewPort.offsetY + offset) + viewPort.scrollY) / viewPort.scale;
-      const attrx = Math.round(offsetX - widget.w / 2);
-      const attry = Math.round(offsetY - widget.h / 2);
+      const attrx = Math.round(offsetX - dnConfig.w / 2);
+      const attry = Math.round(offsetY - dnConfig.h / 2);
       const widgetNode = createWidgetNode({
-        w: widget.w,
-        h: widget.h,
+        w: dnConfig.w,
+        h: dnConfig.h,
         x: attrx,
         y: attry,
         name,
         type,
-        data: widget.data,
-        ver: widget.version || '1.0',
-        events: widget.events,
+        data: dnConfig.data,
+        ver: dnConfig.version || '1.0',
+        events: dnConfig.events,
       });
       operation.addNode(widgetNode);
     },
@@ -47,7 +46,7 @@ export const WidgetDrag: React.FC = () => {
   );
 
   useDrop(dropRef, {
-    onDom: (item: { id: string; name: string; type: string }, e) => {
+    onDom: (item: IWidgetMenuData, e) => {
       const initOffset = { x: e.pageX, y: e.pageY };
       addBox({ ...item, ...initOffset });
       setIsHovering(false);

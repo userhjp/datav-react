@@ -41,7 +41,13 @@ export class Operation {
       sortComp: action,
       lockCom: action,
       singleCopy: action,
+      batchAddNode: action,
     });
+  }
+
+  /** 批量添加组件 */
+  batchAddNode(nodes: IWidgetSetting[]) {
+    this.components = [...this.components, ...nodes];
   }
 
   /** 添加组件 */

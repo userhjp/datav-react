@@ -32,6 +32,7 @@ export class Screen {
       scale: observable.ref,
       setScale: action,
       setSize: action,
+      setProps: action,
       // setFlip: action,
     });
   }
@@ -53,6 +54,10 @@ export class Screen {
     if (height) {
       this.props.height = height;
     }
+  }
+
+  setProps(props: IScreenProps) {
+    this.props = Object.assign(this.props, props);
   }
 
   // setFlip(flip: boolean) {

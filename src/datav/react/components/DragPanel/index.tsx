@@ -5,7 +5,7 @@ import { PanelType } from '../../../shared';
 import { useToolbar } from '../../hooks';
 import PreviewItem from './PreviewItem';
 import { IconWidget } from '../IconWidget';
-import { IResourceChildrenType, IResourceData } from '../../types';
+import { IWidgetMenuChildData, IWidgetMenu } from '../../types';
 import { GlobalRegistry } from '@/datav/core/registry';
 import './index.less';
 
@@ -19,7 +19,7 @@ const icons = {
   info: <IconWidget infer="RichText" />,
 };
 
-export const DragPanel: React.FC<{ resourceData: IResourceData[] }> = observer(({ resourceData }) => {
+export const DragPanel: React.FC<{ widgetMenu: IWidgetMenu[] }> = observer(({ widgetMenu }) => {
   const toolbar = useToolbar();
   const [treeData, setTreeData] = useState([]);
   const changeConfigPanel = () => {
@@ -37,43 +37,35 @@ export const DragPanel: React.FC<{ resourceData: IResourceData[] }> = observer((
 
   useEffect(() => {
     const widgets = GlobalRegistry.getDesignerWidgets();
-    Object.entries(widgets).forEach(([component, m]) => {
-      const paths: string[] = (m.DnConfig.taxonPath || '').split('.').slice(0, 3);
-      if (paths.length > 1) {
-        const live1 = resourceData.find((f) => f.name === paths[0]);
-        if (!live1) return;
-        live1.children = live1.children || [];
-        const componentName = (paths as any[]).pop();
-        if (paths.length === 1) {
-          live1.children.push({
-            name: componentName,
-            cover: m.DnConfig.cover,
-            type: component,
-          });
+    Object.entries(widgets).forEach(([compName, m]) => {
+      const { DnConfig } = m;
+      const paths: string[] = (DnConfig.taxonPath || '').split('.').slice(0, 3);
+      if (paths.length < 2) return;
+      const live1 = widgetMenu.find((f) => f.name === paths[0]);
+      if (!live1) return;
+      live1.children = live1.children || [];
+      const componentName = (paths as any[]).pop();
+      const opt = {
+        name: componentName,
+        cover: DnConfig.cover,
+        type: compName,
+        dnConfig: DnConfig,
+      };
+      if (paths.length === 1) {
+        live1.children.push(opt);
+      } else {
+        const live2 = live1.children.find((f) => f.name === paths[1]) as IWidgetMenuChildData;
+        if (live2) {
+          live2.children.push(opt);
         } else {
-          const live2 = live1.children.find((f) => f.name === paths[1]) as IResourceChildrenType;
-          if (live2) {
-            live2.children.push({
-              name: componentName,
-              cover: m.DnConfig.cover,
-              type: component,
-            });
-          } else {
-            live1.children.push({
-              name: paths[1],
-              children: [
-                {
-                  name: componentName,
-                  cover: m.DnConfig.cover,
-                  type: component,
-                },
-              ],
-            });
-          }
+          live1.children.push({
+            name: paths[1],
+            children: [opt],
+          });
         }
       }
     });
-    setTreeData(resourceData);
+    setTreeData(widgetMenu);
   }, []);
 
   return (
