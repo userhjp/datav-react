@@ -5,3 +5,4 @@ export * from './ScrollBoard';
 export * from './Text';
 export * from './Timer';
 export * from './Title';
+export * from './QrCode';

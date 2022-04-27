@@ -8,13 +8,13 @@ registerWidgetConfig(Carousel, {
   schema: CarouselSchema,
   data: {
     value: [
-      { url: '/images/main-img.png', herf: 'https://www.baidu.com' },
-      { url: '/images/main-img.png', herf: 'https://www.baidu.com' },
-      { url: '/images/main-img.png', herf: 'https://www.baidu.com' },
-      { url: '/images/main-img.png', herf: 'https://www.baidu.com' },
+      { imgurl: '/images/main-img.png', herf: 'https://www.baidu.com' },
+      { imgurl: '/images/main-img.png', herf: 'https://www.baidu.com' },
+      { imgurl: '/images/main-img.png', herf: 'https://www.baidu.com' },
+      { imgurl: '/images/main-img.png', herf: 'https://www.baidu.com' },
     ],
     fields: {
-      url: '图片链接地址',
+      imgurl: '图片链接地址',
       herf: '超链接地址',
     },
   },

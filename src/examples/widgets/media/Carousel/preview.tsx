@@ -53,7 +53,7 @@ const Carousel: React.FC<IWidgetProps> = ({ options, events, data, attr }) => {
                     cursor: m.herf ? 'pointer' : 'default',
                     width: '100%',
                     height: '100%',
-                    background: `url(${m.url}) 0% 0% / 100% 100% no-repeat`,
+                    background: `url(${m.imgurl}) 0% 0% / 100% 100% no-repeat`,
                     overflow: 'hidden',
                     ...options.style,
                   }}

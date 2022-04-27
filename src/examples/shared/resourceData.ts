@@ -243,6 +243,7 @@ export const resourceData: IResourceData[] = [
       {
         name: '二维码',
         cover: '/menuCover/信息/二维码.png',
+        type: 'QrCode',
       },
     ],
   },
