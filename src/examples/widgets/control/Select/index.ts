@@ -5,6 +5,8 @@ import { SelectSchema } from './schema';
 export const Select = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(Select, {
+  taxonPath: '控件.下拉选择器',
+  cover: '/menuCover/控件/下拉选择器.png',
   schema: SelectSchema,
   h: 44,
   w: 280,

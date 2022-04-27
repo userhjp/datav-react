@@ -5,6 +5,8 @@ import { StackLineSchema } from './schema';
 export const StackLine = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(StackLine, {
+  taxonPath: '图表.折线图.堆叠折线图',
+  cover: '/menuCover/图表/折线图/堆叠折线图.png',
   schema: StackLineSchema,
   data: {
     value: [

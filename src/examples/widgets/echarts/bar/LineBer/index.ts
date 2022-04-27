@@ -5,6 +5,8 @@ import { LineBerSchema } from './schema';
 export const LineBer = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(LineBer, {
+  taxonPath: '图表.柱状图.折线柱状图',
+  cover: '/menuCover/图表/柱状图/折线柱状图.png',
   schema: LineBerSchema,
   data: {
     value: [

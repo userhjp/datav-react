@@ -5,6 +5,8 @@ import { HorizontalScatterSchema } from './schema';
 export const HorizontalScatter = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(HorizontalScatter, {
+  taxonPath: '图表.散点图.气泡图',
+  cover: '/menuCover/图表/散点图/气泡图.png',
   w: 550,
   h: 350,
   schema: HorizontalScatterSchema,

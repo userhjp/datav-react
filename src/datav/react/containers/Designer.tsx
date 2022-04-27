@@ -16,9 +16,6 @@ setNpmCDNRegistry('//unpkg.com');
 export const Designer: React.FC<IDesignerProps> = (props) => {
   const engine = useDesigner();
   const ref = useRef<Engine>();
-  useEffect(() => {
-    GlobalRegistry.registerDesignerWidget(props.components);
-  }, []);
 
   useEffect(() => {
     if (props.engine) {
@@ -44,7 +41,7 @@ export const Designer: React.FC<IDesignerProps> = (props) => {
       <div
         className="visual-design"
         onContextMenu={(e) => {
-          // e.preventDefault();
+          e.preventDefault();
         }}
         onMouseDown={() => {
           ref.current.operation.cancelRename();

@@ -4,6 +4,12 @@ import { ISchema } from '@formily/react';
 export type IWidgetData = Array<Record<string, any>> | Record<string, any> | any;
 
 export type IWidgetConfig = {
+  /** 权限标识  */
+  acl?: string;
+  /** 所属组件路径，'.'符号分割，例如："一级分类.二级分类.图表名称" 或 "一级分类.图表名称" 最多3级 多余忽略 */
+  taxonPath: string;
+  /** 组件封面 */
+  cover: string;
   /** 组件默认宽度 380 */
   w?: number;
   /** 组件默认高度 220 */

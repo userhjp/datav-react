@@ -2,6 +2,7 @@ import { IResourceDataChild, IResourceChildrenType } from '../../../types';
 import React, { useMemo, useState } from 'react';
 import { DragItem } from './DragItem';
 import './index.less';
+import { SettingsEmpty } from '@/datav/react/settings-form/components';
 
 type PreviewItemProps = {
   data: IResourceDataChild;
@@ -15,7 +16,7 @@ const PreviewItem: React.FC<PreviewItemProps> = (props) => {
   }, data);
 
   const activateList = useMemo(() => {
-    if (childrenData.length > 1) {
+    if (childrenData.length > 0) {
       if (activate === '全部') {
         return childrenData.reduce((total, currentValue) => [...total, ...currentValue.children], []);
       } else {
@@ -25,10 +26,9 @@ const PreviewItem: React.FC<PreviewItemProps> = (props) => {
       return data || [];
     }
   }, [activate]);
-
   return (
-    <div className={`tree-item ${childrenData.length > 1 ? 'twolevel-warp' : ''}`}>
-      {childrenData.length > 1 && (
+    <div className={`tree-item ${childrenData.length > 0 ? 'twolevel-warp' : ''}`}>
+      {childrenData.length > 0 && (
         <div className="classify-warp">
           <div key="all" className={`${activate === '全部' ? 'activate' : ''}`} onClick={() => setActivate('全部')}>
             全部
@@ -41,9 +41,13 @@ const PreviewItem: React.FC<PreviewItemProps> = (props) => {
         </div>
       )}
       <div className="item-cont scoll-prettify">
-        {activateList.map((m) => {
-          return <DragItem key={m.name} {...m} />;
-        })}
+        {activateList.length > 0 ? (
+          activateList.map((m) => {
+            return <DragItem key={m.name} {...m} />;
+          })
+        ) : (
+          <SettingsEmpty title="暂无可用组件" />
+        )}
       </div>
     </div>
   );

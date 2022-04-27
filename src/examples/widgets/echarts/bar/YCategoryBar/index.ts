@@ -5,6 +5,8 @@ import { YCategoryBarSchema } from './schema';
 export const YCategoryBar = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(YCategoryBar, {
+  taxonPath: '图表.条形图.水平基础柱状图',
+  cover: '/menuCover/图表/条形图/水平基础柱状图.png',
   schema: YCategoryBarSchema,
   data: {
     value: [

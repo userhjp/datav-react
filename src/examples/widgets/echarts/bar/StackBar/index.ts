@@ -5,6 +5,8 @@ import { StackBarSchema } from './schema';
 export const StackBar = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(StackBar, {
+  taxonPath: '图表.柱状图.垂直胶囊柱状图',
+  cover: '/menuCover/图表/柱状图/垂直胶囊柱状图.png',
   schema: StackBarSchema,
   data: {
     value: [

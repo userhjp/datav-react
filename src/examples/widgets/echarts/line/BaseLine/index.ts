@@ -5,6 +5,8 @@ import { BaseLineSchema } from './schema';
 export const BaseLine = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(BaseLine, {
+  taxonPath: '图表.折线图.基础折线图',
+  cover: '/menuCover/图表/折线图/基础折线图.png',
   schema: BaseLineSchema,
   data: {
     value: [

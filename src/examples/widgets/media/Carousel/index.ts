@@ -5,6 +5,8 @@ import { CarouselSchema } from './schema';
 export const Carousel = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(Carousel, {
+  taxonPath: '媒体.轮播图',
+  cover: '/menuCover/媒体/轮播图.png',
   schema: CarouselSchema,
   data: {
     value: [

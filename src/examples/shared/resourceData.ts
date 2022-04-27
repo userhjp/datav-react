@@ -1,6 +1,4 @@
-import { IResourceData } from '@/datav/react/types';
-
-export const resourceData: IResourceData[] = [
+export const resourceData2 = [
   {
     name: '图表',
     icon: 'chart',

@@ -5,6 +5,8 @@ import { QrCodeSchema } from './schema';
 export const QrCode = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(QrCode, {
+  taxonPath: '信息.二维码',
+  cover: '/menuCover/信息/二维码.png',
   schema: QrCodeSchema,
   w: 200,
   h: 200,

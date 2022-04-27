@@ -5,6 +5,8 @@ import { MarqueeSchema } from './schema';
 export const Marquee = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(Marquee, {
+  taxonPath: '信息.跑马灯',
+  cover: '/menuCover/信息/跑马灯.png',
   schema: MarqueeSchema,
   w: 300,
   h: 56,

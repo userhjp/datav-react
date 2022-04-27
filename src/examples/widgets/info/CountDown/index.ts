@@ -5,6 +5,8 @@ import { CountDownSchema } from './schema';
 export const CountDown = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(CountDown, {
+  taxonPath: '信息.倒计时',
+  cover: '/menuCover/信息/倒计时.png',
   schema: CountDownSchema,
   w: 480,
   h: 150,

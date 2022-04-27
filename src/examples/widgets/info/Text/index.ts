@@ -5,6 +5,8 @@ import { TextSchema } from './schema';
 export const Text = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(Text, {
+  taxonPath: '信息.多行文本',
+  cover: '/menuCover/信息/多行文本.png',
   schema: TextSchema,
   w: 300,
   h: 200,

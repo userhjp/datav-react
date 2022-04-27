@@ -5,6 +5,8 @@ import { TabSchema } from './schema';
 export const Tab = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(Tab, {
+  taxonPath: '控件.Tab切换',
+  cover: '/menuCover/控件/Tab切换.png',
   schema: TabSchema,
   h: 44,
   w: 220,

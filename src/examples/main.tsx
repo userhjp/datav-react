@@ -1,11 +1,20 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createDesigner } from '@/datav/core';
 import { Designer, Preview } from '@/datav/react';
-import { resourceData } from './shared/resourceData';
 import { message } from 'antd';
 import { waitTime } from '@/datav/shared';
 import axios from 'axios';
 import * as components from './widgets';
+import { GlobalRegistry } from '@/datav/core/registry';
+
+const resourceData = [
+  { name: '图表', icon: 'chart' },
+  { name: '信息', icon: 'info' },
+  { name: '地图', icon: 'map' },
+  { name: '媒体', icon: 'media' },
+  { name: '控件', icon: 'other' },
+  { name: '其他', icon: 'other' },
+];
 
 const SnapshotKey = 'DataV-Snapshot';
 
@@ -25,7 +34,7 @@ async function getSnapshot() {
 
   return null;
 }
-
+GlobalRegistry.registerDesignerWidget({ ...components });
 export const Main: React.FC = () => {
   const engine = useMemo(
     () =>

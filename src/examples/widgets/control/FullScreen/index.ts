@@ -5,6 +5,8 @@ import { FullScreenSchema } from './schema';
 export const FullScreen = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(FullScreen, {
+  taxonPath: '控件.全屏切换',
+  cover: '/menuCover/控件/全屏切换.png',
   schema: FullScreenSchema,
   h: 80,
   w: 80,

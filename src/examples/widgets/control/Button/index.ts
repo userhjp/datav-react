@@ -5,6 +5,8 @@ import { ButtonSchema } from './schema';
 export const Button = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(Button, {
+  taxonPath: '控件.按钮',
+  cover: '/menuCover/控件/按钮.png',
   schema: ButtonSchema,
   h: 44,
   w: 300,

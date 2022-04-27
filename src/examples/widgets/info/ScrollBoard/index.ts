@@ -5,6 +5,8 @@ import { ScrollBoardSchema } from './schema';
 export const ScrollBoard = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(ScrollBoard, {
+  taxonPath: '信息.轮播列表',
+  cover: '/menuCover/信息/轮播列表.png',
   schema: ScrollBoardSchema,
   w: 320,
   h: 200,

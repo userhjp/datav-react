@@ -5,6 +5,8 @@ import { EChartsSchema } from './schema';
 export const ECharts = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(ECharts, {
+  taxonPath: '图表.通用图表.Echarts自定义配置',
+  cover: '/menuCover/图表/通用图表/echarts_logo.png',
   schema: EChartsSchema,
   data: {
     value: [

@@ -5,6 +5,8 @@ import { RosePieSchema } from './schema';
 export const RosePie = React.lazy(() => import('./preview'));
 
 registerWidgetConfig(RosePie, {
+  taxonPath: '图表.饼图.分类玫瑰图',
+  cover: '/menuCover/图表/饼图/分类玫瑰图.png',
   w: 550,
   h: 350,
   schema: RosePieSchema,

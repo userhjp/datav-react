@@ -41,7 +41,7 @@ export type IResourceDataChild = Array<IResourceDataType | IResourceChildrenType
 export interface IResourceData {
   name: string;
   icon: string;
-  children: IResourceDataChild;
+  children?: IResourceDataChild;
 }
 
 export type DnFC<P = {}> = React.FC<P> & {
