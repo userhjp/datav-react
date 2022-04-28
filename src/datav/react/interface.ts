@@ -39,15 +39,15 @@ export type IWidgetConfig = {
 /** 组件属性 */
 export interface IWidgetProps<T = { [key: string]: any }> {
   id: string;
-  info: IWidgetInfoSetting;
-  attr: IWidgetAttrSetting;
+  info: IWidgetInfo;
+  attr: IWidgetAttr;
   options?: T;
   data?: IWidgetData;
   events?: IWidgetEvents;
 }
 
 /** 组件位置信息 */
-export interface IWidgetAttrSetting {
+export interface IWidgetAttr {
   x: number;
   y: number;
   w: number;
@@ -59,7 +59,7 @@ export interface IWidgetAttrSetting {
 }
 
 /** 组件描述 */
-export interface IWidgetInfoSetting {
+export interface IWidgetInfo {
   name: string;
   type: string;
   ver?: string;
@@ -67,8 +67,8 @@ export interface IWidgetInfoSetting {
 
 export interface IWidgetSetting {
   id: string;
-  info: IWidgetInfoSetting;
-  attr: IWidgetAttrSetting;
+  info: IWidgetInfo;
+  attr: IWidgetAttr;
   options?: { [key: string]: any };
   data?: IDataSetting;
   events?: IWidgetEvents;

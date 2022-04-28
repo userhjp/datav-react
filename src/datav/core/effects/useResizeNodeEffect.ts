@@ -1,6 +1,6 @@
 import { Engine, CursorType, CursorDragType } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { IWidgetAttrSetting, IWidgetSetting } from '../../react/interface';
+import { IWidgetAttr, IWidgetSetting } from '../../react/interface';
 import { toJS } from '@formily/reactive';
 import { Direction, IPoint, Point } from '../../shared';
 
@@ -11,7 +11,7 @@ export const useResizeNodeEffect = (engine: Engine) => {
     x: 0,
     y: 0,
   };
-  let attr: IWidgetAttrSetting;
+  let attr: IWidgetAttr;
   let node: IWidgetSetting;
 
   engine.subscribeTo(DragStartEvent, (e) => {
@@ -30,7 +30,7 @@ export const useResizeNodeEffect = (engine: Engine) => {
   engine.subscribeTo(DragMoveEvent, (e) => {
     if (!engine?.viewport) return;
     if (!status) return;
-    const pos = Object.create(null) as Partial<IWidgetAttrSetting>;
+    const pos = Object.create(null) as Partial<IWidgetAttr>;
     const curPositon = new Point(e.data.clientX, e.data.clientY);
     const scale = engine.viewport.scale;
     if (status === 't') {
