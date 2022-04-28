@@ -6,7 +6,7 @@ import { useToolbar } from '../../hooks';
 import PreviewItem from './PreviewItem';
 import { IconWidget } from '../IconWidget';
 import { IWidgetMenuChildData, IWidgetMenu } from '../../types';
-import { GlobalRegistry } from '@/datav/core/registry';
+import { GlobalRegistry } from '../../../core/registry';
 import './index.less';
 
 const { TabPane } = Tabs;

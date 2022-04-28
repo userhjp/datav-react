@@ -1,7 +1,13 @@
 import { IEngineProps } from '../types';
-import { Event } from '../../shared';
+import { Event } from '../../shared/event';
 import { IPageType } from '../../react/interface';
-import { Viewport, DataSource, Cursor, Toolbar, Operation, Keyboard, Screen } from './index';
+import { Viewport } from './Viewport';
+import { DataSource } from './DataSource';
+import { Cursor } from './Cursor';
+import { Toolbar } from './Toolbar';
+import { Operation } from './Operation';
+import { Keyboard } from './Keyboard';
+import { Screen } from './Screen';
 
 /**
  * 设计器引擎

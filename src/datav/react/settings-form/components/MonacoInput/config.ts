@@ -2,7 +2,7 @@ import { loader } from '@monaco-editor/react';
 import chromeTheme from './themes/chrome';
 import monokaiTheme from './themes/monokai';
 import { format } from './format';
-import { isArr, isObj } from '@/datav/shared';
+import { isArr, isObj } from '../../../../shared';
 
 export type languageType = 'plaintext' | 'html' | 'javascript' | 'json' | 'sql' | string;
 let initialized = false;

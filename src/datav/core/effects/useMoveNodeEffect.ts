@@ -1,7 +1,7 @@
 import { CursorDragType, Engine } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent, ViewportScrollEvent } from '../events';
 import { IWidgetSetting } from '../../react/interface';
-import { CursorType } from '../index';
+import { CursorType } from '../models/Cursor';
 import { action } from '@formily/reactive';
 
 /** 位置移动 */

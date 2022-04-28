@@ -79,7 +79,7 @@ export const createFormCollapse = (defaultActiveKeys?: ActiveKeys) => {
 
 export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ...props }) => {
   const field: ArrayField | ObjectField = useField();
-  const { mapSwitchKey = 'show', defaultSwitch } = props;
+  const { mapSwitchKey = 'show' } = props;
   const schema: any = useFieldSchema();
   const arrValue = Array.isArray(field.value) ? field.value : [];
   const [activeKey, setActiveKey] = useState('tab-0');

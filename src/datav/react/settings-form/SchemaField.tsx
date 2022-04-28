@@ -18,7 +18,6 @@ import {
   BorderSelect,
   ImageSelect,
   NumberPickerUnit,
-  MonacoInput,
 } from './components';
 
 export const SchemaField = createSchemaField({

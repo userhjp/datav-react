@@ -15,7 +15,8 @@ const QrCodeWidget: React.FC<IWidgetProps> = ({ data, options, attr }) => {
   };
 
   useEffect(() => {
-    generateQR(data?.content || '');
+    if (!data?.content) return;
+    generateQR(data.content);
   }, [data, options, attr.w, attr.h]);
 
   return (

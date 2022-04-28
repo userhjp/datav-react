@@ -1,11 +1,15 @@
-import { IWidgetSetting, IPageType } from '../../react/interface';
-import { generateUUID } from '../../shared';
+import { IPageType, IWidgetProps } from '../../react/interface';
+import { generateUUID } from '../../shared/utils';
 import { observable, define, action, toJS } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../events';
 import { IMoveType } from '../types';
-import { Engine, Hover, Selection } from './index';
 import { arrayMoveMutable } from 'array-move';
+import { WidgetNode } from './WidgetNode';
+import { Hover } from './Hover';
+import { Engine } from './Engine';
+import { Selection } from './Selection';
+
 export interface IOperation {
   selection: Selection;
   hover: Hover;
@@ -17,7 +21,7 @@ export class Operation {
   engine: Engine;
   hover: Hover;
   editableId: string;
-  components: IWidgetSetting[] = [];
+  components: WidgetNode[] = [];
 
   constructor(engine: Engine) {
     this.engine = engine;
@@ -46,14 +50,15 @@ export class Operation {
   }
 
   /** 批量添加组件 */
-  batchAddNode(nodes: IWidgetSetting[]) {
-    this.components = [...this.components, ...nodes];
+  batchAddNode(nodes: IWidgetProps[]) {
+    const widgets = nodes.map((m) => new WidgetNode(m));
+    this.components = [...widgets, ...this.components];
   }
 
   /** 添加组件 */
-  addNode(node: IWidgetSetting) {
+  addNode(node: IWidgetProps) {
     this.selection.safeSelect(node.id);
-    this.components = [...this.components, node];
+    this.components = [new WidgetNode(node), ...this.components];
   }
 
   /** 移除组件 */
@@ -75,7 +80,7 @@ export class Operation {
     comp.attr.x += 30;
     comp.attr.y += 20;
     comp.id = generateUUID();
-    this.components.push(comp);
+    this.addNode(comp);
     return comp.id;
   }
 
@@ -94,31 +99,11 @@ export class Operation {
     }
   }
 
-  startMove(comp: IWidgetSetting, type: IMoveType) {
-    if (!comp) return;
-    const grid = this.engine.screen.props.grid;
-    switch (type) {
-      case 'ArrowLeft':
-        comp.attr.x -= grid;
-        break;
-      case 'ArrowUp':
-        comp.attr.y -= grid;
-        break;
-      case 'ArrowRight':
-        comp.attr.x += grid;
-        break;
-      case 'ArrowDown':
-        comp.attr.y += grid;
-        break;
-      default:
-        break;
-    }
-  }
-
   moveTo(type: IMoveType) {
     this.selection.selected.forEach((f) => {
       const comp = this.findById(f);
-      this.startMove(comp, type);
+      const grid = this.engine.screen.props.grid;
+      comp.moveTo(type, grid);
     });
   }
 

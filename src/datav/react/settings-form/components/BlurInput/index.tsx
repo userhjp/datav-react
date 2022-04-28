@@ -1,5 +1,5 @@
 import { Input, InputProps } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './index.less';
 
 export const BlurInput: React.FC<InputProps> = (props) => {

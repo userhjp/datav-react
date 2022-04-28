@@ -1,4 +1,4 @@
-import { ICustomEvent } from '@designable/shared';
+import { ICustomEvent } from '../../../shared';
 import { AbstractMutationNodeEvent } from './AbstractMutationNodeEvent';
 
 export class HoverNodeEvent extends AbstractMutationNodeEvent implements ICustomEvent {

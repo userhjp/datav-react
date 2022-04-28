@@ -13,7 +13,7 @@ const GlobalState = {
 
 export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
   ({ nodeInfo }) => {
-    const Component = GlobalRegistry.getDesignerWidget(nodeInfo.info.type);
+    const Component: any = GlobalRegistry.getDesignerWidget(nodeInfo.info.type);
     const data = useReqData(nodeInfo.id, nodeInfo.data);
     const options = toJS(nodeInfo.options);
 
@@ -97,6 +97,6 @@ export class ErrorBoundary extends React.Component<{ name: string }> {
       );
     }
 
-    return this.props.children;
+    return <div>{this.props.children}</div>;
   }
 }

@@ -19,7 +19,6 @@ export class Selection {
   makeObservable() {
     define(this, {
       selected: observable,
-      select: action,
       batchSelect: action,
       add: action,
       remove: action,
@@ -27,18 +26,13 @@ export class Selection {
     });
   }
 
-  select(id: string) {
+  safeSelect(id: string) {
     if (isStr(id)) {
       if (this.selected.length === 1 && this.selected.includes(id)) {
         return;
       }
       this.selected = [id];
     }
-  }
-
-  safeSelect(id: string) {
-    if (!id) return;
-    this.select(id);
   }
 
   mapIds(ids: any) {

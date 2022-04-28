@@ -3,7 +3,7 @@ import { message, Upload } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 import html2canvas from 'html2canvas';
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import { IconWidget } from '../../../components';
 import { SettingsFormContext } from '../../context';
 import './index.less';

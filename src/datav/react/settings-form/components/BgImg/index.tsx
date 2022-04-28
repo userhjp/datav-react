@@ -1,8 +1,8 @@
 import rcUpload from '../../rc-upload';
 import { Input } from '@formily/antd';
-import { Upload, message, Modal, Divider } from 'antd';
+import { Upload, message, Divider } from 'antd';
 import { UploadFile, UploadChangeParam } from 'antd/lib/upload/interface';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { IconWidget } from '../../../components';
 import './index.less';
 import { SettingsFormContext } from '../../context';

@@ -48,7 +48,7 @@ export default function upload(option: UploadRequestOption<any>) {
         return;
       }
 
-      formData.append(key, option.data[key]);
+      formData.append(key, option.data[key] as any);
     });
   }
 

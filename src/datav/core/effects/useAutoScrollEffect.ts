@@ -1,4 +1,4 @@
-import { Engine, CursorStatus, CursorType, Viewport, CursorDragType } from '../models';
+import { Engine, CursorStatus, Viewport } from '../models';
 import { DragMoveEvent, DragStartEvent, DragStopEvent } from '../events';
 import { calcAutoScrollBasicInfo, IAutoScrollBasicInfo, IPoint, Point, scrollAnimate } from '../../shared';
 

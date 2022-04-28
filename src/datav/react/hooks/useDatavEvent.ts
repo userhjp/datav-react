@@ -1,4 +1,4 @@
-import { getFieldMap } from '@/datav/shared';
+import { getFieldMap } from '../../shared';
 import { observe } from '@formily/reactive';
 import { useEffect } from 'react';
 import { IChangedEvent } from '../interface';

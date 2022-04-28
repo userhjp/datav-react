@@ -8,14 +8,14 @@ import {
   handleCodeInput,
   handleInputCode,
   languageType,
-  registerApiCompletion,
   registerDatavDarkTheme,
 } from './editor-config';
 import { copyText } from '../../../../shared';
 import { message, Modal } from 'antd';
 import { IconWidget } from '../../../components';
+import { usePrefix } from '../../../hooks';
+
 import './index.less';
-import { usePrefix } from '@/datav/react/hooks';
 
 type MonacoEditorProps = Partial<{
   options: monaco.editor.IStandaloneEditorConstructionOptions;

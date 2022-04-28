@@ -1,4 +1,4 @@
-import { ZoomMode, IDataType, FieldStatus, ApiType, ApiRequestMethod, MoveSortType } from '../shared';
+import { ZoomMode, IDataType, FieldStatus, ApiType, ApiRequestMethod } from '../shared';
 import { ISchema } from '@formily/react';
 
 export type IWidgetData = Array<Record<string, any>> | Record<string, any> | any;

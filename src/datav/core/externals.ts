@@ -3,7 +3,7 @@ import { DEFAULT_DRIVERS, DEFAULT_EFFECTS, DEFAULT_SHORTCUTS } from './presets';
 import { Engine } from './models';
 import { IEngineProps } from './types';
 import { ApiType, FieldStatus, generateUUID, IDataType, isArr } from '../shared';
-import { IFieldSetting, IWidgetSetting, IWidgetConfig, IWidgetData, IWidgetEvents } from '../react/interface';
+import { IFieldSetting, IWidgetConfig, IWidgetData, IWidgetEvents, IWidgetProps } from '../react/interface';
 import { DnComponent, DnFC } from '../react/types';
 
 type ICreateWidgetConfig = {
@@ -66,7 +66,7 @@ export const createWidgetFields = (fieldsDes: Record<string, string>): IFieldSet
   return fields;
 };
 
-export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetSetting => {
+export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
   const fieldsDes = config.data?.fields ?? {};
   const dataType = isArr(config.data?.value) ? IDataType.array : IDataType.object;
   const fields: IFieldSetting = createWidgetFields(fieldsDes);

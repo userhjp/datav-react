@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Divider, message, Modal, Tooltip } from 'antd';
+import { Divider, Modal, Tooltip } from 'antd';
 import { IconWidget } from '../IconWidget/index';
 import './styles.less';
 

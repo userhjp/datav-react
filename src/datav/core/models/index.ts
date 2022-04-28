@@ -9,3 +9,4 @@ export * from './Shortcut';
 export * from './Hover';
 export * from './Viewport';
 export * from './Screen';
+export * from './WidgetNode';
