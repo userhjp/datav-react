@@ -22,7 +22,7 @@
     flex-direction: column;
     box-sizing: border-box;
     width: 300px;
-    overflow-x: hidden;
+    overflow: hidden;
     transition: all 0.3s;
 
     .sidebar-head {
@@ -38,7 +38,8 @@
   }
 
   .left-sidebar-tabs {
-    height: 100%;
+    flex: 1;
+    overflow-y: auto;
 
     .tab-btn {
       font-size: @m-font-size;
