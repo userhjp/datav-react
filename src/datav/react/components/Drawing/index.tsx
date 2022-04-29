@@ -1,5 +1,5 @@
 import React from 'react';
-import { Toolbox } from '..';
+import { Toolbox } from '../Toolbox';
 import KeyPress from './components/KeyPress';
 import Viewport from './components/Viewport';
 import ScreenSelectd from './components/ScreenSelectd';

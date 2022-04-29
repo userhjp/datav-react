@@ -97,6 +97,6 @@ export class ErrorBoundary extends React.Component<{ name: string }> {
       );
     }
 
-    return this.props.children;
+    return <>{this.props.children}</>;
   }
 }
