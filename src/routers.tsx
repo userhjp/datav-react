@@ -4,6 +4,7 @@ import VisualLayout from './layouts/VisualLayout';
 import HomeRoutes from './pages/routers';
 
 const Screen = React.lazy(() => import('@/pages/Screen'));
+const Design = React.lazy(() => import('@/pages/Design'));
 
 const routes: RouteObject[] = [
   {
@@ -16,7 +17,11 @@ const routes: RouteObject[] = [
     children: HomeRoutes,
   },
   {
-    path: '/passport',
+    path: '/design',
+    element: <Design />,
+  },
+  {
+    path: '/screen',
     element: <Screen />,
   },
 ];
