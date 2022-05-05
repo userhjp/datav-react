@@ -34,9 +34,11 @@
     "monaco-editor": "^0.33.0",
     "qrcode": "^1.5.0",
     "rc-tween-one": "^3.0.6",
-    "react-color": "^2.19.3",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-color": "^2.19.3",
+    "react-dom": "^17.0.2",
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.17.9",

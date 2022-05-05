@@ -1,6 +1,6 @@
 import { merge } from 'webpack-merge';
 import { Configuration, DefinePlugin } from 'webpack';
-import { commonConfig } from './webpack.common';
+import { baseConfig } from './webpack.base';
 import WebpackDevServer from 'webpack-dev-server';
 
 process.env.NODE_ENV = 'development';
@@ -37,4 +37,4 @@ const devConfig: Configuration & { devServer: WebpackDevServer.Configuration } =
   ],
 };
 
-export default merge<Configuration>(commonConfig, devConfig);
+export default merge<Configuration>(baseConfig, devConfig);

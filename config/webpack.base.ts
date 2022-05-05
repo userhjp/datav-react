@@ -46,7 +46,7 @@ const commonCssLoader = (cssModules: boolean) => {
   ]
   return cssLoader;
 };
-export const commonConfig: Configuration = {
+export const baseConfig: Configuration = {
   entry: {
     main: './src/app.tsx',
   },

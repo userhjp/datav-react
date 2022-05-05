@@ -2,7 +2,7 @@
   import { merge } from 'webpack-merge';
   import TerserPlugin from 'terser-webpack-plugin';
   import { Configuration, DefinePlugin } from 'webpack';
-  import { commonConfig } from './webpack.common';
+  import { baseConfig } from './webpack.base';
 
   process.env.NODE_ENV = 'production';
 
@@ -57,4 +57,4 @@
     ],
   };
 
-  export default merge(commonConfig, prodConfig);
+  export default merge(baseConfig, prodConfig);
