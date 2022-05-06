@@ -3,21 +3,31 @@ import { Engine } from '../core';
 import { IWidgetConfig } from './interface';
 
 export interface IDesignerLayoutProps {
+  /** 拖拽源数据分类配置 */
+  menu: IWidgetMenu[];
   prefixCls?: string;
   theme?: 'dark' | 'light' | (string & {});
   variables?: Record<string, string>;
 }
 export interface IDesignerProps extends IDesignerLayoutProps {
-  engine: Engine;
   /** 拖拽源数据分类配置 */
-  widgetMenu: IWidgetMenu[];
+  menu: IWidgetMenu[];
+  engine: Engine;
   /** 物料组件 */
   components: IDesignerComponents;
 }
 
 export interface IDesignerLayoutContext {
+  /** 拖拽源数据分类配置 */
+  menu: IWidgetMenu[];
   theme?: 'dark' | 'light' | (string & {});
   prefixCls: string;
+}
+
+export interface IDesignerContext {
+  engine: Engine;
+  /** 物料组件 */
+  components: IDesignerComponents;
 }
 
 export interface IWorkspaceContext {

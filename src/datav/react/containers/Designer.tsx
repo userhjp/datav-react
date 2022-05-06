@@ -10,31 +10,32 @@ import { LayerPanel, DesignHead, DragPanel, Drawing } from '../components';
 import { SettingsForm } from '../settings-form/SettingsForm';
 import { setNpmCDNRegistry } from '../settings-form/registry';
 import '../styles.less';
-
-GlobalRegistry.registerDesignerIcons(icons);
 setNpmCDNRegistry('//unpkg.com');
-export const Designer: React.FC<IDesignerProps> = (props) => {
-  const engine = useDesigner();
+GlobalRegistry.registerDesignerIcons(icons);
+export const Designer: React.FC<IDesignerProps> = ({ components, engine, ...props }) => {
+  debugger;
+
+  const pEngine = useDesigner();
+  debugger;
   const ref = useRef<Engine>();
 
   useEffect(() => {
-    if (props.engine) {
-      if (props.engine && ref.current) {
-        if (props.engine !== ref.current) {
+    if (engine) {
+      if (engine && ref.current) {
+        if (engine !== ref.current) {
           ref.current.unmount();
         }
       }
-      props.engine.mount();
-      ref.current = props.engine;
+      engine.mount();
+      ref.current = engine;
     }
     return () => {
-      if (props.engine) {
-        props.engine.unmount();
+      if (engine) {
+        engine.unmount();
       }
     };
-  }, [props.engine]);
-
-  if (engine) throw new Error('There can only be one Designable Engine Context in the React Tree');
+  }, [engine]);
+  if (pEngine) throw new Error('There can only be one Designable Engine Context in the React Tree');
 
   return (
     <Layout {...props}>
@@ -47,11 +48,11 @@ export const Designer: React.FC<IDesignerProps> = (props) => {
           ref.current.operation.cancelRename();
         }}
       >
-        <DesignerEngineContext.Provider value={props.engine}>
+        <DesignerEngineContext.Provider value={{ engine, components }}>
           <DesignHead />
           <div className="datav-content">
             <LayerPanel />
-            <DragPanel widgetMenu={props.widgetMenu} />
+            <DragPanel />
             <Drawing />
             <SettingsForm />
           </div>

@@ -31,6 +31,7 @@ export const Layout: React.FC<IDesignerLayoutProps> = (props) => {
         value={{
           theme: props.theme,
           prefixCls: props.prefixCls,
+          menu: props.menu,
         }}
       >
         {props.children}

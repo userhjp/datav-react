@@ -1,10 +1,10 @@
-import { GlobalRegistry } from '../../../../../core/registry';
 import { IWidgetSetting } from '../../../../interface';
 import { useReqData } from '../../../../hooks';
 import { cancelIdle, requestIdle } from '../../../../../shared';
 import { observer } from '@formily/react';
 import { toJS } from '@formily/reactive';
 import React, { Suspense } from 'react';
+import { useWidgets } from '@/datav/react/hooks/useWidgets';
 import './index.less';
 
 const GlobalState = {
@@ -13,16 +13,17 @@ const GlobalState = {
 
 export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
   ({ nodeInfo }) => {
-    const Component: any = GlobalRegistry.getDesignerWidget(nodeInfo.info.type);
+    const widgets = useWidgets();
+    const Widget = widgets[nodeInfo.info.type];
     const data = useReqData(nodeInfo.id, nodeInfo.data);
     const options = toJS(nodeInfo.options);
 
     if (!nodeInfo.info || !nodeInfo.info.type || nodeInfo.attr.isHide) return <div />;
-    if (!options || !Component) return <WidgetLoading />;
+    if (!options || !Widget) return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>
         <ErrorBoundary name={nodeInfo.info.type}>
-          <Component
+          <Widget
             {...{
               options,
               data,

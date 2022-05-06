@@ -21,7 +21,7 @@ const routes: RouteObject[] = [
     element: <Design />,
   },
   {
-    path: '/screen',
+    path: '/screen/:id',
     element: <Screen />,
   },
 ];

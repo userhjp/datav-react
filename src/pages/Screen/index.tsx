@@ -1,37 +1,24 @@
 import { Preview } from '@/datav';
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import * as components from '@/examples/widgets';
-import { GlobalRegistry } from '@/datav/core/registry';
+import { getPreviewKey } from '@/utils';
 import './index.less';
-const SnapshotKey = 'DataV-Snapshot';
 
-GlobalRegistry.registerDesignerWidget({ ...components });
+// GlobalRegistry.registerDesignerWidget({ ...components });
 
-async function getSnapshot() {
-  try {
-    const json = JSON.parse(localStorage.getItem(SnapshotKey));
-    if (json) {
-      return json;
-    } else {
-      const json2 = await axios.get('/json/demo.json');
-      return json2.data;
-    }
-  } catch (error) {
-    localStorage.removeItem(SnapshotKey);
-  }
-  return null;
-}
 const Screen: React.FC = () => {
   const [previewData, setPreviewData] = useState(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { id } = useParams();
 
   const initData = async () => {
-    const data = await getSnapshot();
-    console.log(searchParams.get('id'));
-    // setSearchParams('id=2&aa=3', { replace: true });
-    setPreviewData(data);
+    if (id === 'preview') {
+      const data = getPreviewKey();
+      setPreviewData(data);
+    } else {
+      const data = getPreviewKey();
+      setPreviewData(data);
+    }
   };
 
   useEffect(() => {
@@ -39,7 +26,7 @@ const Screen: React.FC = () => {
   }, []);
   return (
     <div className="screen-page">
-      <Preview data={previewData} />
+      <Preview data={previewData} components={{ ...components }} />
     </div>
   );
 };

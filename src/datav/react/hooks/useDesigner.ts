@@ -9,8 +9,8 @@ export const useDesigner = (effects?: IEffects): Engine => {
   const designer = useContext(DesignerEngineContext);
   useEffect(() => {
     if (isFn(effects)) {
-      return effects(designer);
+      return effects(designer?.engine);
     }
   }, []);
-  return designer;
+  return designer?.engine;
 };

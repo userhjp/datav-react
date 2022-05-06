@@ -8,7 +8,7 @@ import { IPageType } from '../interface';
 type PreviewProps = {
   data: IPageType;
   loading?: boolean;
-  components?: IDesignerComponents;
+  components: IDesignerComponents;
 };
 
 export const Preview: React.FC<PreviewProps> = (props) => {
@@ -38,7 +38,12 @@ export const Preview: React.FC<PreviewProps> = (props) => {
 
   return (
     <div style={style}>
-      <DesignerEngineContext.Provider value={engine}>
+      <DesignerEngineContext.Provider
+        value={{
+          components: props.components,
+          engine,
+        }}
+      >
         <PreviewView />
       </DesignerEngineContext.Provider>
     </div>

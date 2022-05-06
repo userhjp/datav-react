@@ -2,10 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createDesigner } from '@/datav/core';
 import { Designer, Preview } from '@/datav/react';
 import { message } from 'antd';
-import { waitTime } from '@/datav/shared';
-import axios from 'axios';
 import * as components from './widgets';
-import { GlobalRegistry } from '@/datav/core/registry';
 
 const widgetMenu = [
   { name: '图表', icon: 'chart' },
@@ -16,25 +13,6 @@ const widgetMenu = [
   { name: '其他', icon: 'other' },
 ];
 
-const SnapshotKey = 'DataV-Snapshot';
-
-async function getSnapshot() {
-  await waitTime(500);
-  try {
-    const json = JSON.parse(localStorage.getItem(SnapshotKey));
-    if (json) {
-      return json;
-    } else {
-      const json2 = await axios.get('/json/demo.json');
-      return json2.data;
-    }
-  } catch (error) {
-    localStorage.removeItem(SnapshotKey);
-  }
-
-  return null;
-}
-GlobalRegistry.registerDesignerWidget({ ...components });
 export const Main: React.FC = () => {
   const engine = useMemo(
     () =>
@@ -48,7 +26,6 @@ export const Main: React.FC = () => {
         onSnapshot: (data) => {
           return new Promise((resolve) => {
             setTimeout(() => {
-              localStorage.setItem(SnapshotKey, JSON.stringify(data));
               message.success('已保存快照');
               resolve();
             }, 1000);
@@ -61,7 +38,7 @@ export const Main: React.FC = () => {
     []
   );
   const initData = async () => {
-    const data = await getSnapshot();
+    const data = {};
     engine.setInitialValue(data);
   };
   const [previewData, setPreviewData] = useState(null);
@@ -70,15 +47,15 @@ export const Main: React.FC = () => {
   }, []);
   return (
     <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-      <Designer engine={engine} widgetMenu={widgetMenu} components={{ ...components }} />;
-      {previewData && (
+      <Designer engine={engine} menu={widgetMenu} components={{ ...components }} />;
+      {/* {previewData && (
         <div style={{ width: '100%', height: '100%', position: 'fixed', top: 0, left: 0, zIndex: 9999999 }}>
           <a style={{ position: 'absolute', top: 10, right: 10, zIndex: 9999 }} onClick={() => setPreviewData(null)}>
             关闭
           </a>
           <Preview data={previewData} />
         </div>
-      )}
+      )} */}
     </div>
   );
 };

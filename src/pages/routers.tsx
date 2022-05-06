@@ -18,10 +18,6 @@ const HomeRoutes: RouteObject[] = [
     path: 'project',
     element: <Project />,
   },
-  {
-    path: 'screen',
-    element: <Screen />,
-  },
 ];
 
 export default HomeRoutes;

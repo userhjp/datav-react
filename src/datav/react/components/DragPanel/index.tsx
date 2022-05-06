@@ -2,12 +2,13 @@ import { observer } from '@formily/react';
 import { Tabs } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { PanelType } from '../../../shared';
-import { useToolbar } from '../../hooks';
+import { useSidebarMenu, useToolbar } from '../../hooks';
 import PreviewItem from './PreviewItem';
 import { IconWidget } from '../IconWidget';
 import { IWidgetMenuChildData, IWidgetMenu } from '../../types';
 import { GlobalRegistry } from '../../../core/registry';
 import './index.less';
+import { useWidgets } from '../../hooks/useWidgets';
 
 const { TabPane } = Tabs;
 
@@ -19,8 +20,10 @@ const icons = {
   info: <IconWidget infer="RichText" />,
 };
 
-export const DragPanel: React.FC<{ widgetMenu: IWidgetMenu[] }> = observer(({ widgetMenu }) => {
+export const DragPanel: React.FC = observer(() => {
   const toolbar = useToolbar();
+  const menu = useSidebarMenu();
+  const widgets = useWidgets();
   const [treeData, setTreeData] = useState([]);
   const changeConfigPanel = () => {
     toolbar.setPanelState({ type: PanelType.components, value: !toolbar.components.show });
@@ -36,12 +39,11 @@ export const DragPanel: React.FC<{ widgetMenu: IWidgetMenu[] }> = observer(({ wi
   };
 
   useEffect(() => {
-    const widgets = GlobalRegistry.getDesignerWidgets();
     Object.entries(widgets).forEach(([compName, m]) => {
       const { DnConfig } = m;
       const paths: string[] = (DnConfig.taxonPath || '').split('.').slice(0, 3);
       if (paths.length < 2) return;
-      const live1 = widgetMenu.find((f) => f.name === paths[0]);
+      const live1 = menu.find((f) => f.name === paths[0]);
       if (!live1) return;
       live1.children = live1.children || [];
       const componentName = (paths as any[]).pop();
@@ -65,7 +67,7 @@ export const DragPanel: React.FC<{ widgetMenu: IWidgetMenu[] }> = observer(({ wi
         }
       }
     });
-    setTreeData(widgetMenu);
+    setTreeData(menu);
   }, []);
 
   return (

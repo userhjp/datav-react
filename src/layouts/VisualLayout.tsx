@@ -5,7 +5,7 @@ import { AppstoreAddOutlined, DesktopOutlined, FundProjectionScreenOutlined, Log
 import { Link, NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router';
 
-const VisualLayout: React.FC = ({ children }) => {
+const VisualLayout: React.FC = () => {
   return (
     <div className="visual-layout">
       <div className="sidebar">

@@ -12,3 +12,5 @@ export * from './useHover';
 export * from './useViewport';
 export * from './useDatavEvent';
 export * from './usePrefix';
+export * from './useSidebarMenu';
+export * from './useWidgets';

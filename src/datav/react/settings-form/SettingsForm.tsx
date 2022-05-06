@@ -18,6 +18,7 @@ import { IconWidget } from '../components';
 import { SettingsFormContext } from './context';
 import { GlobalRegistry } from '../../core/registry';
 import './styles.less';
+import { useWidgets } from '../hooks/useWidgets';
 
 const GlobalState = {
   idleRequest: null,
@@ -27,6 +28,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
   (props) => {
     const toolbar = useToolbar();
     const currentNode = useCurrentNode();
+    const widgets = useWidgets();
     const screen = useScreen();
     const form = useMemo(() => {
       return createForm<IWidgetSetting | IScreenProps>({
@@ -56,7 +58,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     //     form.removeEffects('pageChange');
     //   };
     // }, []);
-    const compSchema = currentNode ? GlobalRegistry.getDesignerWidget(currentNode.info.type)?.DnConfig : null;
+    const compSchema = currentNode ? widgets[currentNode.info.type]?.DnConfig : null;
     const tabBarStyle: React.CSSProperties = useMemo(() => {
       return {
         height: 30,
