@@ -46,12 +46,13 @@ export const createDesigner = (props: IEngineProps<Engine> = {}) => {
 };
 
 /** 注册组件配置 */
-export const registerWidgetConfig = (comoinent: DnFC<any> | DnComponent<any>, config: IWidgetConfig): void => {
-  comoinent.DnConfig = {
+export const registerWidgetConfig = (component: DnFC<any> | DnComponent<any>, config: IWidgetConfig): DnFC<any> | DnComponent<any> => {
+  component.DnConfig = {
     w: 380,
     h: 220,
     ...config,
   };
+  return component;
 };
 
 export const createWidgetFields = (fieldsDes: Record<string, string>): IFieldSetting => {
