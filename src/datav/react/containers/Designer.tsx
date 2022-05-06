@@ -13,10 +13,7 @@ import '../styles.less';
 setNpmCDNRegistry('//unpkg.com');
 GlobalRegistry.registerDesignerIcons(icons);
 export const Designer: React.FC<IDesignerProps> = ({ components, engine, ...props }) => {
-  debugger;
-
   const pEngine = useDesigner();
-  debugger;
   const ref = useRef<Engine>();
 
   useEffect(() => {
