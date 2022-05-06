@@ -68,7 +68,7 @@ export class DataSource {
           resData = await dsRequest.post(url, toJson(config.apiBody, {}), conf);
         }
       } catch (error) {
-        throw Error('请求数据异常');
+        throw Error(error.toString());
       }
     }
     return resData;

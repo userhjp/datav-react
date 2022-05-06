@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, RouteObject } from 'react-router';
 import VisualLayout from './layouts/VisualLayout';
-import HomeRoutes from './pages/routers';
+import homeRoutes from './pages/routers';
 
 const Screen = React.lazy(() => import('@/pages/Screen'));
 const Design = React.lazy(() => import('@/pages/Design'));
@@ -14,7 +14,7 @@ const routes: RouteObject[] = [
   {
     path: '/visual',
     element: <VisualLayout />,
-    children: HomeRoutes,
+    children: homeRoutes,
   },
   {
     path: '/design',

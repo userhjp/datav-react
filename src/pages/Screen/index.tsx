@@ -2,8 +2,12 @@ import { Preview } from '@/datav';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import * as components from '@/examples/widgets';
+import { GlobalRegistry } from '@/datav/core/registry';
 import './index.less';
 const SnapshotKey = 'DataV-Snapshot';
+
+GlobalRegistry.registerDesignerWidget({ ...components });
 
 async function getSnapshot() {
   try {
