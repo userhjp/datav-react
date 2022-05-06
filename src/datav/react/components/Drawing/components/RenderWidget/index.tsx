@@ -17,9 +17,8 @@ export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
     const Widget = widgets[nodeInfo.info.type];
     const data = useReqData(nodeInfo.id, nodeInfo.data);
     const options = toJS(nodeInfo.options);
-
     if (!nodeInfo.info || !nodeInfo.info.type || nodeInfo.attr.isHide) return <div />;
-    if (!options || !Widget) return <WidgetLoading />;
+    if (!options || !Widget || JSON.stringify(options) === '{}') return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>
         <ErrorBoundary name={nodeInfo.info.type}>

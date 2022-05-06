@@ -12,6 +12,7 @@ export const IframeSchema: ISchema = {
         spellCheck: false,
         placeholder: '请输入URL地址',
       },
+      default: '',
     },
   },
 };

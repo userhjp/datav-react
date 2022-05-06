@@ -7,6 +7,7 @@ import './styles.less';
 const Select: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
   const [selectd, setSelectd] = useState<any>();
   const { defaultSelectd, multiple, ...config } = options.config;
+  debugger;
   const evData = useMemo(() => {
     return data?.find((f) => f.value === selectd) || {};
   }, [selectd]);

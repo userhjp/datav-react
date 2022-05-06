@@ -32,14 +32,6 @@ const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
     { wait: 200 }
   );
 
-  const dataset = useMemo(() => {
-    try {
-      return data;
-    } catch (error) {
-      return [];
-    }
-  }, [data]);
-
   useLayoutEffect(() => {
     const { series = {}, legend, colors } = options;
     const opt = {
