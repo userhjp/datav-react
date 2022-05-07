@@ -8,15 +8,15 @@ const Screen = React.lazy(() => import('@/pages/Screen'));
 const HomeRoutes: RouteObject[] = [
   {
     index: true,
-    element: <Navigate to="example" />,
-  },
-  {
-    path: 'example',
-    element: <Example />,
+    element: <Navigate to="project" />,
   },
   {
     path: 'project',
     element: <Project />,
+  },
+  {
+    path: 'example',
+    element: <Example />,
   },
 ];
 

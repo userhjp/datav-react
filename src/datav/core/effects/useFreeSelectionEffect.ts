@@ -1,8 +1,19 @@
-import { DragStopEvent } from '../events';
-import { Engine, CursorType } from '../models';
+import { DragStopEvent, KeyDownEvent, KeyUpEvent } from '../events';
+import { Engine, CursorType, KeyCode } from '../models';
 import { calcRectByStartEndPoint, isCrossRectInRect, Point } from '../../shared';
 
 export const useFreeSelectionEffect = (engine: Engine) => {
+  // engine.subscribeTo(KeyDownEvent, (event) => {
+  //   if (event.data !== KeyCode.Control) return;
+  //   event.preventDefault();
+  //   event.stopPropagation();
+  //   engine.cursor.setType(CursorType.Selection);
+  // });
+  // engine.subscribeTo(KeyUpEvent, (event) => {
+  //   if (event.data !== KeyCode.Control) return;
+  //   engine.cursor.setType(CursorType.Normal);
+  // });
+
   engine.subscribeTo(DragStopEvent, () => {
     if (engine.cursor.type !== CursorType.Selection) return;
     const dragStartPoint = new Point(engine.cursor.dragStartPosition.topClientX, engine.cursor.dragStartPosition.topClientY);
