@@ -1,5 +1,5 @@
-import { DragStopEvent, KeyDownEvent, KeyUpEvent } from '../events';
-import { Engine, CursorType, KeyCode } from '../models';
+import { DragStopEvent } from '../events';
+import { Engine, CursorType } from '../models';
 import { calcRectByStartEndPoint, isCrossRectInRect, Point } from '../../shared';
 
 export const useFreeSelectionEffect = (engine: Engine) => {
