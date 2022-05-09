@@ -13,7 +13,8 @@ const CountDown: React.FC<IWidgetProps> = ({ options, data }) => {
   };
 
   useEffect(() => {
-    setDeadline(Date.now() + data?.value || 0);
+    const time = new Date(data?.endTime).getTime();
+    setDeadline(time);
   }, [data]);
 
   return (

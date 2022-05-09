@@ -1,5 +1,5 @@
 import { formatSecondTime } from '@/examples/shared';
-import React, { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import Flipper, { FlipperRef } from '../Flipper';
 import './index.less';
 
@@ -19,7 +19,7 @@ const FlipClock: React.FC<FlipperProps> = (props) => {
       init(valueState.current);
       run();
     }
-    return () => clearInterval(timer.current);
+    return () => clearTimeout(timer.current);
   }, [props.value]);
 
   // 初始化数字
@@ -31,6 +31,12 @@ const FlipClock: React.FC<FlipperProps> = (props) => {
       }
     }
   };
+
+  const formatStr = useMemo(() => {
+    return 'D 天 HH:mm:dd'.split('').filter((f) => f.trim());
+  }, []);
+
+  console.log(formatStr);
 
   const update = () => {
     // const nowTimeStr = formatDate(valueState.current, 'HHmmss');
@@ -47,18 +53,22 @@ const FlipClock: React.FC<FlipperProps> = (props) => {
 
   const joinStr = (dateTime: number) => {
     const dateObj = formatSecondTime(dateTime);
+    // console.log(dateObj.dayTime);
     return `${revamp(dateObj.hourTime)}${revamp(dateObj.minuteTime)}${revamp(dateObj.secondTime)}`;
   };
 
   const revamp = (num: number) => {
     const val = num ? `${num}` : '00';
-    return val.length == 1 ? ('00' + val).substr(val.length) : val;
+    return val.length == 1 ? ('00' + val).substring(val.length) : val;
   };
 
   // 开始计时
   const run = () => {
-    clearInterval(timer.current);
-    timer.current = setInterval(update, 1000);
+    clearTimeout(timer.current);
+    update();
+    timer.current = setTimeout(() => {
+      run();
+    }, 1000);
   };
 
   return (

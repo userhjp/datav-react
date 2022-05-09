@@ -12,10 +12,10 @@ export const CountDown = registerWidgetConfig(
     h: 150,
     data: {
       value: {
-        value: 1000 * 60 * 60 * 24,
+        endTime: '2020-12-20 00:00:00',
       },
       fields: {
-        value: '倒计时（秒）',
+        endTime: '时间',
       },
     },
   }

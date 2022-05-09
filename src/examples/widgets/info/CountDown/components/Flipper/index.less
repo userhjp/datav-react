@@ -3,13 +3,15 @@
   display: inline-block;
   width: 60px;
   height: 100px;
-  font-size: 66px;
   line-height: 100px;
   text-align: center;
-  background: #fff;
-  border: solid 1px #000;
+  border: solid 1px transparent;
   border-radius: 10px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+
+  .digital {
+    background-color: inherit;
+  }
 }
 
 .M-Flipper .digital::before,
@@ -19,7 +21,7 @@
   left: 0;
   box-sizing: border-box;
   overflow: hidden;
-  background: #000;
+  background-color: inherit;
   content: '';
 }
 

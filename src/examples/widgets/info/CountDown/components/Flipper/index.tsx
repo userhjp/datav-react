@@ -59,6 +59,8 @@ const Flipper = forwardRef<FlipperRef, FlipperProps>((props, ref) => {
   const style: React.CSSProperties = useMemo(() => {
     return {
       padding: `${styleVal.horizontalPadding} ${styleVal.horizontalPadding}`,
+      backgroundColor: styleVal.backgroundColor,
+      borderColor: styleVal.borderColor,
       // '--backgroundcolor': styleVal.backgroundColor,
     };
   }, [styleVal]);
