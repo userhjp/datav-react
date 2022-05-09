@@ -69,6 +69,7 @@ const Text: React.FC<IWidgetProps> = ({ options, data }) => {
 
   const linkUrl = options?.link?.href;
   const goPath = () => {
+    if (!linkUrl) return;
     if (options?.link.isblank) {
       window.open(linkUrl);
     } else {

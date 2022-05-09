@@ -7,6 +7,7 @@ export const ScrollBoard = registerWidgetConfig(
   {
     taxonPath: '信息.轮播列表',
     cover: '/menuCover/信息/轮播列表.png',
+    sort: 3,
     schema: ScrollBoardSchema,
     w: 320,
     h: 200,

@@ -15,16 +15,20 @@ const PreviewItem: React.FC<PreviewItemProps> = (props) => {
   }, data);
 
   const activateList = useMemo(() => {
+    let menuData = [];
     if (childrenData.length > 0) {
       if (activate === '全部') {
-        return childrenData.reduce((total, currentValue) => [...total, ...currentValue.children], []);
+        menuData = childrenData.reduce((total, currentValue) => [...total, ...currentValue.children], []);
       } else {
-        return childrenData.find((f) => f.name === activate).children;
+        menuData = childrenData.find((f) => f.name === activate).children;
       }
     } else {
-      return data || [];
+      menuData = data || [];
     }
+    menuData.sort((a, b) => a['sort'] - b['sort']);
+    return menuData;
   }, [activate]);
+
   return (
     <div className={`tree-item ${childrenData.length > 0 ? 'twolevel-warp' : ''}`}>
       {childrenData.length > 0 && (

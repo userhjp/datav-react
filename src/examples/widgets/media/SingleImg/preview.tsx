@@ -3,8 +3,8 @@ import { IWidgetProps } from '@/datav/react/interface';
 
 const SingleImg: React.FC<IWidgetProps> = ({ options }) => {
   const linkUrl = options?.link?.href;
-
   const goPath = () => {
+    if (!linkUrl) return;
     if (options?.link.isblank) {
       window.open(linkUrl);
     } else {

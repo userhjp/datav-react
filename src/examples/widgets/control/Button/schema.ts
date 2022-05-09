@@ -5,20 +5,15 @@ import { ISchema } from '@formily/react';
 export const ButtonSchema: ISchema = {
   type: 'object',
   properties: {
-    layout: {
+    text: {
       type: 'string',
-      title: '按钮布局',
+      title: '文字内容',
       'x-decorator': 'FormItem',
-      'x-component': 'Radio.Group',
+      'x-component': 'Input',
       'x-component-props': {
-        optionType: 'button',
-        buttonStyle: 'solid',
+        placeholder: '请输入',
       },
-      enum: [
-        { value: 'horizontal', label: '水平' },
-        { value: 'vertical', label: '垂直' },
-      ],
-      default: 'horizontal',
+      default: '按钮',
     },
     style: {
       type: 'object',
@@ -32,67 +27,7 @@ export const ButtonSchema: ISchema = {
           title: '背景颜色',
           'x-decorator': 'FormItem',
           'x-component': 'ColorPicker',
-          default: 'rgba(0, 0, 0, 0)',
-        },
-        padding: {
-          type: 'object',
-          title: '内边距',
-          'x-decorator': 'FormItem',
-          'x-component': 'FormGrid',
-          'x-component-props': {
-            minColumns: 2,
-            rowGap: 0,
-          },
-          properties: {
-            vertical: {
-              type: 'number',
-              'x-decorator-props': {
-                feedbackText: '左右',
-              },
-              'x-decorator': 'FormItem',
-              'x-component': 'NumberPicker',
-              'x-component-props': {
-                placeholder: '请输入',
-                unit: 'px',
-                min: 0,
-              },
-              default: 4,
-            },
-            horizontal: {
-              type: 'number',
-              'x-decorator-props': {
-                feedbackText: '上下',
-              },
-              'x-decorator': 'FormItem',
-              'x-component': 'NumberPicker',
-              'x-component-props': {
-                placeholder: '请输入',
-                unit: 'px',
-                min: 0,
-              },
-              default: 12,
-            },
-          },
-        },
-        voidTextStyle: textSchema(),
-      },
-      default: {
-        fontSize: 16,
-      },
-    },
-    activeStyle: {
-      type: 'object',
-      'x-component': 'MyFormCollapse',
-      'x-component-props': {
-        title: '选中样式',
-      },
-      properties: {
-        backgroundColor: {
-          type: 'string',
-          title: '背景颜色',
-          'x-decorator': 'FormItem',
-          'x-component': 'ColorPicker',
-          default: '#0a73ff',
+          default: 'rgba(24,144,255,1)',
         },
         voidTextStyle: textSchema(),
       },
@@ -144,18 +79,36 @@ export const ButtonSchema: ISchema = {
           enum: lineStyles,
           default: 'solid',
         },
-        borderWidth: {
-          type: 'number',
-          'x-decorator-props': {
-            feedbackText: '边框宽度',
-          },
+      },
+    },
+    link: {
+      type: 'object',
+      'x-component': 'MyFormCollapse',
+      'x-component-props': {
+        title: '超链接配置',
+        switch: true,
+      },
+      properties: {
+        href: {
+          type: 'string',
+          title: '链接地址',
           'x-decorator': 'FormItem',
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            unit: 'px',
-            min: 1,
+          'x-decorator-props': {
+            tooltip: '点击标题文本区域跳转超链接地址',
+            tooltipLayout: 'text',
           },
-          default: 1,
+          'x-component': 'Input',
+          'x-component-props': {
+            placeholder: '请输入',
+          },
+          default: '',
+        },
+        isblank: {
+          type: 'boolean',
+          title: '是否新开窗口',
+          'x-decorator': 'FormItem',
+          'x-component': 'Switch',
+          default: true,
         },
       },
     },

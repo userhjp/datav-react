@@ -6,6 +6,7 @@ export const ECharts = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '图表.通用图表.Echarts自定义配置',
+    sort: -1,
     cover: '/menuCover/图表/通用图表/echarts_logo.png',
     schema: EChartsSchema,
     data: {

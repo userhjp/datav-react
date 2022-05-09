@@ -1,11 +1,24 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { createDesigner } from '@/datav/core';
-import { Designer, Preview } from '@/datav/react';
+import { Designer } from '@/datav/react';
 import { message } from 'antd';
 import * as components from './widgets';
 
 const widgetMenu = [
-  { name: '图表', icon: 'chart' },
+  {
+    name: '图表',
+    icon: 'chart',
+    children: [
+      { name: '通用图表', children: [] },
+      { name: '柱状图', children: [] },
+      { name: '条形图', children: [] },
+      { name: '折线图', children: [] },
+      { name: '饼图', children: [] },
+      { name: '雷达图', children: [] },
+      { name: '散点图', children: [] },
+      { name: '其他', children: [] },
+    ],
+  },
   { name: '信息', icon: 'info' },
   { name: '地图', icon: 'map' },
   { name: '媒体', icon: 'media' },

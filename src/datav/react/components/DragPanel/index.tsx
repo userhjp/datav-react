@@ -39,7 +39,7 @@ export const DragPanel: React.FC = observer(() => {
   };
 
   useEffect(() => {
-    Object.entries(widgets).forEach(([compName, m]) => {
+    Object.entries(widgets).forEach(([compName, m], i) => {
       const { DnConfig } = m;
       const paths: string[] = (DnConfig.taxonPath || '').split('.').slice(0, 3);
       if (paths.length < 2) return;
@@ -52,6 +52,7 @@ export const DragPanel: React.FC = observer(() => {
         cover: DnConfig.cover,
         type: compName,
         dnConfig: DnConfig,
+        sort: DnConfig.sort || i,
       };
       if (paths.length === 1) {
         live1.children.push(opt);

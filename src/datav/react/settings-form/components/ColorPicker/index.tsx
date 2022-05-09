@@ -42,13 +42,19 @@ export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
   const [visible, setVisible] = useState(false);
   const [color, setColor] = useState<any>();
   const [colorText, setColorText] = useState<any>(value || '');
-  const field = useField();
-  const { run } = useDebounceFn(() => onChange(colorText), {
-    wait: 500,
-  });
+  const { run } = useDebounceFn(
+    () => {
+      setColor(colorText);
+      onChange(colorText);
+    },
+    {
+      wait: 500,
+    }
+  );
 
   useEffect(() => {
     setColorText(value);
+    setColor(value);
   }, [value]);
 
   const handleColorChange = (color: any) => {

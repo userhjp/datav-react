@@ -1,14 +1,19 @@
-.widgets-tab {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.widgetsButton {
+  width: 100%;
   height: 100%;
+
   & > span {
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 100%;
+    height: 100%;
     text-align: center;
     transition: all 0.2s;
+
+    &:active {
+      background-color: rgba(0, 0, 0, .1);
+    }
 
     &:hover{
       cursor: pointer;
