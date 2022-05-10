@@ -19,3 +19,4 @@ export * from './BlurInput';
 export * from './ImageSelect';
 export * from './NumberPickerUnit';
 export * from './MonacoInput';
+export * from './CompLayout';

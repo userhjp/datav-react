@@ -18,6 +18,7 @@ import {
   BorderSelect,
   ImageSelect,
   NumberPickerUnit,
+  CompLayout,
 } from './components';
 
 export const SchemaField = createSchemaField({
@@ -48,5 +49,6 @@ export const SchemaField = createSchemaField({
     Space,
     ImageSelect,
     NumberPickerUnit,
+    CompLayout,
   },
 });

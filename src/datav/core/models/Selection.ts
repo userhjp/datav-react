@@ -7,6 +7,15 @@ export interface ISelection {
   operation: Operation;
 }
 
+export enum alignType {
+  alignLeft,
+  horizontally,
+  alignRight,
+  alignTop,
+  verticalCenter,
+  alignBottom,
+}
+
 export class Selection {
   operation: Operation;
   selected: string[] = [];
@@ -23,6 +32,7 @@ export class Selection {
       add: action,
       remove: action,
       clear: action,
+      align: action,
     });
   }
 
@@ -37,6 +47,63 @@ export class Selection {
 
   mapIds(ids: any) {
     return isArr(ids) ? ids.map((node: any) => (isStr(node) ? node : node?.id)) : [];
+  }
+
+  align(type: alignType) {
+    const nodes = this.selected.map((f) => this.operation.findById(f));
+    if (nodes.length < 2) return;
+    switch (type) {
+      case alignType.alignLeft:
+        const minxNum = Math.min(...nodes.map((m) => m.attr.x));
+        nodes.forEach((f) => (f.attr.x = minxNum));
+        break;
+      case alignType.horizontally:
+        const minNumx = Math.min(...nodes.map((m) => m.attr.x + m.attr.w / 2));
+        const maxNumx = Math.max(...nodes.map((m) => m.attr.x + m.attr.w / 2));
+        const centerX = (maxNumx + minNumx) / 2;
+        nodes.forEach((f) => {
+          const dval = f.attr.x + f.attr.w / 2 - centerX;
+          if (dval < 0) {
+            f.attr.x = f.attr.x + Math.abs(dval);
+          } else if (dval > 0) {
+            f.attr.x = f.attr.x - dval;
+          }
+        });
+        break;
+      case alignType.alignRight:
+        const maxxMum = Math.max(...nodes.map((m) => m.attr.x + m.attr.w));
+        nodes.forEach((f) => {
+          const dvalue = maxxMum - (f.attr.x + f.attr.w);
+          f.attr.x = f.attr.x + dvalue;
+        });
+        break;
+      case alignType.alignTop:
+        const minyNum = Math.min(...nodes.map((m) => m.attr.y));
+        nodes.forEach((f) => (f.attr.y = minyNum));
+        break;
+      case alignType.verticalCenter:
+        const minNumy = Math.min(...nodes.map((m) => m.attr.y + m.attr.h / 2));
+        const maxNumy = Math.max(...nodes.map((m) => m.attr.y + m.attr.h / 2));
+        const centerY = (maxNumy + minNumy) / 2;
+        nodes.forEach((f) => {
+          const dval = f.attr.y + f.attr.h / 2 - centerY;
+          if (dval < 0) {
+            f.attr.y = f.attr.y + Math.abs(dval);
+          } else if (dval > 0) {
+            f.attr.y = f.attr.y - dval;
+          }
+        });
+        break;
+      case alignType.alignBottom:
+        const maxyMum = Math.max(...nodes.map((m) => m.attr.y + m.attr.h));
+        nodes.forEach((f) => {
+          const dvalue = maxyMum - (f.attr.y + f.attr.h);
+          f.attr.y = f.attr.y + dvalue;
+        });
+        break;
+      default:
+        break;
+    }
   }
 
   batchSelect(ids: string[]) {

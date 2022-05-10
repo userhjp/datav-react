@@ -17,3 +17,4 @@ export * from './inbox';
 export * from './square';
 export * from './check-circle';
 export * from './lock';
+export * from './align';

@@ -1,11 +1,9 @@
 import React, { useMemo } from 'react';
 import { Field, ObjectField, observer } from '@formily/react';
-import { pageSchema } from './schema/pageSchema';
 import { Tabs } from 'antd';
 import { WidgetInfo } from './components';
-import { baseAttrSchema } from './schema/baseAttrSchema';
 import { DataFields } from './DataFields';
-import { useToolbar, useScreen } from '../hooks';
+import { useToolbar, useScreen, useSelected } from '../hooks';
 import { cancelIdle, requestIdle } from '../../shared';
 import { useCurrentNode } from '../hooks/useCurrentNode';
 import { createForm } from '@formily/core';
@@ -16,9 +14,9 @@ import { EventFields } from './EventsFields';
 import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';
 import { SettingsFormContext } from './context';
-import { GlobalRegistry } from '../../core/registry';
-import './styles.less';
 import { useWidgets } from '../hooks/useWidgets';
+import { layoutSchema, pageSchema, baseAttrSchema } from './schema';
+import './styles.less';
 
 const GlobalState = {
   idleRequest: null,
@@ -28,6 +26,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
   (props) => {
     const toolbar = useToolbar();
     const currentNode = useCurrentNode();
+    const selected = useSelected();
     const widgets = useWidgets();
     const screen = useScreen();
     const form = useMemo(() => {
@@ -113,7 +112,13 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                   </Tabs>
                 </>
               ) : (
-                <SchemaField schema={pageSchema} components={props.components} scope={scope} />
+                <>
+                  {selected.length > 1 ? (
+                    <SchemaField schema={layoutSchema} components={props.components} scope={scope} />
+                  ) : (
+                    <SchemaField schema={pageSchema} components={props.components} scope={scope} />
+                  )}
+                </>
               )}
             </Form>
           </SettingsFormContext.Provider>
