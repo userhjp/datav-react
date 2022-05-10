@@ -1,4 +1,4 @@
-import { Engine, CursorStatus, KeyCode } from '../models';
+import { Engine, CursorStatus } from '../models';
 import { MouseClickEvent } from '../events';
 
 export const useSelectionEffect = (engine: Engine) => {
@@ -25,7 +25,7 @@ export const useSelectionEffect = (engine: Engine) => {
     if ((node.attr.isLock && !structNodeId) || node.attr.isHide) return;
     const selection = engine.operation.selection;
     const comId = nodeId || structNodeId;
-    if (engine.keyboard.isKeyDown(KeyCode.Control)) {
+    if (window.event['ctrlKey']) {
       if (selection.has(comId)) {
         if (selection.selected.length > 1) {
           selection.remove(comId);
