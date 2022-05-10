@@ -29,9 +29,9 @@ export const execFilter = (dataFilter: string, data: any) => {
   return res;
 };
 
-export const mapObject = (obj: Record<string, any>, fieldMap: Record<string, string>) => {
+export const mapObject = (obj: Record<string, any>, fieldMap: Record<string, string>, isOriginal = true) => {
   if (!fieldMap || !Object.keys(fieldMap).length) return obj;
-  const c_obj = Object.create({});
+  const c_obj = Object.create({ ...obj });
   Object.entries(fieldMap).forEach(([key, map]) => (c_obj[key] = obj[map] || obj[key] || null));
   return c_obj;
 };

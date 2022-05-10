@@ -1,10 +1,10 @@
 import React from 'react';
-import { ObjectField as ObjectFieldType } from '@formily/core';
-import { Field, ObjectField, observer, useField } from '@formily/react';
+import { ObjectField as ObjectFieldType, ArrayField as ArrayFieldType } from '@formily/core';
+import { ArrayField, Field, ObjectField, observer, useField } from '@formily/react';
 import { toArr } from '@formily/shared';
-import { Checkbox, Collapse } from 'antd';
+import { Button, Checkbox, Collapse } from 'antd';
 import { useMemo } from 'react';
-import { IDataSetting } from '../../interface';
+import { IDataSetting, IEventField } from '../../interface';
 import { Tooltip } from 'antd';
 import { BlurInput, SettingsEmpty } from '../components';
 import { IconWidget } from '../../components';
@@ -95,7 +95,13 @@ export const EventFields: React.FC = observer(() => {
     >
       {Object.keys(value).map((f) => {
         return (
-          <Panel header={value[f].description} key={f} collapsible={value[f].enable ? null : 'disabled'} extra={renderExtra(value[f], f)}>
+          <Panel
+            header={value[f].description}
+            key={f}
+            forceRender
+            collapsible={value[f].enable ? null : 'disabled'}
+            extra={renderExtra(value[f], f)}
+          >
             <ObjectField name={f}>
               <div>
                 <table className="data-attr-table">
@@ -121,7 +127,8 @@ export const EventFields: React.FC = observer(() => {
                     </tr>
                   </thead>
                   <tbody className="table-body">
-                    {Object.keys(value[f]?.fields || {}).map((key) => (
+                    <ArrayField name={'fields'} component={[ArrayComponent]} />
+                    {/* {value[f]?.fields.map((item: IEventField, i: number) => (
                       <ObjectField name={`fields.${key}`} key={key}>
                         <tr className="table-body-row">
                           <td className="column-item attr-name">
@@ -133,7 +140,7 @@ export const EventFields: React.FC = observer(() => {
                           <td className="column-item attr-describe">{value[f]?.fields[key].description}</td>
                         </tr>
                       </ObjectField>
-                    ))}
+                    ))} */}
                   </tbody>
                 </table>
               </div>
@@ -143,18 +150,60 @@ export const EventFields: React.FC = observer(() => {
       })}
     </Collapse>
   );
-  // return (
-  //   <>
-  //     {Object.keys(value).forEach((f) => {
-  //       debugger;
-  //       return (
-  //         <SchemaField.Void x-component="FormCollapse" x-component-props={{ formCollapse }}>
-  //           <SchemaField name={f} x-component="MyFormCollapse.CollapsePanel" x-component-props={{ header: 'A1' }}>
+});
 
-  //           </SchemaField>
-  //         </SchemaField.Void>
-  //       );
-  //     })}
-  //   </>
-  // );
+const ArrayComponent = observer(() => {
+  const field = useField<ArrayFieldType>();
+  return (
+    <>
+      {field.value?.map((item: IEventField, index) => (
+        <ObjectField name={index} key={index}>
+          <tr className="table-body-row">
+            <td className="column-item attr-name">
+              {item.extend ? (
+                <Field name="key" component={[BlurInput, { size: 'small', placeholder: '字段key' }]} />
+              ) : (
+                <span>{item.key}</span>
+              )}
+            </td>
+            <td className="column-item attr-value">
+              <Field name="map" component={[BlurInput, { size: 'small', placeholder: '可自定义' }]} />
+            </td>
+            <td className="column-item attr-describe">
+              {item.extend ? (
+                <IconWidget onClick={() => field.remove(index)} infer="Remove" size={14} style={{ cursor: 'pointer' }} />
+              ) : (
+                <span>{item.des}</span>
+              )}
+            </td>
+          </tr>
+        </ObjectField>
+      ))}
+      <tr className="table-body-row" style={{ textAlign: 'center' }}>
+        <td className="column-item" colSpan={3}>
+          <Button
+            size="small"
+            icon={<IconWidget infer="Add" />}
+            className="ds-action-btn"
+            onClick={() =>
+              field.push({
+                key: '',
+                map: '',
+                extend: true,
+              })
+            }
+          >
+            &nbsp;新增一个字段
+          </Button>
+        </td>
+      </tr>
+      {/* <Button
+        onClick={() => {
+          field.push('');
+        }}
+      >
+        Add
+      </Button> */}
+    </>
+  );
 });

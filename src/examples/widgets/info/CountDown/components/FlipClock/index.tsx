@@ -8,6 +8,17 @@ type FlipperProps = {
   valStyle: any;
 };
 
+const revamp = (num: number) => {
+  const val = num ? `${num}` : '00';
+  return val.length == 1 ? ('00' + val).substring(val.length) : val;
+};
+
+const joinStr = (dateTime: number) => {
+  const dateObj = formatSecondTime(dateTime);
+  // console.log(dateObj.dayTime);
+  return `${revamp(dateObj.hourTime)}${revamp(dateObj.minuteTime)}${revamp(dateObj.secondTime)}`;
+};
+
 const FlipClock: React.FC<FlipperProps> = (props) => {
   const flipObjs = [useRef(), useRef(), useRef(), useRef(), useRef(), useRef()];
   const timer = useRef<NodeJS.Timeout>();
@@ -39,8 +50,6 @@ const FlipClock: React.FC<FlipperProps> = (props) => {
   console.log(formatStr);
 
   const update = () => {
-    // const nowTimeStr = formatDate(valueState.current, 'HHmmss');
-    // const nextTimeStr = formatDate(valueState.current - 1000, 'HHmmss');
     const nowTimeStr = joinStr(valueState.current - 1000);
     const nextTimeStr = joinStr(valueState.current);
     for (let i = 0; i < flipObjs.length; i++) {
@@ -49,17 +58,6 @@ const FlipClock: React.FC<FlipperProps> = (props) => {
       }
       (flipObjs[i].current as FlipperRef).flip('down', +nextTimeStr[i], +nowTimeStr[i]);
     }
-  };
-
-  const joinStr = (dateTime: number) => {
-    const dateObj = formatSecondTime(dateTime);
-    // console.log(dateObj.dayTime);
-    return `${revamp(dateObj.hourTime)}${revamp(dateObj.minuteTime)}${revamp(dateObj.secondTime)}`;
-  };
-
-  const revamp = (num: number) => {
-    const val = num ? `${num}` : '00';
-    return val.length == 1 ? ('00' + val).substring(val.length) : val;
   };
 
   // 开始计时

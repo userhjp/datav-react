@@ -42,7 +42,7 @@
       display: inline-flex;
       align-items: center;
       box-sizing: border-box;
-      height: 40px;
+      height: 34px;
       padding: 0 6px;
       font-size: @m-font-size;
       line-height: 17px;
@@ -51,14 +51,24 @@
       &:first-child {
         padding-left: 10px;
       }
+
+      .ds-action-btn {
+        height: 24px;
+        margin-top: 5px;
+        color: @color-primary;
+
+        &:hover {
+          color: @m-text-color;
+        }
+      }
     }
 
     .attr-name {
-      width: 28%;
+      width: 34%;
     }
 
     .attr-value {
-      width: 40%;
+      width: 34%;
     }
 
     .attr-describe {

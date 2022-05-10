@@ -14,7 +14,7 @@ export const DatePicker = registerWidgetConfig(
       changed: {
         description: '当选择日期数据变化时',
         fields: {
-          dateStr: '选择值',
+          dateStr: '选择日期',
         },
       },
     },

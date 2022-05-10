@@ -33,14 +33,6 @@ export const DataFields: React.FC = observer(() => {
     value.config = { ...(value.config || {}) };
   };
 
-  // const addFields = () => {
-  //   const key = Object.keys(value.fields).length + 1;
-  //   field.form.setValuesIn(`data.fields.key${key}`, {
-  //     map: '',
-  //     status: 'success',
-  //   });
-  // };
-
   return (
     <>
       {Object.keys(value?.fields || {}).length > 0 && (
@@ -78,13 +70,6 @@ export const DataFields: React.FC = observer(() => {
                       </tr>
                     </ObjectField>
                   ))}
-                  {/* <tr className="table-body-row" style={{ textAlign: 'center' }}>
-                 <td className="column-item" colSpan={3}>
-                   <Button size="small" className="ds-action-btn" onClick={addFields}>
-                     添加映射字段
-                   </Button>
-                 </td>
-               </tr> */}
                 </tbody>
               </table>
             </div>

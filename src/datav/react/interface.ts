@@ -24,7 +24,7 @@ export type IWidgetConfig = {
       /** 事件描述 */
       description: string;
       /** 字段映射 默认data.fields */
-      fields?: Record<string, string>;
+      fields?: IEventFieldSetting;
     };
   };
   /** 版本号 */
@@ -98,6 +98,17 @@ export interface IFieldSetting {
   [key: string]: { map: string; status: FieldStatus; description?: string };
 }
 
+export interface IEventFieldSetting {
+  [key: string]: string;
+}
+
+export interface IEventField {
+  key: string;
+  map: string;
+  des: string;
+  extend?: boolean;
+}
+
 /** 组件数据类型 */
 export interface IDataSetting {
   fields: IFieldSetting;
@@ -109,7 +120,7 @@ export interface IDataSetting {
 export interface IChangedEvent {
   description: string;
   enable?: boolean;
-  fields?: IFieldSetting;
+  fields?: IEventField[];
 }
 
 export interface IWidgetEvents {

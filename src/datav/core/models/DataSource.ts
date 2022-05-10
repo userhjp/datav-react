@@ -1,7 +1,7 @@
 import { isObj, replaceTextParams, toJson } from '../../shared';
 import { action, define, observable, toJS } from '@formily/reactive';
 import { ApiRequestMethod, ApiType, IDataType } from '../../shared';
-import { IDataSourceSetting } from '../../react/interface';
+import { IDataSourceSetting, IEventField } from '../../react/interface';
 import { dsRequest } from '../../shared';
 import { Engine } from './Engine';
 
@@ -22,15 +22,18 @@ export class DataSource {
       dataMap: observable,
       variables: observable.shallow,
       setData: action,
+      setVariables: action,
     });
   }
 
-  setVariables(fields: Record<string, string>, data: Record<string, any>) {
-    if (data && isObj(data)) {
-      for (const key in fields) {
-        const alias = fields[key] || key;
-        this.variables[alias] = data[key] === undefined ? '' : data[key];
-      }
+  setVariables(fields: Array<IEventField>, data: Record<string, any>) {
+    if (data && isObj(data) && fields?.length) {
+      fields.forEach((f) => {
+        const alias = f.map || f.key;
+        if (alias && f.key) {
+          this.variables[alias] = data[f.key] === undefined ? '' : data[f.key];
+        }
+      });
     }
     console.log(this.variables);
   }

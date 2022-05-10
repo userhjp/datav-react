@@ -34,7 +34,7 @@ export const Select = registerWidgetConfig(
       changed: {
         description: '当选中项变化时',
         fields: {
-          value: '选中值',
+          value: '选择值',
         },
       },
     },

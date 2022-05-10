@@ -3,7 +3,15 @@ import { DEFAULT_DRIVERS, DEFAULT_EFFECTS, DEFAULT_SHORTCUTS } from './presets';
 import { Engine } from './models';
 import { IEngineProps } from './types';
 import { ApiType, FieldStatus, generateUUID, IDataType, isArr } from '../shared';
-import { IFieldSetting, IWidgetConfig, IWidgetData, IWidgetEvents, IWidgetProps } from '../react/interface';
+import {
+  IEventField,
+  IEventFieldSetting,
+  IFieldSetting,
+  IWidgetConfig,
+  IWidgetData,
+  IWidgetEvents,
+  IWidgetProps,
+} from '../react/interface';
 import { DnComponent, DnFC } from '../react/types';
 
 type ICreateWidgetConfig = {
@@ -25,7 +33,7 @@ type ICreateWidgetConfig = {
       /** 事件描述 */
       description: string;
       /** 字段映射 默认data.fields */
-      fields?: Record<string, string>;
+      fields?: IEventFieldSetting;
     };
   };
 };
@@ -67,6 +75,16 @@ export const createWidgetFields = (fieldsDes: Record<string, string>): IFieldSet
   return fields;
 };
 
+const contrastEventFields = (eventsFields: IEventFieldSetting): Array<IEventField> => {
+  return Object.entries(eventsFields || {}).map(([key, val]) => {
+    return {
+      key,
+      map: '',
+      des: val ?? '-',
+    };
+  });
+};
+
 export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
   const fieldsDes = config.data?.fields ?? {};
   const dataType = isArr(config.data?.value) ? IDataType.array : IDataType.object;
@@ -74,7 +92,7 @@ export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
   const eventsFields: IWidgetEvents = Object.keys(config.events || {}).reduce((pval, cval) => {
     const eventOpt = config.events[cval];
     pval[cval] = {
-      fields: eventOpt.fields ? createWidgetFields(eventOpt.fields) : fields,
+      fields: eventOpt.fields ? contrastEventFields(eventOpt.fields) : fields,
       description: eventOpt.description,
       enable: !!eventOpt.enable,
     };

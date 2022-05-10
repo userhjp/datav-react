@@ -8,7 +8,6 @@ export const CountDownSchema: ISchema = {
     color: '#fff',
   },
   properties: {
-    voidTextStyle: textSchema(),
     flop: {
       type: 'object',
       'x-component': 'MyFormCollapse',
@@ -52,5 +51,6 @@ export const CountDownSchema: ISchema = {
       },
       default: 'D 天 HH:mm:ss',
     },
+    voidTextStyle: textSchema(),
   },
 };

@@ -18,6 +18,10 @@ export const Demo = registerWidgetConfig(
     events: {
       changed: {
         description: '当数据变化时',
+        fields: {
+          title: '标题',
+          value: '值',
+        },
       },
     },
   }
