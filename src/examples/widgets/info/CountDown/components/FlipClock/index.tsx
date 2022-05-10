@@ -43,11 +43,11 @@ const FlipClock: React.FC<FlipperProps> = (props) => {
     }
   };
 
-  const formatStr = useMemo(() => {
-    return 'D 天 HH:mm:dd'.split('').filter((f) => f.trim());
-  }, []);
+  // const formatStr = useMemo(() => {
+  //   return 'D 天 HH:mm:dd'.split('').filter((f) => f.trim());
+  // }, []);
 
-  console.log(formatStr);
+  // console.log(formatStr);
 
   const update = () => {
     const nowTimeStr = joinStr(valueState.current - 1000);
