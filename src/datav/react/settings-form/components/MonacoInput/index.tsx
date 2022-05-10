@@ -99,11 +99,10 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     monacoRef.current = monaco;
     onMount?.(editor, monaco);
     const model = editor.getModel();
-    const currentValue = editor.getValue();
-    valueRef.current = currentValue;
+    valueRef.current = editor.getValue();
     model['getDesignerLanguage'] = () => computedLanguage.current;
-    if (currentValue) {
-      format(computedLanguage.current, currentValue)
+    if (valueRef.current) {
+      format(computedLanguage.current, valueRef.current)
         .then((content) => {
           editor.setValue(content);
           setLoaded(true);
@@ -125,7 +124,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     });
     editor.onDidBlurEditorText(() => {
       if (props.autoFormat && valueRef.current) {
-        format(computedLanguage.current, currentValue)
+        format(computedLanguage.current, valueRef.current)
           .then((content) => {
             editor.setValue(content);
           })
