@@ -31,7 +31,6 @@ export interface IFormCollapseProps extends CollapseProps {
   maxItems?: string; // tab最大数
   noPadding?: boolean; // 是否保留子级Collapse内容上下边距，如果子级第一个元素就是 Collapse设置为false好看些
   isOpen?: boolean;
-  listType?: 'bar' | 'line' | 'column';
 }
 
 type ComposedFormCollapse = React.FC<IFormCollapseProps> & {

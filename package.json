@@ -20,10 +20,10 @@
     "**/*.{js,jsx,tsx,ts,less,md,json}": "npm run prettier"
   },
   "dependencies": {
-    "@formily/antd": "^2.0.20",
-    "@formily/core": "^2.0.20",
-    "@formily/react": "^2.0.20",
-    "@formily/reactive": "^2.0.20",
+    "@formily/antd": "^2.1.1",
+    "@formily/core": "^2.1.1",
+    "@formily/react": "^2.1.1",
+    "@formily/reactive": "^2.1.1",
     "@monaco-editor/react": "^4.4.4",
     "ahooks": "^3.3.10",
     "antd": "4.20.1",

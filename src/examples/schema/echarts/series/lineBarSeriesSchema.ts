@@ -33,6 +33,10 @@ export const lineBarSeriesSchema: ISchema = {
           type: 'string',
           title: '渐变类型',
           'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            tooltip: '多个颜色时有效',
+            tooltipLayout: 'text',
+          },
           'x-component': 'Radio.Group',
           'x-component-props': {
             optionType: 'button',

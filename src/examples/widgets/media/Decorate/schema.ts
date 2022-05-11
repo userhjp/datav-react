@@ -13,7 +13,7 @@ export const DecorateSchema: ISchema = {
       default: 'decorate1',
     },
     backgroundColor: {
-      title: '背景色',
+      title: '填充色',
       type: 'string',
       'x-decorator': 'FormItem',
       'x-component': 'ColorPicker',
