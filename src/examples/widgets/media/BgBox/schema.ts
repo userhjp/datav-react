@@ -1,4 +1,4 @@
-import { fillTypes, lineStyles } from '../../../shared';
+import { fillTypes, lineStyles, repeatTypes } from '../../../shared';
 import { ISchema } from '@formily/react';
 
 const colorsSchema = (title: string) => {
@@ -86,7 +86,7 @@ export const BgBoxSchema: ISchema = {
             dependencies: ['.bgType'],
             fulfill: {
               state: {
-                visible: '{{$deps[0] === "base"}}',
+                hidden: '{{$deps[0] !== "base"}}',
               },
             },
           },
@@ -99,7 +99,7 @@ export const BgBoxSchema: ISchema = {
             dependencies: ['.bgType'],
             fulfill: {
               state: {
-                visible: '{{$deps[0] !== "base"}}',
+                hidden: '{{$deps[0] === "base"}}',
               },
             },
           },
@@ -135,13 +135,13 @@ export const BgBoxSchema: ISchema = {
           ],
           default: 'base',
         },
-        borderBaseStyle: {
+        baseBorder: {
           type: 'object',
           'x-reactions': {
             dependencies: ['.borderType'],
             fulfill: {
               state: {
-                visible: '{{$deps[0] === "base"}}',
+                hidden: '{{$deps[0] !== "base"}}',
               },
             },
           },
@@ -185,7 +185,7 @@ export const BgBoxSchema: ISchema = {
                   'x-component': 'NumberPicker',
                   'x-component-props': {
                     unit: 'px',
-                    min: 1,
+                    min: 0,
                   },
                   default: 1,
                 },
@@ -201,11 +201,11 @@ export const BgBoxSchema: ISchema = {
                 rowGap: 0,
               },
               properties: {
-                left: {
+                topLeft: {
                   type: 'number',
                   'x-decorator': 'FormItem',
                   'x-decorator-props': {
-                    feedbackText: '左',
+                    feedbackText: '左上',
                   },
                   'x-component': 'NumberPicker',
                   'x-component-props': {
@@ -213,13 +213,13 @@ export const BgBoxSchema: ISchema = {
                     unit: 'px',
                     min: 0,
                   },
-                  default: 40,
+                  default: 0,
                 },
-                right: {
+                topRight: {
                   type: 'number',
                   'x-decorator': 'FormItem',
                   'x-decorator-props': {
-                    feedbackText: '右',
+                    feedbackText: '右上',
                   },
                   'x-component': 'NumberPicker',
                   'x-component-props': {
@@ -227,13 +227,13 @@ export const BgBoxSchema: ISchema = {
                     unit: 'px',
                     min: 0,
                   },
-                  default: 40,
+                  default: 0,
                 },
-                top: {
+                tottomLeft: {
                   type: 'number',
                   'x-decorator': 'FormItem',
                   'x-decorator-props': {
-                    feedbackText: '上',
+                    feedbackText: '左下',
                   },
                   'x-component': 'NumberPicker',
                   'x-component-props': {
@@ -241,13 +241,13 @@ export const BgBoxSchema: ISchema = {
                     unit: 'px',
                     min: 0,
                   },
-                  default: 40,
+                  default: 0,
                 },
-                bottom: {
+                bottomRight: {
                   type: 'number',
                   'x-decorator': 'FormItem',
                   'x-decorator-props': {
-                    feedbackText: '下',
+                    feedbackText: '右下',
                   },
                   'x-component': 'NumberPicker',
                   'x-component-props': {
@@ -255,24 +255,27 @@ export const BgBoxSchema: ISchema = {
                     unit: 'px',
                     min: 0,
                   },
-                  default: 40,
+                  default: 0,
                 },
               },
             },
           },
         },
-        borderGradientStyle: {
+        gradientBorder: {
           type: 'object',
+          default: {
+            colors: ['#00b1ff', '#008bff'],
+          },
           'x-reactions': {
             dependencies: ['.borderType'],
             fulfill: {
               state: {
-                visible: '{{$deps[0] === "gradient"}}',
+                hidden: '{{$deps[0] !== "gradient"}}',
               },
             },
           },
           properties: {
-            gradientborderWidth: {
+            borderWidth: {
               type: 'number',
               title: '边框宽度',
               'x-decorator': 'FormItem',
@@ -292,28 +295,75 @@ export const BgBoxSchema: ISchema = {
             dependencies: ['.borderType'],
             fulfill: {
               state: {
-                visible: '{{$deps[0] === "image"}}',
+                hidden: '{{$deps[0] !== "image"}}',
               },
             },
           },
           properties: {
-            borderImg: {
+            url: {
               type: 'string',
               title: '边框图片',
               'x-component': 'BgImg',
               'x-decorator': 'FormItem',
-              'x-decorator-props': {
-                style: {
-                  paddingBottom: 12,
-                  marginBottom: 8,
-                  borderBottom: 'solid 1px #333',
-                },
-              },
               'x-component-props': {
                 placeholder: '输入图片地址',
                 prefix: "{{icon('Link')}}",
               },
               default: 'https://datav.oss-cn-hangzhou.aliyuncs.com/uploads/images/a7c93134c5e1440c58b1a7a3b675009b.png',
+            },
+            voidStyle: {
+              type: 'void',
+              title: '边框配置',
+              'x-decorator': 'FormItem',
+              'x-component': 'FormGrid',
+              'x-component-props': {
+                minColumns: 2,
+                rowGap: 0,
+              },
+              properties: {
+                slice: {
+                  type: 'string',
+                  'x-decorator-props': {
+                    feedbackText: '切片',
+                  },
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  default: '32 40 fill',
+                },
+                width: {
+                  type: 'string',
+                  'x-decorator-props': {
+                    feedbackText: '宽度',
+                  },
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Input',
+                  default: '32px 37px',
+                },
+                outset: {
+                  type: 'string',
+                  'x-decorator-props': {
+                    feedbackText: '外扩',
+                  },
+                  'x-decorator': 'FormItem',
+                  'x-component': 'NumberPicker',
+                  default: 0,
+                },
+                repeat: {
+                  type: 'string',
+                  'x-decorator-props': {
+                    feedbackText: '平铺类型',
+                  },
+                  'x-decorator': 'FormItem',
+                  'x-component': 'Select',
+                  enum: [
+                    { value: 'stretch', label: '不重复，拉伸满' },
+                    { value: 'repeat', label: '水平和垂直重复' },
+                    { value: 'repeat stretch', label: '水平重复' },
+                    { value: 'stretch repeat', label: '垂直重复' },
+                  ],
+                  default: 'repeat',
+                },
+              },
             },
           },
         },

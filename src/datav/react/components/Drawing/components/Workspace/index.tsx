@@ -16,7 +16,7 @@ const Workspace: React.FC = observer(() => {
     width: screenProps.width,
     height: screenProps.height,
     transform: `scale(${screen.scale})`,
-    backgroundColor: screenProps.backgroundColor,
+    backgroundColor: screenProps.backgroundColor || '#0e2a42',
   };
 
   const canvasNodeAttrName = {
