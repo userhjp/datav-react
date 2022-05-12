@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 
 /** 自定义背景快 */
