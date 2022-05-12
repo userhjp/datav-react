@@ -22,9 +22,9 @@ const widgetMenu: IWidgetMenu[] = [
     ],
   },
   { name: '信息', icon: 'info' },
-  { name: '地图', icon: 'map' },
   { name: '媒体', icon: 'media' },
   { name: '控件', icon: 'other' },
+  { name: '地图', icon: 'map' },
   { name: '其他', icon: 'other' },
 ];
 

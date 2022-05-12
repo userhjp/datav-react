@@ -6,3 +6,4 @@ export * from './Text';
 export * from './Timer';
 export * from './QrCode';
 export * from './Title';
+export * from './Trend';

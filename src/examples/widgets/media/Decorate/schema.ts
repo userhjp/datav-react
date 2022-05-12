@@ -8,7 +8,7 @@ export const DecorateSchema: ISchema = {
       type: 'string',
       title: '装饰条',
       'x-decorator': 'FormItem',
-      'x-component': 'ImageSelect',
+      'x-component': 'DecorateSelect',
       enum: decorateImgList,
       default: 'decorate1',
     },

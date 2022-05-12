@@ -15,10 +15,10 @@ import {
   MonacoEditor,
   ArrayTabs,
   MyFormCollapse,
-  BorderSelect,
-  ImageSelect,
+  DecorateSelect,
   NumberPickerUnit,
   CompLayout,
+  ImageSelect,
 } from './components';
 
 export const SchemaField = createSchemaField({
@@ -43,12 +43,12 @@ export const SchemaField = createSchemaField({
     ArrayTabs,
     FormCollapse,
     MyFormCollapse,
-    BorderSelect,
     Radio,
     ArrayItems,
     Space,
-    ImageSelect,
+    DecorateSelect,
     NumberPickerUnit,
     CompLayout,
+    ImageSelect,
   },
 });

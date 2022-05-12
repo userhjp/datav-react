@@ -1,0 +1,46 @@
+@import '../../../theme.less';
+
+.decorate-select-dropdown {
+  padding: 0;
+  color: @m-text-color;
+  background-color: @input-bg-color;
+  border: 1px solid #272b33;
+
+  .ant-select-item {
+    min-height: 24px;
+    padding: 0;
+    background-color: transparent;
+    border: 1px solid transparent;
+
+    .ant-select-item-option-content {
+      margin: 6px 6px 0;
+      padding: 0 6px;
+      background-color: #202226;
+      border: solid 1px transparent;
+    }
+    &:last-child .ant-select-item-option-content {
+      margin-bottom: 6px;
+    }
+  }
+
+  .ant-select-item-option-active {
+    background-color: transparent;
+    .ant-select-item-option-content {
+      border: solid 1px @color-primary;
+    }
+  }
+  .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+    .ant-select-item-option-content {
+      border: solid 1px @color-primary;
+    }
+  }
+}
+
+.decorate-select {
+  margin-top: 4px;
+}
+
+.decorate-option-item {
+  display: flex;
+  align-items: center;
+}

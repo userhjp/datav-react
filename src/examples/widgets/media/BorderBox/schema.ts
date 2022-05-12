@@ -8,7 +8,7 @@ export const BorderBoxSchema: ISchema = {
       type: 'string',
       title: '边框样式',
       'x-decorator': 'FormItem',
-      'x-component': 'BorderSelect',
+      'x-component': 'ImageSelect',
       enum: presetImages,
       default: 'box1',
     },
