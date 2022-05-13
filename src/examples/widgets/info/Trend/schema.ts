@@ -10,7 +10,7 @@ export const TrendSchema: ISchema = {
   },
   properties: {
     titleStyle: {
-      type: 'void',
+      type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
         title: '标题',
@@ -38,7 +38,7 @@ export const TrendSchema: ISchema = {
       },
     },
     iconStyle: {
-      type: 'void',
+      type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
         title: '图标',
@@ -104,17 +104,21 @@ export const TrendSchema: ISchema = {
             },
           },
         },
-        isWrap: {
+        syncColor: {
           type: 'boolean',
           title: '同步文字颜色',
           'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            tooltip: '开启后数值颜色配置失效，颜色跟随图标颜色',
+            tooltipLayout: 'text',
+          },
           'x-component': 'Switch',
           default: true,
         },
       },
     },
     numStyle: {
-      type: 'void',
+      type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
         title: '数值',
@@ -125,8 +129,32 @@ export const TrendSchema: ISchema = {
           type: 'boolean',
           title: '值四舍五入',
           'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            tooltip: '值四舍五入取整',
+            tooltipLayout: 'text',
+          },
           'x-component': 'Switch',
           default: true,
+        },
+        decimal: {
+          type: 'number',
+          title: '保留小数位数',
+          'x-decorator': 'FormItem',
+          'x-reactions': {
+            dependencies: ['.rounding'],
+            fulfill: {
+              state: {
+                visible: '{{!$deps[0]}}',
+              },
+            },
+          },
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: '位',
+            min: 0,
+          },
+          default: 2,
         },
         baseNum: {
           type: 'number',
