@@ -27,7 +27,7 @@ const Trend: React.FC<IWidgetProps> = ({ options, data }) => {
   const img = images.find((m) => m.value === iconStyle.image);
   let status: 'up' | 'down' | 'flat' = 'flat';
   const baseVal = data.base || numStyle.baseNum || 0;
-  const value = (data?.value || 0) - baseVal;
+  const value = data?.value || 0;
   const valueText = value.toFixed(numStyle.rounding ? 0 : numStyle.decimal) || '-';
 
   const deg = {
@@ -42,9 +42,9 @@ const Trend: React.FC<IWidgetProps> = ({ options, data }) => {
     flat: iconStyle.flatColor,
   };
 
-  if (value > 0) {
+  if (value > baseVal) {
     status = 'up';
-  } else if (value < 0) {
+  } else if (value < baseVal) {
     status = 'down';
   } else {
     status = 'flat';

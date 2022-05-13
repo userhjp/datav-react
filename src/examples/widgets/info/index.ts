@@ -7,3 +7,4 @@ export * from './Timer';
 export * from './QrCode';
 export * from './Title';
 export * from './Trend';
+export * from './TextLabel';
