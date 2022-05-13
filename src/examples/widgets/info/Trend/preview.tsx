@@ -3,7 +3,10 @@ import { IWidgetProps } from '@/datav/react/interface';
 import { images } from './data';
 import './styles.less';
 
-const formatNumber = (value: number, str: string) => {
+const formatNumber = (value: number | string, str: string) => {
+  str = /[0-9]/.test(str) ? '' : str;
+  if (!str) return value;
+
   const val = `${value}`;
   const list = val.split('.');
   const prefix = list[0].charAt(0) === '-' ? '-' : '';
@@ -23,7 +26,9 @@ const Trend: React.FC<IWidgetProps> = ({ options, data }) => {
   const { titleStyle, iconStyle, numStyle } = options;
   const img = images.find((m) => m.value === iconStyle.image);
   let status: 'up' | 'down' | 'flat' = 'flat';
-  const value = data?.value.toFixed(numStyle.rounding ? 0 : numStyle.decimal) || '-';
+  const baseVal = data.base || numStyle.baseNum || 0;
+  const value = (data?.value || 0) - baseVal;
+  const valueText = value.toFixed(numStyle.rounding ? 0 : numStyle.decimal) || '-';
 
   const deg = {
     up: 0,
@@ -37,10 +42,9 @@ const Trend: React.FC<IWidgetProps> = ({ options, data }) => {
     flat: iconStyle.flatColor,
   };
 
-  const baseVal = data.base || numStyle.baseNum || 0;
-  if (value > baseVal) {
+  if (value > 0) {
     status = 'up';
-  } else if (value < baseVal) {
+  } else if (value < 0) {
     status = 'down';
   } else {
     status = 'flat';
@@ -88,7 +92,7 @@ const Trend: React.FC<IWidgetProps> = ({ options, data }) => {
       <span style={titleStyles}>{titleStyle.content}</span>
       <span style={imgStyle} />
       <span style={valueStyle}>
-        {formatNumber(value, numStyle.thousandth)}
+        {formatNumber(valueText, numStyle.thousandth)}
         {numStyle.suffix}
       </span>
     </div>
