@@ -14,7 +14,7 @@ export const TextLabel = registerWidgetConfig(
     data: {
       fields: {
         content: '标签值',
-        url: '标签类别名',
+        type: '标签类别名',
       },
       value: [
         {
