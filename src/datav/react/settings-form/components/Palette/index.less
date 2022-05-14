@@ -6,46 +6,28 @@
   background-color: @input-bg-color;
   border: 1px solid @color-primary;
 
-  .rc-virtual-list-holder {
-    .rc-virtual-list-holder-inner {
-      flex-wrap: wrap;
-    }
-  }
-
   .rc-virtual-list-holder-inner {
-    flex-direction: initial !important;
-    padding: 0;
-    padding-right: 8px;
-    padding-bottom: 8px;
-
     .ant-select-item {
-      width: 50%;
-      padding: 8px 0 0 8px !important;
+      min-height: 26px;
+      padding: 0 !important;
       overflow: hidden;
       font-size: 12px;
       background: transparent;
 
-      &.ant-select-item-option-selected {
-        .datav-palette-select-palette {
-          border: 1px solid @color-primary;
-        }
+      &.ant-select-item-option-selected .palette-select-dropdown-menu-item {
+        // border: 1px solid @color-primary;
+        background-color: #313030;
       }
 
       .palette-select-dropdown-menu-item  {
         display: flex;
-        flex-direction: column;
-        align-items: center;
-        color: @m-text-color;
-      }
-
-      .datav-palette-select-palette {
-        display: flex;
-        align-items: center;
-        justify-content: center;
         width: 100%;
-        height: 54px;
-        object-fit: contain;
-        border: 1px solid transparent;
+        padding: 0 6px;
+        & > span {
+          display: inline-block;
+          flex: 1;
+          height: 10px;
+        }
 
         &:hover {
           background: #303640;
@@ -59,19 +41,24 @@
 }
 
 .palette-select-dropdown-menu {
+  display: flex;
+  align-items: center;
+  height: 32px;
   .ant-select-selector {
-    height: 58px !important;
-
     .ant-select-selection-item {
-      .palette-option-item {
-        margin-top: 6px;
+      .palette-select-dropdown-menu-item  {
+        display: flex;
+        width: 100%;
+        & > span {
+          display: inline-block;
+          flex: 1;
+          height: 10px;
+        }
       }
     }
+  }
 
-    .datav-palette-select-palette {
-      max-width: 72px;
-      max-height: 46px;
-      margin-right: 10px;
-    }
+  .palette-setting {
+    padding-left: 10px;
   }
 }

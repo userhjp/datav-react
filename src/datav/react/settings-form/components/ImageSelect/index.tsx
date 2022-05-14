@@ -9,7 +9,7 @@ export const ImageSelect: React.FC<SelectProps> = (props) => {
   return (
     <AntdSelect
       open={open}
-      onMouseDown={(e) => e.preventDefault()}
+      // onMouseDown={(e) => e.preventDefault()}
       onDropdownVisibleChange={(e) => {
         if (e) setOpen(true);
       }}
@@ -23,11 +23,9 @@ export const ImageSelect: React.FC<SelectProps> = (props) => {
           <div
             className="image-select-dropdown-menu-item"
             key={i}
-            role="option"
             style={{ userSelect: 'none', height: '100%', display: 'flex', alignItems: 'center' }}
             onClick={() => {
               if (props.value !== item.value) {
-                props?.onChange(item.value, item);
                 setOpen(false);
               }
             }}
