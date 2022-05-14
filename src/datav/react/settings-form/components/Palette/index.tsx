@@ -1,6 +1,6 @@
 import { IconWidget } from '@/datav/react/components';
 import { useFieldSchema } from '@formily/react';
-import { SelectProps, Select as AntdSelect } from 'antd';
+import { Select as AntdSelect } from 'antd';
 import React, { useState } from 'react';
 import './index.less';
 
@@ -14,6 +14,7 @@ export const Palette: React.FC<any> = (props) => {
   return (
     <div className="palette-select-dropdown-menu">
       <AntdSelect
+        virtual={false}
         showArrow={false}
         open={open}
         onDropdownVisibleChange={(e) => {
@@ -26,7 +27,7 @@ export const Palette: React.FC<any> = (props) => {
             props?.onChange(spval, spval);
           }
         }}
-        onBlur={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
         dropdownClassName="palette-select-dropdown"
       >
         {colors.map((arr: string, i) => {

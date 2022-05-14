@@ -3,20 +3,25 @@
 .palette-select-dropdown {
   padding: 0;
   color: @m-text-color;
-  background-color: @input-bg-color;
+  background-color: #262c33;
   border: 1px solid @color-primary;
 
-  .rc-virtual-list-holder-inner {
+  .rc-virtual-list-holder {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    padding: 4px 6px;
     .ant-select-item {
       min-height: 26px;
-      padding: 0 !important;
+      padding: 2px 0 !important;
       overflow: hidden;
       font-size: 12px;
       background: transparent;
 
       &.ant-select-item-option-selected .palette-select-dropdown-menu-item {
-        // border: 1px solid @color-primary;
-        background-color: #313030;
+        background-color: @input-bg-color;
+        border: 1px solid @color-primary;
       }
 
       .palette-select-dropdown-menu-item  {
