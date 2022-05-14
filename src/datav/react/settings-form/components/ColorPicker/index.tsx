@@ -85,7 +85,30 @@ export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
         }}
         addonAfter={<div style={{ backgroundColor: value, width: 20, height: 16 }} onClick={() => setVisible(!visible)} />}
       />
-      {visible && <SketchPicker className="sketch-picker" color={color} onChange={handleColorChange} />}
+      {visible && (
+        <SketchPicker
+          className="sketch-picker"
+          width="166px"
+          presetColors={[
+            '#D0021B',
+            '#F5A623',
+            '#F8E71C',
+            '#8B572A',
+            '#7ED321',
+            '#417505',
+            '#BD10E0',
+            '#9013FE',
+            '#4A90E2',
+            '#50E3C2',
+            '#B8E986',
+            '#000000',
+            '#4A4A4A',
+            '#9B9B9B',
+          ]}
+          color={color}
+          onChange={handleColorChange}
+        />
+      )}
     </div>
   );
 });

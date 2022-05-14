@@ -5,7 +5,7 @@ import { PieChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
-import { convertEChartColors, getChartColors } from '@/examples/shared';
+import { convertEChartColors } from '@/examples/shared';
 
 use([CanvasRenderer, PieChart, GridComponent, TitleComponent, PolarComponent, BarChart]);
 /** 单值百分比饼图 */
@@ -83,7 +83,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
     }
     return {
       series,
-      color: pieStyleColor ? pieStyleColor : getChartColors(colors),
+      color: pieStyleColor ? pieStyleColor : colors,
       grid,
       title: {
         show: !!textStyle.show,

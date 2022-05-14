@@ -21,7 +21,7 @@ export const lineSeriesStyleSchema: ISchema = {
           borderBottom: 'solid 1px #333',
         },
       },
-      'x-component': 'USlider',
+      'x-component': 'Slider',
       default: 0,
     },
     symbolVoid: {

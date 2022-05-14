@@ -8,7 +8,6 @@ import {
   Divider,
   SettingsEmpty as Empty,
   FormTitle,
-  USlider,
   WidgetInfo,
   ZoomModeRadio,
   CutCover,
@@ -19,6 +18,8 @@ import {
   NumberPickerUnit,
   CompLayout,
   ImageSelect,
+  Slider,
+  Palette,
 } from './components';
 
 export const SchemaField = createSchemaField({
@@ -34,7 +35,6 @@ export const SchemaField = createSchemaField({
     Divider,
     Empty,
     FormTitle,
-    USlider,
     WidgetInfo,
     ZoomMode: ZoomModeRadio,
     CutCover,
@@ -50,5 +50,7 @@ export const SchemaField = createSchemaField({
     NumberPickerUnit,
     CompLayout,
     ImageSelect,
+    Slider,
+    Palette,
   },
 });

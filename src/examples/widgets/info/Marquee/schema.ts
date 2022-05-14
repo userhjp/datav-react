@@ -120,6 +120,10 @@ export const MarqueeSchema: ISchema = {
       type: 'number',
       title: '动画间隔',
       'x-decorator': 'FormItem',
+      'x-decorator-props': {
+        tooltip: '每100长度动画时长',
+        tooltipLayout: 'text',
+      },
       'x-component': 'NumberPicker',
       'x-component-props': {
         placeholder: '请输入',

@@ -12,7 +12,7 @@ const NumberFlop: React.FC<IWidgetProps<any>> = ({ options = {}, data }) => {
   const [animation, setAnimation] = useState(null);
 
   const titleText = useMemo((): string => {
-    return options.titleConfig?.show ? data?.title ?? options.titleConfig?.title : '';
+    return options.titleConfig?.show ? data?.title || options.titleConfig?.title : '';
   }, [options.titleConfig]);
 
   const prefixText = useMemo((): string => {

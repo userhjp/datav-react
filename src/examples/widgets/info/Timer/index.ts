@@ -10,5 +10,19 @@ export const Timer = registerWidgetConfig(
     schema: TimerSchema,
     w: 300,
     h: 56,
+    events: {
+      changed: {
+        description: '当时间变化时',
+        fields: {
+          time: '当前时间',
+        },
+      },
+      changed2: {
+        description: '当时间到设置时间时',
+        fields: {
+          time: '当前时间',
+        },
+      },
+    },
   }
 );

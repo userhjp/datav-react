@@ -20,7 +20,7 @@ export type IWidgetConfig = {
   schema?: ISchema;
   /** 交互数据属性 */
   events?: {
-    changed: {
+    [key: string]: {
       /** 事件描述 */
       description: string;
       /** 字段映射 默认data.fields */
@@ -124,7 +124,7 @@ export interface IChangedEvent {
 }
 
 export interface IWidgetEvents {
-  changed: IChangedEvent;
+  [key: string]: IChangedEvent;
 }
 
 /** 数据配置 */

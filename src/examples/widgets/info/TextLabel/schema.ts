@@ -10,24 +10,72 @@ export const TextLabelSchema: ISchema = {
   properties: {
     config: {
       type: 'object',
-      'x-component': 'MyFormCollapse',
-      'x-component-props': {
-        title: '全局',
-      },
+      // 'x-component': 'MyFormCollapse',
+      // 'x-component-props': {
+      //   title: '全局',
+      // },
       properties: {
-        isblank: {
+        autolayout: {
           type: 'boolean',
           title: '自动布局',
           'x-decorator': 'FormItem',
           'x-component': 'Switch',
           default: false,
         },
+        padding: {
+          type: 'object',
+          title: '内容边距',
+          'x-decorator': 'FormItem',
+          'x-reactions': {
+            dependencies: ['.autolayout'],
+            fulfill: {
+              state: {
+                visible: '{{$deps[0]}}',
+              },
+            },
+          },
+          'x-component': 'FormGrid',
+          'x-component-props': {
+            minColumns: 2,
+            rowGap: 0,
+          },
+          properties: {
+            vertical: {
+              type: 'number',
+              'x-decorator': 'FormItem',
+              'x-decorator-props': {
+                feedbackText: '上下',
+              },
+              'x-component': 'NumberPicker',
+              'x-component-props': {
+                placeholder: '请输入',
+                unit: 'px',
+                min: 0,
+              },
+              default: 2,
+            },
+            horizontal: {
+              type: 'number',
+              'x-decorator': 'FormItem',
+              'x-decorator-props': {
+                feedbackText: '左右',
+              },
+              'x-component': 'NumberPicker',
+              'x-component-props': {
+                placeholder: '请输入',
+                unit: 'px',
+                min: 0,
+              },
+              default: 3,
+            },
+          },
+        },
         layout: {
           type: 'object',
           title: '标签布局',
           'x-decorator': 'FormItem',
           'x-reactions': {
-            dependencies: ['.isblank'],
+            dependencies: ['.autolayout'],
             fulfill: {
               state: {
                 visible: '{{!$deps[0]}}',
@@ -52,7 +100,7 @@ export const TextLabelSchema: ISchema = {
                 unit: '行',
                 min: 0,
               },
-              default: 2,
+              default: 3,
             },
             col: {
               type: 'number',
@@ -66,8 +114,20 @@ export const TextLabelSchema: ISchema = {
                 unit: '列',
                 min: 0,
               },
-              default: 3,
+              default: 2,
             },
+          },
+        },
+        space: {
+          type: 'object',
+          title: '标签间距',
+          'x-decorator': 'FormItem',
+          'x-component': 'FormGrid',
+          'x-component-props': {
+            minColumns: 2,
+            rowGap: 0,
+          },
+          properties: {
             rowSpace: {
               type: 'number',
               'x-decorator': 'FormItem',
@@ -98,7 +158,6 @@ export const TextLabelSchema: ISchema = {
             },
           },
         },
-        textStyle: textSchema(),
       },
     },
     labelConfig: {
@@ -108,18 +167,6 @@ export const TextLabelSchema: ISchema = {
         title: '默认标签配置',
       },
       properties: {
-        contentPadding: {
-          type: 'number',
-          title: '内容边距',
-          'x-decorator': 'FormItem',
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 0,
-          },
-          default: 0,
-        },
         filletRadius: {
           type: 'number',
           title: '圆角半径',
@@ -139,7 +186,7 @@ export const TextLabelSchema: ISchema = {
           'x-component': 'ColorPicker',
           default: 'rgb(10, 115, 255)',
         },
-        textStyle: textSchema(),
+        textStyle: textSchema('object'),
       },
     },
     statusList: {
@@ -150,7 +197,7 @@ export const TextLabelSchema: ISchema = {
         title: '标签系列',
         listType: 'column',
       },
-      default: [{ title: '标签1', mapKey: 'key1', textAlign: 'left' }],
+      default: [{ labelName: 'series1', backgroundColor: 'rgb(121, 218, 255)', color: 'rgba(0,0,0,0.8)' }],
       items: {
         type: 'object',
         properties: {

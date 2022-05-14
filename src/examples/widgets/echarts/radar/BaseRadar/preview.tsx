@@ -5,7 +5,6 @@ import { RadarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
-import { getChartColors } from '@/examples/shared';
 
 use([CanvasRenderer, RadarChart, GridComponent, TitleComponent, PolarComponent]);
 /** 基础雷达图 */
@@ -49,7 +48,7 @@ const BaseRadar: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
     const { grid, tooltip = {}, radar = {}, radarSeries = {}, colors } = options;
     if (!dataset.indicator?.length) return {};
     return {
-      color: getChartColors(colors),
+      color: colors,
       grid,
       tooltip: {
         ...tooltip,

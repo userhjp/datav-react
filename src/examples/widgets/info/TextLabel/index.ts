@@ -9,8 +9,8 @@ export const TextLabel = registerWidgetConfig(
     sort: 5,
     cover: '/menuCover/信息/文字标签.png',
     schema: TextLabelSchema,
-    w: 320,
-    h: 160,
+    w: 300,
+    h: 180,
     data: {
       fields: {
         content: '标签值',
@@ -19,6 +19,7 @@ export const TextLabel = registerWidgetConfig(
       value: [
         {
           content: '家有宝宝',
+          type: '',
         },
         {
           content: '时尚达人',
@@ -26,6 +27,7 @@ export const TextLabel = registerWidgetConfig(
         },
         {
           content: '美食专家',
+          type: '',
         },
         {
           content: '运动先锋',
@@ -33,6 +35,7 @@ export const TextLabel = registerWidgetConfig(
         },
         {
           content: 'VIP4',
+          type: '',
         },
         {
           content: '美食专家',

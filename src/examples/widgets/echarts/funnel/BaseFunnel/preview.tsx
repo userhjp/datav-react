@@ -5,7 +5,7 @@ import { FunnelChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
-import { formJsonToLegendData, getChartColors } from '@/examples/shared';
+import { formJsonToLegendData } from '@/examples/shared';
 
 use([CanvasRenderer, LegendComponent, FunnelChart, TooltipComponent, GridComponent]);
 
@@ -37,7 +37,7 @@ const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
     const opt = {
       ...options,
       legend: formJsonToLegendData(legend),
-      color: getChartColors(colors),
+      color: colors,
       series: [{ ...series, data }],
     };
     myChart.current.setOption(opt, true);

@@ -99,10 +99,10 @@ export const pageSchema: ISchema = {
             tooltip: '画布组件拖拽时每次移动栅格',
             tooltipLayout: 'text',
           },
-          'x-component': 'NumberPicker',
+          'x-component': 'Slider',
           'x-component-props': {
-            placeholder: '栅格间距',
-            unit: 'px',
+            precision: 0,
+            step: 1,
             min: 1,
             max: 20,
           },

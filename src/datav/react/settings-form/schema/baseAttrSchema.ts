@@ -88,7 +88,7 @@ export const baseAttrSchema: ISchema = {
           borderBottom: 'solid 1px #333',
         },
       },
-      'x-component': 'USlider',
+      'x-component': 'Slider',
       'x-component-props': {
         placeholder: '透明度',
       },

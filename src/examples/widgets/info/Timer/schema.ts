@@ -51,7 +51,7 @@ export const TimerSchema: ISchema = {
       },
     },
     textStyle: {
-      type: 'void',
+      type: 'object',
       'x-component': 'MyFormCollapse',
       'x-component-props': {
         key: '1',
@@ -71,6 +71,52 @@ export const TimerSchema: ISchema = {
       },
       'x-component': 'Input',
       default: 'yyyy-MM-dd HH:mm:ss',
+    },
+    timing: {
+      type: 'object',
+      'x-component': 'MyFormCollapse',
+      'x-component-props': {
+        title: '定时回调设置',
+        switch: true,
+      },
+      properties: {
+        time: {
+          type: 'number',
+          title: '回调抛出间隔',
+          'x-decorator': 'FormItem',
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'ms',
+            min: 1000,
+          },
+          default: 3000,
+        },
+      },
+    },
+    fixedPoint: {
+      type: 'object',
+      'x-component': 'MyFormCollapse',
+      'x-component-props': {
+        title: '定点回调设置',
+        switch: true,
+      },
+      properties: {
+        time: {
+          type: 'number',
+          title: '定点抛出时间',
+          'x-decorator': 'FormItem',
+          'x-decorator-props': {
+            tooltip: '表示一个需包含日期的时间字符串，该字符串应该能被 Date.parse() 方法正确识别。',
+            tooltipLayout: 'text',
+          },
+          'x-component': 'Input',
+          'x-component-props': {
+            placeholder: '请输入',
+          },
+          default: '2022-11-11 00:00:00',
+        },
+      },
     },
   },
 };

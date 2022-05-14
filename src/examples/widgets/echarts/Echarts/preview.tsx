@@ -3,7 +3,6 @@ import { IWidgetProps } from '@/datav/react/interface';
 import * as echarts from 'echarts';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { message } from 'antd';
-import { colorsOpt } from '@/examples/schema/echarts/colorsSchema';
 
 /** Echarts 图表通用组件，接收options配置文件，组件只负责渲染 */
 const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) => {
@@ -41,8 +40,7 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) 
     }
     try {
       if (echartOpt && !echartOpt.color) {
-        const colors = colorsOpt[0];
-        echartOpt.color = colors?.color;
+        // echartOpt.color = colors?.color;
       }
       myChart.current.setOption(echartOpt, true);
     } catch (error) {}

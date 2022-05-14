@@ -5,7 +5,7 @@ import { PieChart, BarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
-import { convertEChartColors, formJsonToLegendData, getChartColors } from '@/examples/shared';
+import { convertEChartColors, formJsonToLegendData } from '@/examples/shared';
 
 use([CanvasRenderer, PieChart, GridComponent, TitleComponent, PolarComponent, BarChart]);
 /** 分类玫瑰图 */
@@ -43,7 +43,7 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
     const { colors, grid, title, legend, series = {} } = options;
     // const pieStyleColor = convertEChartColors(pieStyle.color);
     return {
-      color: getChartColors(colors),
+      color: colors,
       // tooltip: {
       //     trigger: 'item'
       // },

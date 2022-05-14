@@ -20,13 +20,5 @@ export const Carousel = registerWidgetConfig(
         herf: '超链接地址',
       },
     },
-    // events: {
-    //   changed: {
-    //     description: '当选择日期数据变化时',
-    //     fields: {
-    //       dateStr: '选择值',
-    //     },
-    //   },
-    // },
   }
 );

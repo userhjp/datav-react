@@ -1,6 +1,5 @@
 import { IWidgetData } from '@/datav/react/interface';
 import { Path } from '@formily/path';
-import { colorsOpt } from '../schema/echarts/colorsSchema';
 
 export function convert2Ddata(data: IWidgetData) {
   const c_obj = Object.create({});
@@ -78,7 +77,7 @@ export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | '
 /** Echarts Series 数据差异处理 */
 export function formDataToSeriesData(options: { [key: string]: any }): any[] {
   const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], areaStyle = {}, colors } = options;
-  options.color = getChartColors(colors);
+  options.color = (colors || []).map((m) => convertEChartColors(m));
   // 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
   // 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
   // options.colorBy = 'series';
@@ -122,12 +121,6 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
     return f;
   });
   return options.series;
-}
-
-/** 获取颜色组 */
-export function getChartColors(type: number) {
-  const colors = colorsOpt.find((f) => f.value === type);
-  return (colors.color || colorsOpt[0]?.color || []).map((m) => convertEChartColors(m));
 }
 
 /** 转换echart颜色渐变 */

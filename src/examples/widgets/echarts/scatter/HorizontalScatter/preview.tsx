@@ -5,7 +5,6 @@ import { ScatterChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
-import { convertEChartColors, formDataToTooltipData, getChartColors } from '@/examples/shared';
 
 use([CanvasRenderer, ScatterChart, GridComponent, TitleComponent, PolarComponent, SingleAxisComponent]);
 /** 二维散点图 */

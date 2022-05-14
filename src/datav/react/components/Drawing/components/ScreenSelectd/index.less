@@ -9,20 +9,26 @@
     width: 150px;
     margin: 0 8px;
     padding: 5px 0;
-
+    
     .ant-slider-rail {
-      background-color: #434343;
+      height: 2px;
+      background-color: #262C33;
     }
-
-    .ant-slider-track,
-    .ant-slider-rail {
-      height: 3px;
+    .ant-slider-track {
+      height: 2px;
+      background: linear-gradient(to right, #74f0ff, #2681ff);
     }
 
     .ant-slider-handle {
-      width: 12px;
-      height: 12px;
-      margin-top: -4px;
+      width: 8px;
+      height: 8px;
+      margin-top: -3px;
+      border: none;
+      border-radius: 0;
+      transform: none;
+      &:hover {
+        border: solid 2px #2681ff;
+      }
     }
   }
 
