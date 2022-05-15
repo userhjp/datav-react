@@ -1,19 +1,24 @@
 import { IconWidget } from '@/datav/react/components';
-import { useFieldSchema } from '@formily/react';
+import { useDvGlobal } from '@/datav/react/hooks';
+import { observer } from '@formily/react';
 import { Select as AntdSelect } from 'antd';
 import React, { useState } from 'react';
 import './index.less';
 
-export const Palette: React.FC<any> = (props) => {
-  const fieldSchema = useFieldSchema();
+export const Palette: React.FC<any> = observer((props) => {
+  const dvGlobal = useDvGlobal();
   const [open, setOpen] = useState(false);
 
-  const colors = fieldSchema.enum.map((m: any) => m.join());
+  const colors = dvGlobal.colorList.map((m: any) => m.join());
   const val = props.value.join();
+  if (!colors.some((s) => s === val)) {
+    colors.push(val);
+  }
 
   return (
     <div className="palette-select-dropdown-menu">
       <AntdSelect
+        style={{ minWidth: 0 }}
         virtual={false}
         showArrow={false}
         open={open}
@@ -49,4 +54,4 @@ export const Palette: React.FC<any> = (props) => {
       <IconWidget className="palette-setting" infer="Setting" onClick={() => {}} />
     </div>
   );
-};
+});

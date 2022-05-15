@@ -91,6 +91,9 @@ export interface IPageType {
   /** 页面设置 */
   page?: IScreenProps;
   components?: IWidgetProps[];
+  global?: {
+    colors: string[][];
+  };
 }
 
 /** 数据映射 */

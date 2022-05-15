@@ -8,6 +8,7 @@ import { Toolbar } from './Toolbar';
 import { Operation } from './Operation';
 import { Keyboard } from './Keyboard';
 import { Screen } from './Screen';
+import { DvGlobal } from './global';
 
 /**
  * 设计器引擎
@@ -29,6 +30,8 @@ export class Engine extends Event {
 
   keyboard: Keyboard;
 
+  global: DvGlobal;
+
   constructor(props: IEngineProps<Engine>) {
     super(props);
     this.props = {
@@ -49,6 +52,7 @@ export class Engine extends Event {
       contentWindow: window,
     });
     this.operation = new Operation(this);
+    this.global = new DvGlobal();
   }
 
   createViewport(viewportElement: HTMLElement) {
@@ -64,6 +68,9 @@ export class Engine extends Event {
     if (!val) return;
     if (val.components) this.operation.batchAddNode(val.components || []);
     if (val.page) this.screen.setProps(val.page);
+    if (val.global) {
+      this.global.setColors(val.global.colors);
+    }
   }
 
   mount() {

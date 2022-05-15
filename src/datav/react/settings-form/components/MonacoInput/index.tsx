@@ -104,16 +104,19 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     if (valueRef.current) {
       format(computedLanguage.current, valueRef.current)
         .then((content) => {
+          if (unmountedRef.current) return;
           editor.setValue(content);
           setLoaded(true);
         })
         .catch(() => {
           setTimeout(() => {
+            if (unmountedRef.current) return;
             formatDocument(editor, computedLanguage.current);
             setLoaded(true);
           }, 0);
         });
     } else {
+      if (unmountedRef.current) return;
       setLoaded(true);
     }
     if (props.extraLib) {

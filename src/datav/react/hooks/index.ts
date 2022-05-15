@@ -14,3 +14,4 @@ export * from './useDatavEvent';
 export * from './usePrefix';
 export * from './useSidebarMenu';
 export * from './useWidgets';
+export * from './useDvGlobal';
