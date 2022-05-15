@@ -7,7 +7,7 @@ export const colorsSchema: ISchema = {
     colors: {
       type: 'array',
       title: '调色盘',
-      'x-decorator': 'FormItem',
+      // 'x-decorator': 'FormItem',
       'x-component': 'Palette',
       default: ['#0a73ff', '#79daff', '#bdfdff', '#57cdff', '#a3f6ff', '#4caff9'],
     },
