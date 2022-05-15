@@ -5,7 +5,7 @@ export const colorsSchema: ISchema = {
   type: 'void',
   properties: {
     colors: {
-      type: 'string',
+      type: 'array',
       title: '调色盘',
       'x-decorator': 'FormItem',
       'x-component': 'Palette',
