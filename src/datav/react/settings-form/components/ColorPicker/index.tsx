@@ -1,5 +1,5 @@
 import { Input } from '@formily/antd';
-import { observer, useField } from '@formily/react';
+import { observer } from '@formily/react';
 import { useDebounceFn } from 'ahooks';
 import React, { useEffect, useState } from 'react';
 import { SketchPicker } from 'react-color';
@@ -34,11 +34,12 @@ function checkIsColor(bgVal) {
 
 type ColorPickerProps = {
   value: string;
+  styleType?: number;
   onChange: (val: string) => void;
 };
 
 export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
-  const { value, onChange } = props;
+  const { value, styleType = 1, onChange, ...propss } = props;
   const [visible, setVisible] = useState(false);
   const [color, setColor] = useState<any>();
   const [colorText, setColorText] = useState<any>(value || '');
@@ -71,10 +72,12 @@ export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
     return () => document.removeEventListener('click', handle);
   }, []);
 
+  const renderColorItem = <div style={{ backgroundColor: value, width: 20, height: 16 }} onClick={() => setVisible(!visible)} />;
+
   return (
     <div className="color-picker" onClick={(e) => e.stopPropagation()}>
       <Input
-        {...props}
+        {...propss}
         value={colorText}
         onChange={(e) => {
           setColorText(e.target.value);
@@ -83,7 +86,8 @@ export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
           } else {
           }
         }}
-        addonAfter={<div style={{ backgroundColor: value, width: 20, height: 16 }} onClick={() => setVisible(!visible)} />}
+        addonAfter={styleType === 1 && renderColorItem}
+        addonBefore={styleType === 2 && renderColorItem}
       />
       {visible && (
         <SketchPicker
@@ -101,9 +105,9 @@ export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
             '#4A90E2',
             '#50E3C2',
             '#B8E986',
-            '#000000',
             '#4A4A4A',
             '#9B9B9B',
+            '#FFFFFF',
           ]}
           color={color}
           onChange={handleColorChange}

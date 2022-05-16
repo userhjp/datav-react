@@ -8,7 +8,7 @@ import { Toolbar } from './Toolbar';
 import { Operation } from './Operation';
 import { Keyboard } from './Keyboard';
 import { Screen } from './Screen';
-import { DvGlobal } from './global';
+import { DvGlobal } from './DvGlobal';
 
 /**
  * 设计器引擎
