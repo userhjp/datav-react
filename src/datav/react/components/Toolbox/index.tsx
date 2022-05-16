@@ -21,10 +21,10 @@ export const Toolbox: React.FC = observer(() => {
   return (
     <div className={`toolbox-panel-wp ${toolbar.toolbox.show ? '' : 'collapsed'}`}>
       <div className="toolbox-panel">
-        <div className="btn-box">
-          <span>组件缩放</span>
+        {/* <div className="btn-box">
+          <span>对齐线</span>
           <Checkbox onChange={onChange} />
-        </div>
+        </div> */}
         <div className="btn-box">
           <span>参考线</span>
           <Switch size="small" checked={toolbar.toolbox.referline} onChange={changeReferLinePanel} />

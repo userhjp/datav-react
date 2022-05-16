@@ -1,6 +1,6 @@
 import { useDvGlobal } from '@/datav/react/hooks';
-import { ArrayItems, Space, FormItem, Form } from '@formily/antd';
-import { createForm, onFieldValueChange } from '@formily/core';
+import { ArrayItems, Space, FormItem } from '@formily/antd';
+import { createForm, onFieldChange, onFieldValueChange } from '@formily/core';
 import { createSchemaField, FormProvider, observer, useField } from '@formily/react';
 import { toJS } from '@formily/reactive';
 import { Select as AntdSelect, Collapse, InputNumberProps } from 'antd';
@@ -112,10 +112,16 @@ const ColorArrayForm: React.FC<{ value: string[]; onChange: (val: string[]) => v
   const form = useMemo(
     () =>
       createForm({
-        initialValues: {
+        values: {
           string_array: value,
         },
         effects() {
+          onFieldChange('string_array', (field) => {
+            const val = toJS(field.form.getValuesIn('string_array'));
+            if (JSON.stringify(val) !== JSON.stringify(value)) {
+              onChange(val);
+            }
+          });
           onFieldValueChange('string_array.*', (field) => {
             const val = toJS(field.form.getValuesIn('string_array'));
             if (JSON.stringify(val) !== JSON.stringify(value)) {
