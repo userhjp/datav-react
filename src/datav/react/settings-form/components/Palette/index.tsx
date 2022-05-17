@@ -1,6 +1,6 @@
 import { useDvGlobal } from '@/datav/react/hooks';
 import { ArrayItems, Space, FormItem } from '@formily/antd';
-import { createForm, onFieldChange, onFieldInputValueChange, onFieldValueChange } from '@formily/core';
+import { createForm, onFieldInputValueChange, onFieldValueChange } from '@formily/core';
 import { createSchemaField, FormProvider, observer, useField } from '@formily/react';
 import { toJS } from '@formily/reactive';
 import { Select as AntdSelect, Collapse, InputNumberProps } from 'antd';
@@ -12,7 +12,6 @@ export const Palette: React.FC<any> = observer(({ value, onChange }) => {
   const dvGlobal = useDvGlobal();
   const field = useField();
 
-  const colors = toJS(dvGlobal.colorList);
   const currentColors = toJS(value || dvGlobal.colorList[0]);
   const handleChange = (colors: string[]) => {
     if (JSON.stringify(value) !== JSON.stringify(colors)) onChange(colors);
@@ -25,11 +24,11 @@ export const Palette: React.FC<any> = observer(({ value, onChange }) => {
           header={
             <ColorSelect
               style={{ width: '254px', display: 'flex' }}
-              colors={colors}
+              colors={dvGlobal.colorList}
               title={field.title}
               value={'current'}
               currentColors={currentColors}
-              onChange={(e) => handleChange(colors[e])}
+              onChange={(e) => handleChange(dvGlobal.colorList[e])}
             />
           }
           key="1"
@@ -60,6 +59,7 @@ const ColorSelect: React.FC<InputNumberProps & { title?: string; colors: string[
         onChange={(newValue) => {
           if (value !== newValue) {
             onChange(newValue);
+            setOpen(false);
           }
         }}
         onBlur={() => setOpen(false)}
