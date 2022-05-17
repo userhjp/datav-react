@@ -20,6 +20,7 @@ import {
   ImageSelect,
   Slider,
   Palette,
+  GlobalConfig,
 } from './components';
 
 export const SchemaField = createSchemaField({
@@ -52,5 +53,6 @@ export const SchemaField = createSchemaField({
     ImageSelect,
     Slider,
     Palette,
+    GlobalConfig,
   },
 });

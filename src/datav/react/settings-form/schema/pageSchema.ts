@@ -78,6 +78,12 @@ export const pageSchema: ISchema = {
             prefix: "{{icon('Link')}}",
           },
         },
+        config: {
+          type: 'string',
+          title: '全局配置',
+          'x-component': 'GlobalConfig',
+          'x-decorator': 'FormItem',
+        },
         zoomMode: {
           type: 'number',
           title: '页面缩放方式',

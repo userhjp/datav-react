@@ -21,3 +21,4 @@ export * from './CompLayout';
 export * from './ImageSelect';
 export * from './Slider';
 export * from './Palette';
+export * from './GlobalConfig';

@@ -1,9 +1,9 @@
 import { useDvGlobal } from '@/datav/react/hooks';
 import { ArrayItems, Space, FormItem } from '@formily/antd';
 import { createForm, onFieldInputValueChange, onFieldValueChange } from '@formily/core';
-import { createSchemaField, FormProvider, observer, useField } from '@formily/react';
+import { ArrayField, createSchemaField, Field, FormProvider, observer, useField } from '@formily/react';
 import { toJS } from '@formily/reactive';
-import { Select as AntdSelect, Collapse, InputNumberProps } from 'antd';
+import { Select as AntdSelect, Collapse, InputNumberProps, Input, Button } from 'antd';
 import React, { useMemo, useState } from 'react';
 import { ColorPicker } from '../ColorPicker';
 import './index.less';
@@ -164,6 +164,45 @@ const ColorArrayForm: React.FC<{ value: string[]; onChange: (val: string[]) => v
           />
         </SchemaField.Array>
       </SchemaField>
+      {/* <ArrayField name="string_array">
+        {(field) => {
+          return (
+            <>
+              <div>
+                {field.value?.map((item, index) => (
+                  <div key={index} style={{ display: 'flex-block', marginBottom: 10 }}>
+                    <Space>
+                      <Field name={index} component={[Input]} />
+                      <Button
+                        onClick={() => {
+                          field.remove(index);
+                        }}
+                      >
+                        Remove
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          field.moveUp(index);
+                        }}
+                      >
+                        Move Up
+                      </Button>
+                      <Button
+                        onClick={() => {
+                          field.moveDown(index);
+                        }}
+                      >
+                        Move Down
+                      </Button>
+                    </Space>
+                  </div>
+                ))}
+              </div>
+              <Button onClick={() => field.push('')}>Add</Button>
+            </>
+          );
+        }}
+      </ArrayField> */}
     </FormProvider>
   );
 };

@@ -71,6 +71,17 @@
       width: 0;
     }
   }
+
+  .ant-select.apitype-selectd {
+    .ant-select-selector {
+      height: 30px;
+      line-height: 30px;
+      .ant-select-selection-item {
+        height: 30px;
+        line-height: 27px;
+      }
+    }
+  }
 }
 
 .editor-popover {
@@ -91,9 +102,7 @@
     width: 10px;
     height: 10px;
 
-    &::before {
-      background-color: #1f2329;
-    }
+    --antd-arrow-background-color: #1f2329;
   }
 }
 
@@ -116,16 +125,5 @@
   .ant-input,
   .ant-select {
     background: #0e1013;
-  }
-}
-
-.data-settings-drawer .ant-select.apitype-selectd {
-  .ant-select-selector {
-    height: 30px;
-    line-height: 30px;
-    .ant-select-selection-item {
-      height: 30px;
-      line-height: 27px;
-    }
   }
 }
