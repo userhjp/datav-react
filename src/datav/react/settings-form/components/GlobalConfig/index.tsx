@@ -1,12 +1,13 @@
 import React, { useMemo, useRef } from 'react';
-import { FormDrawer, FormItem, FormLayout, Input, Checkbox, Select } from '@formily/antd';
-import { Button } from 'antd';
-import { Field, ObjectField, VoidField } from '@formily/react';
+import { FormDrawer, FormItem, FormLayout, Input, Checkbox, Select, ArrayCollapse } from '@formily/antd';
+import { Button, Collapse } from 'antd';
+import { ArrayField, Field, ObjectField, VoidField } from '@formily/react';
 import { InputProps } from 'rc-input';
 import { MonacoEditor } from '../MonacoEditor';
 import { ApiRequestMethod } from '@/datav/shared';
 import { EditorPopover } from '../../DataFields/DataConfig';
 import { useDataSource } from '@/datav/react/hooks';
+import { DataCollapsePanel } from './DataCollapsePanel';
 
 import './index.less';
 
@@ -19,12 +20,6 @@ type GlobalConfigProps = {
 export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = ({ style, title, onChange, value }) => {
   const configForm = useRef<any>();
   const dataSource = useDataSource();
-
-  const apiMethods = useMemo(() => {
-    return Object.entries(ApiRequestMethod).map(([key, val]) => {
-      return { label: key, value: val };
-    });
-  }, []);
 
   const openSourceDrawer = () => {
     FormDrawer(
@@ -46,73 +41,21 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = ({ style, 
         return (
           <FormLayout layout="vertical" colon={false} className="global-config-layout" size="small">
             <div className="step-title">全局数据源</div>
-            <ObjectField name="apiConfig">
-              <Field
-                name="apiMethod"
-                title="请求方式"
-                initialValue={ApiRequestMethod.GET}
-                dataSource={apiMethods}
-                decorator={[FormItem, { style: { marginBottom: 12 } }]}
-                component={[Select, { placeholder: '请选择请求方式', dropdownClassName: 'datav-dropdown' }]}
-              />
-              <p className="url-info">
-                <label className="prefix-label textarea-label">URL：</label>
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS"
-                  className="api-help"
-                >
-                  重要：跨域问题解决方案
-                </a>
-              </p>
-              <p className="url-info-text">将回调参数配置到url中, 例: http://api.test?value=:value</p>
-              <Field
-                name="apiUrl"
-                component={[Input.TextArea, { size: 'small', placeholder: '请求url地址', rows: 4, style: { backgroundColor: '#0e1013' } }]}
-              />
-              <Field
-                name="apiHeaders"
-                title="Headers (Optional)"
-                initialValue={'{}'}
-                decorator={[FormItem, { style: { marginBottom: 12, marginTop: 12 }, labelWidth: 200 }]}
-                component={[
-                  MonacoEditor,
-                  {
-                    language: 'json',
-                    readOnly: false,
-                    autoFormat: true,
-                    height: 110,
-                    fullScreenTitle: 'Headers (Optional)',
-                    className: 'filter-editor',
-                  },
-                ]}
-              />
-              <Field
-                name="apiBody"
-                title="POST请求参数"
-                initialValue={'{}'}
-                decorator={[FormItem, { style: { marginBottom: 12, marginTop: 12 } }]}
-                reactions={(field) => {
-                  const apiMethod = field.query('.apiMethod').get('value');
-                  field.setState({
-                    display: apiMethod === ApiRequestMethod.POST ? 'visible' : 'none',
-                  });
+            <div className="data-sc-container">
+              <ArrayField name="array">
+                {(field) => {
+                  return (
+                    <Collapse expandIconPosition="right" defaultActiveKey={[]} ghost>
+                      {field.value?.map((item, index) => (
+                        <ObjectField key={index} name={index}>
+                          {DataCollapsePanel({ ikey: `${index}` })}
+                        </ObjectField>
+                      ))}
+                    </Collapse>
+                  );
                 }}
-                component={[
-                  MonacoEditor,
-                  {
-                    language: 'json',
-                    readOnly: false,
-                    autoFormat: true,
-                    height: 110,
-                    fullScreenTitle: 'POST请求参数',
-                    className: 'filter-editor',
-                  },
-                ]}
-              />
-            </ObjectField>
-            <EditorPopover dataSource={dataSource} config={form.values} />
+              </ArrayField>
+            </div>
             <div className="step-title">
               <label style={{ cursor: 'pointer' }}>
                 <Field name="useFilter" component={[Checkbox]} />
@@ -146,7 +89,15 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = ({ style, 
         );
       }
     ).open({
-      initialValues: value,
+      initialValues: {
+        array: [
+          {
+            title: '新建数据源',
+            enable: false,
+            apiUrl: '1111',
+          },
+        ],
+      },
     });
   };
 

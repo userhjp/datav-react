@@ -1,5 +1,45 @@
 @import '../../../theme.less';
 
 .global-config-drawer {
+  .data-sc-container {
+    background-color: @input-bg-color;
+    border: 1px solid @m-border-color;
+  }
 
+  .ant-collapse-ghost {
+    padding: 8px 8px 0;
+    .ant-collapse-content-active {
+      border-top: 1px solid #566273;
+      transition: border-color .2s;
+    }
+  }
+
+  .global-config-header {
+    display: flex;
+    align-items: center;
+
+    .ant-input:focus, .ant-input-focused {
+      box-shadow: none;
+    }
+    .ant-checkbox-wrapper {
+      padding-right: 4px;
+    }
+  }
+
+
+  .global-config-source {
+    margin-bottom: 8px;
+    background: #262c33;
+    border: 1px solid #566273;
+    transition: border-color .2s;
+
+    .ant-collapse-header {
+      padding: 4px 10px;
+      color: #bcc9d4;
+
+      & > .ant-collapse-arrow {
+        right: 8px;
+      }
+    }
+  }
 }
