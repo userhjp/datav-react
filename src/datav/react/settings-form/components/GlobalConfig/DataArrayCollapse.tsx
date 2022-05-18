@@ -16,18 +16,20 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
   return (
     <div ref={domRef} className="dv-data-array-collapse">
       <Collapse expandIconPosition="right" defaultActiveKey={[]} ghost>
-        {field.value?.map((item, index) => (
-          <Collapse.Panel
-            className="global-config-source"
-            header={<CollapseHeader name={index} remove={() => field.remove(index)} domRef={domRef} />}
-            key={index}
-          >
-            <ObjectField name={index}>
-              <VoidField name="void" component={[DataSource]} />
-              <DataPreview config={item[index]} dataSource={dataSource} />
-            </ObjectField>
-          </Collapse.Panel>
-        ))}
+        {field.value?.map((item, index) => {
+          return (
+            <Collapse.Panel
+              className="global-config-source"
+              header={<CollapseHeader name={index} remove={() => field.remove(index)} domRef={domRef} />}
+              key={index}
+            >
+              <ObjectField name={index}>
+                <VoidField name="void" component={[DataSource]} />
+                <DataPreview config={item} dataSource={dataSource} />
+              </ObjectField>
+            </Collapse.Panel>
+          );
+        })}
       </Collapse>
       <div style={{ padding: '0 10px 10px 10px' }}>
         <Button

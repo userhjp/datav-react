@@ -5,8 +5,9 @@ import { MonacoEditor } from '../../../components';
 import { IconWidget } from '@/datav/react/components';
 import { DataSource } from '@/datav/core';
 import './index.less';
+import { observer } from '@formily/react';
 
-export const DataPreview: React.FC<{ config: IDataSourceSetting; dataSource: DataSource }> = ({ config, dataSource }) => {
+export const DataPreview: React.FC<{ config: IDataSourceSetting; dataSource: DataSource }> = observer(({ config, dataSource }) => {
   const [viewData, setViewData] = useState();
   const loadData = async (visible: boolean) => {
     let resData: any;
@@ -48,4 +49,4 @@ export const DataPreview: React.FC<{ config: IDataSourceSetting; dataSource: Dat
       </div>
     </Tooltip>
   );
-};
+});
