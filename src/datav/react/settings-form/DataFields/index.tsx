@@ -2,7 +2,6 @@ import React from 'react';
 import { ObjectField as ObjectFieldType } from '@formily/core';
 import { Field, FormConsumer, ObjectField, observer, useField, useForm } from '@formily/react';
 import { Checkbox } from '@formily/antd';
-import DataState from './DataState';
 import { MonacoEditor, BlurInput, SettingsEmpty } from '../components';
 import { useEffect, useMemo, useState } from 'react';
 import { IDataSetting } from '../../interface';
@@ -10,8 +9,8 @@ import { languageType } from '../components/MonacoEditor/editor-config';
 import { InputNumber, Tooltip } from 'antd';
 import { autorun } from '@formily/reactive';
 import { ApiType, FieldStatus } from '../../../shared';
-import DataConfig from './DataConfig';
 import { useDataSource } from '../../hooks';
+import { DataConfig, DataState } from './components';
 import { IconWidget } from '../../components';
 import './index.less';
 

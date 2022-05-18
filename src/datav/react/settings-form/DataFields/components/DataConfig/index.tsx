@@ -1,55 +1,55 @@
 import React, { useRef } from 'react';
-import { FormDrawer, FormLayout } from '@formily/antd';
+import { IDataSourceSetting, IFieldSetting } from '../../../../interface';
+import { Checkbox, FormDrawer, FormLayout } from '@formily/antd';
+import { Field, VoidField } from '@formily/react';
 import { Button } from 'antd';
-import { ArrayField } from '@formily/react';
-import { InputProps } from 'rc-input';
-import { MonacoEditor } from '../MonacoEditor';
-import { DataArrayCollapse } from './DataArrayCollapse';
+import { MonacoEditor } from '../../../components';
+import { FieldGrid } from '../FieldGrid';
+import { DataSource } from '../DataSource';
+import { DataPreview } from '../DataPreview';
 import { useDataSource } from '@/datav/react/hooks';
-import { DataSource } from '@/datav/core';
 import './index.less';
-import { DataSourceContext } from './context';
 
-type GlobalConfigProps = {
-  title?: string;
-  style?: React.CSSProperties;
-  value: any;
+type DataConfigProps = {
+  fields: IFieldSetting;
+  onChange: (value: IDataSourceSetting) => void;
+  value: IDataSourceSetting;
+  editorType: 'json' | 'plaintext';
 };
-export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = ({ onChange }) => {
-  const configForm = useRef<any>();
+
+export const DataConfig: React.FC<DataConfigProps> = (props) => {
+  const { onChange, value, editorType, fields } = props;
+  const configForm = useRef<IDataSourceSetting>();
   const dataSource = useDataSource();
 
   const openSourceDrawer = () => {
     FormDrawer(
       {
-        title: '全局配置',
+        title: '设置数据源',
         bodyStyle: { background: '#1d2126', padding: '0 20px', fontSize: 12 },
         headerStyle: { background: '#1d2126' },
         footerStyle: { background: '#1d2126', borderTop: 'none' },
         style: { position: 'fixed', marginTop: 40, height: 'calc(100% - 40px)' },
         width: 500,
-        className: 'global-config-drawer data-settings-drawer',
+        className: 'data-settings-drawer',
         getContainer: false,
         onClose: () => onChange(configForm.current),
       },
       (form) => {
         configForm.current = form.values;
         return (
-          <FormLayout layout="vertical" colon={false} className="global-config-layout" size="small">
-            <div className="step-title">全局数据源</div>
-            <div className="data-source-container">
-              <DataSourceContext.Provider value={dataSource}>
-                <ArrayField name="dataArray" component={[DataArrayCollapse]} />
-              </DataSourceContext.Provider>
-            </div>
+          <FormLayout layout="vertical" colon={false} className="config-layout" size="small">
+            <div className="step-title">数据源</div>
+            <VoidField name="voidDataField" component={[DataSource]} />
+            <DataPreview config={form.values} dataSource={dataSource} />
             <div className="step-title">
               <label style={{ cursor: 'pointer' }}>
-                {/* <Field name="useFilter" component={[Checkbox]} /> */}
-                <span className="update-txt">&nbsp;全局数据过滤器</span>
+                <Field name="useFilter" component={[Checkbox]} />
+                <span className="update-txt">&nbsp;数据过滤器</span>
               </label>
             </div>
             <div className="filter-edit" style={{ height: form.values.useFilter ? 180 : 0 }}>
-              {/* <Field
+              <Field
                 name="filterCode"
                 reactions={(field) => {
                   const autoUpdate = field.query('.useFilter');
@@ -69,21 +69,19 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = ({ onChang
                     fnName: 'filter(res)',
                   },
                 ]}
-              /> */}
+              />
             </div>
+            <FieldGrid typeName={value.dataType === 'object' ? '对象' : '列表'} fields={fields} />
           </FormLayout>
         );
       }
     ).open({
-      initialValues: {
-        dataArray: [],
-      },
+      initialValues: value,
     });
   };
-
   return (
-    <Button size="small" style={{ lineHeight: 1, width: '100%' }} className="ds-action-btn" onClick={openSourceDrawer}>
-      全局配置
+    <Button size="small" className="ds-action-btn" onClick={openSourceDrawer}>
+      配置数据源
     </Button>
   );
 };

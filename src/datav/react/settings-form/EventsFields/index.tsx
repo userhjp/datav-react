@@ -56,9 +56,7 @@ export const createFormCollapse = (defaultActiveKeys?: ActiveKeys) => {
 export const EventFields: React.FC = observer(() => {
   const field = useField<ObjectFieldType<IDataSetting>>();
   const value = useMemo(() => field.value || {}, [field.value]);
-  const _formCollapse = useMemo(() => {
-    return createFormCollapse();
-  }, []);
+  const _formCollapse = useMemo(() => createFormCollapse(), []);
 
   if (Object.keys(value).length < 1) {
     return <SettingsEmpty title="该组件没有交互事件" />;
@@ -75,9 +73,6 @@ export const EventFields: React.FC = observer(() => {
           if (!obj.enable) {
             _formCollapse?.removeActiveKey(key);
           }
-          // field.form.setFieldState(`events.${key}.fields`, (state) => {
-          //   state.display = obj.enable ? 'visible' : 'none';
-          // });
         }}
       >
         启用
@@ -127,20 +122,7 @@ export const EventFields: React.FC = observer(() => {
                     </tr>
                   </thead>
                   <tbody className="table-body">
-                    <ArrayField name={'fields'} component={[ArrayComponent]} />
-                    {/* {value[f]?.fields.map((item: IEventField, i: number) => (
-                      <ObjectField name={`fields.${key}`} key={key}>
-                        <tr className="table-body-row">
-                          <td className="column-item attr-name">
-                            <span>{key}</span>
-                          </td>
-                          <td className="column-item attr-value">
-                            <Field name="map" component={[BlurInput, { size: 'small', placeholder: '可自定义' }]} />
-                          </td>
-                          <td className="column-item attr-describe">{value[f]?.fields[key].description}</td>
-                        </tr>
-                      </ObjectField>
-                    ))} */}
+                    <ArrayField name="fields" component={[ArrayComponent]} />
                   </tbody>
                 </table>
               </div>
@@ -197,13 +179,6 @@ const ArrayComponent = observer(() => {
           </Button>
         </td>
       </tr>
-      {/* <Button
-        onClick={() => {
-          field.push('');
-        }}
-      >
-        Add
-      </Button> */}
     </>
   );
 });

@@ -1,4 +1,4 @@
-import { IFieldSetting } from '../../../interface';
+import { IFieldSetting } from '../../../../interface';
 import React from 'react';
 import './index.less';
 
