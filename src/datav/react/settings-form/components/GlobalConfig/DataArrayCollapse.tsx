@@ -58,9 +58,10 @@ const CollapseHeader: React.FC<{ name: number; remove: () => void; domRef: React
       <div className="global-config-header" onClick={(e) => e.stopPropagation()}>
         <Field name="enable" component={[Checkbox]} />
         <Field name="title" component={[HeaderTitle, { placeholder: '请输入', size: 'small' }]} />
-        <IconWidget style={{ paddingLeft: 10 }} infer="Edit" />
+        <IconWidget className="focus-show" style={{ paddingLeft: 10 }} infer="Edit" />
         <div className="fill-up" />
         <Popconfirm
+          className="focus-show"
           placement="leftBottom"
           title="确认删除该数据源？"
           getPopupContainer={() => props.domRef.current}
@@ -78,7 +79,7 @@ const CollapseHeader: React.FC<{ name: number; remove: () => void; domRef: React
 const HeaderTitle: React.FC<InputProps> = (props) => {
   const field = useField();
   field.setState({
-    readPretty: false,
+    readPretty: true,
   });
   return <Input {...props} />;
 };

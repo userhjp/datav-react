@@ -51,9 +51,24 @@
 
         .fill-up {
           flex: 1;
-        }
-
+        }     
         
+        .ant-form-text {
+          font-size: 12px;
+        }
+      }
+
+      .focus-show {
+        display: none;
+        &:hover {
+          display: block;
+        }
+      }
+
+      &:hover {
+        .focus-show {
+          display: block;
+        }
       }
     }
   }
