@@ -92,7 +92,7 @@ export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
   const eventsFields: IWidgetEvents = Object.keys(config.events || {}).reduce((pval, cval) => {
     const eventOpt = config.events[cval];
     pval[cval] = {
-      fields: eventOpt.fields ? contrastEventFields(eventOpt.fields) : fields,
+      fields: eventOpt.fields ? contrastEventFields(eventOpt.fields) : [],
       description: eventOpt.description,
       enable: !!eventOpt.enable,
     };
@@ -110,7 +110,7 @@ export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
         data: config.data?.value || null,
         apiType: ApiType.static,
         useFilter: false,
-        filterCode: 'return res.data;',
+        filterCode: 'return res;',
       },
       autoUpdate: false,
       updateTime: 1,

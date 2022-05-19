@@ -186,7 +186,7 @@ export class Operation {
   }
 
   onOperationBtn(type: 'publish' | 'snapshot' | 'preview' | 'help') {
-    const pageData: IPageType = { page: this.engine.screen.props, components: this.components };
+    const pageData: IPageType = { page: this.engine.screen.props, components: this.components, global: this.engine.global.props };
     switch (type) {
       case 'publish':
         this.dispatch(new PublishClickEvent(pageData));

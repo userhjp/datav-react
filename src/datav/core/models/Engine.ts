@@ -69,7 +69,7 @@ export class Engine extends Event {
     if (val.components) this.operation.batchAddNode(val.components || []);
     if (val.page) this.screen.setProps(val.page);
     if (val.global) {
-      this.global.setColors(val.global.colors);
+      this.global.setProps(val.global);
     }
   }
 

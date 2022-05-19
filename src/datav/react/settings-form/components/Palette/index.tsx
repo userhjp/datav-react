@@ -12,7 +12,7 @@ export const Palette: React.FC<any> = observer(({ value, onChange }) => {
   const dvGlobal = useDvGlobal();
   const field = useField();
 
-  const currentColors = toJS(value || dvGlobal.colorList[0]);
+  const currentColors = toJS(value || dvGlobal.colors[0]);
   const handleChange = (colors: string[]) => {
     if (JSON.stringify(value) !== JSON.stringify(colors)) onChange(colors);
   };
@@ -24,11 +24,11 @@ export const Palette: React.FC<any> = observer(({ value, onChange }) => {
           header={
             <ColorSelect
               style={{ width: '254px', display: 'flex' }}
-              colors={dvGlobal.colorList}
+              colors={dvGlobal.colors}
               title={field.title}
               value={'current'}
               currentColors={currentColors}
-              onChange={(e) => handleChange(dvGlobal.colorList[e])}
+              onChange={(e) => handleChange(dvGlobal.colors[e])}
             />
           }
           key="1"

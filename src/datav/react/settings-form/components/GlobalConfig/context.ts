@@ -1,4 +1,4 @@
 import { DataSource } from '@/datav/core';
 import React from 'react';
 
-export const DataSourceContext = React.createContext<DataSource>(null);
+export const DrawerContext = React.createContext<{ dataSource: DataSource }>(null);

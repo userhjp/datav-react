@@ -79,7 +79,7 @@ export const pageSchema: ISchema = {
           },
         },
         config: {
-          type: 'string',
+          type: 'void',
           title: '全局配置',
           'x-component': 'GlobalConfig',
           'x-decorator': 'FormItem',

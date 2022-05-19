@@ -14,7 +14,7 @@ const GlobalState = {
 export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
   ({ nodeInfo }) => {
     const widgets = useWidgets();
-    const Widget = widgets[nodeInfo.info.type];
+    const Widget: any = widgets[nodeInfo.info.type];
     const data = useReqData(nodeInfo.id, nodeInfo.data);
     const options = toJS(nodeInfo.options);
     if (!nodeInfo.info || !nodeInfo.info.type || nodeInfo.attr.isHide) return <div />;

@@ -6,12 +6,13 @@ import { Checkbox, Input } from '@formily/antd';
 import { IconWidget } from '@/datav/react/components';
 import { DataSource as DataSourceType } from '@/datav/core';
 import { DataPreview, DataSource } from '../../DataFields/components';
-import { DataSourceContext } from './context';
+import { DrawerContext } from './context';
+import { generateUUID } from '@/datav/shared';
 import './index.less';
 
 export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceType }> = observer(() => {
   const field = useField<ArrayFieldType>();
-  const dataSource = useContext(DataSourceContext);
+  const { dataSource } = useContext(DrawerContext);
   const domRef = useRef<HTMLDivElement>();
   return (
     <div ref={domRef} className="dv-data-array-collapse">
@@ -24,8 +25,8 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
               key={index}
             >
               <ObjectField name={index}>
-                <VoidField name="void" component={[DataSource]} />
-                <DataPreview config={item} dataSource={dataSource} />
+                <ObjectField name="config" component={[DataSource]} />
+                <DataPreview config={item.config} dataSource={dataSource} />
               </ObjectField>
             </Collapse.Panel>
           );
@@ -37,10 +38,14 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
           size="small"
           className="ds-action-btn"
           onClick={() => {
+            const uuid = generateUUID();
             field.push({
-              apiUrl: '',
-              enable: false,
+              id: uuid,
               title: '新建数据源',
+              enable: false,
+              config: {
+                apiUrl: '',
+              },
             });
           }}
         >

@@ -1,5 +1,6 @@
 import { ZoomMode, IDataType, FieldStatus, ApiType, ApiRequestMethod } from '../shared';
 import { ISchema } from '@formily/react';
+import { IDvGlobal } from '../core';
 
 export type IWidgetData = Array<Record<string, any>> | Record<string, any> | any;
 
@@ -91,9 +92,7 @@ export interface IPageType {
   /** 页面设置 */
   page?: IScreenProps;
   components?: IWidgetProps[];
-  global?: {
-    colors: string[][];
-  };
+  global?: IDvGlobal;
 }
 
 /** 数据映射 */
@@ -142,4 +141,6 @@ export interface IDataSourceSetting {
   apiMethod?: ApiRequestMethod;
   apiHeaders?: string;
   apiBody?: string;
+
+  globalDataId?: string;
 }

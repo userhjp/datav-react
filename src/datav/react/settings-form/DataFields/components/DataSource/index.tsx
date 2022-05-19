@@ -4,6 +4,7 @@ import { Field, observer, useField, VoidField } from '@formily/react';
 import { MonacoEditor } from '../../../components';
 import { FormItem, Input, Select } from '@formily/antd';
 import './index.less';
+import { useDvGlobal } from '@/datav/react/hooks';
 
 const apiTypes = [
   {
@@ -16,7 +17,7 @@ const apiTypes = [
   },
 ];
 
-export const DataSource: React.FC = observer(() => {
+export const DataSource: React.FC<{ globalDataOptions?: any[] }> = observer(({ globalDataOptions }) => {
   const apiMethods = useMemo(() => {
     return Object.entries(ApiRequestMethod).map(([key, val]) => {
       return { label: key, value: val };
@@ -28,13 +29,23 @@ export const DataSource: React.FC = observer(() => {
       <Field
         name="apiType"
         title="数据源类型"
-        dataSource={apiTypes}
+        dataSource={[...(globalDataOptions ? [{ label: '全局数据', value: ApiType.global }] : []), ...apiTypes]}
         initialValue={ApiType.api}
         decorator={[FormItem, { style: { marginBottom: 12 } }]}
-        component={[
-          Select,
-          { placeholder: '请选择数据类型', defaultValue: 1, dropdownClassName: 'datav-dropdown', className: 'apitype-selectd' },
-        ]}
+        component={[Select, { placeholder: '请选择数据类型', dropdownClassName: 'datav-dropdown', className: 'apitype-selectd' }]}
+      />
+      <Field
+        name="globalDataId"
+        title="全局数据源"
+        dataSource={globalDataOptions}
+        decorator={[FormItem, { style: { marginBottom: 12 } }]}
+        component={[Select, { placeholder: '请选择数据源', dropdownClassName: 'datav-dropdown', className: 'apitype-selectd' }]}
+        reactions={(field) => {
+          const apiType = field.query('.apiType').get('value');
+          field.setState({
+            display: apiType === ApiType.global ? 'visible' : 'hidden',
+          });
+        }}
       />
       <Field
         name="data"

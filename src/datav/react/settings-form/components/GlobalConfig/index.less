@@ -4,16 +4,16 @@
   .data-source-container {
     background-color: @input-bg-color;
     border: 1px solid @m-border-color;
-  }
 
-  .ant-collapse-ghost {
-    padding: 8px 8px 0;
-    .ant-collapse-content {
-      color: @m-text-color;
-    }
-    .ant-collapse-content-active {
-      border-top: 1px solid #566273;
-      transition: border-color .2s;
+    .ant-collapse-ghost {
+      padding: 8px 8px 0;
+      .ant-collapse-content {
+        color: @m-text-color;
+      }
+      .ant-collapse-content-active {
+        border-top: 1px solid #566273;
+        transition: border-color .2s;
+      }
     }
   }
 
@@ -105,4 +105,125 @@
     color: @m-text-color;
   }
 }
+}
+
+
+// 颜色模板配置
+@content-color: #111417;
+.global-colors-collapse {
+  margin: 0 -10px 0 -20px;
+  font-size: @m-font-size;
+  background-color: @content-color;
+
+  .ant-collapse-item > .ant-collapse-header {
+    padding: 8px 0;
+    padding-left: 20px;
+    color: @m-text-color;
+    background: @background-color;
+    border-bottom: solid 1px #333;
+  }
+
+  .ant-collapse-item-disabled > .ant-collapse-header {
+    color: @m-disabled-color;
+  }
+
+  .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
+    color: #999;
+    font-size: 10px;
+  }
+
+  .ant-collapse-item > .ant-collapse-content > .ant-collapse-content-box {
+    padding-left: 20px;
+  }
+
+  .ant-collapse-item > .ant-collapse-header .ant-collapse-extra {
+    margin-right: 30px;
+    padding-bottom: 0;
+  }
+
+  .color-array-space .ant-space-item:nth-child(2) {
+    width: 100%;
+  }
+
+}
+
+.global-colors-select-dropdown {
+  padding: 0;
+  color: @m-text-color;
+  background-color: #262c33;
+  border: 1px solid @color-primary;
+
+  .rc-virtual-list-holder {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    padding: 4px 6px;
+    .ant-select-item {
+      min-height: 26px;
+      padding: 2px 0 !important;
+      overflow: hidden;
+      font-size: 12px;
+      background: transparent;
+
+      &.ant-select-item-group {
+        padding-bottom: 0 !important;
+        padding-left: 5px !important;
+        color: @m-text-color;
+      }
+
+      &.ant-select-item-option-selected .global-colors-select-dropdown-menu-item {
+        background-color: @input-bg-color;
+        border: 1px solid @color-primary;
+      }
+
+      &:not(.ant-select-item-option-disabled) .global-colors-select-dropdown-menu-item {
+        &:hover {
+          background: #303640;
+          border: 1px solid @color-primary;
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+      &.ant-select-item-option-disabled {
+        cursor: default;
+      }
+
+      .global-colors-select-dropdown-menu-item  {
+        display: flex;
+        width: 100%;
+        padding: 0 6px;
+        & > span {
+          display: inline-block;
+          flex: 1;
+          height: 10px;
+        }
+
+      }
+    }
+  }
+}
+
+.global-colors-select-dropdown-menu {
+  // display: flex;
+  // align-items: center;
+  // height: 32px;
+  .ant-select-selector {
+    .ant-select-selection-item {
+      .global-colors-select-dropdown-menu-item  {
+        display: flex;
+        width: 100%;
+        & > span {
+          display: inline-block;
+          flex: 1;
+          height: 10px;
+        }
+      }
+    }
+  }
+
+  .palette-setting {
+    padding-left: 10px;
+  }
 }

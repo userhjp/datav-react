@@ -61,4 +61,5 @@ export enum ApiRequestMethod {
 export enum ApiType {
   static = 'static',
   api = 'api',
+  global = 'global',
 }
