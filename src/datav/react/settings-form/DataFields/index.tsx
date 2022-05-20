@@ -97,9 +97,15 @@ export const DataFields: React.FC = observer(() => {
       <div className="data-flow-wp">
         <div className="ds-line">
           <div className="ds-title">
-            <FormConsumer>
-              {() => <span className="ds-type-text">{value.config?.apiType === ApiType.api ? 'API' : '静态数据'}</span>}
-            </FormConsumer>
+            <span className="ds-type-text">
+              {
+                {
+                  global: '全局数据',
+                  static: '静态数据',
+                  api: 'API',
+                }[value.config?.apiType]
+              }
+            </span>
           </div>
           {/* 数据配置 */}
           <ObjectField name="config" component={[DataConfig, { editorType, fields: value?.fields }]} />

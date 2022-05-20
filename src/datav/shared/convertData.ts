@@ -1,3 +1,4 @@
+import { toJS } from '@formily/reactive';
 import { message } from 'antd';
 import { IFieldSetting } from '../react/interface';
 import { IDataType } from './enums';
@@ -18,7 +19,7 @@ export const checkDataType = (dataType: IDataType, data: any) => {
 };
 
 export const execFilter = (dataFilter: string, data: any) => {
-  let res = data;
+  let res = toJS(data);
   try {
     const filter = `if (!data) { return data; }  return filter(data);  function filter(res){  ${dataFilter}   }`;
     const func = new Function('data', filter);

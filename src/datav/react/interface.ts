@@ -131,7 +131,7 @@ export interface IWidgetEvents {
 
 /** 数据配置 */
 export interface IDataSourceSetting {
-  /** 数据来源 1 静态数据 2 API*/
+  /** 数据来源 */
   apiType: ApiType;
   data: Record<string, any> | Record<string, IWidgetProps>[];
   dataType: IDataType;

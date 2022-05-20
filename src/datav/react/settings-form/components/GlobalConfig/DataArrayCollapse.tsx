@@ -1,6 +1,6 @@
-import { Field, ObjectField, observer, useField, VoidField } from '@formily/react';
+import { Field, ObjectField, observer, useField } from '@formily/react';
 import { ArrayField as ArrayFieldType } from '@formily/core';
-import { Collapse, InputProps, Button, Popconfirm } from 'antd';
+import { Collapse, InputProps, Button, Popconfirm, InputNumber } from 'antd';
 import React, { useContext, useRef } from 'react';
 import { Checkbox, Input } from '@formily/antd';
 import { IconWidget } from '@/datav/react/components';
@@ -25,6 +25,32 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
               key={index}
             >
               <ObjectField name={index}>
+                {item.config.apiType === 'api' && (
+                  <div
+                    style={{
+                      position: 'absolute',
+                      right: 44,
+                      zIndex: 9999,
+                      transform: 'translateY(-5px)',
+                    }}
+                  >
+                    <label style={{ cursor: 'pointer' }}>
+                      <Field name="autoUpdate" initialValue={false} component={[Checkbox]} />
+                      <span className="update-txt"> 定时刷新 </span>
+                    </label>
+                    <Field
+                      name="updateTime"
+                      initialValue={3}
+                      reactions={(field) => {
+                        field.setComponentProps({
+                          disabled: !item.autoUpdate,
+                        });
+                      }}
+                      component={[InputNumber, { max: 9999, min: 1, defaultValue: 1, width: 100 }]}
+                    />
+                    <span> 秒一次</span>
+                  </div>
+                )}
                 <ObjectField name="config" component={[DataSource]} />
                 <DataPreview config={item.config} dataSource={dataSource} />
               </ObjectField>

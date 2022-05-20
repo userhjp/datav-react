@@ -4,12 +4,13 @@ import { ApiRequestMethod, ApiType, IDataType } from '../../shared';
 import { IDataSourceSetting, IEventField } from '../../react/interface';
 import { dsRequest } from '../../shared';
 import { Engine } from './Engine';
+import { GlobalData } from './globalData';
 
 type ApiData = Partial<Record<string, any>> | Partial<Record<string, any>>[];
 
 export class DataSource {
   dataMap: Map<string, ApiData> = new Map();
-  globalDataMap: Map<string, ApiData> = new Map();
+  globalDataMap: Map<string, GlobalData> = new Map();
   variables: Record<string, string> = {};
   engine: Engine;
 
@@ -41,12 +42,12 @@ export class DataSource {
     console.log(this.variables);
   }
 
-  setGlobalData(dataId: string, data: ApiData) {
+  setGlobalData(dataId: string, data: GlobalData) {
     this.globalDataMap.set(dataId, data);
   }
 
   getGlobalData(dataId: string) {
-    return this.globalDataMap.get(dataId);
+    return this.globalDataMap.get(dataId)?.data;
   }
 
   setData(comId: string, data: ApiData) {

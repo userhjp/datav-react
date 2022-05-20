@@ -45,7 +45,7 @@ const ColorSelect: React.FC<InputNumberProps & { value: number; colors: string[]
 
   return (
     <div style={{ display: 'block', alignItems: 'center', width: '100%', ...(style || {}) }} onClick={(e) => e.stopPropagation()}>
-      <span style={{ paddingRight: 20 }}>模板选择</span>
+      <span style={{ paddingRight: 20 }}>配置模板</span>
       <AntdSelect
         style={{ minWidth: 0, flex: 1 }}
         virtual={false}

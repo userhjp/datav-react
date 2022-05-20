@@ -1,27 +1,32 @@
 import { IDataSourceSetting } from '@/datav/react/interface';
 import { observable, define, action } from '@formily/reactive';
+import { DataSource } from './DataSource';
+import { GlobalData } from './globalData';
 
-type ISourceArray = {
+type ISourceGlobal = {
   enable: boolean;
   title: string;
   id: string;
+  autoUpdate: boolean;
+  updateTime: number;
   config: IDataSourceSetting;
 };
 export type IDvGlobal = {
-  sourceArray: ISourceArray[];
+  sourceArray: ISourceGlobal[];
   colors: string[][];
 };
 export class DvGlobal {
+  dataSource: DataSource;
   props: IDvGlobal = {
     sourceArray: [],
     colors: [],
   };
 
-  constructor(props?: IDvGlobal) {
+  constructor(dataSource: DataSource) {
     this.props = {
       ...DvGlobal.defaultProps,
-      ...(props || {}),
     };
+    this.dataSource = dataSource;
     this.makeObservable();
   }
 
@@ -43,33 +48,29 @@ export class DvGlobal {
       colors: observable.computed,
       sourceArray: observable.computed,
       enableDataSources: observable.computed,
-      addColors: action,
-      setColors: action,
-      setIndexColors: action,
-      removeColors: action,
       setProps: action,
     });
-  }
-
-  addColors(colors: string[]) {
-    this.colors.push(colors);
-  }
-
-  removeColors(i: number) {
-    this.colors.splice(i, i + 1);
-  }
-
-  setColors(data: string[][]) {
-    this.props.colors = data || [];
-  }
-
-  setIndexColors(data: string[], i: number) {
-    this.colors[i] = data || [];
   }
 
   setProps(props: IDvGlobal) {
     this.props.colors = Object.assign(this.colors, props.colors);
     this.props.sourceArray = Object.assign(this.sourceArray, props.sourceArray);
+    this.updateSource();
+  }
+
+  updateSource() {
+    this.dataSource.globalDataMap.clear();
+
+    this.sourceArray.forEach((f) => {
+      if (!f.enable) return;
+      this.dataSource.setGlobalData(
+        f.id,
+        new GlobalData({
+          dataSource: this.dataSource,
+          ...f,
+        })
+      );
+    });
   }
 
   static defaultProps: IDvGlobal = {

@@ -7,6 +7,7 @@
 
     .ant-collapse-ghost {
       padding: 8px 8px 0;
+      font-size: 12px;
       .ant-collapse-content {
         color: @m-text-color;
       }
@@ -68,6 +69,23 @@
       &:hover {
         .focus-show {
           display: block;
+        }
+      }
+    }
+
+    .ant-input-number-handler-wrap {
+      display: none;
+    }
+
+    .ant-input-number {
+      width: 40px;
+      height: 20px;
+      line-height: 1;
+      .ant-input-number-input-wrap {
+        height: 20px;
+        input {
+          height: inherit;
+          text-align: center;
         }
       }
     }

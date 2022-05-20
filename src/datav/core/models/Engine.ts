@@ -52,7 +52,7 @@ export class Engine extends Event {
       contentWindow: window,
     });
     this.operation = new Operation(this);
-    this.global = new DvGlobal();
+    this.global = new DvGlobal(this.dataSource);
   }
 
   createViewport(viewportElement: HTMLElement) {
