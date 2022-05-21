@@ -4,12 +4,13 @@ import { ApiRequestMethod, ApiType, IDataType } from '../../shared';
 import { IDataSourceSetting, IEventField } from '../../react/interface';
 import { dsRequest } from '../../shared';
 import { Engine } from './Engine';
-import { GlobalData } from './globalData';
+import { GlobalData } from './GlobalData';
+import { DvData } from './DvData';
 
 type ApiData = Partial<Record<string, any>> | Partial<Record<string, any>>[];
 
 export class DataSource {
-  dataMap: Map<string, ApiData> = new Map();
+  dataMap: Map<string, DvData> = new Map();
   globalDataMap: Map<string, GlobalData> = new Map();
   variables: Record<string, string> = {};
   engine: Engine;
@@ -47,15 +48,20 @@ export class DataSource {
   }
 
   getGlobalData(dataId: string) {
-    return this.globalDataMap.get(dataId)?.data;
+    return this.globalDataMap.get(dataId)?.data || null;
   }
 
-  setData(comId: string, data: ApiData) {
+  setData(comId: string, data: DvData) {
     this.dataMap.set(comId, data);
   }
 
+  removeData(id: string) {
+    const dvData = this.dataMap.get(id);
+    if (dvData) dvData.destroy();
+  }
+
   getData(comId: string) {
-    return this.dataMap.get(comId);
+    return this.dataMap.get(comId) || null;
   }
 
   async requestData(config: IDataSourceSetting) {
@@ -88,7 +94,7 @@ export class DataSource {
             resData = await dsRequest.post(url, toJson(config.apiBody, {}), conf);
           }
         } catch (error) {
-          throw Error(error.toString());
+          throw Error(error?.toString() || '服务器异常，请稍后再试');
         }
         break;
       default:

@@ -1,4 +1,4 @@
-import { action, define, observable } from '@formily/reactive';
+import { define, observable, reaction } from '@formily/reactive';
 import { IDataSourceSetting } from '../../react/interface';
 import { DataSource } from './DataSource';
 
@@ -11,6 +11,8 @@ type IGloalData = {
 };
 
 export class GlobalData {
+  time: NodeJS.Timeout;
+  dispose: () => void;
   id: string;
   dataSource: DataSource;
   autoUpdate: boolean;
@@ -31,18 +33,26 @@ export class GlobalData {
   makeObservable() {
     define(this, {
       data: observable,
-      loadGlobalData: action,
     });
+  }
+
+  destroy() {
+    clearTimeout(this.time);
+    this.dispose();
   }
 
   async loadGlobalData() {
     try {
-      this.data = await this.dataSource.requestData(this.config);
-      if (this.autoUpdate && this.updateTime) {
-        setTimeout(() => {
-          this.loadGlobalData();
-        }, this.updateTime * 1000);
-      }
+      if (this.dispose) this.dispose();
+      this.dispose = reaction(async () => {
+        clearTimeout(this.time);
+        this.data = await this.dataSource.requestData(this.config);
+        if (this.autoUpdate && this.updateTime) {
+          this.time = setTimeout(() => {
+            this.loadGlobalData();
+          }, this.updateTime * 1000);
+        }
+      });
     } catch (error) {}
   }
 }

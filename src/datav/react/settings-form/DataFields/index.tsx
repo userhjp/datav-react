@@ -8,14 +8,17 @@ import { IDataSetting } from '../../interface';
 import { languageType } from '../components/MonacoEditor/editor-config';
 import { InputNumber, Tooltip } from 'antd';
 import { autorun } from '@formily/reactive';
-import { ApiType, FieldStatus } from '../../../shared';
-import { useDataSource } from '../../hooks';
+import { FieldStatus } from '../../../shared';
+import { useDataSource, useSelected, useSelection } from '../../hooks';
 import { DataConfig, DataState } from './components';
 import { IconWidget } from '../../components';
 import './index.less';
 
 export const DataFields: React.FC = observer(() => {
   const field = useField<ObjectFieldType<IDataSetting>>();
+  const dataSource = useDataSource();
+  const selection = useSelection();
+  const dvData = dataSource.getData(selection.first);
   const value = useMemo(() => field.value || {}, [field.value]);
   if (!value.config?.data) {
     return <SettingsEmpty title="该组件无需配置数据" />;
@@ -64,7 +67,7 @@ export const DataFields: React.FC = observer(() => {
                           <Field name="map" component={[BlurInput, { size: 'small', placeholder: '可自定义' }]} />
                         </td>
                         <td className="column-item attr-status">
-                          <Field name="status" component={[DataState]} />
+                          <DataState status={dvData.fieldsStatus[key]} />
                         </td>
                       </tr>
                     </ObjectField>
@@ -143,7 +146,7 @@ const ReadOnlyEditor: React.FC<{ editorType: languageType }> = observer(({ edito
   const dataSource = useDataSource();
   const form = useForm();
   const id = form.getValuesIn('id');
-  const editorData = dataSource.getData(id);
+  const editorData = dataSource.getData(id).data;
   return (
     <MonacoEditor
       {...{

@@ -1,7 +1,7 @@
 import { IDataSourceSetting } from '@/datav/react/interface';
 import { observable, define, action } from '@formily/reactive';
 import { DataSource } from './DataSource';
-import { GlobalData } from './globalData';
+import { GlobalData } from './GlobalData';
 
 type ISourceGlobal = {
   enable: boolean;
@@ -59,8 +59,8 @@ export class DvGlobal {
   }
 
   updateSource() {
+    this.dataSource.globalDataMap.forEach((f) => f.destroy());
     this.dataSource.globalDataMap.clear();
-
     this.sourceArray.forEach((f) => {
       if (!f.enable) return;
       this.dataSource.setGlobalData(

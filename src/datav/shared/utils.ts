@@ -84,9 +84,9 @@ export const getTextParams = (text: string) => {
  * 替换字符串中 :value 形式的参数
  */
 export const replaceTextParams = (text: string, data: Record<string, string>) => {
-  const reg = /:([\d\w\u4e00-\u9fa5_$@*]+)/gi;
+  const reg = /=:([\d\w\u4e00-\u9fa5_$@*]+)/gi;
   return text.replace(reg, (key: string) => {
-    return data[key.substring(1)] ?? '';
+    return `=${data[key.substring(2)] ?? ''}`;
   });
 };
 

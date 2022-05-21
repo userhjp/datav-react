@@ -28,6 +28,7 @@ export class Selection {
   makeObservable() {
     define(this, {
       selected: observable,
+      first: observable.computed,
       batchSelect: action,
       add: action,
       remove: action,

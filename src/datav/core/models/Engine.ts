@@ -79,6 +79,7 @@ export class Engine extends Event {
 
   unmount() {
     this.detachEvents();
+    this.dataSource.globalDataMap.forEach((f) => f.destroy());
   }
 
   static defaultProps: IEngineProps<Engine> = {

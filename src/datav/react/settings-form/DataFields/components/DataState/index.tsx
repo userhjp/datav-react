@@ -3,13 +3,12 @@ import React, { useMemo } from 'react';
 import './index.less';
 
 type DataStateProps = {
-  value: FieldStatus;
+  status: FieldStatus;
 };
 
-export const DataState: React.FC<DataStateProps> = (props) => {
-  const { value } = props;
+export const DataState: React.FC<DataStateProps> = ({ status }) => {
   const renderState = useMemo(() => {
-    switch (value) {
+    switch (status) {
       case FieldStatus.success:
         return <div className="data-success">匹配成功</div>;
       case FieldStatus.failed:
@@ -26,7 +25,7 @@ export const DataState: React.FC<DataStateProps> = (props) => {
           </div>
         );
     }
-  }, [value]);
+  }, [status]);
 
   return <div className="data-status">{renderState}</div>;
 };

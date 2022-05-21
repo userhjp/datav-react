@@ -110,7 +110,7 @@ export const registerApiCompletion = (languageId: languageType, callbackIds: str
 
 export const handleInputCode = (languageId: languageType, code: string | any[] | { [key: string]: any }): string => {
   let val = code;
-  if (isObj(val) || isArr(val)) {
+  if (val && (isObj(val) || isArr(val))) {
     val = JSON.stringify(val, null, 2);
   }
   return typeof val === 'string' ? val : `${val}`;
