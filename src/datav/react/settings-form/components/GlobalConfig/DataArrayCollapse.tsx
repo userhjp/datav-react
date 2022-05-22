@@ -42,7 +42,7 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
                           disabled: !item.autoUpdate,
                         });
                       }}
-                      component={[InputNumber, { max: 9999, min: 1, defaultValue: 1, width: 100 }]}
+                      component={[InputNumber, { max: 9999, min: 1, defaultValue: 3, width: 100 }]}
                     />
                     <span> 秒一次</span>
                   </div>

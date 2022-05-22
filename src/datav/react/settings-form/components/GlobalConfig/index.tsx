@@ -8,6 +8,7 @@ import { DataArrayCollapse } from './DataArrayCollapse';
 import { useDataSource, useDvGlobal } from '@/datav/react/hooks';
 import { DrawerContext } from './context';
 import { GlobalColors } from './GlobalColors';
+import { IconWidget } from '@/datav/react/components';
 import './index.less';
 
 type GlobalConfigProps = {
@@ -36,7 +37,10 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
         configForm.current = form.values;
         return (
           <FormLayout layout="vertical" colon={false} className="global-config-layout" size="small">
-            <div className="step-title">全局数据源</div>
+            <div className="step-title">
+              全局数据源 &nbsp;
+              <IconWidget infer="Help" />
+            </div>
             <div className="data-source-container">
               <DrawerContext.Provider value={{ dataSource }}>
                 <ArrayField name="sourceArray" component={[DataArrayCollapse]} />

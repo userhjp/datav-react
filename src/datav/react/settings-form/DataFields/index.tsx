@@ -92,7 +92,7 @@ export const DataFields: React.FC = observer(() => {
               disabled: !autoUpdate.get('value'),
             });
           }}
-          component={[InputNumber, { max: 9999, min: 1, defaultValue: 1 }]}
+          component={[InputNumber, { max: 9999, min: 1, defaultValue: 3 }]}
         />
         <span>秒一次</span>
       </div>

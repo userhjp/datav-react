@@ -34,7 +34,7 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) 
       const func = new Function('resData', 'myChart', 'echarts', fun);
       echartOpt = func(data, myChart.current, echarts);
     } catch (error) {
-      throw Error(error);
+      console.log(error);
     }
     try {
       if (echartOpt && !echartOpt.color) {
