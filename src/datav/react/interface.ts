@@ -97,7 +97,7 @@ export interface IPageType {
 
 /** 数据映射 */
 export interface IFieldSetting {
-  [key: string]: { map: string; status: FieldStatus; description?: string };
+  [key: string]: { map: string; description?: string };
 }
 
 export interface IEventFieldSetting {

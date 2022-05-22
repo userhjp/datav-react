@@ -8,7 +8,6 @@ const Tab: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
   const [activate, setActivate] = useState<any>();
 
   const { btnSpacing, padding, ...style } = options.style;
-
   // 事件使用hook方式，参数为 事件配置和数据，注意传入数据key需要和fields的匹配
   useDatavEvent(events.changed, activate);
 

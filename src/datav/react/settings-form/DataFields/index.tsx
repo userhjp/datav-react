@@ -1,25 +1,28 @@
 import React from 'react';
 import { ObjectField as ObjectFieldType } from '@formily/core';
-import { Field, FormConsumer, ObjectField, observer, useField, useForm } from '@formily/react';
+import { Field, ObjectField, observer, useField, useForm } from '@formily/react';
 import { Checkbox } from '@formily/antd';
 import { MonacoEditor, BlurInput, SettingsEmpty } from '../components';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { IDataSetting } from '../../interface';
 import { languageType } from '../components/MonacoEditor/editor-config';
 import { InputNumber, Tooltip } from 'antd';
-import { autorun } from '@formily/reactive';
-import { FieldStatus } from '../../../shared';
-import { useDataSource, useSelected, useSelection } from '../../hooks';
+import { useDataSource } from '../../hooks';
 import { DataConfig, DataState } from './components';
 import { IconWidget } from '../../components';
 import './index.less';
+import { FieldStatus } from '@/datav/shared';
 
 export const DataFields: React.FC = observer(() => {
   const field = useField<ObjectFieldType<IDataSetting>>();
   const dataSource = useDataSource();
-  const selection = useSelection();
-  const dvData = dataSource.getData(selection.first);
+  const dvData = dataSource.getData(field.form.values.id);
   const value = useMemo(() => field.value || {}, [field.value]);
+  const totalStatus =
+    dvData.fieldsStatus && Object.keys(dvData.fieldsStatus).length
+      ? Object.values(dvData.fieldsStatus).every((e) => e === FieldStatus.failed)
+      : false;
+
   if (!value.config?.data) {
     return <SettingsEmpty title="该组件无需配置数据" />;
   }
@@ -30,10 +33,6 @@ export const DataFields: React.FC = observer(() => {
       string: 'plaintext',
     }[value?.config?.dataType || 'string'];
   }, [value?.config?.dataType]);
-
-  const refreshData = () => {
-    value.config = { ...(value.config || {}) };
-  };
 
   return (
     <>
@@ -116,37 +115,23 @@ export const DataFields: React.FC = observer(() => {
         <div className="ds-line mt2">
           <span>数据响应结果 ( 只读 ) </span>
           <Tooltip overlayClassName="design-tip" color="#2681ff" placement="left" title={'刷新数据'}>
-            <IconWidget onClick={refreshData} className="refresh-btn" infer="Recover" />
+            <IconWidget onClick={() => dvData.loadData()} className="refresh-btn" infer="Recover" />
           </Tooltip>
         </div>
         <div className="ds-dots">
-          <DataTotalState field={value?.fields} />
+          <span className={`ds-dot ${totalStatus ? 'error' : 'active'}`} />
           <span className="ds-dot" />
           <span className="ds-dot" />
         </div>
       </div>
-      <ReadOnlyEditor editorType={editorType} />
+      <ReadOnlyEditor editorType={editorType} compId={field.form.values.id} />
     </>
   );
 });
 
-const DataTotalState = ({ field }) => {
-  const [totalStatus, setTotalStatus] = useState(false);
-  useEffect(() => {
-    const dispose = autorun(() => {
-      const isError = field && Object.keys(field).length ? Object.keys(field).every((e) => field[e].status === FieldStatus.failed) : false;
-      setTotalStatus(isError);
-    });
-    return () => dispose();
-  }, []);
-  return <span className={`ds-dot ${totalStatus ? 'error' : 'active'}`} />;
-};
-
-const ReadOnlyEditor: React.FC<{ editorType: languageType }> = observer(({ editorType }) => {
+const ReadOnlyEditor: React.FC<{ editorType: languageType; compId: string }> = observer(({ editorType, compId }) => {
   const dataSource = useDataSource();
-  const form = useForm();
-  const id = form.getValuesIn('id');
-  const editorData = dataSource.getData(id).data;
+  const editorData = dataSource.getData(compId).data;
   return (
     <MonacoEditor
       {...{

@@ -4,19 +4,14 @@ import { Tooltip } from 'antd';
 import { MonacoEditor } from '../../../components';
 import { IconWidget } from '@/datav/react/components';
 import { DataSource } from '@/datav/core';
-import './index.less';
 import { observer } from '@formily/react';
+import './index.less';
 
 export const DataPreview: React.FC<{ config: IDataSourceSetting; dataSource: DataSource }> = observer(({ config, dataSource }) => {
   const [viewData, setViewData] = useState();
   const loadData = async (visible: boolean) => {
-    let resData: any;
     if (visible) {
-      try {
-        resData = await dataSource.requestData(config);
-      } catch (error) {
-        resData = { isError: true, message: `${error}` };
-      }
+      const resData = await dataSource.requestData(config);
       setViewData(resData);
     }
   };

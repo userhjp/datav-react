@@ -1,21 +1,39 @@
 import { IWidgetSetting } from '../../../../interface';
-import { useReqData } from '../../../../hooks';
+import { useDataSource } from '../../../../hooks';
 import { cancelIdle, requestIdle } from '../../../../../shared';
-import { observer } from '@formily/react';
-import { toJS } from '@formily/reactive';
-import React, { Suspense } from 'react';
+import { autorun, toJS } from '@formily/reactive';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { useWidgets } from '@/datav/react/hooks/useWidgets';
-import './index.less';
+import { DvData } from '@/datav/core/models/DvData';
+import { observer } from '@formily/react';
 
+import './index.less';
 const GlobalState = {
   idleRequest: null,
 };
 
 export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
   ({ nodeInfo }) => {
+    const dataSource = useDataSource();
     const widgets = useWidgets();
+    const [data, setData] = useState(null);
     const Widget: any = widgets[nodeInfo.info.type];
-    const data = useReqData(nodeInfo.id, nodeInfo.data);
+    useEffect(() => {
+      const dvdata = new DvData({
+        dataSource,
+        id: nodeInfo.id,
+        dataSetting: nodeInfo.data,
+      });
+      dataSource.setData(nodeInfo.id, dvdata);
+      const dispose = autorun(() => {
+        setData(toJS(dvdata.data));
+      });
+      return () => {
+        dispose();
+        dataSource.removeData(nodeInfo.id);
+      };
+    }, []);
+
     const options = toJS(nodeInfo.options);
     if (!nodeInfo.info || !nodeInfo.info.type || nodeInfo.attr.isHide) return <div />;
     if (!options || !Widget || JSON.stringify(options) === '{}') return <WidgetLoading />;
@@ -45,6 +63,13 @@ export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
     },
   }
 );
+
+const Test: React.FC<{ compId: string }> = observer(({ compId }) => {
+  // const dataSource = useDataSource();
+  // const editorData = dataSource.getData(compId)?.data;
+  debugger;
+  return <div>{JSON.stringify(compId)}</div>;
+});
 
 // 加载lodaing组件
 export const WidgetLoading: React.FC = () => {

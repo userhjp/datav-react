@@ -68,7 +68,6 @@ export const createWidgetFields = (fieldsDes: Record<string, string>): IFieldSet
   Object.entries(fieldsDes).forEach(([key, val]) => {
     fields[key] = {
       map: '',
-      status: FieldStatus.loading,
       description: val ?? '',
     };
   });

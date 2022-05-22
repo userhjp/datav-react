@@ -1,7 +1,6 @@
 export * from './useCursor';
 export * from './useDataSource';
 export * from './useDesigner';
-export * from './useReqData';
 export * from './useOperation';
 export * from './useRegistry';
 export * from './useScreen';

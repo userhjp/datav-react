@@ -1,47 +1,48 @@
 import { checkDataType, execFilter, FieldStatus, getFieldMap, mapObject } from '@/datav/shared';
-import { define, observable, reaction, action } from '@formily/reactive';
-import { IDataSourceSetting, IFieldSetting } from '../../react/interface';
+import { define, observable, action, autorun } from '@formily/reactive';
+import { IDataSetting, IDataSourceSetting } from '../../react/interface';
 import { DataSource } from './DataSource';
 
 type IDvData = {
   id: string;
   dataSource: DataSource;
-  autoUpdate: boolean;
-  updateTime: number;
-  config: IDataSourceSetting;
-  fields?: IFieldSetting;
+  dataSetting: IDataSetting;
 };
 
 export class DvData {
+  dataSource: DataSource;
+
   id: string;
   time: NodeJS.Timeout;
   dispose: () => void;
+  settingDispose: () => void;
   loading: boolean;
-  data: any;
+  data: null | Array<any> | object;
 
-  dataSource: DataSource;
   autoUpdate: boolean;
   updateTime: number;
   config: IDataSourceSetting;
   fieldMap: Record<string, string>;
   fieldsStatus: Record<string, FieldStatus>;
 
-  constructor(globalData: IDvData) {
-    this.id = globalData.id;
-    this.dataSource = globalData.dataSource;
-    this.autoUpdate = globalData.autoUpdate;
-    this.updateTime = globalData.updateTime;
-    this.config = globalData.config;
-    this.fieldMap = getFieldMap(globalData.fields || {});
-    this.fieldsStatus = {};
+  constructor(props: IDvData) {
+    this.id = props.id;
+    this.dataSource = props.dataSource;
     this.makeObservable();
-    this.loadData();
+    this.settingDispose = autorun(() => {
+      this.autoUpdate = props.dataSetting.autoUpdate;
+      this.updateTime = props.dataSetting.updateTime;
+      this.config = props.dataSetting.config;
+      this.fieldMap = getFieldMap(props.dataSetting.fields || {});
+      this.loadData();
+    });
   }
 
   makeObservable() {
     define(this, {
       loading: observable.ref,
-      data: observable,
+      data: observable.ref,
+      fieldsStatus: observable,
       changeFieldsStatus: action,
     });
   }
@@ -49,29 +50,28 @@ export class DvData {
   destroy() {
     window.clearTimeout(this.time);
     this.dispose();
+    this.settingDispose();
   }
 
   async loadData() {
-    try {
-      if (this.dispose) this.dispose();
-      this.dispose = reaction(async () => {
-        clearTimeout(this.time);
-        this.loading = true;
-        this.changeFieldsStatus(FieldStatus.loading);
-        const res = await this.dataSource.requestData(this.config);
-        this.data = this.mapData(this.processingData(res));
-        this.changeFieldsStatus();
-        this.loading = false;
-        if (this.autoUpdate && this.updateTime) {
-          this.time = setTimeout(() => {
-            this.loadData();
-          }, this.updateTime * 1000);
-        }
-      });
-    } catch (error) {}
+    if (this.dispose) this.dispose();
+    this.dispose = autorun(async () => {
+      clearTimeout(this.time);
+      this.loading = true;
+      this.changeFieldsStatus(FieldStatus.loading);
+      const res = await this.dataSource.requestData(this.config);
+      this.data = this.mapData(this.filterData(res));
+      this.changeFieldsStatus();
+      this.loading = false;
+      if (this.autoUpdate && this.updateTime) {
+        this.time = setTimeout(() => {
+          this.loadData();
+        }, this.updateTime * 1000);
+      }
+    });
   }
 
-  processingData(data: any) {
+  filterData(data: any) {
     if (!data || data?.isError) return data;
     if (this.config.useFilter && this.config.filterCode) {
       data = execFilter(this.config.filterCode, data);
@@ -92,12 +92,14 @@ export class DvData {
   }
 
   changeFieldsStatus(status?: FieldStatus) {
+    this.fieldsStatus = {};
     let _data = null;
     if (Array.isArray(this.data)) {
       _data = this.data[0];
     } else if (typeof this.data === 'object') {
       _data = this.data;
     }
+    if (!_data) _data = {};
     Object.entries(this.fieldMap).forEach(([key, fc]) => {
       if (status === FieldStatus.loading) {
         this.fieldsStatus[key] = FieldStatus.loading;

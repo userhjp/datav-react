@@ -58,6 +58,7 @@ export class DataSource {
   removeData(id: string) {
     const dvData = this.dataMap.get(id);
     if (dvData) dvData.destroy();
+    this.dataMap.delete(id);
   }
 
   getData(comId: string) {
@@ -68,25 +69,22 @@ export class DataSource {
     let resData: any;
     switch (config.apiType) {
       case ApiType.static:
-        resData = toJS(config.data);
+        resData = config.data;
         break;
       case ApiType.global:
-        resData = this.getGlobalData(config.globalDataId);
+        resData = toJS(this.getGlobalData(config.globalDataId));
         break;
       case ApiType.api:
         if (!config.apiUrl) {
           return (resData = { data: config.dataType === IDataType.object ? {} : [] });
         }
         if (!/^[a-zA-z]+:\/\/[^\s]*$/.test(config.apiUrl)) {
-          throw Error('url必须包含协议字段，如http:');
+          resData = { isError: true, message: 'url必须包含协议字段，如http:' };
         }
         try {
           const conf = {
             headers: toJson(config.apiHeaders, {}),
           };
-          /**
-           * 由于在 useReqData useEffect中使用了reaction 这里会自动收集 apiUrl使用到variables的字段的依赖，当依赖字段变化后会重新调用请求方法
-           */
           const url = replaceTextParams(config.apiUrl, this.variables);
           if (config.apiMethod === ApiRequestMethod.GET) {
             resData = await dsRequest.get(url, conf);
@@ -94,7 +92,7 @@ export class DataSource {
             resData = await dsRequest.post(url, toJson(config.apiBody, {}), conf);
           }
         } catch (error) {
-          throw Error(error?.toString() || '服务器异常，请稍后再试');
+          resData = { isError: true, message: error?.message || '服务器异常，请稍后再试' };
         }
         break;
       default:

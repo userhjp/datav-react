@@ -57,8 +57,8 @@ export class Operation {
 
   /** 添加组件 */
   addNode(node: IWidgetProps) {
+    this.components.unshift(new WidgetNode(node));
     this.selection.safeSelect(node.id);
-    this.components = [new WidgetNode(node), ...this.components];
   }
 
   /** 移除组件 */
