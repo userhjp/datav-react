@@ -1,7 +1,7 @@
 import { IDataSourceSetting } from '@/datav/react/interface';
 import { observable, define, action } from '@formily/reactive';
 import { DataSource } from './DataSource';
-import { GlobalData } from './GlobalData';
+import { DvData } from './DvData';
 
 type ISourceGlobal = {
   enable: boolean;
@@ -65,9 +65,14 @@ export class DvGlobal {
       if (!f.enable) return;
       this.dataSource.setGlobalData(
         f.id,
-        new GlobalData({
+        new DvData({
+          id: f.id,
           dataSource: this.dataSource,
-          ...f,
+          dataSetting: {
+            autoUpdate: f.autoUpdate,
+            updateTime: f.updateTime,
+            config: f.config,
+          },
         })
       );
     });

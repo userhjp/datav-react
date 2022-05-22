@@ -77,7 +77,7 @@ export class DvData {
       data = execFilter(this.config.filterCode, data);
     }
     if (!checkDataType(this.config.dataType, data)) {
-      data = { isError: true, message: '数据有误，类型应为：' + this.config.dataType, data };
+      data = { isError: true, message: '数据有误，类型应为：' + this.config.dataType, data: data || null };
     }
     return data;
   }

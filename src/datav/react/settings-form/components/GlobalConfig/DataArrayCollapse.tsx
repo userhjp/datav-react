@@ -19,11 +19,7 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
       <Collapse expandIconPosition="right" defaultActiveKey={[]} ghost>
         {field.value?.map((item, index) => {
           return (
-            <Collapse.Panel
-              className="global-config-source"
-              header={<CollapseHeader name={index} remove={() => field.remove(index)} domRef={domRef} />}
-              key={index}
-            >
+            <Collapse.Panel className="global-config-source" header={<CollapseHeader name={index} domRef={domRef} />} key={index}>
               <ObjectField name={index}>
                 {item.config.apiType === 'api' && (
                   <div
@@ -83,20 +79,48 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
   );
 });
 
-const CollapseHeader: React.FC<{ name: number; remove: () => void; domRef: React.MutableRefObject<HTMLDivElement> }> = (props) => {
+const CollapseHeader: React.FC<{ name: number; domRef: React.MutableRefObject<HTMLDivElement> }> = (props) => {
+  const field = useField<ArrayFieldType>();
   return (
     <ObjectField name={props.name}>
       <div className="global-config-header" onClick={(e) => e.stopPropagation()}>
         <Field name="enable" component={[Checkbox]} />
-        <Field name="title" component={[HeaderTitle, { placeholder: '请输入', size: 'small' }]} />
-        <IconWidget className="focus-show" style={{ paddingLeft: 10 }} infer="Edit" />
+        <Field
+          name="title"
+          component={[
+            HeaderTitle,
+            {
+              placeholder: '请输入',
+              size: 'small',
+              onBlur: () => {
+                field.form.setFieldState(`sourceArray.${props.name}.title`, {
+                  readPretty: true,
+                });
+              },
+            },
+          ]}
+          readPretty
+        />
+        <IconWidget
+          className="focus-show"
+          style={{ paddingLeft: 10 }}
+          infer="Edit"
+          onClick={() => {
+            console.log(`sourceArray.${props.name}.title`, field.form.getValuesIn(`sourceArray.${props.name}.title`));
+            field.form.setFieldState(`sourceArray.${props.name}.title`, {
+              readPretty: false,
+            });
+          }}
+        />
         <div className="fill-up" />
         <Popconfirm
           className="focus-show"
           placement="leftBottom"
           title="确认删除该数据源？"
           getPopupContainer={() => props.domRef.current}
-          onConfirm={props?.remove}
+          onConfirm={() => {
+            field.remove(props.name);
+          }}
           okText="确认"
           cancelText="取消"
         >
@@ -108,9 +132,5 @@ const CollapseHeader: React.FC<{ name: number; remove: () => void; domRef: React
 };
 
 const HeaderTitle: React.FC<InputProps> = (props) => {
-  const field = useField();
-  field.setState({
-    readPretty: true,
-  });
   return <Input {...props} />;
 };

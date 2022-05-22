@@ -113,7 +113,7 @@ export interface IEventField {
 
 /** 组件数据类型 */
 export interface IDataSetting {
-  fields: IFieldSetting;
+  fields?: IFieldSetting;
   config: IDataSourceSetting;
   autoUpdate: boolean;
   updateTime: number;
