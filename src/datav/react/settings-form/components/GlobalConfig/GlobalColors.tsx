@@ -7,7 +7,7 @@ import React, { useMemo, useState } from 'react';
 import { ColorPicker } from '../ColorPicker';
 import './index.less';
 
-export const GlobalColors: React.FC<any> = observer(({ value, onChange }) => {
+export const GlobalColors: React.FC<any> = observer(({ value }) => {
   const field = useField<ArrayFieldType>();
   const [idx, setIdx] = useState(0);
   return (
@@ -74,9 +74,17 @@ const ColorSelect: React.FC<InputNumberProps & { value: number; colors: string[]
                   key={i}
                   style={{ userSelect: 'none', height: '100%', display: 'flex', alignItems: 'center' }}
                 >
-                  {arr.map((m, i) => (
-                    <span key={i} style={{ backgroundColor: m }} />
-                  ))}
+                  {arr.map((m: any, i) => {
+                    const styl =
+                      typeof m === 'string'
+                        ? {
+                            backgroundColor: m,
+                          }
+                        : {
+                            backgroundImage: `linear-gradient(to top, ${m.startColor}, ${m.endColor})`,
+                          };
+                    return <span key={i} style={styl} />;
+                  })}
                 </div>
               </AntdSelect.Option>
             );
@@ -100,7 +108,7 @@ const SchemaField = createSchemaField({
 const ColorArrayForm: React.FC<{ value: string[]; onChange: (val: string[]) => void }> = ({ value, onChange }) => {
   const colorList = useMemo(() => {
     return value.map((f) => {
-      return { startColor: f, endColor: '#0098d9' };
+      return typeof f === 'string' ? { startColor: f, endColor: f } : f;
     });
   }, [value]);
   const form = useMemo(
@@ -110,14 +118,21 @@ const ColorArrayForm: React.FC<{ value: string[]; onChange: (val: string[]) => v
           string_array: colorList,
         },
         effects() {
-          // onFieldInputValueChange('string_array', (field) => {
-          //   onChange(field.value);
-          //   console.log(field.value);
-          // });
-          // onFieldValueChange('string_array.*', (field) => {
-          //   const val = toJS(field.form.getValuesIn('string_array'));
-          //   onChange(val);
-          // });
+          onFieldInputValueChange('string_array', (field) => {
+            onChange(
+              field.value.map((m) => {
+                if (m.endColor) return m;
+                return m.startColor;
+              })
+            );
+          });
+          onFieldValueChange('string_array.*', (field) => {
+            const val = toJS(field.form.getValuesIn('string_array')).map((m) => {
+              if (m.endColor) return m;
+              return m.startColor;
+            });
+            onChange(val);
+          });
         },
       }),
     [value]

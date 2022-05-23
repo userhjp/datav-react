@@ -13,7 +13,7 @@ type ISourceGlobal = {
 };
 export type IDvGlobal = {
   sourceArray: ISourceGlobal[];
-  colors: string[][];
+  colors: Array<Array<string | { startColor: string; endColor: string }>>;
 };
 export class DvGlobal {
   dataSource: DataSource;
@@ -85,6 +85,12 @@ export class DvGlobal {
       ['#516b91', '#59c4e6', '#edafda', '#93b7e3', '#a5e7f0', '#cbb0e3'],
       ['#c12e34', '#e6b600', '#0098d9', '#2b821d', '#005eaa', '#339ca8'],
       ['#3fb1e3', '#6be6c1', '#626c91', '#a0a7e6', '#c4ebad', '#96dee8'],
+
+      [
+        { startColor: '#3b59f8', endColor: '#47a2fb' },
+        { startColor: '#4ad395', endColor: '#51e267' },
+        { startColor: '#f5aa2c', endColor: '#fa6537' },
+      ],
 
       // ['#FFFFCC', '#DEFCCD', '#BDF9CE', '#9DF6CF', '#7CF2D0', '#5BEFD1'],
       // ['#34FFF5', '#31E0F2', '#2DC0EE', '#2AA1EB', '#2782E7', '#2362E4'],
