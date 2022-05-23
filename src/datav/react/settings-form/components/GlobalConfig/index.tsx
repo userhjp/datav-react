@@ -53,7 +53,7 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
                 <ArrayField name="sourceArray" component={[DataArrayCollapse]} />
               </DrawerContext.Provider>
             </div>
-            <div className="step-title">全局数据过滤器</div>
+            {/* <div className="step-title">全局请求Headers (Optional)</div> */}
             <div className="step-title">颜色模板配置</div>
             <div style={{ paddingRight: 8 }}>
               <ArrayField name="colors" component={[GlobalColors]} />

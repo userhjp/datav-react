@@ -134,6 +134,19 @@
   font-size: @m-font-size;
   background-color: @content-color;
 
+  
+  .global-colors-colortype {
+    display: flex;
+    padding: 0 20px;
+    .ant-radio-button-wrapper {
+      flex: 1;
+      height: 26px;
+      font-size: @m-font-size;
+      line-height: 24px;
+      text-align: center;
+    }
+  }
+
   .ant-collapse-item > .ant-collapse-header {
     padding: 8px 0;
     padding-left: 20px;
@@ -160,8 +173,8 @@
     padding-bottom: 0;
   }
 
-  .color-array-space .ant-space-item:nth-child(2) {
-    width: 100%;
+  .color-array-space .ant-space-item:not(:last-child, :first-child) {
+    flex: 1;
   }
 
 }

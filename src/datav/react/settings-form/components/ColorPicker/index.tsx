@@ -66,16 +66,10 @@ export const ColorPicker: React.FC<ColorPickerProps> = observer((props) => {
     run();
   };
 
-  useEffect(() => {
-    const handle = () => setVisible(false);
-    document.addEventListener('click', handle);
-    return () => document.removeEventListener('click', handle);
-  }, []);
-
-  const renderColorItem = <div style={{ backgroundColor: value, width: 20, height: 16 }} onClick={() => setVisible(!visible)} />;
+  const renderColorItem = <div style={{ backgroundColor: colorText, width: 20, height: 16 }} onClick={() => setVisible(!visible)} />;
 
   return (
-    <div className="color-picker" onClick={(e) => e.stopPropagation()}>
+    <div className="color-picker" tabIndex={-1} onBlur={() => setVisible(false)} onClick={(e) => e.stopPropagation()}>
       <Input
         {...propss}
         value={colorText}
