@@ -1,5 +1,5 @@
 import { checkDataType, execFilter, FieldStatus, getFieldMap, mapObject } from '@/datav/shared';
-import { define, observable, action, autorun } from '@formily/reactive';
+import { define, observable, action, autorun, toJS } from '@formily/reactive';
 import { IDataSetting, IDataSourceSetting } from '../../react/interface';
 import { DataSource } from './DataSource';
 

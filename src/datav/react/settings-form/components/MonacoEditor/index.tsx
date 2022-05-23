@@ -62,7 +62,10 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
   const copyData = () => {
     if (editor.current) {
       copyText(editor.current.getValue());
-      message.success('复制成功');
+      message.success({
+        content: '复制成功',
+        className: 'dv-message-class',
+      });
     }
   };
 

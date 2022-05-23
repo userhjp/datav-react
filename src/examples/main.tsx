@@ -31,7 +31,10 @@ export const Main: React.FC = () => {
     () =>
       createDesigner({
         onPublish: (data) => {
-          message.info('点击发布按钮');
+          message.info({
+            content: '点击发布按钮',
+            className: 'dv-message-class',
+          });
         },
         // onHelp: (data) => {
         //   message.info('点击帮助按钮');
@@ -39,7 +42,10 @@ export const Main: React.FC = () => {
         onSnapshot: (data) => {
           return new Promise((resolve) => {
             setTimeout(() => {
-              message.success('已保存快照');
+              message.success({
+                content: '已保存快照',
+                className: 'dv-message-class',
+              });
               resolve();
             }, 1000);
           });

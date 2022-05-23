@@ -33,13 +33,19 @@ const Design: React.FC = () => {
     () =>
       createDesigner({
         onPublish: (data) => {
-          message.info('点击发布按钮');
+          message.info({
+            content: '点击发布按钮',
+            className: 'dv-message-class',
+          });
         },
         onSnapshot: (data) => {
           return new Promise((resolve) => {
             setTimeout(() => {
               setSnapshot(data);
-              message.info('保存成功');
+              message.success({
+                content: '保存成功',
+                className: 'dv-message-class',
+              });
               resolve();
             }, 1000);
           });

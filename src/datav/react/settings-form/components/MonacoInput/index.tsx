@@ -90,7 +90,10 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const copyData = () => {
     if (editorRef.current) {
       copyText(editorRef.current.getValue());
-      message.success('复制成功');
+      message.success({
+        content: '复制成功',
+        className: 'dv-message-class',
+      });
     }
   };
 

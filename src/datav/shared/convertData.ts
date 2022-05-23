@@ -1,5 +1,4 @@
-import { toJS } from '@formily/reactive';
-import { message } from 'antd';
+import { notification } from 'antd';
 import { IFieldSetting } from '../react/interface';
 import { IDataType } from './enums';
 
@@ -20,13 +19,24 @@ export const checkDataType = (dataType: IDataType, data: any) => {
 };
 
 export const execFilter = (dataFilter: string, data: any) => {
-  let res = toJS(data);
+  let res = JSON.parse(JSON.stringify(data));
   try {
     const filter = `if (!data) { return data; }  return filter(data);  function filter(res){  ${dataFilter}   }`;
     const func = new Function('data', filter);
     res = func(res);
   } catch (error) {
-    message.error('过滤器执行错误');
+    if (process.env.NODE_ENV == 'development') {
+      notification.config({
+        maxCount: 3,
+      });
+      notification.error({
+        message: '过滤器执行异常',
+        description: error.toString(),
+        className: 'dv-notification',
+      });
+    } else {
+      console.log('过滤器执行异常', error.toString());
+    }
   }
   return res;
 };

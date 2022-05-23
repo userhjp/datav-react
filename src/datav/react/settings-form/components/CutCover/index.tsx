@@ -46,7 +46,10 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
     });
     const { status } = info.file;
     if (status === 'error') {
-      message.error('上传失败，请稍后再试');
+      message.error({
+        content: '上传失败，请稍后再试',
+        className: 'dv-message-class',
+      });
       return;
     }
     if (status === 'removed' || status === 'done') {
@@ -76,9 +79,15 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
         const base64Url = res.toDataURL('image/jpeg', 0.8);
         // const file = blobToFile(dataURLtoBlob(base64Url), 'thumbnail.jpeg');
         onChange(base64Url);
-        message.success('截取成功');
+        message.success({
+          content: '截取成功',
+          className: 'dv-message-class',
+        });
       } catch (error) {
-        message.error(error.toString());
+        message.error({
+          content: error.toString(),
+          className: 'dv-message-class',
+        });
       } finally {
         loading.current = false;
       }

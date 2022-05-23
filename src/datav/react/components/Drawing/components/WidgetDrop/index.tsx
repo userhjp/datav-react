@@ -21,7 +21,10 @@ export const WidgetDrag: React.FC = () => {
   const addBox = useCallback(
     ({ x = 0, y = 0, name, type, dnConfig }) => {
       if (!dnConfig) {
-        message.info('开发中，敬请期待...');
+        message.success({
+          content: '开发中，敬请期待...',
+          className: 'dv-message-class',
+        });
         return;
       }
       const offset = 60;
@@ -101,7 +104,7 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ node 
       <div ref={ref} style={transformStyle} className="widget-container">
         <div className="transform-handler" style={handlerStyle}>
           <div className="widget-com" style={comStyle}>
-            <RenderWidget nodeInfo={node} />
+            <RenderWidget widgetInfo={node} />
             <div className="wrapper-event-disable" {...{ [designer.props.nodeIdAttrName]: id }} />
           </div>
         </div>

@@ -24,11 +24,18 @@
   line-height: 1;
 }
 
-.design-tip .ant-tooltip-inner {
-  min-height: 22px;
-  padding: 2px 8px;
-  background-color: @color-primary;
-  border-radius: 2px;
+.design-tip {
+  .ant-tooltip-inner {
+    min-height: 22px;
+    padding: 3px 8px;
+    font-size: 12px;
+    background-color: @color-primary;
+    border-radius: 2px;
+  }
+  .ant-tooltip-arrow {
+    width: 18px;
+    height: 18px;
+  }
 }
 
 .ant-tooltip-placement-top {
@@ -361,5 +368,37 @@
 
   &::-webkit-scrollbar-thumb {
     background-color: #434b55;
+  }
+}
+
+// notification
+.dv-notification {
+  color: @m-text-color;
+  background-color: #303640;
+  border: 1px solid #44484c;
+
+  .ant-notification-notice-icon {
+    padding-top: 3px;
+    font-size: 20px;
+  }
+
+  .ant-notification-notice-message, .ant-notification-notice-description {
+    margin-left: 40px;
+    color: inherit;
+    font-size: 14px;
+  }
+
+  .ant-notification-notice-close {
+    color: inherit;
+  }
+}
+
+// message
+.dv-message-class {
+  .ant-message-notice-content {
+    padding: 6px 16px;
+    color: @m-text-color;
+    background-color: #171b22;
+    border: 1px solid #333;
   }
 }

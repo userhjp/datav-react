@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { FormDrawer, FormLayout } from '@formily/antd';
-import { Button } from 'antd';
+import { Button, Tooltip } from 'antd';
 import { ArrayField, observer } from '@formily/react';
 import { InputProps } from 'rc-input';
 import { MonacoEditor } from '../MonacoEditor';
@@ -39,7 +39,14 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
           <FormLayout layout="vertical" colon={false} className="global-config-layout" size="small">
             <div className="step-title">
               全局数据源 &nbsp;
-              <IconWidget infer="Help" />
+              <Tooltip
+                overlayClassName="design-tip"
+                color="#2681ff"
+                placement="bottom"
+                title={'当多个组件共享同一接口数据，可配置全局数据共享，避免同一数据源多次请求。'}
+              >
+                <IconWidget infer="Help" />
+              </Tooltip>
             </div>
             <div className="data-source-container">
               <DrawerContext.Provider value={{ dataSource }}>

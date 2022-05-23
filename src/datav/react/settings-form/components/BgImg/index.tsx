@@ -29,7 +29,10 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
     });
     const { status } = info.file;
     if (status === 'error') {
-      message.error('上传失败，请稍后再试');
+      message.error({
+        content: '上传失败，请稍后再试',
+        className: 'dv-message-class',
+      });
     }
     if (status === 'removed' || status === 'done') {
       const newFiles: any[] = filelist.filter((f) => !f.error && f.url).map((m) => m.url);

@@ -31,7 +31,10 @@ export const IconPreview: React.FC = () => {
                   textArea.select();
                   try {
                     document.execCommand('copy');
-                    message.success('已复制到剪贴板');
+                    message.success({
+                      content: '已复制到剪贴板',
+                      className: 'dv-message-class',
+                    });
                   } catch (err) {
                     alert('复制失败');
                   }

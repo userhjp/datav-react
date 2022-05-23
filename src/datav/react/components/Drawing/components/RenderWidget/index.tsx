@@ -12,42 +12,42 @@ const GlobalState = {
   idleRequest: null,
 };
 
-export const RenderWidget: React.FC<{ nodeInfo: IWidgetSetting }> = observer(
-  ({ nodeInfo }) => {
+export const RenderWidget: React.FC<{ widgetInfo: IWidgetSetting }> = observer(
+  ({ widgetInfo }) => {
     const dataSource = useDataSource();
     const widgets = useWidgets();
     const [data, setData] = useState(null);
-    const Widget: any = widgets[nodeInfo.info.type];
+    const Widget: any = widgets[widgetInfo.info.type];
     useEffect(() => {
       const dvdata = new DvData({
         dataSource,
-        id: nodeInfo.id,
-        dataSetting: nodeInfo.data,
+        id: widgetInfo.id,
+        dataSetting: widgetInfo.data,
       });
-      dataSource.setData(nodeInfo.id, dvdata);
+      dataSource.setData(widgetInfo.id, dvdata);
       const dispose = autorun(() => {
         setData(toJS(dvdata.data));
       });
       return () => {
         dispose();
-        dataSource.removeData(nodeInfo.id);
+        dataSource.removeData(widgetInfo.id);
       };
     }, []);
 
-    const options = toJS(nodeInfo.options);
-    if (!nodeInfo.info || !nodeInfo.info.type || nodeInfo.attr.isHide) return <div />;
+    const options = toJS(widgetInfo.options);
+    if (!widgetInfo.info || !widgetInfo.info.type || widgetInfo.attr.isHide) return <div />;
     if (!options || !Widget || JSON.stringify(options) === '{}') return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>
-        <ErrorBoundary name={nodeInfo.info.type}>
+        <ErrorBoundary name={widgetInfo.info.type}>
           <Widget
             {...{
               options,
               data,
-              events: nodeInfo.events,
-              id: nodeInfo.id,
-              info: nodeInfo.info,
-              attr: nodeInfo.attr,
+              events: widgetInfo.events,
+              id: widgetInfo.id,
+              info: widgetInfo.info,
+              attr: widgetInfo.attr,
             }}
           />
         </ErrorBoundary>

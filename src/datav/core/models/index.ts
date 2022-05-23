@@ -11,3 +11,4 @@ export * from './Viewport';
 export * from './Screen';
 export * from './WidgetNode';
 export * from './DvGlobal';
+export * from './DvData';
