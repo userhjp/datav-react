@@ -75,7 +75,8 @@ export class DragDropDriver extends EventDriver<Engine> {
   };
 
   onStartDrag = (e: MouseEvent | DragEvent) => {
-    if (GlobalState.dragging) return;
+    const canvasEl = e.currentTarget?.['className'] === 'canvas-panel-wrap';
+    if (GlobalState.dragging || !canvasEl) return;
     GlobalState.startEvent = GlobalState.startEvent || e;
     this.batchAddEventListener('dragover', this.onMouseMove);
     this.batchAddEventListener('mousemove', this.onMouseMove);
