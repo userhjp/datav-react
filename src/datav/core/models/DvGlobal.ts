@@ -11,9 +11,12 @@ type ISourceGlobal = {
   updateTime: number;
   config: IDataSourceSetting;
 };
+
+/** 颜色类型，渐变大多数情况下图表两种颜色渐变足以，若有多颜色需求自定义组件实现 纯色 | 垂直渐变 | 水平渐变 */
+export type IGlobalColor = Array<{ baseColor: string; gradualColor?: string; type: 'base' | 'horizontal' | 'vertical' | string }>;
 export type IDvGlobal = {
   sourceArray: ISourceGlobal[];
-  colors: Array<Array<string | { startColor: string; endColor: string }>>;
+  colors: Array<IGlobalColor>;
 };
 export class DvGlobal {
   dataSource: DataSource;
@@ -53,7 +56,7 @@ export class DvGlobal {
   }
 
   setProps(props: IDvGlobal) {
-    this.props.colors = Object.assign(this.colors, props.colors);
+    this.props.colors = Object.assign(this.colors, {});
     this.props.sourceArray = Object.assign(this.sourceArray, props.sourceArray);
     this.updateSource();
   }
@@ -80,16 +83,53 @@ export class DvGlobal {
 
   static defaultProps: IDvGlobal = {
     colors: [
-      ['#0a73ff', '#79daff', '#bdfdff', '#57cdff', '#a3f6ff', '#4caff9'],
-      ['#38cafb', '#4caff9', '#4adeca', '#2aa7ee', '#0270f2', '#488cf7'],
-      ['#516b91', '#59c4e6', '#edafda', '#93b7e3', '#a5e7f0', '#cbb0e3'],
-      ['#c12e34', '#e6b600', '#0098d9', '#2b821d', '#005eaa', '#339ca8'],
-      ['#3fb1e3', '#6be6c1', '#626c91', '#a0a7e6', '#c4ebad', '#96dee8'],
-
       [
-        { startColor: '#3b59f8', endColor: '#47a2fb' },
-        { startColor: '#4ad395', endColor: '#51e267' },
-        { startColor: '#f5aa2c', endColor: '#fa6537' },
+        { baseColor: '#0a73ff', gradualColor: '#0a73ff', type: 'base' },
+        { baseColor: '#79daff', gradualColor: '#79daff', type: 'base' },
+        { baseColor: '#bdfdff', gradualColor: '#bdfdff', type: 'base' },
+        { baseColor: '#57cdff', gradualColor: '#57cdff', type: 'base' },
+        { baseColor: '#a3f6ff', gradualColor: '#a3f6ff', type: 'base' },
+        { baseColor: '#4caff9', gradualColor: '#4caff9', type: 'base' },
+      ],
+      [
+        { baseColor: '#38cafb', gradualColor: '#38cafb', type: 'base' },
+        { baseColor: '#4caff9', gradualColor: '#4caff9', type: 'base' },
+        { baseColor: '#4adeca', gradualColor: '#4adeca', type: 'base' },
+        { baseColor: '#2aa7ee', gradualColor: '#2aa7ee', type: 'base' },
+        { baseColor: '#0270f2', gradualColor: '#0270f2', type: 'base' },
+        { baseColor: '#488cf7', gradualColor: '#488cf7', type: 'base' },
+      ],
+      [
+        { baseColor: '#516b91', gradualColor: '#516b91', type: 'base' },
+        { baseColor: '#59c4e6', gradualColor: '#59c4e6', type: 'base' },
+        { baseColor: '#edafda', gradualColor: '#edafda', type: 'base' },
+        { baseColor: '#93b7e3', gradualColor: '#93b7e3', type: 'base' },
+        { baseColor: '#a5e7f0', gradualColor: '#a5e7f0', type: 'base' },
+        { baseColor: '#cbb0e3', gradualColor: '#cbb0e3', type: 'base' },
+      ],
+      [
+        { baseColor: '#c12e34', gradualColor: '#c12e34', type: 'base' },
+        { baseColor: '#e6b600', gradualColor: '#e6b600', type: 'base' },
+        { baseColor: '#0098d9', gradualColor: '#0098d9', type: 'base' },
+        { baseColor: '#2b821d', gradualColor: '#2b821d', type: 'base' },
+        { baseColor: '#005eaa', gradualColor: '#005eaa', type: 'base' },
+        { baseColor: '#339ca8', gradualColor: '#339ca8', type: 'base' },
+      ],
+      [
+        { baseColor: '#3fb1e3', gradualColor: '#3fb1e3', type: 'base' },
+        { baseColor: '#6be6c1', gradualColor: '#6be6c1', type: 'base' },
+        { baseColor: '#626c91', gradualColor: '#626c91', type: 'base' },
+        { baseColor: '#a0a7e6', gradualColor: '#a0a7e6', type: 'base' },
+        { baseColor: '#c4ebad', gradualColor: '#c4ebad', type: 'base' },
+        { baseColor: '#96dee8', gradualColor: '#96dee8', type: 'base' },
+      ],
+      [
+        { baseColor: '#3b59f8', gradualColor: '#47a2fb', type: 'vertical' },
+        { baseColor: '#4ad395', gradualColor: '#51e267', type: 'vertical' },
+        { baseColor: '#f5aa2c', gradualColor: '#fa6537', type: 'vertical' },
+        { baseColor: '#f585eb', gradualColor: '#7b7afe', type: 'vertical' },
+        { baseColor: '#2fa1dc', gradualColor: '#54ddf9', type: 'vertical' },
+        { baseColor: '#28d0fc', gradualColor: '#6c7ffa', type: 'vertical' },
       ],
 
       // ['#FFFFCC', '#DEFCCD', '#BDF9CE', '#9DF6CF', '#7CF2D0', '#5BEFD1'],

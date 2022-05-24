@@ -23,6 +23,10 @@ const Workspace: React.FC = observer(() => {
     [designer.props?.canvasNodeAttrName]: 'root',
   };
 
+  const canvasNodeAttrContainerName = {
+    [`${designer.props?.canvasNodeAttrName}-container`]: 'root',
+  };
+
   const containerStyle: React.CSSProperties = {
     width: screenProps.width * screen.scale + 100,
     height: screenProps.height * screen.scale + 100,
@@ -37,7 +41,7 @@ const Workspace: React.FC = observer(() => {
   }, []);
 
   return (
-    <div style={containerStyle}>
+    <div style={containerStyle} {...canvasNodeAttrContainerName}>
       <div ref={domRef} {...canvasNodeAttrName} className="canvas-panel" style={style}>
         <ToolWidget />
         <WidgetDrag />

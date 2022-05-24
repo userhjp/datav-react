@@ -1,20 +1,53 @@
+import { IGlobalColor } from '@/datav/core';
 import { useDvGlobal } from '@/datav/react/hooks';
-import { ArrayItems, Space, FormItem } from '@formily/antd';
-import { createForm, onFieldInputValueChange, onFieldValueChange } from '@formily/core';
-import { createSchemaField, FormProvider, observer, useField } from '@formily/react';
-import { toJS } from '@formily/reactive';
+import { observer, useField } from '@formily/react';
 import { Select as AntdSelect, Collapse, InputNumberProps } from 'antd';
 import React, { useMemo, useState } from 'react';
-import { ColorPicker } from '../ColorPicker';
+import { ColorArrayForm } from '../GlobalConfig/GlobalColors';
 import './index.less';
+
+/** 转换echart颜色对象 */
+function toEChartColors(colors: IGlobalColor): string | object {
+  return colors.map((m) => {
+    if (typeof m === 'string') return m;
+    return {
+      type: 'linear',
+      x: 0,
+      y: m.type === 'vertical' ? 1 : 0,
+      x2: m.type === 'horizontal' ? 1 : 0,
+      y2: 0,
+      colorStops: [
+        { offset: 0, color: m.baseColor || m.baseColor || '#0098d9' }, // 0% 处的颜色
+        { offset: 1, color: m.gradualColor || m.baseColor || '#0098d9' }, // 100% 处的颜色
+      ],
+      global: false,
+    };
+  });
+}
+
+/** Echart颜色转换为配置对象 */
+function toConfigColors(colors: any[]): IGlobalColor {
+  const colorList = colors.map((m) => {
+    const baseColor = m || '';
+    return {
+      baseColor: typeof baseColor === 'string' ? m : m.colorStops?.[0].color,
+      gradualColor: typeof baseColor === 'string' ? m : m.colorStops?.[1].color,
+      type: m.colorStops?.[0].y ? 'vertical' : 'horizontal',
+    };
+  });
+  return colorList;
+}
 
 export const Palette: React.FC<any> = observer(({ value, onChange }) => {
   const dvGlobal = useDvGlobal();
   const field = useField();
 
-  const currentColors = toJS(value || dvGlobal.colors[0]);
-  const handleChange = (colors: string[]) => {
-    if (JSON.stringify(value) !== JSON.stringify(colors)) onChange(colors);
+  const currentColors = useMemo(() => {
+    return value ? toConfigColors(value) : dvGlobal.colors[0];
+  }, [value]);
+  const handleChange = (colors: IGlobalColor) => {
+    debugger;
+    onChange(toEChartColors(colors));
   };
 
   return (
@@ -33,15 +66,15 @@ export const Palette: React.FC<any> = observer(({ value, onChange }) => {
           }
           key="1"
         >
-          <ColorArrayForm value={currentColors} onChange={handleChange} />
+          <ColorArrayForm value={currentColors} compColor onChange={(e) => handleChange(e)} />
         </Collapse.Panel>
       </Collapse>
     </div>
   );
 });
 
-const ColorSelect: React.FC<InputNumberProps & { title?: string; colors: string[][]; currentColors?: string[] }> = (props) => {
-  const { value, onChange, title, colors, style, currentColors = [] } = props;
+const ColorSelect: React.FC<InputNumberProps & { title?: string; colors: IGlobalColor[]; currentColors: IGlobalColor }> = (props) => {
+  const { value, onChange, title, colors, style, currentColors } = props;
   const [open, setOpen] = useState(false);
 
   return (
@@ -57,10 +90,8 @@ const ColorSelect: React.FC<InputNumberProps & { title?: string; colors: string[
         }}
         value={value}
         onChange={(newValue) => {
-          if (value !== newValue) {
-            onChange(newValue);
-            setOpen(false);
-          }
+          onChange(newValue);
+          setOpen(false);
         }}
         onBlur={() => setOpen(false)}
         dropdownClassName="palette-select-dropdown"
@@ -71,14 +102,26 @@ const ColorSelect: React.FC<InputNumberProps & { title?: string; colors: string[
               className="palette-select-dropdown-menu-item"
               style={{ userSelect: 'none', height: '100%', display: 'flex', alignItems: 'center' }}
             >
-              {currentColors.map((m, i) => (
-                <span key={i} style={{ backgroundColor: m }} />
-              ))}
+              {currentColors.map((m, i) => {
+                const cStyle: React.CSSProperties = {};
+                switch (m.type) {
+                  case 'horizontal':
+                    cStyle.backgroundImage = `linear-gradient(to right, ${m.baseColor}, ${m.gradualColor})`;
+                    break;
+                  case 'vertical':
+                    cStyle.backgroundImage = `linear-gradient(to top, ${m.baseColor}, ${m.gradualColor})`;
+                    break;
+                  default:
+                    cStyle.backgroundColor = m.baseColor;
+                    break;
+                }
+                return <span key={i} style={cStyle} />;
+              })}
             </div>
           </AntdSelect.Option>
         </AntdSelect.OptGroup>
         <AntdSelect.OptGroup label="选择模板">
-          {colors.map((arr: string[], i) => {
+          {colors.map((item, i) => {
             return (
               <AntdSelect.Option key={i} value={i}>
                 <div
@@ -86,9 +129,21 @@ const ColorSelect: React.FC<InputNumberProps & { title?: string; colors: string[
                   key={i}
                   style={{ userSelect: 'none', height: '100%', display: 'flex', alignItems: 'center' }}
                 >
-                  {arr.map((m, i) => (
-                    <span key={i} style={{ backgroundColor: m }} />
-                  ))}
+                  {item.map((m, i) => {
+                    const cStyle: React.CSSProperties = {};
+                    switch (m.type) {
+                      case 'horizontal':
+                        cStyle.backgroundImage = `linear-gradient(to right, ${m.baseColor}, ${m.gradualColor})`;
+                        break;
+                      case 'vertical':
+                        cStyle.backgroundImage = `linear-gradient(to top, ${m.baseColor}, ${m.gradualColor})`;
+                        break;
+                      default:
+                        cStyle.backgroundColor = m.baseColor;
+                        break;
+                    }
+                    return <span key={i} style={cStyle} />;
+                  })}
                 </div>
               </AntdSelect.Option>
             );
@@ -96,74 +151,5 @@ const ColorSelect: React.FC<InputNumberProps & { title?: string; colors: string[
         </AntdSelect.OptGroup>
       </AntdSelect>
     </div>
-  );
-};
-
-const SchemaField = createSchemaField({
-  components: {
-    ArrayItems,
-    ColorPicker,
-    Space,
-    FormItem,
-  },
-});
-
-const ColorArrayForm: React.FC<{ value: string[]; onChange: (val: string[]) => void }> = ({ value, onChange }) => {
-  const form = useMemo(
-    () =>
-      createForm({
-        values: {
-          string_array: value,
-        },
-        effects() {
-          onFieldInputValueChange('string_array', (field) => {
-            onChange(field.value);
-            console.log(field.value);
-          });
-          onFieldValueChange('string_array.*', (field) => {
-            const val = toJS(field.form.getValuesIn('string_array'));
-            onChange(val);
-          });
-        },
-      }),
-    [value]
-  );
-
-  return (
-    <FormProvider form={form}>
-      <SchemaField>
-        <SchemaField.Array
-          name="string_array"
-          title="颜色配置"
-          x-decorator="FormItem"
-          x-component="ArrayItems"
-          x-decorator-props={{ labelWidth: 58 }}
-        >
-          <SchemaField.Void x-component="Space">
-            <SchemaField.Void x-decorator="FormItem" x-component="ArrayItems.SortHandle" />
-            <SchemaField.String
-              x-decorator="FormItem"
-              name="input"
-              x-component="ColorPicker"
-              x-component-props={{ styleType: 2 } as any}
-              default="#0098d9"
-            />
-            <SchemaField.Void x-decorator="FormItem" x-component="ArrayItems.Remove" />
-          </SchemaField.Void>
-          <SchemaField.Void
-            x-reactions={{
-              dependencies: ['..string_array'],
-              fulfill: {
-                state: {
-                  visible: '{{$deps[0].length < 8}}',
-                },
-              },
-            }}
-            x-component="ArrayItems.Addition"
-            title="添加颜色"
-          />
-        </SchemaField.Array>
-      </SchemaField>
-    </FormProvider>
   );
 };

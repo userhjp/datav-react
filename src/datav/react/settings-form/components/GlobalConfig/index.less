@@ -133,20 +133,7 @@
   margin: 0 -10px 0 -20px;
   font-size: @m-font-size;
   background-color: @content-color;
-
-  
-  .global-colors-colortype {
-    display: flex;
-    padding: 0 20px;
-    .ant-radio-button-wrapper {
-      flex: 1;
-      height: 26px;
-      font-size: @m-font-size;
-      line-height: 24px;
-      text-align: center;
-    }
-  }
-
+ 
   .ant-collapse-item > .ant-collapse-header {
     padding: 8px 0;
     padding-left: 20px;
@@ -172,11 +159,29 @@
     margin-right: 30px;
     padding-bottom: 0;
   }
+}
 
-  .color-array-space .ant-space-item:not(:last-child, :first-child) {
+.global-colors-colortype {
+  display: flex;
+  padding: 0 20px 0 0;
+  .ant-radio-button-wrapper {
     flex: 1;
+    height: 26px;
+    font-size: @m-font-size;
+    line-height: 24px;
+    text-align: center;
   }
+}
 
+// .color-array-space .ant-space-item:not(:last-child, :first-child) {
+//   flex: 1;
+// }
+
+.color-array-space .ant-space-item:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 30px;
 }
 
 .global-colors-select-dropdown {

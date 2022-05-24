@@ -124,9 +124,10 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
 }
 
 /** 转换echart颜色渐变 */
-export function convertEChartColors(colors: Array<string> | string, type: 'vertical' | 'horizontal' = 'vertical'): string | object {
+export function convertEChartColors(colors: Array<string> | any, type: 'vertical' | 'horizontal' = 'vertical'): string | object {
   if (!colors) return '';
   if (typeof colors === 'string') return colors;
+  if (colors.colorStops) return colors; // 这里大概判断下表示已经转换过
   const col = colors.filter((f) => !!f);
   if (col && col.length > 1) {
     const offset = 1 / (col.length - 1);
