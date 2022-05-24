@@ -10,8 +10,8 @@ import { InputNumber, Tooltip } from 'antd';
 import { useDataSource } from '../../hooks';
 import { DataConfig, DataState } from './components';
 import { IconWidget } from '../../components';
-import './index.less';
 import { FieldStatus } from '@/datav/shared';
+import './index.less';
 
 export const DataFields: React.FC = observer(() => {
   const field = useField<ObjectFieldType<IDataSetting>>();
@@ -19,7 +19,7 @@ export const DataFields: React.FC = observer(() => {
   const dvData = dataSource.getData(field.form.values.id);
   const value = useMemo(() => field.value || {}, [field.value]);
   const totalStatus =
-    dvData.fieldsStatus && Object.keys(dvData.fieldsStatus).length
+    dvData?.fieldsStatus && Object.keys(dvData.fieldsStatus).length
       ? Object.values(dvData.fieldsStatus).every((e) => e === FieldStatus.failed)
       : false;
 
@@ -66,7 +66,7 @@ export const DataFields: React.FC = observer(() => {
                           <Field name="map" component={[BlurInput, { size: 'small', placeholder: '可自定义' }]} />
                         </td>
                         <td className="column-item attr-status">
-                          <DataState status={dvData.fieldsStatus[key]} />
+                          <DataState status={dvData?.fieldsStatus[key]} />
                         </td>
                       </tr>
                     </ObjectField>
@@ -131,7 +131,7 @@ export const DataFields: React.FC = observer(() => {
 
 const ReadOnlyEditor: React.FC<{ editorType: languageType; compId: string }> = observer(({ editorType, compId }) => {
   const dataSource = useDataSource();
-  const editorData = dataSource.getData(compId).data;
+  const editorData = dataSource.getData(compId)?.data;
   return (
     <MonacoEditor
       {...{
