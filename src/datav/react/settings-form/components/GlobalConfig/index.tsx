@@ -43,9 +43,9 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
                 overlayClassName="design-tip"
                 color="#2681ff"
                 placement="bottom"
-                title={'当多个组件共享同一接口数据，可配置全局数据共享，避免同一数据源多次请求。'}
+                title={'当多个组件共享同一接口数据，可配置全局数据共享，避免同一数据源多次创建或请求'}
               >
-                <IconWidget infer="Help" />
+                <IconWidget infer="Help" style={{ cursor: 'help' }} />
               </Tooltip>
             </div>
             <div className="data-source-container">

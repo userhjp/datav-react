@@ -3,7 +3,7 @@ import { IconWidget } from '@/datav/react/components';
 import { ArrayItems, Space, FormItem, Radio } from '@formily/antd';
 import { ArrayField as ArrayFieldType, createForm, onFieldInputValueChange } from '@formily/core';
 import { createSchemaField, FormProvider, observer, useField } from '@formily/react';
-import { Select as AntdSelect, Collapse, InputNumberProps, InputProps } from 'antd';
+import { Select as AntdSelect, Collapse, InputNumberProps } from 'antd';
 import React, { useMemo, useState } from 'react';
 import { ColorPicker } from '../ColorPicker';
 import './index.less';
@@ -29,13 +29,7 @@ export const GlobalColors: React.FC<any> = observer(({ value }) => {
           }
           key="1"
         >
-          <ColorArrayForm
-            value={field.value[idx]}
-            onChange={(e) => {
-              debugger;
-              field.value[idx] = e;
-            }}
-          />
+          <ColorArrayForm value={field.value[idx]} onChange={(e) => (field.value[idx] = e)} />
         </Collapse.Panel>
       </Collapse>
     </div>
@@ -103,11 +97,11 @@ const ColorSelect: React.FC<InputNumberProps & { value: number; colors: IGlobalC
 const ColorsType: React.FC<{ value: string; onChange: (val: string) => void }> = ({ value, onChange }) => {
   switch (value) {
     case 'horizontal':
-      return <IconWidget infer="FlexJustifyEnd" onClick={() => onChange('vertical')} />;
+      return <IconWidget infer="horizontal" title="水平渐变" style={{ color: '#0a73ff' }} onClick={() => onChange('base')} />;
     case 'vertical':
-      return <IconWidget infer="FlexJustifyStart" onClick={() => onChange('base')} />;
+      return <IconWidget infer="vertical" title="垂直渐变" style={{ color: '#0a73ff' }} onClick={() => onChange('horizontal')} />;
     default:
-      return <IconWidget infer="AddOperation" onClick={() => onChange('horizontal')} />;
+      return <IconWidget infer="color" title="纯色" style={{ color: '#0a73ff' }} onClick={() => onChange('vertical')} />;
   }
 };
 
@@ -137,9 +131,9 @@ export const ColorArrayForm: React.FC<{ value: IGlobalColor; onChange: (val: IGl
           onFieldInputValueChange('colorList.*', (field) => {
             onChange(field.form.values.colorList);
           });
-          // onFieldInputValueChange('colorList', (field) => {
-          //   onChange(field.form.values);
-          // });
+          onFieldInputValueChange('colorList', (field) => {
+            onChange(field.form.values.colorList);
+          });
           // onFieldInputValueChange('colorType', (field) => {
           //   if (compColor) onChange(field.form.values);
           // });
@@ -156,7 +150,12 @@ export const ColorArrayForm: React.FC<{ value: IGlobalColor; onChange: (val: IGl
           title="颜色配置"
           x-decorator="FormItem"
           x-component="ArrayItems"
-          x-decorator-props={{ labelWidth: 68, layout: 'horizontal' }}
+          x-decorator-props={{
+            labelWidth: 68,
+            layout: 'horizontal',
+            tooltip: '配置颜色，支持纯色和渐变，渐变最多两色径向渐变',
+            tooltipLayout: 'text',
+          }}
         >
           <SchemaField.Object>
             <SchemaField.Void x-component="Space" x-component-props={{ className: 'color-array-space', style: { width: '100%' } }}>
@@ -175,7 +174,7 @@ export const ColorArrayForm: React.FC<{ value: IGlobalColor; onChange: (val: IGl
                 x-component-props={{ styleType: 2 } as any}
                 default="#0098d9"
                 x-reactions={{
-                  dependencies: ['.type'],
+                  dependencies: ['.void.type'],
                   fulfill: {
                     state: {
                       visible: '{{$deps[0] !== "base"}}',
@@ -183,13 +182,22 @@ export const ColorArrayForm: React.FC<{ value: IGlobalColor; onChange: (val: IGl
                   },
                 }}
               />
-              <SchemaField.String name="type" x-decorator="FormItem" x-component="ColorsType" />
-              <SchemaField.Void x-decorator="FormItem" x-component="ArrayItems.Remove" />
+              <SchemaField.Void name="void">
+                <SchemaField.String name="type" x-decorator="FormItem" x-component="ColorsType" />
+                <SchemaField.Void x-decorator="FormItem" x-component="ArrayItems.Remove" />
+              </SchemaField.Void>
             </SchemaField.Void>
           </SchemaField.Object>
           <SchemaField.Void
             title="添加颜色"
             x-component="ArrayItems.Addition"
+            x-component-props={{
+              defaultValue: {
+                baseColor: '#0098d9',
+                gradualColor: '#47a2fb',
+                type: 'base',
+              },
+            }}
             x-reactions={{
               dependencies: ['...colorList'],
               fulfill: {

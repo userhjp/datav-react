@@ -3,7 +3,6 @@ import { Navigate, RouteObject } from 'react-router';
 
 const Example = React.lazy(() => import('@/pages/Home/Example'));
 const Project = React.lazy(() => import('@/pages/Home/Project'));
-const Screen = React.lazy(() => import('@/pages/Screen'));
 
 const HomeRoutes: RouteObject[] = [
   {

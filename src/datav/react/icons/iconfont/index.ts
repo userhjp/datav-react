@@ -18,3 +18,4 @@ export * from './square';
 export * from './check-circle';
 export * from './lock';
 export * from './align';
+export * from './color';

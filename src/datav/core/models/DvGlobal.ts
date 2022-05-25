@@ -56,7 +56,7 @@ export class DvGlobal {
   }
 
   setProps(props: IDvGlobal) {
-    this.props.colors = Object.assign(this.colors, {});
+    this.props.colors = Object.assign(this.colors, props.colors);
     this.props.sourceArray = Object.assign(this.sourceArray, props.sourceArray);
     this.updateSource();
   }

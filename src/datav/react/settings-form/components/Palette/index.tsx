@@ -9,7 +9,7 @@ import './index.less';
 /** 转换echart颜色对象 */
 function toEChartColors(colors: IGlobalColor): string | object {
   return colors.map((m) => {
-    if (typeof m === 'string') return m;
+    if (m.type === 'base') return m.baseColor;
     return {
       type: 'linear',
       x: 0,
@@ -29,10 +29,11 @@ function toEChartColors(colors: IGlobalColor): string | object {
 function toConfigColors(colors: any[]): IGlobalColor {
   const colorList = colors.map((m) => {
     const baseColor = m || '';
+    const isStr = typeof baseColor === 'string';
     return {
-      baseColor: typeof baseColor === 'string' ? m : m.colorStops?.[0].color,
-      gradualColor: typeof baseColor === 'string' ? m : m.colorStops?.[1].color,
-      type: m.colorStops?.[0].y ? 'vertical' : 'horizontal',
+      baseColor: isStr ? m : m.colorStops?.[0].color,
+      gradualColor: isStr ? m : m.colorStops?.[1].color,
+      type: isStr ? 'base' : m.y ? 'vertical' : 'horizontal',
     };
   });
   return colorList;
@@ -46,10 +47,8 @@ export const Palette: React.FC<any> = observer(({ value, onChange }) => {
     return value ? toConfigColors(value) : dvGlobal.colors[0];
   }, [value]);
   const handleChange = (colors: IGlobalColor) => {
-    debugger;
     onChange(toEChartColors(colors));
   };
-
   return (
     <div className="palette-select-dropdown-menu">
       <Collapse className="palette-collapse" expandIconPosition="right" ghost>
