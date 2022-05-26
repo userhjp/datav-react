@@ -14,11 +14,10 @@ type DataConfigProps = {
   fields: IFieldSetting;
   onChange: (value: IDataSourceSetting) => void;
   value: IDataSourceSetting;
-  editorType: 'json' | 'plaintext';
 };
 
 export const DataConfig: React.FC<DataConfigProps> = (props) => {
-  const { onChange, value, editorType, fields } = props;
+  const { onChange, value, fields } = props;
   const configForm = useRef<IDataSourceSetting>();
   const dataSource = useDataSource();
   const dvGlobal = useDvGlobal();
@@ -61,7 +60,7 @@ export const DataConfig: React.FC<DataConfigProps> = (props) => {
                 component={[
                   MonacoEditor,
                   {
-                    language: 'typescript',
+                    language: 'javascript',
                     readOnly: false,
                     autoFormat: true,
                     height: 180,

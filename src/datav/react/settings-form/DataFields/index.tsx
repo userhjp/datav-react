@@ -26,14 +26,6 @@ export const DataFields: React.FC = observer(() => {
   if (!value.config?.data) {
     return <SettingsEmpty title="该组件无需配置数据" />;
   }
-  const editorType: languageType = useMemo<'json' | 'plaintext'>(() => {
-    return {
-      array: 'json',
-      object: 'json',
-      string: 'plaintext',
-    }[value?.config?.dataType || 'string'];
-  }, [value?.config?.dataType]);
-
   return (
     <>
       {Object.keys(value?.fields || {}).length > 0 && (
@@ -110,7 +102,7 @@ export const DataFields: React.FC = observer(() => {
             </span>
           </div>
           {/* 数据配置 */}
-          <ObjectField name="config" component={[DataConfig, { editorType, fields: value?.fields }]} />
+          <ObjectField name="config" component={[DataConfig, { fields: value?.fields }]} />
         </div>
         <div className="ds-line mt2">
           <span>数据响应结果 ( 只读 ) </span>
@@ -124,18 +116,18 @@ export const DataFields: React.FC = observer(() => {
           <span className="ds-dot" />
         </div>
       </div>
-      <ReadOnlyEditor editorType={editorType} compId={field.form.values.id} />
+      <ReadOnlyEditor compId={field.form.values.id} />
     </>
   );
 });
 
-const ReadOnlyEditor: React.FC<{ editorType: languageType; compId: string }> = observer(({ editorType, compId }) => {
+const ReadOnlyEditor: React.FC<{ compId: string }> = observer(({ compId }) => {
   const dataSource = useDataSource();
   const editorData = dataSource.getData(compId)?.data;
   return (
     <MonacoEditor
       {...{
-        language: editorType,
+        language: 'json',
         readOnly: true,
         autoFormat: true,
         height: 350,

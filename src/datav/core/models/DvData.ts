@@ -18,6 +18,7 @@ export class DvData {
   settingDispose: () => void;
   loading: boolean;
   data: null | Array<any> | object;
+  metadata: null | Array<any> | object;
 
   autoUpdate: boolean;
   updateTime: number;
@@ -60,6 +61,7 @@ export class DvData {
       this.loading = true;
       this.changeFieldsStatus(FieldStatus.loading);
       const res = await this.dataSource.requestData(this.config);
+      this.metadata = toJS(res);
       this.data = this.mapData(this.filterData(res));
       this.changeFieldsStatus();
       this.loading = false;
@@ -94,10 +96,10 @@ export class DvData {
   changeFieldsStatus(status?: FieldStatus) {
     this.fieldsStatus = {};
     let _data = null;
-    if (Array.isArray(this.data)) {
-      _data = this.data[0];
-    } else if (typeof this.data === 'object') {
-      _data = this.data;
+    if (Array.isArray(this.metadata)) {
+      _data = this.metadata[0];
+    } else if (typeof this.metadata === 'object') {
+      _data = this.metadata;
     }
     if (!_data) _data = {};
     Object.entries(this.fieldMap).forEach(([key, fc]) => {

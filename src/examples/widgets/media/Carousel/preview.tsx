@@ -36,7 +36,12 @@ const Carousel: React.FC<IWidgetProps> = ({ options, events, data, attr }) => {
 
   return (
     <div className="widgets-carousel">
-      <AntCarousel {...config}>
+      <AntCarousel
+        {...config}
+        // beforeChange={(e) => {
+        //   console.log(e);
+        // }}
+      >
         {(data || []).map((m, key) => {
           return (
             <div key={key}>
