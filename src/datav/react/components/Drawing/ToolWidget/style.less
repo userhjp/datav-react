@@ -48,8 +48,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
 
   &::after {
     width: 6px;
@@ -111,16 +111,16 @@ each(@selectors2, {
     position: absolute;
     z-index: 3;
     display: flex;
-    @{placement}: -15px;
-    @{adjacency}: -15px;
+    @{placement}: -12px;
+    @{adjacency}: -12px;
     width: 11px;
     height: 11px;
     justify-content: center;
     align-items: center;
 
     .rotate-handler {
-      padding-@{placement}: 21px;
-      padding-@{adjacency}: 21px;
+      padding-@{placement}: 15px;
+      padding-@{adjacency}: 15px;
     }
   }
 });

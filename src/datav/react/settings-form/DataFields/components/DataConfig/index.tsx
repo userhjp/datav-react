@@ -64,7 +64,7 @@ export const DataConfig: React.FC<DataConfigProps> = (props) => {
                     language: 'typescript',
                     readOnly: false,
                     autoFormat: true,
-                    height: 120,
+                    height: 180,
                     fullScreenTitle: '数据过滤器',
                     className: 'filter-editor',
                     fnName: 'filter(res)',
