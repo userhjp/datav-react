@@ -84,10 +84,25 @@ const contrastEventFields = (eventsFields: IEventFieldSetting): Array<IEventFiel
   });
 };
 
-export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
-  const fieldsDes = config.data?.fields ?? {};
-  const dataType = isArr(config.data?.value) ? IDataType.array : IDataType.object;
+const createSettingData = (cfg: ICreateWidgetConfig) => {
+  if (!cfg.data) return null;
+  const fieldsDes = cfg.data?.fields ?? {};
+  const dataType = isArr(cfg.data?.value) ? IDataType.array : IDataType.object;
   const fields: IFieldSetting = createWidgetFields(fieldsDes);
+  return {
+    fields,
+    config: {
+      dataType,
+      data: cfg.data?.value || null,
+      apiType: ApiType.static,
+      useFilter: false,
+      filterCode: 'return res;',
+    },
+    autoUpdate: false,
+    updateTime: 1,
+  };
+};
+export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
   const eventsFields: IWidgetEvents = Object.keys(config.events || {}).reduce((pval, cval) => {
     const eventOpt = config.events[cval];
     pval[cval] = {
@@ -102,17 +117,6 @@ export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
     info: { name: config.name, type: config.type, ver: config.ver },
     attr: { x: config.x, y: config.y, w: config.w, h: config.h },
     events: eventsFields,
-    data: {
-      fields,
-      config: {
-        dataType,
-        data: config.data?.value || null,
-        apiType: ApiType.static,
-        useFilter: false,
-        filterCode: 'return res;',
-      },
-      autoUpdate: false,
-      updateTime: 1,
-    },
+    data: createSettingData(config),
   };
 };

@@ -5,7 +5,6 @@ import { Checkbox } from '@formily/antd';
 import { MonacoEditor, BlurInput, SettingsEmpty } from '../components';
 import { useMemo } from 'react';
 import { IDataSetting } from '../../interface';
-import { languageType } from '../components/MonacoEditor/editor-config';
 import { InputNumber, Tooltip } from 'antd';
 import { useDataSource } from '../../hooks';
 import { DataConfig, DataState } from './components';

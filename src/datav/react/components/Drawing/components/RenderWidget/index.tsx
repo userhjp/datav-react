@@ -19,6 +19,7 @@ export const RenderWidget: React.FC<{ widgetInfo: IWidgetSetting }> = observer(
     const [data, setData] = useState(null);
     const Widget: any = widgets[widgetInfo.info.type];
     useEffect(() => {
+      if (!widgetInfo.data) return null;
       const dvdata = new DvData({
         dataSource,
         id: widgetInfo.id,
