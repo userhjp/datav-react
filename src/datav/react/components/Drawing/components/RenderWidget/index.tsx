@@ -65,13 +65,6 @@ export const RenderWidget: React.FC<{ widgetInfo: IWidgetSetting }> = observer(
   }
 );
 
-const Test: React.FC<{ compId: string }> = observer(({ compId }) => {
-  // const dataSource = useDataSource();
-  // const editorData = dataSource.getData(compId)?.data;
-  debugger;
-  return <div>{JSON.stringify(compId)}</div>;
-});
-
 // 加载lodaing组件
 export const WidgetLoading: React.FC = () => {
   return (
