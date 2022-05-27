@@ -17,7 +17,7 @@ export class DvData {
   dispose: () => void;
   settingDispose: () => void;
   loading: boolean;
-  data: null | Array<any> | object;
+  data: null | Array<any> | object = null;
   metadata: null | Array<any> | object;
 
   autoUpdate: boolean;
