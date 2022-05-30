@@ -47,3 +47,4 @@ export * from './play';
 export * from './add';
 export * from './actions';
 export * from './iconfont';
+export * from './warning';

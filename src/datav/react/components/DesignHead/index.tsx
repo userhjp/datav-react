@@ -1,8 +1,8 @@
 import { observer } from '@formily/react';
-import { Space, Tooltip } from 'antd';
-import React from 'react';
+import { Badge, Dropdown, Menu, Space, Tooltip } from 'antd';
+import React, { useRef } from 'react';
 import { PanelType } from '../../../shared';
-import { useCursor, useOperation, useDesigner, useToolbar } from '../../hooks';
+import { useCursor, useOperation, useDesigner, useToolbar, useDvGlobal, useSelected, useSelection } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import { CursorType, Engine } from '../../../core';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../../../core/events';
@@ -139,10 +139,49 @@ export const DesignHead: React.FC = observer(() => {
                 <IconWidget infer="Preview" style={{ color: '#fff' }} />
               </div>
             </Tooltip>
+            <DvError />
           </Space>
         </div>
       </div>
       <div className={`head-loading ${toolbar.loading ? 'loading' : ''}`} />
     </>
+  );
+});
+
+const DvError: React.FC = observer(() => {
+  const domRef = useRef<HTMLDivElement>();
+  const global = useDvGlobal();
+  const selection = useSelection();
+
+  const menuList = Array.from(global.dvError).map(([key, val]) => {
+    return {
+      key,
+      label: (
+        <div className="dv-error-item">
+          <a onClick={() => selection.safeSelect(key)}>ID：{key}</a>
+          <div>异常类型：{val.title}</div>
+          <div>异常信息：{val.content}</div>
+        </div>
+      ),
+    };
+  });
+  return (
+    <div ref={domRef} className="dv-error-container">
+      {menuList.length < 1 ? (
+        <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottomRight" title={'无组件异常'}>
+          <div className="head-btn">
+            <IconWidget infer="Warning" style={{ color: '#fff' }} />
+          </div>
+        </Tooltip>
+      ) : (
+        <Dropdown overlay={<Menu items={menuList} />} getPopupContainer={() => domRef.current}>
+          <div className="head-btn" onClick={() => {}}>
+            <Badge dot={global.dvError.size > 0}>
+              <IconWidget infer="Warning" style={{ color: '#fff', fontSize: 15 }} />
+            </Badge>
+          </div>
+        </Dropdown>
+      )}
+    </div>
   );
 });

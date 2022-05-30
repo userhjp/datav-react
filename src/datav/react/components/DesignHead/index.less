@@ -95,3 +95,24 @@
     transform: rotateZ(360deg);
   }
 }
+
+.dv-error-container {
+  .ant-dropdown-menu {
+    background-color: #2a2e33;
+    border: 1px solid @m-input-border-color;
+    .ant-dropdown-menu-item {
+      color: @m-text-color;
+      &:not(:last-child) {
+        border-bottom: 1px solid @m-input-border-color;
+      }
+    }
+  }
+
+  .dv-error-item {
+    font-size: 12px;
+  }
+
+  .ant-dropdown-menu-item.ant-dropdown-menu-item-active {
+    background-color: transparent;
+  }
+}

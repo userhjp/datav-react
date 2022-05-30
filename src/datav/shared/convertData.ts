@@ -18,29 +18,6 @@ export const checkDataType = (dataType: IDataType, data: any) => {
   return typeof data === dataType;
 };
 
-export const execFilter = (dataFilter: string, data: any) => {
-  let res = JSON.parse(JSON.stringify(data));
-  try {
-    const filter = `if (!data) { return data; }  return filter(data);  function filter(res){  ${dataFilter}   }`;
-    const func = new Function('data', filter);
-    res = func(res);
-  } catch (error) {
-    if (process.env.NODE_ENV == 'development') {
-      notification.config({
-        maxCount: 3,
-      });
-      notification.error({
-        message: '过滤器执行异常',
-        description: error.toString(),
-        className: 'dv-notification',
-      });
-    } else {
-      console.log('过滤器执行异常', error.toString());
-    }
-  }
-  return res;
-};
-
 export const mapObject = (obj: Record<string, any>, fieldMap: Record<string, string>, isOriginal = true) => {
   if (!fieldMap || !Object.keys(fieldMap).length) return obj;
   const c_obj = Object.create({ ...obj });

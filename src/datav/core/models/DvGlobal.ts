@@ -18,8 +18,15 @@ export type IDvGlobal = {
   sourceArray: ISourceGlobal[];
   colors: Array<IGlobalColor>;
 };
+
+export type DvError = {
+  id: string;
+  title: string;
+  content: string;
+};
 export class DvGlobal {
   dataSource: DataSource;
+  dvError: Map<string, DvError>;
   props: IDvGlobal = {
     sourceArray: [],
     colors: [],
@@ -30,6 +37,7 @@ export class DvGlobal {
       ...DvGlobal.defaultProps,
     };
     this.dataSource = dataSource;
+    this.dvError = new Map();
     this.makeObservable();
   }
 
@@ -48,20 +56,19 @@ export class DvGlobal {
   makeObservable() {
     define(this, {
       props: observable,
+      dvError: observable,
       colors: observable.computed,
       sourceArray: observable.computed,
       enableDataSources: observable.computed,
       setProps: action,
+      addError: action,
+      removeError: action,
     });
   }
 
   setProps(props: IDvGlobal) {
     this.props.colors = Object.assign(this.colors, props.colors);
     this.props.sourceArray = Object.assign(this.sourceArray, props.sourceArray);
-    this.updateSource();
-  }
-
-  updateSource() {
     this.dataSource.globalDataMap.forEach((f) => f.destroy());
     this.dataSource.globalDataMap.clear();
     this.sourceArray.forEach((f) => {
@@ -79,6 +86,18 @@ export class DvGlobal {
         })
       );
     });
+  }
+
+  addError(error: DvError) {
+    this.dvError.set(error.id, error);
+  }
+
+  removeError(id: string) {
+    this.dvError.delete(id);
+  }
+
+  hasError(id: string) {
+    return this.dvError.has(id);
   }
 
   static defaultProps: IDvGlobal = {

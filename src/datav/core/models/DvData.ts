@@ -1,4 +1,4 @@
-import { checkDataType, execFilter, FieldStatus, getFieldMap, mapObject } from '@/datav/shared';
+import { checkDataType, FieldStatus, getFieldMap, mapObject } from '@/datav/shared';
 import { define, observable, action, autorun, toJS } from '@formily/reactive';
 import { IDataSetting, IDataSourceSetting } from '../../react/interface';
 import { DataSource } from './DataSource';
@@ -76,12 +76,30 @@ export class DvData {
   filterData(data: any) {
     if (!data || data?.isError) return data;
     if (this.config.useFilter && this.config.filterCode) {
-      data = execFilter(this.config.filterCode, data);
+      data = this.execFilter(this.config.filterCode, data);
     }
     if (!checkDataType(this.config.dataType, data)) {
       data = { isError: true, message: '数据有误，类型应为：' + this.config.dataType, data: data || null };
     }
     return data;
+  }
+
+  execFilter(dataFilter: string, data: any) {
+    let res = JSON.parse(JSON.stringify(data));
+    try {
+      const filter = `if (!data) { return data; }  return filter(data);  function filter(res){  ${dataFilter}   }`;
+      const func = new Function('data', filter);
+      res = func(res);
+      this.dataSource.engine.global.removeError(this.id);
+    } catch (error) {
+      const errorMsg = error.toString();
+      this.dataSource.engine.global.addError({
+        id: this.id,
+        title: '过滤器执行异常',
+        content: errorMsg,
+      });
+    }
+    return res;
   }
 
   mapData(data: any) {

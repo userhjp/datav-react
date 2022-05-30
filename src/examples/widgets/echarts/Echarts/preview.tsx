@@ -33,15 +33,13 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) 
       const fun = `const fun = (resData, myChart, echarts) => {  ${opt}   }; return fun(resData, myChart, echarts);`;
       const func = new Function('resData', 'myChart', 'echarts', fun);
       echartOpt = func(data, myChart.current, echarts);
-    } catch (error) {
-      console.log(error);
-    }
-    try {
       if (echartOpt && !echartOpt.color) {
         // echartOpt.color = colors?.color;
       }
       myChart.current.setOption(echartOpt, true);
-    } catch (error) {}
+    } catch (error) {
+      throw Error(error);
+    }
   }, [options, data]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;

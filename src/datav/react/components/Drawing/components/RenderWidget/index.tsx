@@ -2,12 +2,12 @@ import { IWidgetSetting } from '../../../../interface';
 import { useDataSource } from '../../../../hooks';
 import { cancelIdle, requestIdle } from '../../../../../shared';
 import { autorun, toJS } from '@formily/reactive';
-import React, { Suspense, useEffect, useMemo, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 import { useWidgets } from '@/datav/react/hooks/useWidgets';
 import { DvData } from '@/datav/core/models/DvData';
 import { observer } from '@formily/react';
-
 import './index.less';
+
 const GlobalState = {
   idleRequest: null,
 };
@@ -18,6 +18,7 @@ export const RenderWidget: React.FC<{ widgetInfo: IWidgetSetting }> = observer(
     const widgets = useWidgets();
     const [data, setData] = useState(null);
     const Widget: any = widgets[widgetInfo.info.type];
+
     useEffect(() => {
       if (!widgetInfo.data) return null;
       const dvdata = new DvData({
@@ -34,13 +35,21 @@ export const RenderWidget: React.FC<{ widgetInfo: IWidgetSetting }> = observer(
         dataSource.removeData(widgetInfo.id);
       };
     }, []);
-
     const options = toJS(widgetInfo.options);
     if (!widgetInfo.info || !widgetInfo.info.type || widgetInfo.attr.isHide) return <div />;
     if (!options || !Widget || JSON.stringify(options) === '{}') return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>
-        <ErrorBoundary name={widgetInfo.info.type}>
+        <ErrorBoundary
+          name={widgetInfo.info.type}
+          onError={(msg) => {
+            dataSource.engine.global.addError({
+              id: widgetInfo.id,
+              title: '组件内部异常',
+              content: msg,
+            });
+          }}
+        >
           <Widget
             {...{
               options,
@@ -78,7 +87,7 @@ export const WidgetLoading: React.FC = () => {
   );
 };
 
-export class ErrorBoundary extends React.Component<{ name: string }> {
+export class ErrorBoundary extends React.Component<{ name: string; onError: (message: string) => void }> {
   state = {
     hasError: false,
     errorMsg: '',
@@ -90,7 +99,7 @@ export class ErrorBoundary extends React.Component<{ name: string }> {
   }
 
   componentDidCatch(error, errorInfo) {
-    // 将错误日志上报给服务器
+    this.props.onError(error.toString());
   }
 
   render() {

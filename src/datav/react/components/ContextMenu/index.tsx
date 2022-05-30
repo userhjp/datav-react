@@ -1,6 +1,7 @@
 import { Observer } from '@formily/react';
 import { Dropdown, Menu } from 'antd';
-import React, { useMemo } from 'react';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
+import React from 'react';
 import { MoveSortType } from '../../../shared';
 import { useOperation } from '../../hooks';
 import { IconWidget } from '../IconWidget';
@@ -20,70 +21,115 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
   const lockCom = (lockCom: boolean) => operation.lockCom(currentId, lockCom);
   const hideCom = (hideCom: boolean) => operation.hideCom(currentId, hideCom);
 
-  const menu = useMemo(
-    () => (
-      <Menu style={{ minWidth: 100, padding: 0 }} onMouseDown={(e) => e.stopPropagation()}>
-        <Menu.Item key="1" onClick={moveTop}>
+  const menuList: ItemType[] = [
+    {
+      key: '1',
+      label: (
+        <span>
           <IconWidget infer="ZhiDing" />
           &nbsp; 置顶
-        </Menu.Item>
-        <Menu.Item key="2" onClick={moveBottom}>
+        </span>
+      ),
+      onClick: moveTop,
+    },
+    {
+      key: '2',
+      label: (
+        <span>
           <IconWidget infer="ZhiDi" />
           &nbsp; 置底
-        </Menu.Item>
-        <Menu.Item key="3" onClick={moveUp}>
+        </span>
+      ),
+      onClick: moveBottom,
+    },
+    {
+      key: '3',
+      label: (
+        <span>
           <IconWidget infer="MoveUp" />
           &nbsp; 上移一层
-        </Menu.Item>
-        <Menu.Item key="4" onClick={moveDown}>
+        </span>
+      ),
+      onClick: moveUp,
+    },
+    {
+      key: '4',
+      label: (
+        <span key="4">
           <IconWidget infer="MoveDown" />
           &nbsp; 下移一层
-        </Menu.Item>
-        <Menu.Divider style={{ backgroundColor: '#3a4659', margin: 0 }} />
-        <Menu.Item key="5" onClick={() => lockCom(!com.attr.isLock)}>
-          <Observer>
-            {() => (
-              <>
-                <IconWidget infer="lock" />
-                &nbsp; {com.attr.isLock ? '解锁' : '锁定'}
-              </>
-            )}
-          </Observer>
-        </Menu.Item>
-        <Menu.Item key="6" onClick={() => hideCom(!com.attr.isHide)}>
-          <Observer>
-            {() => (
-              <>
-                <IconWidget infer={com.attr.isHide ? 'Eye' : 'EyeClose'} />
-                &nbsp; {com.attr.isHide ? '显示' : '隐藏'}
-              </>
-            )}
-          </Observer>
-        </Menu.Item>
-        <Menu.Divider style={{ backgroundColor: '#3a4659', margin: 0 }} />
-        <Menu.Item key="7" onClick={rename}>
+        </span>
+      ),
+      onClick: moveDown,
+    },
+    {
+      type: 'divider',
+    },
+    {
+      key: '5',
+      label: (
+        <Observer>
+          {() => (
+            <span>
+              <IconWidget infer="lock" />
+              &nbsp; {com.attr.isLock ? '解锁' : '锁定'}
+            </span>
+          )}
+        </Observer>
+      ),
+      onClick: () => lockCom(!com.attr.isLock),
+    },
+    {
+      key: '6',
+      label: (
+        <Observer>
+          {() => (
+            <span>
+              <IconWidget infer={com.attr.isHide ? 'Eye' : 'EyeClose'} />
+              &nbsp; {com.attr.isHide ? '显示' : '隐藏'}
+            </span>
+          )}
+        </Observer>
+      ),
+      onClick: () => hideCom(!com.attr.isHide),
+    },
+    {
+      type: 'divider',
+    },
+    {
+      key: '7',
+      label: (
+        <span>
           <IconWidget infer="Edit" />
           &nbsp; 重命名
-        </Menu.Item>
-        <Menu.Item key="8" onClick={copyComp}>
+        </span>
+      ),
+      onClick: rename,
+    },
+    {
+      key: '8',
+      label: (
+        <span>
           <IconWidget infer="Copy" />
           &nbsp; 复制
-        </Menu.Item>
-        <Menu.Item key="9" onClick={removeComp}>
+        </span>
+      ),
+      onClick: copyComp,
+    },
+    {
+      key: '9',
+      label: (
+        <span>
           <IconWidget infer="Delete" />
           &nbsp; 删除
-        </Menu.Item>
-        {/* <Menu.Item key="8" onClick={() => {}}>
-          <IconWidget infer="Export" />
-          &nbsp; 导出
-        </Menu.Item> */}
-      </Menu>
-    ),
-    []
-  );
+        </span>
+      ),
+      onClick: removeComp,
+    },
+  ];
 
   return (
-    <Dropdown destroyPopupOnHide overlay={menu} trigger={['contextMenu']} overlayClassName="context-menu-weidget">
+    <Dropdown destroyPopupOnHide overlay={<Menu items={menuList} />} trigger={['contextMenu']} overlayClassName="context-menu-weidget">
       {children}
     </Dropdown>
   );
