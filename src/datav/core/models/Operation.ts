@@ -66,11 +66,13 @@ export class Operation {
     if (this.selection.length > 1) {
       this.selection.selected.forEach((id) => {
         this.selection.remove(id);
+        this.engine.global.dvError.delete(id);
         this.components = this.components.filter((f) => f.id !== id);
       });
     } else {
       if (!id) id = this.selection.first;
       this.selection.remove(id);
+      this.engine.global.dvError.delete(id);
       this.components = this.components.filter((f) => f.id !== id);
     }
   }

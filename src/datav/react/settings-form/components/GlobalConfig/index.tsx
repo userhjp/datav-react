@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { FormDrawer, FormLayout } from '@formily/antd';
+import { Checkbox, FormDrawer, FormLayout } from '@formily/antd';
 import { Button, Tooltip } from 'antd';
-import { ArrayField, observer } from '@formily/react';
+import { ArrayField, Field, observer } from '@formily/react';
 import { InputProps } from 'rc-input';
-import { MonacoEditor } from '../MonacoEditor';
+import { MonacoEditor } from '../../components';
 import { DataArrayCollapse } from './DataArrayCollapse';
 import { useDataSource, useDvGlobal } from '@/datav/react/hooks';
 import { DrawerContext } from './context';
@@ -58,8 +58,14 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
             <div style={{ paddingRight: 8 }}>
               <ArrayField name="colors" component={[GlobalColors]} />
             </div>
-            <div className="filter-edit" style={{ height: form.values.useFilter ? 180 : 0 }}>
-              {/* <Field
+            {/* <div className="step-title">
+              <label style={{ cursor: 'pointer' }}>
+                <Field name="useFilter" component={[Checkbox]} />
+                <span className="update-txt">&nbsp;全局数据过滤器</span>
+              </label>
+            </div>
+            <div className="filter-edit" style={{ maxHeight: 180, height: form.values.useFilter ? 180 : 0 }}>
+              <Field
                 name="filterCode"
                 reactions={(field) => {
                   const autoUpdate = field.query('.useFilter');
@@ -70,17 +76,17 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
                 component={[
                   MonacoEditor,
                   {
-                    language: 'typescript',
+                    language: 'javascript',
                     readOnly: false,
                     autoFormat: true,
-                    height: 120,
+                    height: 180,
                     fullScreenTitle: '数据过滤器',
                     className: 'filter-editor',
                     fnName: 'filter(res)',
                   },
                 ]}
-              /> */}
-            </div>
+              />
+            </div> */}
           </FormLayout>
         );
       }
@@ -88,6 +94,7 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
       initialValues: {
         sourceArray: dvGlobal.sourceArray,
         colors: dvGlobal.colors,
+        filterCode: 'return res.data',
       },
     });
   };

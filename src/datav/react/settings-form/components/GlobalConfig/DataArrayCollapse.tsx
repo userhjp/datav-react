@@ -19,7 +19,12 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
       <Collapse expandIconPosition="right" defaultActiveKey={[]} ghost>
         {field.value?.map((item, index) => {
           return (
-            <Collapse.Panel className="global-config-source" header={<CollapseHeader name={index} domRef={domRef} />} key={index}>
+            <Collapse.Panel
+              forceRender
+              className="global-config-source"
+              header={<CollapseHeader name={index} domRef={domRef} />}
+              key={index}
+            >
               <ObjectField name={index}>
                 {item.config.apiType === 'api' && (
                   <div
