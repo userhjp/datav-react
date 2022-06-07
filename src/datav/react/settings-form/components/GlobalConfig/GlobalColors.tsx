@@ -147,7 +147,7 @@ export const ColorArrayForm: React.FC<{ value: IGlobalColor; onChange: (val: IGl
       <SchemaField>
         <SchemaField.Array
           name="colorList"
-          title="颜色配置"
+          title={compColor ? '' : '颜色配置'}
           x-decorator="FormItem"
           x-component="ArrayItems"
           x-decorator-props={{
