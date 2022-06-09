@@ -1,4 +1,4 @@
-import { IWidgetSetting } from '../../../../interface';
+import { IVisible, IWidgetSetting } from '../../../../interface';
 import { useDataSource } from '../../../../hooks';
 import { cancelIdle, requestIdle } from '../../../../../shared';
 import { autorun, toJS } from '@formily/reactive';
@@ -50,16 +50,18 @@ export const RenderWidget: React.FC<{ widgetInfo: IWidgetSetting }> = observer(
             });
           }}
         >
-          <Widget
-            {...{
-              options,
-              data,
-              events: widgetInfo.events,
-              id: widgetInfo.id,
-              info: widgetInfo.info,
-              attr: widgetInfo.attr,
-            }}
-          />
+          <Visible visible={widgetInfo.visible}>
+            <Widget
+              {...{
+                options,
+                data,
+                events: widgetInfo.events,
+                id: widgetInfo.id,
+                info: widgetInfo.info,
+                attr: widgetInfo.attr,
+              }}
+            />
+          </Visible>
         </ErrorBoundary>
       </Suspense>
     );
@@ -87,7 +89,14 @@ export const WidgetLoading: React.FC = () => {
   );
 };
 
-export class ErrorBoundary extends React.Component<{ name: string; onError: (message: string) => void }> {
+const Visible: React.FC<{ visible: IVisible }> = observer(({ visible, children }) => {
+  const dataSource = useDataSource();
+  const isShow = visible.enable && visible.key ? dataSource.variables[visible.key] === visible.val : true;
+  if (!isShow) return <div />;
+  return <div style={{ width: '100%', height: '100%' }}>{children}</div>;
+});
+
+class ErrorBoundary extends React.Component<{ name: string; onError: (message: string) => void }> {
   state = {
     hasError: false,
     errorMsg: '',

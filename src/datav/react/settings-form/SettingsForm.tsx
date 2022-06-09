@@ -16,6 +16,7 @@ import { IconWidget } from '../components';
 import { SettingsFormContext } from './context';
 import { useWidgets } from '../hooks/useWidgets';
 import { layoutSchema, pageSchema, baseAttrSchema } from './schema';
+import { StatusFields } from './StatusFields';
 import './styles.less';
 
 const GlobalState = {
@@ -107,7 +108,8 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                       <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />
                     </Tabs.TabPane>
                     <Tabs.TabPane forceRender key="3" tab="交互" className="pl_10">
-                      <ObjectField key={`${currentNode.id}`} name="events" component={[EventFields]} />
+                      <ObjectField name="events" component={[EventFields]} />
+                      <ObjectField name="visible" component={[StatusFields]} />
                     </Tabs.TabPane>
                   </Tabs>
                 </>

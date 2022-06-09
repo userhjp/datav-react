@@ -1,4 +1,4 @@
-import { IDataSetting, IWidgetAttr, IWidgetEvents, IWidgetInfo, IWidgetProps } from '../../react/interface';
+import { IDataSetting, IVisible, IWidgetAttr, IWidgetEvents, IWidgetInfo, IWidgetProps } from '../../react/interface';
 import { IMoveType } from '../types';
 import { action, define, observable } from '@formily/reactive';
 
@@ -14,6 +14,8 @@ export class WidgetNode {
   events: IWidgetEvents;
   /** 组件配置 */
   options: Record<string, any>;
+  /** 组件显示隐藏 */
+  visible: IVisible;
 
   constructor(props: IWidgetProps) {
     this.id = props.id;
@@ -22,6 +24,12 @@ export class WidgetNode {
     this.data = props.data;
     this.events = props.events;
     this.options = props.options || {};
+    this.visible = props.visible || {
+      enable: false,
+      key: '',
+      val: '',
+      type: 'hide',
+    };
     this.makeObservable();
   }
 
@@ -32,6 +40,7 @@ export class WidgetNode {
       data: observable,
       events: observable,
       options: observable,
+      visible: observable,
       moveTo: action,
       changeLock: action,
       changeVisible: action,

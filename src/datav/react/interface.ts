@@ -21,10 +21,15 @@ export type IWidgetConfig = {
   schema?: ISchema;
   /** 交互数据属性 */
   events?: {
-    [key: string]: {
+    /** 映射字段到全局变量 */
+    changed: {
       /** 事件描述 */
       description: string;
       /** 字段映射 默认data.fields */
+      fields?: IEventFieldSetting;
+    };
+    [key: string]: {
+      description: string;
       fields?: IEventFieldSetting;
     };
   };
@@ -47,6 +52,7 @@ export interface IWidgetProps<T = { [key: string]: any }> {
   options?: T;
   data?: IWidgetData;
   events?: IWidgetEvents;
+  visible?: IVisible;
 }
 
 /** 组件位置信息 */
@@ -75,6 +81,8 @@ export interface IWidgetSetting {
   options?: { [key: string]: any };
   data?: IDataSetting;
   events?: IWidgetEvents;
+  /** 组件显示隐藏 */
+  visible: IVisible;
 }
 
 /** 页面配置 */
@@ -127,6 +135,13 @@ export interface IChangedEvent {
 
 export interface IWidgetEvents {
   [key: string]: IChangedEvent;
+}
+
+export interface IVisible {
+  enable: boolean;
+  key: string;
+  val: string;
+  type: 'hide' | 'destroy';
 }
 
 /** 数据配置 */

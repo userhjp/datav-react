@@ -57,9 +57,8 @@ export const EventFields: React.FC = observer(() => {
   const field = useField<ObjectFieldType<IDataSetting>>();
   const value = useMemo(() => field.value || {}, [field.value]);
   const _formCollapse = useMemo(() => createFormCollapse(), []);
-
   if (Object.keys(value).length < 1) {
-    return <SettingsEmpty title="该组件没有交互事件" />;
+    return <div />;
   }
 
   const renderExtra = (obj: any, key: string) => {
