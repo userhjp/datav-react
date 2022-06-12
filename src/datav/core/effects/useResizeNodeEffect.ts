@@ -1,6 +1,6 @@
-import { Engine, CursorType, CursorDragType } from '../models';
+import { Engine, CursorType, CursorDragType, WidgetNode } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { IWidgetAttr, IWidgetSetting } from '../../react/interface';
+import { IWidgetAttr } from '../../react/interface';
 import { toJS } from '@formily/reactive';
 import { Direction, IPoint, Point } from '../../shared';
 
@@ -12,7 +12,7 @@ export const useResizeNodeEffect = (engine: Engine) => {
     y: 0,
   };
   let attr: IWidgetAttr;
-  let node: IWidgetSetting;
+  let node: WidgetNode;
 
   engine.subscribeTo(DragStartEvent, (e) => {
     if (engine.cursor.type !== CursorType.Normal) return;

@@ -86,15 +86,15 @@ export class DvData {
 
   execFilter(dataFilter: string, data: any) {
     let res = JSON.parse(JSON.stringify(data));
+    const node = this.dataSource.engine.operation.findById(this.id);
     try {
       const filter = `if (!data) { return data; }  return filter(data);  function filter(res){  ${dataFilter}   }`;
       const func = new Function('data', filter);
       res = func(res);
-      this.dataSource.engine.global.removeError(this.id);
+      node.clearError();
     } catch (error) {
       const errorMsg = error.toString();
-      this.dataSource.engine.global.addError({
-        id: this.id,
+      node.setError({
         title: '过滤器执行异常',
         content: errorMsg,
       });

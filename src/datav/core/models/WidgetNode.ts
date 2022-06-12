@@ -1,7 +1,10 @@
 import { IDataSetting, IVisible, IWidgetAttr, IWidgetEvents, IWidgetInfo, IWidgetProps } from '../../react/interface';
 import { IMoveType } from '../types';
 import { action, define, observable } from '@formily/reactive';
-
+export type NodeError = {
+  title: string;
+  content: string;
+};
 export class WidgetNode {
   id: string;
   /** 组件基础信息 */
@@ -16,6 +19,8 @@ export class WidgetNode {
   options: Record<string, any>;
   /** 组件显示隐藏 */
   visible: IVisible;
+  /** 组件异常信息 */
+  errorInfo: NodeError;
 
   constructor(props: IWidgetProps) {
     this.id = props.id;
@@ -41,9 +46,13 @@ export class WidgetNode {
       events: observable,
       options: observable,
       visible: observable,
+      errorInfo: observable.ref,
       moveTo: action,
       changeLock: action,
       changeVisible: action,
+
+      setError: action,
+      clearError: action,
     });
   }
 
@@ -72,5 +81,13 @@ export class WidgetNode {
 
   changeVisible(isHide: boolean) {
     this.attr.isHide = !!isHide;
+  }
+
+  setError(error: NodeError) {
+    this.errorInfo = error;
+  }
+
+  clearError() {
+    this.errorInfo = null;
   }
 }

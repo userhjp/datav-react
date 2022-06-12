@@ -1,7 +1,7 @@
-import { IWidgetSetting } from '../../react/interface';
 import { calcBoundingRect, cancelIdle, IPoint, isPointInRect, requestIdle } from '../../shared';
 import { action, define, observable } from '@formily/reactive';
 import { Engine } from './Engine';
+import { WidgetNode } from './WidgetNode';
 
 export interface IViewportProps {
   engine: Engine;
@@ -259,13 +259,13 @@ export class Viewport {
     return elementRect;
   }
 
-  getValidNodeRect(node: IWidgetSetting): DOMRect {
+  getValidNodeRect(node: WidgetNode): DOMRect {
     if (!node) return null;
     const rect = this.getElementRectById(node.id);
     return calcBoundingRect([this.innerRect, rect]);
   }
 
-  getValidNodeOffsetRect(node: IWidgetSetting): DOMRect {
+  getValidNodeOffsetRect(node: WidgetNode): DOMRect {
     if (!node) return null;
     const rect = this.getElementOffsetRectById(node.id);
     return rect;

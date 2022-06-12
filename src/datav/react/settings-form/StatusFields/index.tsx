@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ObjectField as ObjectFieldType } from '@formily/core';
 import { Field, observer, useField } from '@formily/react';
 import { toArr } from '@formily/shared';
@@ -57,18 +57,17 @@ export const StatusFields: React.FC = observer(() => {
   const field = useField<ObjectFieldType<IDataSetting>>();
   const _formCollapse = useMemo(() => createFormCollapse(), []);
 
+  useEffect(() => {
+    if (!field.value.enable) _formCollapse?.removeActiveKey('1');
+  }, [field.value.enable]);
+
   const renderExtra = (key: string) => {
     return (
       <Checkbox
         checked={field.value.enable}
         style={{ color: '#bcc9d4', fontSize: '12px' }}
         onClick={(e) => e.stopPropagation()}
-        onChange={(e) => {
-          field.value.enable = e.target.checked;
-          if (!field.value.enable) {
-            _formCollapse?.removeActiveKey(key);
-          }
-        }}
+        onChange={(e) => (field.value.enable = e.target.checked)}
       >
         启用
       </Checkbox>

@@ -1,13 +1,12 @@
-import { Engine, CursorType, CursorDragType } from '../models';
+import { Engine, CursorType, CursorDragType, WidgetNode } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { IWidgetSetting } from '../../react/interface';
 
 export const useRotateEffect = (engine: Engine) => {
   let status = null;
   let startX = 0;
   let startY = 0;
   let startAngle = 0;
-  let node: IWidgetSetting;
+  let node: WidgetNode;
 
   engine.subscribeTo(DragStartEvent, (e) => {
     if (engine.cursor.type !== CursorType.Normal) return;

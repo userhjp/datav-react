@@ -9,7 +9,7 @@ import { useCurrentNode } from '../hooks/useCurrentNode';
 import { createForm } from '@formily/core';
 import { Form } from '@formily/antd';
 import { ISettingFormProps } from './types';
-import { IWidgetSetting, IScreenProps } from '../interface';
+import { IScreenProps } from '../interface';
 import { EventFields } from './EventsFields';
 import { SchemaField } from './SchemaField';
 import { IconWidget } from '../components';
@@ -17,6 +17,7 @@ import { SettingsFormContext } from './context';
 import { useWidgets } from '../hooks/useWidgets';
 import { layoutSchema, pageSchema, baseAttrSchema } from './schema';
 import { StatusFields } from './StatusFields';
+import { WidgetNode } from '@/datav/core';
 import './styles.less';
 
 const GlobalState = {
@@ -31,7 +32,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
     const widgets = useWidgets();
     const screen = useScreen();
     const form = useMemo(() => {
-      return createForm<IWidgetSetting | IScreenProps>({
+      return createForm<WidgetNode | IScreenProps>({
         // initialValues: currentNode || screen.props,
         values: currentNode || screen.props,
         effects(form) {

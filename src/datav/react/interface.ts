@@ -1,6 +1,6 @@
 import { ZoomMode, IDataType, FieldStatus, ApiType, ApiRequestMethod } from '../shared';
 import { ISchema } from '@formily/react';
-import { IDvGlobal } from '../core';
+import { IDvGlobal, WidgetNode } from '../core';
 
 export type IWidgetData = Array<Record<string, any>> | Record<string, any> | any;
 
@@ -72,17 +72,6 @@ export interface IWidgetInfo {
   name: string;
   type: string;
   ver?: string;
-}
-
-export interface IWidgetSetting {
-  id: string;
-  info: IWidgetInfo;
-  attr: IWidgetAttr;
-  options?: { [key: string]: any };
-  data?: IDataSetting;
-  events?: IWidgetEvents;
-  /** 组件显示隐藏 */
-  visible: IVisible;
 }
 
 /** 页面配置 */

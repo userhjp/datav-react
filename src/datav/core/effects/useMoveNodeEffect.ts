@@ -1,13 +1,12 @@
-import { CursorDragType, Engine } from '../models';
+import { CursorDragType, Engine, WidgetNode } from '../models';
 import { DragStartEvent, DragMoveEvent, DragStopEvent, ViewportScrollEvent } from '../events';
-import { IWidgetSetting } from '../../react/interface';
 import { CursorType } from '../models/Cursor';
 import { action } from '@formily/reactive';
 
 /** 位置移动 */
 export const useMoveNodeEffect = (engine: Engine) => {
-  let status: { x: number; y: number; node: IWidgetSetting }[] = null;
-  let node: IWidgetSetting;
+  let status: { x: number; y: number; node: WidgetNode }[] = null;
+  let node: WidgetNode;
   let currentDragMove: DragStartEvent = null;
 
   const moveComponent = () => {

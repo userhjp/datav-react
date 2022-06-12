@@ -35,6 +35,7 @@ export class Operation {
   makeObservable() {
     define(this, {
       editableId: observable.ref,
+      errors: observable.computed,
       components: observable,
       addNode: action,
       removeCompSchema: action,
@@ -47,6 +48,10 @@ export class Operation {
       singleCopy: action,
       batchAddNode: action,
     });
+  }
+
+  get errors() {
+    return this.components.filter((f) => f.errorInfo).map((m) => ({ id: m.id, errorInfo: m.errorInfo }));
   }
 
   /** 批量添加组件 */
@@ -66,13 +71,11 @@ export class Operation {
     if (this.selection.length > 1) {
       this.selection.selected.forEach((id) => {
         this.selection.remove(id);
-        this.engine.global.dvError.delete(id);
         this.components = this.components.filter((f) => f.id !== id);
       });
     } else {
       if (!id) id = this.selection.first;
       this.selection.remove(id);
-      this.engine.global.dvError.delete(id);
       this.components = this.components.filter((f) => f.id !== id);
     }
   }

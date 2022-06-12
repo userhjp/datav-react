@@ -5,7 +5,7 @@ import { ContextMenu } from '../ContextMenu';
 import { Input } from 'antd';
 import { useSelection, useOperation, useToolbar } from '../../hooks';
 import { IconWidget } from '../IconWidget';
-import { IWidgetSetting } from '../../interface';
+import { WidgetNode } from '@/datav/core';
 import './index.less';
 
 export const LayerPanel: React.FC = observer(() => {
@@ -14,7 +14,7 @@ export const LayerPanel: React.FC = observer(() => {
   const toolbar = useToolbar();
   const iptRef = useRef<any>();
 
-  const RenderState = ({ value }: { value: IWidgetSetting }) => (
+  const RenderState = ({ value }: { value: WidgetNode }) => (
     <Observer>
       {() => {
         return (

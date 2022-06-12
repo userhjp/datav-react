@@ -2,10 +2,10 @@ import { observer } from '@formily/react';
 import { autorun } from '@formily/reactive';
 import React, { useCallback, useEffect, useState } from 'react';
 import { ZoomMode } from '../../../shared';
-import { IWidgetSetting } from '../../interface';
 import { useOperation, useScreen } from '../../hooks';
 import { RenderWidget } from '../Drawing/components/RenderWidget';
 import { useDebounceFn } from 'ahooks';
+import { WidgetNode } from '@/datav/core';
 import './index.less';
 
 const resizeAuto = (width: number, height: number): React.CSSProperties => {
@@ -68,7 +68,7 @@ export const PreviewView: React.FC = observer(() => {
   const screen = useScreen();
   const [pageStyle, setPageStyle] = useState<React.CSSProperties>();
 
-  const transformStyle = useCallback((com: IWidgetSetting): React.CSSProperties => {
+  const transformStyle = useCallback((com: WidgetNode): React.CSSProperties => {
     const { attr } = com;
     return {
       position: 'absolute',
@@ -80,7 +80,7 @@ export const PreviewView: React.FC = observer(() => {
     };
   }, []);
 
-  const comStyle = useCallback((com: IWidgetSetting): React.CSSProperties => {
+  const comStyle = useCallback((com: WidgetNode): React.CSSProperties => {
     const { attr } = com;
     return {
       height: '100%',

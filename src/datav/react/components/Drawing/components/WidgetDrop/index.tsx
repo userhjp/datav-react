@@ -4,11 +4,10 @@ import { useCallback, useMemo } from 'react';
 import { message } from 'antd';
 import { useDrop } from 'ahooks';
 import { useOperation, useViewport } from '../../../../hooks';
-import { IWidgetSetting } from '../../../../interface';
 import { useDesigner, useSelection } from '../../../../hooks';
 import { ContextMenu } from '../../../../components';
 import { RenderWidget } from '../RenderWidget';
-import { createWidgetNode } from '../../../../../core';
+import { createWidgetNode, WidgetNode } from '../../../../../core';
 import { IWidgetMenuData } from '../../../../../react/types';
 import './index.less';
 
@@ -71,7 +70,7 @@ export const WidgetDrag: React.FC = () => {
 };
 
 type WidgetContainerProps = {
-  node: IWidgetSetting;
+  node: WidgetNode;
 };
 
 export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ node }) => {

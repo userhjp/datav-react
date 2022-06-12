@@ -1,6 +1,6 @@
 import { observer } from '@formily/react';
 import { Badge, Dropdown, Menu, Space, Tooltip } from 'antd';
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { PanelType } from '../../../shared';
 import { useCursor, useOperation, useDesigner, useToolbar, useDvGlobal, useSelected, useSelection } from '../../hooks';
 import { IconWidget } from '../IconWidget';
@@ -8,6 +8,8 @@ import { CursorType, Engine } from '../../../core';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../../../core/events';
 import { IconPreview } from './IconPreview';
 import { HelpPreview } from './HelpPreview';
+import { ItemType } from 'antd/lib/menu/hooks/useItems';
+
 import './index.less';
 
 export const useButtonEffect = (engine: Engine) => {
@@ -150,17 +152,16 @@ export const DesignHead: React.FC = observer(() => {
 
 const DvError: React.FC = observer(() => {
   const domRef = useRef<HTMLDivElement>();
-  const global = useDvGlobal();
+  const operation = useOperation();
   const selection = useSelection();
-
-  const menuList = Array.from(global.dvError).map(([key, val]) => {
+  const menuList: ItemType[] = operation.errors.map(({ id, errorInfo }) => {
     return {
-      key,
+      key: id,
       label: (
         <div className="dv-error-item">
-          <a onClick={() => selection.safeSelect(key)}>ID：{key}</a>
-          <div>异常类型：{val.title}</div>
-          <div>异常信息：{val.content}</div>
+          <a onClick={() => selection.safeSelect(id)}>ID：{id}</a>
+          <div>异常类型：{errorInfo.title}</div>
+          <div>异常信息：{errorInfo.content}</div>
         </div>
       ),
     };
@@ -176,7 +177,7 @@ const DvError: React.FC = observer(() => {
       ) : (
         <Dropdown overlay={<Menu items={menuList} />} getPopupContainer={() => domRef.current}>
           <div className="head-btn" onClick={() => {}}>
-            <Badge dot={global.dvError.size > 0}>
+            <Badge dot>
               <IconWidget infer="Warning" style={{ color: '#fff', fontSize: 15 }} />
             </Badge>
           </div>

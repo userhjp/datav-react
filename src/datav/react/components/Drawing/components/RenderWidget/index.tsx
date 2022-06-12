@@ -1,4 +1,4 @@
-import { IVisible, IWidgetSetting } from '../../../../interface';
+import { IVisible } from '../../../../interface';
 import { useDataSource } from '../../../../hooks';
 import { cancelIdle, requestIdle } from '../../../../../shared';
 import { autorun, toJS } from '@formily/reactive';
@@ -6,13 +6,15 @@ import React, { Suspense, useEffect, useState } from 'react';
 import { useWidgets } from '@/datav/react/hooks/useWidgets';
 import { DvData } from '@/datav/core/models/DvData';
 import { observer } from '@formily/react';
+import { WidgetNode } from '@/datav/core';
+
 import './index.less';
 
 const GlobalState = {
   idleRequest: null,
 };
 
-export const RenderWidget: React.FC<{ widgetInfo: IWidgetSetting }> = observer(
+export const RenderWidget: React.FC<{ widgetInfo: WidgetNode }> = observer(
   ({ widgetInfo }) => {
     const dataSource = useDataSource();
     const widgets = useWidgets();
@@ -43,8 +45,7 @@ export const RenderWidget: React.FC<{ widgetInfo: IWidgetSetting }> = observer(
         <ErrorBoundary
           name={widgetInfo.info.type}
           onError={(msg) => {
-            dataSource.engine.global.addError({
-              id: widgetInfo.id,
+            widgetInfo.setError({
               title: '组件内部异常',
               content: msg,
             });
