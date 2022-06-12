@@ -71,7 +71,7 @@ const BaseRadar: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
 
   useLayoutEffect(() => {
     myChart.current.setOption(chartOptions, true);
-  }, [chartOptions]);
+  }, [chartOptions, dataset]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;
 };

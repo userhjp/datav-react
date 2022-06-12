@@ -35,7 +35,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
     return { text: data?.text, value: data?.value || 0 };
   }, [data]);
 
-  const chartOptions = useMemo(() => {
+  const opt = useMemo(() => {
     const { pieStyle, innerPie, outerPie, grid, textStyle, colors } = options;
     const pieStyleColor = convertEChartColors(pieStyle.color);
 
@@ -122,8 +122,8 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
   }, [options]);
 
   useLayoutEffect(() => {
-    myChart.current.setOption(chartOptions, true);
-  }, [chartOptions]);
+    myChart.current.setOption({ ...opt }, true);
+  }, [opt, dataset]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;
 };

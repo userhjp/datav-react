@@ -251,7 +251,7 @@ const HorizontalScatter: React.FC<IWidgetProps> = ({ options = {}, data = [] }) 
 
   useLayoutEffect(() => {
     myChart.current.setOption(chartOptions, true);
-  }, [chartOptions]);
+  }, [chartOptions, data]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;
 };

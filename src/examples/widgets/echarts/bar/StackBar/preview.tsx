@@ -47,10 +47,9 @@ const StackBar: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
     }
   }, [data]);
 
-  useLayoutEffect(() => {
-    options.dataset = dataset;
+  const opt = useMemo(() => {
     const { legend = {}, series = [], tooltip = {}, xAxis = {}, yAxis = {}, grid = {}, barSeriesStyle = {} } = options;
-    if (!series.length) return;
+    if (!series.length) return {};
     options.xAxis = formJsonToxAxisData(xAxis);
     options.yAxis = formJsonToyAxisData(yAxis);
     options.legend = formJsonToLegendData(legend);
@@ -66,8 +65,12 @@ const StackBar: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
         f.itemStyle.borderRadius = 0;
       }
     });
-    myChart.current.setOption(options, true);
+    return options;
   }, [options]);
+
+  useLayoutEffect(() => {
+    myChart.current.setOption({ ...opt, dataset }, true);
+  }, [options, dataset]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;
 };

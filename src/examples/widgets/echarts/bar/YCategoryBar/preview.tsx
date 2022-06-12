@@ -48,17 +48,20 @@ const YCategoryBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events 
     }
   }, [data]);
 
-  useLayoutEffect(() => {
-    options.dataset = dataset;
+  const opt = useMemo(() => {
     const { legend = {}, series = [], tooltip = {}, xAxis = {}, yAxis = {}, grid = {} } = options;
-    if (!series.length) return;
+    if (!series.length) return {};
     options.xAxis = formJsonToxAxisData(xAxis);
     options.yAxis = formJsonToyAxisData(yAxis);
     options.legend = formJsonToLegendData(legend);
     options.tooltip = formDataToTooltipData(tooltip, 'cross');
     options.series = formDataToSeriesData(options);
-    myChart.current.setOption(options, true);
+    return options;
   }, [options]);
+
+  useLayoutEffect(() => {
+    myChart.current.setOption({ ...opt, dataset }, true);
+  }, [opt, dataset]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;
 };

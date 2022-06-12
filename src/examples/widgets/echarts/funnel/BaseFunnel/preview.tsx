@@ -41,7 +41,7 @@ const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
       series: [{ ...series, data }],
     };
     myChart.current.setOption(opt, true);
-  }, [options]);
+  }, [options, data]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;
 };

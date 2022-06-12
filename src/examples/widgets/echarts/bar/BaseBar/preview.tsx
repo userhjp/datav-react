@@ -13,6 +13,7 @@ import {
   formJsonToxAxisData,
   formJsonToyAxisData,
 } from '@/examples/shared';
+import { ECBasicOption } from 'echarts/types/dist/shared';
 
 use([GridComponent, BarChart, LineChart, CanvasRenderer, LegendComponent, DatasetComponent, TooltipComponent]);
 
@@ -20,7 +21,6 @@ const BaseBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) =>
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<ECharts>();
   const size = useSize(elemtRef);
-
   useLayoutEffect(() => {
     myChart.current = init(elemtRef.current);
     return () => myChart.current.dispose();
@@ -46,21 +46,24 @@ const BaseBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) =>
     }
   }, [data]);
 
-  useLayoutEffect(() => {
-    options.dataset = dataset;
+  const opt: ECBasicOption = useMemo(() => {
     const { legend = {}, series = [], tooltip = {}, xAxis = {}, yAxis = {}, grid = {} } = options;
-    if (!series.length) return;
+    if (!series.length) return {};
     options.xAxis = formJsonToxAxisData(xAxis);
     options.yAxis = formJsonToyAxisData(yAxis);
     options.legend = formJsonToLegendData(legend);
     options.tooltip = formDataToTooltipData(tooltip, 'cross');
     options.series = formDataToSeriesData(options);
+    return options;
+  }, [options]);
+
+  useLayoutEffect(() => {
     try {
-      myChart.current.setOption(options, true);
+      myChart.current.setOption({ ...opt, dataset }, true);
     } catch (error) {
       console.log(error);
     }
-  }, [options]);
+  }, [opt, dataset]);
 
   return <div ref={elemtRef} style={{ width: '100%', height: '100%' }} />;
 };

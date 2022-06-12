@@ -18,21 +18,18 @@ export const RenderWidget: React.FC<{ node: WidgetNode }> = observer(
   ({ node }) => {
     const options = toJS(node.options);
     if (!node.info?.type || node.attr.isHide) return <div />;
-    if (JSON.stringify(options) === '{}') return <WidgetLoading />;
     return (
-      <Suspense fallback={<WidgetLoading />}>
-        <ErrorBoundary
-          name={node.info.type}
-          onError={(msg) => {
-            node.setError({
-              title: '组件内部异常',
-              content: msg,
-            });
-          }}
-        >
-          <ConnectData options={options} node={node} />
-        </ErrorBoundary>
-      </Suspense>
+      <ErrorBoundary
+        name={node.info.type}
+        onError={(msg) => {
+          node.setError({
+            title: '组件内部异常',
+            content: msg,
+          });
+        }}
+      >
+        <ConnectData options={options} node={node} />
+      </ErrorBoundary>
     );
   },
   {
@@ -63,6 +60,15 @@ const ConnectData: React.FC<{ node: WidgetNode; options: Record<string, any> }> 
   const dataSource = useDataSource();
   const widgets = useWidgets();
   const Widget: any = widgets[node.info.type];
+  const opt = {
+    key: node.id,
+    options,
+    data,
+    events: node.events,
+    id: node.id,
+    info: node.info,
+    attr: node.attr,
+  };
 
   useEffect(() => {
     if (!node.data) return null;
@@ -80,21 +86,12 @@ const ConnectData: React.FC<{ node: WidgetNode; options: Record<string, any> }> 
       dataSource.removeData(node.id);
     };
   }, []);
+  if (JSON.stringify(options) === '{}') return <WidgetLoading />;
   return (
     <Visible visible={node.visible}>
-      <Widget
-        {...{
-          key: node.id,
-          options,
-          data,
-          events: node.events,
-          id: node.id,
-          info: node.info,
-          attr: node.attr,
-        }}
-      >
-        {children}
-      </Widget>
+      <Suspense fallback={<WidgetLoading />}>
+        <Widget {...opt}>{children}</Widget>
+      </Suspense>
     </Visible>
   );
 });
