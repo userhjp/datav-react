@@ -143,7 +143,7 @@ export const PreviewView: React.FC = observer(() => {
         .map((item) => (
           <div key={item.id} style={transformStyle(item)}>
             <div style={comStyle(item)}>
-              <RenderWidget widgetInfo={item} />
+              <RenderWidget node={item} />
             </div>
           </div>
         ))

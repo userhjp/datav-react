@@ -1,12 +1,12 @@
 import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
-import { GridComponent, TitleComponent, PolarComponent } from 'echarts/components';
+import { GridComponent, TitleComponent, PolarComponent, TooltipComponent } from 'echarts/components';
 import { RadarChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 
-use([CanvasRenderer, RadarChart, GridComponent, TitleComponent, PolarComponent]);
+use([CanvasRenderer, RadarChart, GridComponent, TitleComponent, PolarComponent, TooltipComponent]);
 /** 基础雷达图 */
 const BaseRadar: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
   const elemtRef = useRef<HTMLDivElement>();

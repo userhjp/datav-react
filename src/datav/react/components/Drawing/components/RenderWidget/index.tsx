@@ -14,55 +14,23 @@ const GlobalState = {
   idleRequest: null,
 };
 
-export const RenderWidget: React.FC<{ widgetInfo: WidgetNode }> = observer(
-  ({ widgetInfo }) => {
-    const dataSource = useDataSource();
-    const widgets = useWidgets();
-    const [data, setData] = useState(null);
-    const Widget: any = widgets[widgetInfo.info.type];
-
-    useEffect(() => {
-      if (!widgetInfo.data) return null;
-      const dvdata = new DvData({
-        dataSource,
-        id: widgetInfo.id,
-        dataSetting: widgetInfo.data,
-      });
-      dataSource.setData(widgetInfo.id, dvdata);
-      const dispose = autorun(() => {
-        setData(toJS(dvdata.data));
-      });
-      return () => {
-        dispose();
-        dataSource.removeData(widgetInfo.id);
-      };
-    }, []);
-    const options = toJS(widgetInfo.options);
-    if (!widgetInfo.info || !widgetInfo.info.type || widgetInfo.attr.isHide) return <div />;
-    if (!options || !Widget || JSON.stringify(options) === '{}') return <WidgetLoading />;
+export const RenderWidget: React.FC<{ node: WidgetNode }> = observer(
+  ({ node }) => {
+    const options = toJS(node.options);
+    if (!node.info?.type || node.attr.isHide) return <div />;
+    if (JSON.stringify(options) === '{}') return <WidgetLoading />;
     return (
       <Suspense fallback={<WidgetLoading />}>
         <ErrorBoundary
-          name={widgetInfo.info.type}
+          name={node.info.type}
           onError={(msg) => {
-            widgetInfo.setError({
+            node.setError({
               title: '组件内部异常',
               content: msg,
             });
           }}
         >
-          <Visible visible={widgetInfo.visible}>
-            <Widget
-              {...{
-                options,
-                data,
-                events: widgetInfo.events,
-                id: widgetInfo.id,
-                info: widgetInfo.info,
-                attr: widgetInfo.attr,
-              }}
-            />
-          </Visible>
+          <ConnectData options={options} node={node} />
         </ErrorBoundary>
       </Suspense>
     );
@@ -90,11 +58,51 @@ export const WidgetLoading: React.FC = () => {
   );
 };
 
+const ConnectData: React.FC<{ node: WidgetNode; options: Record<string, any> }> = observer(({ children, node, options }) => {
+  const [data, setData] = useState(null);
+  const dataSource = useDataSource();
+  const widgets = useWidgets();
+  const Widget: any = widgets[node.info.type];
+
+  useEffect(() => {
+    if (!node.data) return null;
+    const dvdata = new DvData({
+      dataSource,
+      id: node.id,
+      dataSetting: node.data,
+    });
+    dataSource.setData(node.id, dvdata);
+    const dispose = autorun(() => {
+      setData(toJS(dvdata.data));
+    });
+    return () => {
+      dispose();
+      dataSource.removeData(node.id);
+    };
+  }, []);
+  return (
+    <Visible visible={node.visible}>
+      <Widget
+        {...{
+          key: node.id,
+          options,
+          data,
+          events: node.events,
+          id: node.id,
+          info: node.info,
+          attr: node.attr,
+        }}
+      >
+        {children}
+      </Widget>
+    </Visible>
+  );
+});
+
 const Visible: React.FC<{ visible: IVisible }> = observer(({ visible, children }) => {
   const dataSource = useDataSource();
-  const isShow = visible.enable && visible.key ? dataSource.variables[visible.key] === visible.val : true;
-  if (!isShow) return <div />;
-  return <div style={{ width: '100%', height: '100%' }}>{children}</div>;
+  if (visible.enable && visible.key && dataSource.variables[visible.key] !== visible.val) return <div />;
+  return <>{children}</>;
 });
 
 class ErrorBoundary extends React.Component<{ name: string; onError: (message: string) => void }> {

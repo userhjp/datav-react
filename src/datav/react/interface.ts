@@ -69,8 +69,11 @@ export interface IWidgetAttr {
 
 /** 组件描述 */
 export interface IWidgetInfo {
+  /** 组件描述名称 */
   name: string;
+  /** 组件名 */
   type: string;
+  /** 版本 */
   ver?: string;
 }
 

@@ -103,7 +103,7 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ node 
       <div ref={ref} style={transformStyle} className="widget-container">
         <div className="transform-handler" style={handlerStyle}>
           <div className="widget-com" style={comStyle}>
-            <RenderWidget widgetInfo={node} />
+            <RenderWidget node={node} />
             <div className="wrapper-event-disable" {...{ [designer.props.nodeIdAttrName]: id }} />
           </div>
         </div>
