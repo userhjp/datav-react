@@ -45,6 +45,7 @@ export class Operation {
       moveTo: action,
       sortComp: action,
       lockCom: action,
+      hideCom: action,
       singleCopy: action,
       batchAddNode: action,
     });

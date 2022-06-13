@@ -34,6 +34,7 @@ export class WidgetNode {
       key: '',
       val: '',
       type: 'hide',
+      renderDom: false,
     };
     this.makeObservable();
   }

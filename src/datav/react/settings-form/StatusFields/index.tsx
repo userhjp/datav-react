@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ObjectField as ObjectFieldType } from '@formily/core';
 import { Field, observer, useField } from '@formily/react';
 import { toArr } from '@formily/shared';
-import { Checkbox, Collapse } from 'antd';
+import { Checkbox as AntCheckbox, Collapse } from 'antd';
 import { useMemo } from 'react';
 import { IDataSetting } from '../../interface';
 import { Tooltip } from 'antd';
@@ -10,6 +10,7 @@ import { BlurInput } from '../components';
 import { IconWidget } from '../../components';
 import { markRaw, model } from '@formily/reactive';
 import './index.less';
+import { Checkbox } from '@formily/antd';
 
 const { Panel } = Collapse;
 type ActiveKeys = string | number | Array<string | number>;
@@ -63,14 +64,14 @@ export const StatusFields: React.FC = observer(() => {
 
   const renderExtra = (key: string) => {
     return (
-      <Checkbox
+      <AntCheckbox
         checked={field.value.enable}
         style={{ color: '#bcc9d4', fontSize: '12px' }}
         onClick={(e) => e.stopPropagation()}
         onChange={(e) => (field.value.enable = e.target.checked)}
       >
         启用
-      </Checkbox>
+      </AntCheckbox>
     );
   };
 
@@ -91,7 +92,7 @@ export const StatusFields: React.FC = observer(() => {
               overlayClassName="design-tip"
               color="#2681ff"
               placement="bottom"
-              title={<span style={{ fontSize: 12 }}>监听其他任意组件或事件绑定到全局作用域的变量，实现跨组件事件交互。</span>}
+              title={<span style={{ fontSize: 12 }}>监听其他组件或事件绑定到全局作用域的变量，实现跨组件控制组件显示隐藏。</span>}
             >
               <IconWidget style={{ cursor: 'help', margin: '2px 0 0 2px', color: '#1890ff' }} infer="Help" />
             </Tooltip>
@@ -101,7 +102,7 @@ export const StatusFields: React.FC = observer(() => {
         collapsible={field.value.enable ? null : 'disabled'}
         extra={renderExtra('1')}
       >
-        <div>
+        <div style={{ paddingBottom: 10 }}>
           <table className="data-attr-table">
             <thead className="table-head">
               <tr className="table-head-row">
@@ -124,6 +125,23 @@ export const StatusFields: React.FC = observer(() => {
               </tr>
             </tbody>
           </table>
+          <div>
+            <label style={{ padding: '0 10px', cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+              <Field name="renderDom" component={[Checkbox]} />
+              &nbsp;
+              <span style={{ color: 'rgba(255, 255, 255, 0.85)', fontSize: 12 }}>隐藏时保留DOM</span>
+              <Tooltip
+                overlayClassName="design-tip"
+                color="#2681ff"
+                placement="bottom"
+                title={
+                  <span style={{ fontSize: 12 }}>隐藏组件时销毁组件，组件内部存在事件将一同销毁，再次显示时重新渲染，反之仅视觉隐藏。</span>
+                }
+              >
+                <IconWidget style={{ cursor: 'help', margin: '2px 0 0 2px', color: '#1890ff' }} infer="Help" />
+              </Tooltip>
+            </label>
+          </div>
         </div>
       </Panel>
     </Collapse>

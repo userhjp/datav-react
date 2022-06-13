@@ -134,6 +134,7 @@ export interface IVisible {
   key: string;
   val: string;
   type: 'hide' | 'destroy';
+  renderDom: boolean;
 }
 
 /** 数据配置 */

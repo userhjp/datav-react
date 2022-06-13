@@ -20,6 +20,29 @@ export const TabSchema: ISchema = {
       ],
       default: 'horizontal',
     },
+    autoSwitch: {
+      type: 'object',
+      'x-component': 'MyFormCollapse',
+      'x-component-props': {
+        title: '自动切换',
+        switch: true,
+        defaultSwitch: false,
+      },
+      properties: {
+        waitTime: {
+          type: 'number',
+          title: '间隔时间',
+          'x-decorator': 'FormItem',
+          'x-component': 'NumberPicker',
+          'x-component-props': {
+            placeholder: '请输入',
+            unit: 'ms',
+            min: 500,
+          },
+          default: 2000,
+        },
+      },
+    },
     style: {
       type: 'object',
       'x-component': 'MyFormCollapse',
