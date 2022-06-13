@@ -98,10 +98,11 @@ const ConnectData: React.FC<{ node: WidgetNode; options: Record<string, any> }> 
 
 const Visible: React.FC<{ visible: IVisible }> = observer(({ visible, children }) => {
   const dataSource = useDataSource();
-  if (!visible.enable || (visible.key && dataSource.variables[visible.key] === visible.val)) return <>{children}</>;
-  if (visible.renderDom) {
-    return <div style={{ width: '100%', height: '100%', opacity: 0 }}>{children}</div>;
+  const isVisible = visible.key && dataSource.variables[visible.key] === visible.val;
+  if (visible.enable && visible.renderDom) {
+    return <div style={{ width: '100%', height: '100%', opacity: isVisible ? 1 : 0 }}>{children}</div>;
   }
+  if (!visible.enable || isVisible) return <>{children}</>;
   return <div />;
 });
 
