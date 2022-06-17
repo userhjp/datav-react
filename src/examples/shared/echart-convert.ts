@@ -76,7 +76,7 @@ export function formDataToTooltipData(tooltip: any, axisPointerType: 'cross' | '
 
 /** Echarts Series 数据差异处理 */
 export function formDataToSeriesData(options: { [key: string]: any }): any[] {
-  const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], areaStyle = {}, colors } = options;
+  const { lineSeriesStyle = {}, barSeriesStyle = {}, series = [], colors } = options;
   options.color = (colors || []).map((m) => convertEChartColors(m));
   // 'series'：按照系列分配调色盘中的颜色，同一系列中的所有数据都是用相同的颜色；
   // 'data'：按照数据项分配调色盘中的颜色，每个数据项都使用不同的颜色。
@@ -112,9 +112,9 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
         }
         break;
       case 'line':
-        f.label = lineSeriesStyle?.label?.show ? lineSeriesStyle.label : { show: false };
-        f.areaStyle = areaStyle.show ? { ...areaStyle } : null;
         Object.assign(f, { ...lineSeriesStyle, symbolOffset: [lineSeriesStyle.symbolOffsetX, lineSeriesStyle.symbolOffsetY] });
+        f.label = lineSeriesStyle?.label?.show ? lineSeriesStyle.label : { show: false };
+        f.areaStyle = lineSeriesStyle?.areaStyle?.show ? { ...lineSeriesStyle?.areaStyle } : null;
         break;
       default:
         break;

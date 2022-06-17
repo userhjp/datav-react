@@ -21,7 +21,6 @@ export const BaseLineSchema: ISchema = {
     },
   },
   properties: {
-    colors: colorsSchema,
     grid: echartGridSchema,
     xAxis: axisSchema('category', 'X轴'),
     yAxis: axisSchema('value', 'Y轴'),
