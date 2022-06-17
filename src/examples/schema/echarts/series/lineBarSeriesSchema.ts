@@ -6,6 +6,16 @@ import { seriesColorSchema } from './seriesColorSchema';
 export const lineBarSeriesSchema: ISchema = {
   type: 'object',
   properties: {
+    name: {
+      type: 'string',
+      title: '系列名称',
+      'x-decorator': 'FormItem',
+      'x-component': 'Input',
+      'x-component-props': {
+        placeholder: '请输入',
+      },
+      default: '',
+    },
     type: {
       type: 'string',
       title: '系列类型',

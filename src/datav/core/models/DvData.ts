@@ -29,6 +29,7 @@ export class DvData {
   constructor(props: IDvData) {
     this.id = props.id;
     this.dataSource = props.dataSource;
+    this.fieldsStatus = {};
     this.makeObservable();
     this.settingDispose = autorun(() => {
       this.autoUpdate = props.dataSetting.autoUpdate;
@@ -61,8 +62,8 @@ export class DvData {
       this.loading = true;
       this.changeFieldsStatus(FieldStatus.loading);
       const res = await this.dataSource.requestData(this.config);
-      this.metadata = toJS(res);
-      this.data = this.mapData(this.filterData(res));
+      this.metadata = this.filterData(toJS(res));
+      this.data = this.mapData(this.metadata);
       this.changeFieldsStatus();
       this.loading = false;
       if (this.autoUpdate && this.updateTime) {
@@ -112,7 +113,6 @@ export class DvData {
   }
 
   changeFieldsStatus(status?: FieldStatus) {
-    this.fieldsStatus = {};
     let _data = null;
     if (Array.isArray(this.metadata)) {
       _data = this.metadata[0];

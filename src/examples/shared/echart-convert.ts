@@ -87,6 +87,7 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
     if (f?.itemStyle?.color) {
       f.itemStyle.color = convertEChartColors(f.itemStyle.color, f.itemStyle.gradientDirection);
     }
+    f.name = f.itemStyle.name || null;
 
     switch (f.type) {
       case 'pictorialBar':

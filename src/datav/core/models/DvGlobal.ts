@@ -51,7 +51,7 @@ export class DvGlobal {
       colors: observable.computed,
       sourceArray: observable.computed,
       enableDataSources: observable.computed,
-      setProps: action,
+      // setProps: action, actions内部无法通过autorun追踪依赖
     });
   }
 

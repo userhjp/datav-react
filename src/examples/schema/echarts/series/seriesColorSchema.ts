@@ -6,7 +6,7 @@ export const seriesColorSchema: ISchema = {
   'x-component': 'ArrayItems',
   'x-decorator': 'FormItem',
   'x-decorator-props': {
-    tooltip: '单独配置系列颜色，默认取调色盘颜色，多个颜色表示渐变色',
+    tooltip: '默认取调色盘颜色，多个颜色表示渐变色',
     tooltipLayout: 'text',
   },
   title: '颜色配置',

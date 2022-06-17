@@ -18,7 +18,7 @@ const NumberFlop: React.FC<IWidgetProps<any>> = ({ options = {}, data }) => {
   const prefixText = useMemo((): string => {
     const { counter } = options;
     return counter.prefix?.content || '';
-  }, [options.prefix?.content]);
+  }, [options.counter]);
 
   const suffixText = useMemo((): string => {
     const { counter } = options;

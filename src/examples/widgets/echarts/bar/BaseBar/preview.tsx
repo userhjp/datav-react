@@ -1,21 +1,14 @@
 import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
-import { DatasetComponent, GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
+import { DatasetComponent, GridComponent, TooltipComponent } from 'echarts/components';
 import { BarChart, LineChart } from 'echarts/charts';
 import { CanvasRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
-import {
-  convert2Ddata,
-  formDataToSeriesData,
-  formDataToTooltipData,
-  formJsonToLegendData,
-  formJsonToxAxisData,
-  formJsonToyAxisData,
-} from '@/examples/shared';
+import { convert2Ddata, convertEChartColors, formDataToTooltipData, formJsonToxAxisData, formJsonToyAxisData } from '@/examples/shared';
 import { ECBasicOption } from 'echarts/types/dist/shared';
 
-use([GridComponent, BarChart, LineChart, CanvasRenderer, LegendComponent, DatasetComponent, TooltipComponent]);
+use([GridComponent, BarChart, LineChart, CanvasRenderer, DatasetComponent, TooltipComponent]);
 
 const BaseBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) => {
   const elemtRef = useRef<HTMLDivElement>();
@@ -47,13 +40,30 @@ const BaseBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) =>
   }, [data]);
 
   const opt: ECBasicOption = useMemo(() => {
-    const { legend = {}, series = [], tooltip = {}, xAxis = {}, yAxis = {}, grid = {} } = options;
-    if (!series.length) return {};
+    const { tooltip = {}, xAxis = {}, yAxis = {}, barSeriesStyle = {} } = options;
+    const series: any = {
+      type: 'bar',
+    };
+    series.name = barSeriesStyle.name;
+    series.showBackground = !!barSeriesStyle?.backgroundStyle?.show; // 背景
+    series.backgroundStyle = barSeriesStyle?.backgroundStyle;
+    series.label = barSeriesStyle?.label?.show ? barSeriesStyle.label : { show: false };
+    series.barWidth = barSeriesStyle.barWidth || 'auto';
+    series.color = convertEChartColors(barSeriesStyle.color);
+    if (barSeriesStyle.borderRadius) {
+      series.itemStyle = {};
+      series.itemStyle.borderRadius = [
+        barSeriesStyle.borderRadius?.leftTop || 0,
+        barSeriesStyle.borderRadius?.rightTop || 0,
+        barSeriesStyle.borderRadius?.rightbottom || 0,
+        barSeriesStyle.borderRadius?.leftbottom || 0,
+      ];
+    }
+
     options.xAxis = formJsonToxAxisData(xAxis);
     options.yAxis = formJsonToyAxisData(yAxis);
-    options.legend = formJsonToLegendData(legend);
     options.tooltip = formDataToTooltipData(tooltip, 'cross');
-    options.series = formDataToSeriesData(options);
+    options.series = [series];
     return options;
   }, [options]);
 

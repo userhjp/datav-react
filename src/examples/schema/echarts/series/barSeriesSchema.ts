@@ -16,6 +16,16 @@ export const barSeriesSchema: ISchema = {
         rowGap: 0,
       },
       properties: {
+        name: {
+          type: 'string',
+          title: '系列名称',
+          'x-decorator': 'FormItem',
+          'x-component': 'Input',
+          'x-component-props': {
+            placeholder: '请输入',
+          },
+          default: '',
+        },
         gradientDirection: {
           type: 'string',
           title: '渐变类型',
