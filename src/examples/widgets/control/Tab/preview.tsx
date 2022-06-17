@@ -20,6 +20,7 @@ const Tab: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
   }, [data]);
 
   const autoSwitch = () => {
+    clearTimeout(time.current);
     time.current = setTimeout(() => {
       if (currentIndex.current >= data.length - 1) {
         currentIndex.current = 0;
@@ -48,6 +49,9 @@ const Tab: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
             if (currentIndex.current === i) return;
             setActivate(m);
             currentIndex.current = i;
+            if (options.autoSwitch?.show) {
+              autoSwitch();
+            }
           }}
           style={{
             padding: `${padding?.vertical || 2}px ${padding?.horizontal || 10}px`,
