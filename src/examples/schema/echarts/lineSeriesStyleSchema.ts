@@ -1,5 +1,6 @@
 import { ISchema } from '@formily/react';
 import { symbolTyles } from '../../shared';
+import { areaStyleSchema } from './areaStyleSchema';
 import { labelSchema } from './labelSchema';
 
 /** 折线系列公共配置 */
@@ -113,5 +114,6 @@ export const lineSeriesStyleSchema: ISchema = {
       },
     },
     label: labelSchema,
+    areaStyle: areaStyleSchema(false),
   },
 };

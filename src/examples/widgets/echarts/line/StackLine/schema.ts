@@ -19,7 +19,6 @@ export const StackLineSchema: ISchema = {
     tooltip: tooltipSchema(),
     legend: legendSchema,
     animation: animationSchema,
-    areaStyle: areaStyleSchema(),
     lineSeriesStyle: lineSeriesStyleSchema,
     series: {
       type: 'array',

@@ -1,5 +1,4 @@
 import { animationSchema } from '@/examples/schema/echarts/animationSchema';
-import { areaStyleSchema } from '@/examples/schema/echarts/areaStyleSchema';
 import { axisSchema } from '@/examples/schema/echarts/axisSchema';
 import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
@@ -17,6 +16,9 @@ export const BaseLineSchema: ISchema = {
     lineSeriesStyle: {
       color: ['#1179ff', '#79daff'],
     },
+    grid: {
+      right: 30,
+    },
   },
   properties: {
     colors: colorsSchema,
@@ -25,7 +27,6 @@ export const BaseLineSchema: ISchema = {
     yAxis: axisSchema('value', 'Y轴'),
     tooltip: tooltipSchema({ axisPointer: true }),
     animation: animationSchema,
-    areaStyle: areaStyleSchema(false),
     lineSeriesStyle: {
       type: 'object',
       'x-component': 'MyFormCollapse',

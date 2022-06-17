@@ -40,7 +40,7 @@ const LineBer: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   }, [data]);
 
   const opt = useMemo(() => {
-    const { tooltip = {}, xAxis = {}, yAxis = {}, lineSeriesStyle, areaStyle = {}, ...opt } = options;
+    const { tooltip = {}, xAxis = {}, yAxis = {}, lineSeriesStyle } = options;
     const series: any = {
       type: 'line',
       ...lineSeriesStyle,
@@ -48,7 +48,7 @@ const LineBer: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
     series.name = lineSeriesStyle.name;
     series.color = convertEChartColors(lineSeriesStyle.color);
     series.label = lineSeriesStyle?.label?.show ? lineSeriesStyle?.label : { show: false };
-    series.areaStyle = areaStyle.show ? { ...areaStyle } : null;
+    series.areaStyle = lineSeriesStyle.areaStyle.show ? { ...lineSeriesStyle.areaStyle } : null;
     options.xAxis = formJsonToxAxisData(xAxis);
     options.yAxis = formJsonToyAxisData(yAxis);
     options.tooltip = formDataToTooltipData(tooltip, 'line');
