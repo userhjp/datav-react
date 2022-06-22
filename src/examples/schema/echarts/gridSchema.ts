@@ -46,6 +46,13 @@ export const echartGridSchema: ISchema = {
     //     },
     //   },
     // },
+    // padding: {
+    //   type: 'array',
+    //   title: '网格边距',
+    //   'x-decorator': 'FormItem',
+    //   'x-component': 'PaddingArr',
+    //   default: [40, 40, 40, 40],
+    // },
     distance: {
       type: 'void',
       title: '网格边距',

@@ -50,8 +50,7 @@ export const BubbleChartSchema: ISchema = {
           'x-decorator': 'FormItem',
           'x-component': 'FunTextArea',
           'x-component-props': {
-            placeholder: '请输入',
-            funName: 'symbolSize(data)',
+            funName: '(data)',
           },
           default: 'return Math.sqrt(data.v) * 3;',
         },

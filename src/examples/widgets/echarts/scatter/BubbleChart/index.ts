@@ -7,15 +7,13 @@ export const BubbleChart = registerWidgetConfig(
   {
     taxonPath: '图表.散点图.气泡图',
     cover: '/menuCover/图表/散点图/气泡图.png',
-    w: 550,
-    h: 350,
     schema: BubbleChartSchema,
     data: {
       value: [
         { x: 'A', v: 60 },
         { x: 'B', v: 36 },
         { x: 'C', v: 50 },
-        { x: 'D', v: 80 },
+        { x: 'D', v: 81 },
         { x: 'E', v: 15 },
       ],
       fields: {

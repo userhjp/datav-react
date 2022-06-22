@@ -22,6 +22,7 @@ import {
   Palette,
   GlobalConfig,
   FunTextArea,
+  PaddingArr,
 } from './components';
 
 export const SchemaField = createSchemaField({
@@ -56,5 +57,6 @@ export const SchemaField = createSchemaField({
     Palette,
     GlobalConfig,
     FunTextArea,
+    PaddingArr,
   },
 });

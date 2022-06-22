@@ -23,3 +23,4 @@ export * from './Slider';
 export * from './Palette';
 export * from './GlobalConfig';
 export * from './FunTextArea';
+export * from './PaddingArr';

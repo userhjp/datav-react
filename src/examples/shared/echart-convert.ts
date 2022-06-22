@@ -24,6 +24,15 @@ export function formJsonToxAxisData(xAxis: any = {}) {
     delete XlineStyle['dashedLength'];
     delete XlineStyle['dashedSpace'];
   }
+
+  const axisLabel = xAxis.axisLabel;
+  if (axisLabel.formatter) {
+    axisLabel.formatter = new Function(
+      'value',
+      'index',
+      `const fun = (value, index) => {  ${axisLabel.formatter}   }; return fun(value, index);`
+    );
+  }
   return xAxis;
 }
 
@@ -38,6 +47,15 @@ export function formJsonToyAxisData(yAxis: any = {}) {
 
   if (yAxis.max === 'auto') yAxis.max = null;
   if (yAxis.min === 'auto') yAxis.min = null;
+  const axisLabel = yAxis.axisLabel;
+  if (axisLabel.formatter) {
+    axisLabel.formatter = new Function(
+      'value',
+      'index',
+      `const fun = (value, index) => {  ${axisLabel.formatter}   }; return fun(value, index);`
+    );
+  }
+  debugger;
   return yAxis;
 }
 

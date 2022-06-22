@@ -26,7 +26,7 @@ export const nameTextStyleSchema = {
       'x-decorator': 'FormItem',
       'x-component': 'Select',
       enum: titleLocations,
-      default: 'start',
+      default: 'end',
     },
     displayMode: {
       type: 'void',
@@ -68,6 +68,18 @@ export const nameTextStyleSchema = {
         },
       },
     },
-    nameTextStyle: textSchema('object'),
+    nameTextStyle: {
+      type: 'object',
+      properties: {
+        padding: {
+          type: 'array',
+          title: '标题边距',
+          'x-decorator': 'FormItem',
+          'x-component': 'PaddingArr',
+          default: [0, 10, 0, 0],
+        },
+        voidTextStyle: textSchema('void'),
+      },
+    },
   },
 };
