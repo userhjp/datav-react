@@ -53,7 +53,7 @@ export const BubbleChartSchema: ISchema = {
             placeholder: '请输入',
             funName: 'symbolSize(data)',
           },
-          default: 'return Math.sqrt(data.y) * 3;',
+          default: 'return Math.sqrt(data.v) * 3;',
         },
         color: seriesColorSchema,
       },

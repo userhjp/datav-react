@@ -50,15 +50,10 @@ const BubbleChart: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
     series.color = convertEChartColors(polarSeriesStyle.color);
     options.xAxis = formJsonToxAxisData(xAxis);
     options.yAxis = formJsonToyAxisData(yAxis);
-    let symbolSize = null;
-    try {
-      const fun = `const fun = (data) => {  ${series.symbolSize}   }; return fun(data);`;
-      symbolSize = new Function('data', fun);
-    } catch (error) {}
     options.series = [
       {
         ...series,
-        symbolSize,
+        symbolSize: new Function('data', `const fun = (data) => {  ${series.symbolSize}   }; return fun(data);`),
       },
     ];
     return options;
