@@ -9,8 +9,8 @@ import { Tooltip } from 'antd';
 import { BlurInput } from '../components';
 import { IconWidget } from '../../components';
 import { markRaw, model } from '@formily/reactive';
-import './index.less';
 import { Checkbox } from '@formily/antd';
+import './index.less';
 
 const { Panel } = Collapse;
 type ActiveKeys = string | number | Array<string | number>;
@@ -134,9 +134,7 @@ export const StatusFields: React.FC = observer(() => {
                 overlayClassName="design-tip"
                 color="#2681ff"
                 placement="bottom"
-                title={
-                  <span style={{ fontSize: 12 }}>隐藏组件时销毁组件，组件内部存在事件将一同销毁，再次显示时重新渲染，反之仅视觉隐藏。</span>
-                }
+                title={<span style={{ fontSize: 12 }}>只隐藏组件不销毁，保留组件内部事件及状态，反之销毁组件，再次显示时重新渲染。</span>}
               >
                 <IconWidget style={{ cursor: 'help', margin: '2px 0 0 2px', color: '#1890ff' }} infer="Help" />
               </Tooltip>

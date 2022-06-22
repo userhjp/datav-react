@@ -1,6 +1,5 @@
 import { animationSchema } from '@/examples/schema/echarts/animationSchema';
 import { axisSchema } from '@/examples/schema/echarts/axisSchema';
-import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
 import { lineSeriesStyleSchema } from '@/examples/schema/echarts/lineSeriesStyleSchema';
 import { seriesColorSchema } from '@/examples/schema/echarts/series/seriesColorSchema';

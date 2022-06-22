@@ -6,7 +6,7 @@ export function convert2Ddata(data: IWidgetData) {
   data.forEach((f) => {
     if (!f['x']) return;
     if (!c_obj[f['x']]) c_obj[f['x']] = { x: f['x'] };
-    c_obj[f['x']][f['y']] = f['v'] || 0;
+    c_obj[f['x']][f['y'] || 'y'] = f['v'] || 0;
   });
   const source = Object.values(c_obj);
   const dimensions = Object.keys(source[0] || {});

@@ -6,7 +6,7 @@ import { Button, Checkbox, Collapse } from 'antd';
 import { useMemo } from 'react';
 import { IDataSetting, IEventField } from '../../interface';
 import { Tooltip } from 'antd';
-import { BlurInput, SettingsEmpty } from '../components';
+import { BlurInput } from '../components';
 import { IconWidget } from '../../components';
 import { markRaw, model } from '@formily/reactive';
 import './index.less';

@@ -9,5 +9,5 @@ export * from './line/StackLine';
 export * from './pie/PercentagePie';
 export * from './pie/RosePie';
 export * from './radar/BaseRadar';
-export * from './scatter/HorizontalScatter';
+export * from './scatter/BubbleChart';
 export * from './funnel/BaseFunnel';

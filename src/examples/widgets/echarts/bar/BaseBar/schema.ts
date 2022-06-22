@@ -1,6 +1,5 @@
 import { animationSchema } from '@/examples/schema/echarts/animationSchema';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';
-import { legendSchema } from '@/examples/schema/echarts/legendSchema';
 import { tooltipSchema } from '@/examples/schema/echarts/tooltipSchema';
 import { axisSchema } from '@/examples/schema/echarts/axisSchema';
 import { ISchema } from '@formily/react';

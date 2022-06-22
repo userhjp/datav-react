@@ -9,9 +9,6 @@ export const funnelSeriesStyleSchema: ISchema = {
   'x-component-props': {
     title: '漏斗图样式',
     noPadding: true,
-    switch: true,
-    defaultSwitch: true,
-    isOpen: true,
   },
   properties: {
     type: {

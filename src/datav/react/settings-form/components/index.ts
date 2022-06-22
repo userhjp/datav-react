@@ -22,3 +22,4 @@ export * from './ImageSelect';
 export * from './Slider';
 export * from './Palette';
 export * from './GlobalConfig';
+export * from './FunTextArea';
