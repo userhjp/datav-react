@@ -25,6 +25,19 @@ const widgetMenu: IWidgetMenu[] = [
   { name: '媒体', icon: 'media' },
   { name: '控件', icon: 'other' },
   { name: '地图', icon: 'map' },
+  {
+    name: '素材',
+    icon: 'material',
+    children: [
+      { name: '视频', children: [] },
+      { name: '图标', children: [] },
+      // { name: '点缀', children: [] },
+      { name: '背景图', children: [] },
+      { name: '背景框', children: [] },
+      { name: '装饰条', children: [] },
+      // { name: '插画', children: [] },
+    ],
+  },
   { name: '其他', icon: 'other' },
 ];
 

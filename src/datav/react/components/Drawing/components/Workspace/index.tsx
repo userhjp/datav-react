@@ -12,11 +12,12 @@ const Workspace: React.FC = observer(() => {
   const domRef = useRef<HTMLDivElement>();
 
   const style: React.CSSProperties = {
-    background: screenProps?.backgroundImg ? `url(${screenProps.backgroundImg}) 0% 0% / 100% 100% no-repeat` : 'none',
+    background: screenProps?.backgroundImg
+      ? `url(${screenProps.backgroundImg}) 0% 0% / 100% 100% no-repeat`
+      : screenProps.backgroundColor || '#0e2a42',
     width: screenProps.width,
     height: screenProps.height,
     transform: `scale(${screen.scale})`,
-    backgroundColor: screenProps.backgroundColor || '#0e2a42',
   };
 
   const canvasNodeAttrName = {

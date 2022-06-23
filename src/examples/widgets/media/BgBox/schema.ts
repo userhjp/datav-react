@@ -1,4 +1,4 @@
-import { fillTypes, lineStyles, repeatTypes } from '../../../shared';
+import { lineStyles } from '../../../shared';
 import { ISchema } from '@formily/react';
 
 const colorsSchema = (title: string) => {

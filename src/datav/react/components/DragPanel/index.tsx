@@ -18,6 +18,7 @@ const icons = {
   media: <IconWidget infer="Media" />,
   other: <IconWidget infer="Other" />,
   info: <IconWidget infer="RichText" />,
+  material: <IconWidget infer="Material" />,
 };
 
 export const DragPanel: React.FC = observer(() => {

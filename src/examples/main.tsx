@@ -23,6 +23,7 @@ const widgetMenu = [
   { name: '媒体', icon: 'media' },
   { name: '控件', icon: 'other' },
   { name: '地图', icon: 'map' },
+  { name: '素材', icon: 'material' },
   { name: '其他', icon: 'other' },
 ];
 
@@ -51,7 +52,7 @@ export const Main: React.FC = () => {
           });
         },
         onPreview: (data) => {
-          setPreviewData(data);
+          // setPreviewData(data);
         },
       }),
     []
@@ -60,7 +61,7 @@ export const Main: React.FC = () => {
     const data = {};
     engine.setInitialValue(data);
   };
-  const [previewData, setPreviewData] = useState(null);
+  // const [previewData, setPreviewData] = useState(null);
   useEffect(() => {
     initData();
   }, []);
