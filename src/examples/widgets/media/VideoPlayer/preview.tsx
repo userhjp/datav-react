@@ -24,6 +24,7 @@ const VideoPlayer: React.FC<IWidgetProps> = ({ options }) => {
         autoPlay
         controls={options.controls}
         muted={options.muted}
+        loop={options.loop}
         height="100%"
         width="100%"
         src={options.src}

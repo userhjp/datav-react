@@ -33,7 +33,7 @@ export const VideoPlayerSchema: ISchema = {
         spellCheck: false,
         placeholder: '链接地址',
       },
-      default: 'http://vjs.zencdn.net/v/oceans.mp4',
+      default: '//cdn-upload.datav.aliyun.com/upload/download/1628165378777-whQZ-2SE.mp4',
     },
   },
 };
