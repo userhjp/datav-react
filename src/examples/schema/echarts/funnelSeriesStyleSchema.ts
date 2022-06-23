@@ -1,4 +1,4 @@
-import { echartsFunnelLablePositions, fontWeights } from '@/examples/shared';
+import { echartsFunnelLablePositions } from '@/examples/shared';
 import { ISchema } from '@formily/react';
 import { textSchema } from '../textSchema';
 

@@ -3,7 +3,7 @@ import { colorsSchema } from './colorsSchema';
 
 /** 网格基础配置 */
 export const echartGridSchema: ISchema = {
-  type: 'object',
+  type: 'void',
   'x-component': 'MyFormCollapse',
   'x-component-props': {
     title: '图表网格',
@@ -46,80 +46,12 @@ export const echartGridSchema: ISchema = {
     //     },
     //   },
     // },
-    // padding: {
-    //   type: 'array',
-    //   title: '网格边距',
-    //   'x-decorator': 'FormItem',
-    //   'x-component': 'PaddingArr',
-    //   default: [40, 40, 40, 40],
-    // },
-    distance: {
-      type: 'void',
+    grid: {
+      type: 'object',
       title: '网格边距',
       'x-decorator': 'FormItem',
-      'x-component': 'FormGrid',
-      'x-component-props': {
-        minColumns: 2,
-        rowGap: 0,
-      },
-      properties: {
-        left: {
-          type: 'number',
-          'x-decorator': 'FormItem',
-          'x-decorator-props': {
-            feedbackText: '左',
-          },
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 0,
-          },
-          default: 40,
-        },
-        right: {
-          type: 'number',
-          'x-decorator': 'FormItem',
-          'x-decorator-props': {
-            feedbackText: '右',
-          },
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 0,
-          },
-          default: 40,
-        },
-        top: {
-          type: 'number',
-          'x-decorator': 'FormItem',
-          'x-decorator-props': {
-            feedbackText: '上',
-          },
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 0,
-          },
-          default: 40,
-        },
-        bottom: {
-          type: 'number',
-          'x-decorator': 'FormItem',
-          'x-decorator-props': {
-            feedbackText: '下',
-          },
-          'x-component': 'NumberPicker',
-          'x-component-props': {
-            placeholder: '请输入',
-            unit: 'px',
-            min: 0,
-          },
-          default: 40,
-        },
-      },
+      'x-component': 'PaddingArr',
+      default: { left: 40, right: 40, top: 40, bottom: 40 },
     },
   },
 };

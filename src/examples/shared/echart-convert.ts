@@ -55,7 +55,6 @@ export function formJsonToyAxisData(yAxis: any = {}) {
       `const fun = (value, index) => {  ${axisLabel.formatter}   }; return fun(value, index);`
     );
   }
-  debugger;
   return yAxis;
 }
 
