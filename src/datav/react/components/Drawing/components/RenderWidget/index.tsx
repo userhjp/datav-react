@@ -27,6 +27,7 @@ export const RenderWidget: React.FC<{ node: WidgetNode }> = observer(
             content: msg,
           });
         }}
+        onClear={() => node.clearError()}
       >
         <ConnectData options={options} node={node} />
       </ErrorBoundary>
@@ -106,7 +107,7 @@ const Visible: React.FC<{ visible: IVisible }> = observer(({ visible, children }
   return <div />;
 });
 
-class ErrorBoundary extends React.Component<{ name: string; onError: (message: string) => void }> {
+class ErrorBoundary extends React.Component<{ name: string; onError: (message: string) => void; onClear: () => void }> {
   state = {
     hasError: false,
     errorMsg: '',
@@ -115,6 +116,16 @@ class ErrorBoundary extends React.Component<{ name: string; onError: (message: s
   static getDerivedStateFromError(error) {
     // 渲染能够显示降级后的 UI
     return { hasError: true, errorMsg: error.toString() };
+  }
+
+  componentDidUpdate(prevProps: Readonly<{ name: string; onError: (message: string) => void }>, prevState: any): void {
+    if (this.state.hasError && prevState.hasError) {
+      this.setState({
+        hasError: false,
+        errorMsg: '',
+      });
+      this.props.onClear();
+    }
   }
 
   componentDidCatch(error, errorInfo) {

@@ -26,7 +26,7 @@ export function formJsonToxAxisData(xAxis: any = {}) {
   }
 
   const axisLabel = xAxis.axisLabel;
-  if (axisLabel.formatter) {
+  if (axisLabel?.formatter) {
     axisLabel.formatter = new Function(
       'value',
       'index',
@@ -48,7 +48,7 @@ export function formJsonToyAxisData(yAxis: any = {}) {
   if (yAxis.max === 'auto') yAxis.max = null;
   if (yAxis.min === 'auto') yAxis.min = null;
   const axisLabel = yAxis.axisLabel;
-  if (axisLabel.formatter) {
+  if (axisLabel?.formatter) {
     axisLabel.formatter = new Function(
       'value',
       'index',
