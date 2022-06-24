@@ -5,10 +5,10 @@ import { PanelType } from '../../../shared';
 import { useSidebarMenu, useToolbar } from '../../hooks';
 import PreviewItem from './PreviewItem';
 import { IconWidget } from '../IconWidget';
-import { IWidgetMenuChildData, IWidgetMenu } from '../../types';
-import { GlobalRegistry } from '../../../core/registry';
-import './index.less';
+import { IWidgetMenuChildData } from '../../types';
 import { useWidgets } from '../../hooks/useWidgets';
+import MaterialItem from './MaterialItem';
+import './index.less';
 
 const { TabPane } = Tabs;
 
@@ -90,7 +90,7 @@ export const DragPanel: React.FC = observer(() => {
           {treeData.length > 0 &&
             treeData.map((m, i) => (
               <TabPane tab={<RenderTab icon={m.icon} name={m.name} />} key={i}>
-                <PreviewItem data={m.children} />
+                {m.name === '素材' ? <MaterialItem /> : <PreviewItem data={m.children} />}
               </TabPane>
             ))}
         </Tabs>

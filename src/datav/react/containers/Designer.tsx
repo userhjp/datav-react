@@ -12,7 +12,7 @@ import { setNpmCDNRegistry } from '../settings-form/registry';
 import '../styles.less';
 setNpmCDNRegistry('//unpkg.com');
 GlobalRegistry.registerDesignerIcons(icons);
-export const Designer: React.FC<IDesignerProps> = ({ components, engine, ...props }) => {
+export const Designer: React.FC<IDesignerProps> = ({ components, engine, material, ...props }) => {
   const pEngine = useDesigner();
   const ref = useRef<Engine>();
 
@@ -45,7 +45,7 @@ export const Designer: React.FC<IDesignerProps> = ({ components, engine, ...prop
           ref.current.operation.cancelRename();
         }}
       >
-        <DesignerEngineContext.Provider value={{ engine, components }}>
+        <DesignerEngineContext.Provider value={{ engine, components, material }}>
           <DesignHead />
           <div className="datav-content">
             <LayerPanel />

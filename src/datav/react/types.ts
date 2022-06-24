@@ -1,6 +1,6 @@
 import React from 'react';
 import { Engine } from '../core';
-import { IWidgetConfig } from './interface';
+import { IDvMaterial, IWidgetConfig } from './interface';
 
 export interface IDesignerLayoutProps {
   /** 拖拽源数据分类配置 */
@@ -15,6 +15,8 @@ export interface IDesignerProps extends IDesignerLayoutProps {
   engine: Engine;
   /** 物料组件 */
   components: IDesignerComponents;
+  /** 设计器素材 */
+  material?: IDvMaterial[];
 }
 
 export interface IDesignerLayoutContext {
@@ -28,6 +30,8 @@ export interface IDesignerContext {
   engine: Engine;
   /** 物料组件 */
   components: IDesignerComponents;
+  /** 组件素材 */
+  material?: IDvMaterial[];
 }
 
 export interface IWorkspaceContext {
@@ -40,7 +44,7 @@ export interface IWidgetMenuData {
   name: string;
   cover: string;
   type: string;
-  dnConfig: IWidgetConfig;
+  dnConfig?: IWidgetConfig;
 }
 
 export interface IWidgetMenuChildData {

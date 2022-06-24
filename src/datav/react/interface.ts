@@ -19,6 +19,8 @@ export type IWidgetConfig = {
   h?: number;
   /** 组件属性Schema*/
   schema?: ISchema;
+  /** 组件默认配置 */
+  defaultConfig?: { [key: string]: any };
   /** 交互数据属性 */
   events?: {
     /** 映射字段到全局变量 */
@@ -151,4 +153,18 @@ export interface IDataSourceSetting {
   apiBody?: string;
 
   globalDataId?: string;
+}
+
+/** 设计器素材类型，自适应根据type初始化组件 */
+export interface IDvMaterial {
+  /** 视频 | 图标 | 背景图 | 背景框 | 装饰 | 自定义组件名称 */
+  type: 'video' | 'icon' | 'bgImg' | 'bgBorder' | 'decorate';
+  name: string;
+  url: string;
+  config?: {
+    width: string;
+    outset: string;
+    slice: string;
+    repeat: string;
+  };
 }

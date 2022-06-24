@@ -36,6 +36,7 @@ type ICreateWidgetConfig = {
       fields?: IEventFieldSetting;
     };
   };
+  options: { [key: string]: any };
 };
 
 export const createDesigner = (props: IEngineProps<Engine> = {}) => {
@@ -117,6 +118,7 @@ export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
     info: { name: config.name, type: config.type, ver: config.ver },
     attr: { x: config.x, y: config.y, w: config.w, h: config.h },
     events: eventsFields,
+    options: config.options || null,
     data: createSettingData(config),
   };
 };

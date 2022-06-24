@@ -1,14 +1,15 @@
-import { useDesigner } from '../../../hooks';
+import { useDesigner } from '../../hooks';
 import { useDrag } from 'ahooks';
 import React, { useRef, useState } from 'react';
-import { IWidgetMenuData } from '../../../../react/types';
+import { IWidgetMenuData } from '../../types';
 
 export const DragItem: React.FC<IWidgetMenuData> = (props) => {
   const { name, type, cover } = props;
+  const { children, ...dragProp } = props;
   const dragRef = useRef();
   const designer = useDesigner();
   const [dragging, setDragging] = useState<boolean>(false);
-  useDrag(props, dragRef, {
+  useDrag(dragProp, dragRef, {
     onDragStart: () => {
       setDragging(true);
     },
@@ -26,10 +27,16 @@ export const DragItem: React.FC<IWidgetMenuData> = (props) => {
 
   return (
     <div ref={dragRef} {...domProps}>
-      <div className="title">{name}</div>
-      <div className="cover-img">
-        <img src={cover} alt={name} />
-      </div>
+      {children ? (
+        children
+      ) : (
+        <>
+          <div className="title">{name}</div>
+          <div className="cover-img">
+            <img src={cover} alt={name} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

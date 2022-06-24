@@ -19,6 +19,8 @@ export const WidgetDrag: React.FC = () => {
 
   const addBox = useCallback(
     ({ x = 0, y = 0, name, type, dnConfig }) => {
+      const comW = dnConfig.w || 380;
+      const comH = dnConfig.h || 220;
       if (!dnConfig) {
         message.success({
           content: '开发中，敬请期待...',
@@ -29,16 +31,17 @@ export const WidgetDrag: React.FC = () => {
       const offset = 60;
       const offsetX = (x - (viewPort.offsetX + offset) + viewPort.scrollX) / viewPort.scale;
       const offsetY = (y - (viewPort.offsetY + offset) + viewPort.scrollY) / viewPort.scale;
-      const attrx = Math.round(offsetX - dnConfig.w / 2);
-      const attry = Math.round(offsetY - dnConfig.h / 2);
+      const attrx = Math.round(offsetX - comW / 2);
+      const attry = Math.round(offsetY - comH / 2);
       const widgetNode = createWidgetNode({
-        w: dnConfig.w,
-        h: dnConfig.h,
+        w: comW,
+        h: comH,
         x: attrx,
         y: attry,
         name,
         type,
         data: dnConfig.data,
+        options: dnConfig.defaultConfig,
         ver: dnConfig.version || '1.0',
         events: dnConfig.events,
       });

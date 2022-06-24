@@ -1,6 +1,6 @@
 import { IWidgetMenuChild, IWidgetMenuChildData } from '../../../types';
 import React, { useMemo, useState } from 'react';
-import { DragItem } from './DragItem';
+import { DragItem } from '../DragItem';
 import { SettingsEmpty } from '../../../settings-form/components';
 import './index.less';
 
