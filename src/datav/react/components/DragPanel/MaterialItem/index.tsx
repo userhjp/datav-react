@@ -3,8 +3,8 @@ import { DragItem } from '../DragItem';
 import { bgImg } from './bgImgData';
 import { decorateData } from './decorateData';
 import { bgBorderData } from './bgBorderData';
-import './index.less';
 import { videoData } from './videoData';
+import './index.less';
 
 //  'video' | 'icon' | 'bgImg' | 'bgBorder' | 'decorate'
 const materialType = [
