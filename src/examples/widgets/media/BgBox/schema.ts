@@ -361,7 +361,7 @@ export const BgBoxSchema: ISchema = {
                     { value: 'repeat stretch', label: '水平重复' },
                     { value: 'stretch repeat', label: '垂直重复' },
                   ],
-                  default: 'repeat',
+                  default: 'stretch',
                 },
               },
             },

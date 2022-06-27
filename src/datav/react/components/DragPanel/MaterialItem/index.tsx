@@ -1,12 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { DragItem } from '../DragItem';
-import { SettingsEmpty } from '../../../settings-form/components';
-import { useMaterial } from '@/datav/react/hooks';
-import { IDvMaterial } from '@/datav/react/interface';
 import { bgImg } from './bgImgData';
 import { decorateData } from './decorateData';
 import { bgBorderData } from './bgBorderData';
 import './index.less';
+import { videoData } from './videoData';
 
 //  'video' | 'icon' | 'bgImg' | 'bgBorder' | 'decorate'
 const materialType = [
@@ -35,12 +33,78 @@ const MaterialItem: React.FC = () => {
         {activate === 'bgImg' && <RenderBgImg />}
         {activate === 'decorate' && <RenderDecorateStrip />}
         {activate === 'bgBorder' && <RenderBgBorder />}
+        {activate === 'video' && <RenderVideo />}
         {/* {activateList.length > 0 ? <></> : <SettingsEmpty title="暂无可用素材" />} */}
       </div>
     </div>
   );
 };
 export default MaterialItem;
+
+const RenderDragItem: React.FC<{
+  name: string;
+  type: 'SingleImg' | 'BgBox' | 'VideoPlayer';
+  cover?: string;
+  url: string;
+  width?: number;
+  height?: number;
+  defaultConfig?: { [key: string]: any };
+}> = (props) => {
+  const { name, type, cover, width, height, url, defaultConfig = {} } = props;
+
+  const dnConfig: any = useMemo(() => {
+    switch (type) {
+      case 'SingleImg':
+        return {
+          w: width,
+          h: height,
+          defaultConfig: {
+            backgroundImg: url,
+            imgType: 'image',
+            svg: '',
+            svgColor: '#d9d9d9',
+            ...defaultConfig,
+          },
+        };
+      case 'BgBox':
+        return {
+          w: width,
+          h: height,
+          defaultConfig: {
+            bgStyle: {
+              backgroundColor: 'rgba(0,0,0,0)',
+            },
+            borderStyle: {
+              borderType: 'image',
+              imageBorder: {
+                url,
+                ...defaultConfig,
+              },
+            },
+          },
+        };
+      case 'VideoPlayer':
+        return {
+          w: width,
+          h: height,
+          defaultConfig: {
+            src: url,
+          },
+        };
+      default:
+        return {};
+    }
+  }, [type]);
+
+  return (
+    <DragItem name={name} cover={cover || url} type={type} dnConfig={dnConfig}>
+      <div className="title">{name}</div>
+      <div className="cover-img">
+        <img src={cover || url} alt={name} />
+      </div>
+    </DragItem>
+  );
+};
 
 const RenderBgBorder: React.FC = () => {
   return (
@@ -49,12 +113,18 @@ const RenderBgBorder: React.FC = () => {
       <ul className="render-material-item render-bg-border">
         {bgBorderData.map((m, i) => (
           <li key={i}>
-            <DragItem cover={m.url} {...m} type="SingleImg">
-              <div className="title">{m.name}</div>
-              <div className="cover-img">
-                <img src={m.url} alt={m.name} />
-              </div>
-            </DragItem>
+            <RenderDragItem
+              name={m.name}
+              type={'BgBox'}
+              cover={m.cover}
+              url={m.url}
+              width={300}
+              height={300}
+              defaultConfig={{
+                slice: m.slice,
+                width: m.width,
+              }}
+            />
           </li>
         ))}
       </ul>
@@ -67,26 +137,7 @@ const RenderBgImg: React.FC = () => {
     <ul className="render-material-item render-bg-img">
       {bgImg.map((m, i) => (
         <li key={i}>
-          <DragItem
-            cover={m.url}
-            {...m}
-            type="SingleImg"
-            dnConfig={
-              {
-                defaultConfig: {
-                  backgroundImg: m.url,
-                  imgType: 'image',
-                  svg: '',
-                  svgColor: '#d9d9d9',
-                },
-              } as any
-            }
-          >
-            <div className="title">{m.name}</div>
-            <div className="cover-img">
-              <img src={m.url} alt={m.name} />
-            </div>
-          </DragItem>
+          <RenderDragItem name={m.name} type={'SingleImg'} url={m.url} />
         </li>
       ))}
     </ul>
@@ -98,28 +149,19 @@ const RenderDecorateStrip: React.FC = () => {
     <ul className="render-material-item render-decorate-strip">
       {decorateData.map((m, i) => (
         <li key={i}>
-          <DragItem
-            cover={m.url}
-            {...m}
-            type="SingleImg"
-            dnConfig={
-              {
-                h: 24,
-                w: 380,
-                defaultConfig: {
-                  backgroundImg: '',
-                  imgType: 'svg',
-                  svg: m.url,
-                  svgColor: '#d9d9d9',
-                },
-              } as any
-            }
-          >
-            <div className="title">{m.name}</div>
-            <div className="cover-img">
-              <img src={m.url} alt={m.name} />
-            </div>
-          </DragItem>
+          <RenderDragItem name={m.name} type={'SingleImg'} url={m.url} width={380} height={24} />
+        </li>
+      ))}
+    </ul>
+  );
+};
+
+const RenderVideo: React.FC = () => {
+  return (
+    <ul className="render-material-item render-bg-img">
+      {videoData.map((m, i) => (
+        <li key={i}>
+          <RenderDragItem name={m.name} type={'VideoPlayer'} cover={m.cover} url={m.url} width={380} height={220} />
         </li>
       ))}
     </ul>

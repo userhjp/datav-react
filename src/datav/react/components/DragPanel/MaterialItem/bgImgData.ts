@@ -1,11 +1,7 @@
 export const bgImg = [
   {
-    name: '背景图11',
-    url: 'https://img.alicdn.com/imgextra/i3/O1CN01NY5TI92AEMwAvZUpo_!!6000000008171-0-tps-352-198.jpg',
-  },
-  {
     name: '背景图10',
-    url: 'https://img.alicdn.com/imgextra/i2/O1CN014FT9001TMaZGIeWPS_!!6000000002368-2-tps-352-198.png',
+    url: 'https://img.alicdn.com/imgextra/i3/O1CN01NY5TI92AEMwAvZUpo_!!6000000008171-0-tps-352-198.jpg',
   },
   {
     name: '背景图9',
@@ -42,5 +38,30 @@ export const bgImg = [
   {
     name: '背景图1',
     url: 'https://img.alicdn.com/imgextra/i1/O1CN01LLH0XG23oMk6dlE4X_!!6000000007302-2-tps-352-198.png',
+  },
+
+  {
+    name: '页面背景框1',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1631949264630-Do1j9OP2.png',
+  },
+  {
+    name: '页面背景框2',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1631949264874-6Vp8H5_5.png',
+  },
+  {
+    name: '页面背景框3',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1631949261389-ArHpGUZd.png',
+  },
+  {
+    name: '页面背景框4',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1631949261820-NYhMwVIk.png',
+  },
+  {
+    name: '页面背景框5',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1631949262195-o-ySPHVK.png',
+  },
+  {
+    name: '页面背景框6',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1631949264196-8l2g5fbF.png',
   },
 ];

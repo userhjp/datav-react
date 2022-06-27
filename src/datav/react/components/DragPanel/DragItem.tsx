@@ -21,7 +21,7 @@ export const DragItem: React.FC<IWidgetMenuData> = (props) => {
   const domProps = {
     [designer.props?.sourceIdAttrName]: type,
     style: { opacity: dragging ? 0.4 : 1, cursor: 'move' },
-    title: '拖拽添加图表',
+    title: name,
     className: 'item-warp',
   };
 
