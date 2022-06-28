@@ -72,11 +72,36 @@ export const videoData = [
   {
     name: '视频15',
     cover: 'https://img.alicdn.com/imgextra/i2/O1CN01MCU4Fl1TYUsXWsw8F_!!6000000002394-2-tps-1920-1080.png',
-    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1635474522040-Jq27XMar.mp4',
+    url: '//cdn-upload.datav.aliyun.com/upload/download/1628165350050-QbY5RfvI.mp4',
   },
   {
     name: '视频16',
     cover: 'https://img.alicdn.com/imgextra/i4/O1CN01ESeNh41VmoUJ5Fm1e_!!6000000002696-2-tps-1920-1080.png',
     url: '//cdn-upload.datav.aliyun.com/upload/download/1628165378777-whQZ-2SE.mp4',
+  },
+  {
+    name: '视频17',
+    cover: 'https://img.alicdn.com/imgextra/i2/O1CN012WziRq1JhywUh4SsV_!!6000000001061-2-tps-1920-1080.png',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1635474522040-Jq27XMar.mp4',
+  },
+  {
+    name: '视频18',
+    cover: 'https://img.alicdn.com/imgextra/i2/O1CN01SAZV2U1G0WVtnBDTm_!!6000000000560-2-tps-1920-1080.png',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1634816333326-sAgdf1fu.mp4',
+  },
+  {
+    name: '视频19',
+    cover: 'https://img.alicdn.com/imgextra/i1/O1CN0116wiBH1Xyq8n65Xwm_!!6000000002993-2-tps-1920-1080.png',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1634791444263-WsWbYwep.mp4',
+  },
+  {
+    name: '视频20',
+    cover: 'https://img.alicdn.com/imgextra/i2/O1CN01TLYzg51lzD4yLNHAJ_!!6000000004889-2-tps-1920-1080.png',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1634800662355-LDpwnM2k.mp4',
+  },
+  {
+    name: '视频21',
+    cover: 'https://img.alicdn.com/imgextra/i3/O1CN01WSCg8U1ph7uIqXGqi_!!6000000005391-2-tps-1920-1080.png',
+    url: 'https://cdn-upload.datav.aliyun.com/upload/download/1635747985675-hzerKWsy.mp4',
   },
 ];

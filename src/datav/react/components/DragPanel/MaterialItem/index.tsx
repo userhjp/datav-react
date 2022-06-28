@@ -5,6 +5,8 @@ import { decorateData } from './decorateData';
 import { bgBorderData } from './bgBorderData';
 import { videoData } from './videoData';
 import './index.less';
+import { pageBgBorder } from './pageBorderData';
+import { titleBgBorder } from './titleBorderData';
 
 //  'video' | 'icon' | 'bgImg' | 'bgBorder' | 'decorate'
 const materialType = [
@@ -109,6 +111,14 @@ const RenderDragItem: React.FC<{
 const RenderBgBorder: React.FC = () => {
   return (
     <>
+      <li className="render-material-item-title">大标题背景框</li>
+      <ul className="render-material-item render-bg-border">
+        {titleBgBorder.map((m, i) => (
+          <li key={i}>
+            <RenderDragItem name={m.name} height={122} type={'SingleImg'} cover={m.cover} url={m.url} />
+          </li>
+        ))}
+      </ul>
       <li className="render-material-item-title">内容背景框</li>
       <ul className="render-material-item render-bg-border">
         {bgBorderData.map((m, i) => (
@@ -125,6 +135,14 @@ const RenderBgBorder: React.FC = () => {
                 width: m.width,
               }}
             />
+          </li>
+        ))}
+      </ul>
+      <li className="render-material-item-title">页面背景框</li>
+      <ul className="render-material-item render-bg-border">
+        {pageBgBorder.map((m, i) => (
+          <li key={i}>
+            <RenderDragItem name={m.name} type={'SingleImg'} cover={m.cover} url={m.url} />
           </li>
         ))}
       </ul>
