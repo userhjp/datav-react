@@ -1,3 +1,4 @@
+import { Select } from 'antd';
 import React, { useMemo, useState } from 'react';
 import { DragItem } from '../DragItem';
 import { titleBgBorder, pageBgBorder, videoData, bgBorderData, decorateData, bgImg, smallTitleBgBorder } from './data';
@@ -6,7 +7,7 @@ import './index.less';
 //  'video' | 'icon' | 'bgImg' | 'bgBorder' | 'decorate'
 const materialType = [
   { name: '视频', type: 'video' },
-  { name: '图标', type: 'icon' },
+  // { name: '图标', type: 'icon' },
   // { name: '点缀', children: [] },
   { name: '背景图', type: 'bgImg' },
   { name: '背景框', type: 'bgBorder' },
@@ -102,40 +103,74 @@ const RenderDragItem: React.FC<{
 };
 
 const RenderBgBorder: React.FC = () => {
+  const [active, setActive] = useState('all');
   return (
     <>
-      <li className="render-material-item-title">大标题背景框</li>
-      <ul className="render-material-item render-bg-border">
-        {titleBgBorder.map((m, i) => (
-          <li key={i}>
-            <RenderDragItem height={122} {...m} />
-          </li>
-        ))}
-      </ul>
-      <li className="render-material-item-title">小标题背景框</li>
-      <ul className="render-material-item render-bg-border">
-        {smallTitleBgBorder.map((m, i) => (
-          <li key={i}>
-            <RenderDragItem height={122} {...m} />
-          </li>
-        ))}
-      </ul>
-      <li className="render-material-item-title">内容背景框</li>
-      <ul className="render-material-item render-bg-border">
-        {bgBorderData.map((m, i) => (
-          <li key={i}>
-            <RenderDragItem width={300} height={300} {...m} />
-          </li>
-        ))}
-      </ul>
-      <li className="render-material-item-title">页面背景框</li>
-      <ul className="render-material-item render-bg-border">
-        {pageBgBorder.map((m, i) => (
-          <li key={i}>
-            <RenderDragItem {...m} />
-          </li>
-        ))}
-      </ul>
+      <div style={{ padding: '10px 10px 0' }}>
+        <Select
+          value={active}
+          style={{ width: '100%' }}
+          dropdownClassName="datav-dropdown"
+          onChange={(e) => {
+            setActive(e);
+          }}
+        >
+          <Select.Option value="all">全部</Select.Option>
+          <Select.Option value="largeTitle">大标题背景框</Select.Option>
+          <Select.Option value="smallTitle">小标题背景框</Select.Option>
+          <Select.Option value="contentBg">内容背景框</Select.Option>
+          <Select.Option value="pageBg">页面背景框</Select.Option>
+        </Select>
+      </div>
+
+      {(active === 'all' || active === 'largeTitle') && (
+        <>
+          <li className="render-material-item-title">大标题背景框</li>
+          <ul className="render-material-item render-bg-border">
+            {titleBgBorder.map((m, i) => (
+              <li key={i}>
+                <RenderDragItem height={122} {...m} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {(active === 'all' || active === 'smallTitle') && (
+        <>
+          <li className="render-material-item-title">小标题背景框</li>
+          <ul className="render-material-item render-bg-border">
+            {smallTitleBgBorder.map((m, i) => (
+              <li key={i}>
+                <RenderDragItem height={122} {...m} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {(active === 'all' || active === 'contentBg') && (
+        <>
+          <li className="render-material-item-title">内容背景框</li>
+          <ul className="render-material-item render-bg-border">
+            {bgBorderData.map((m, i) => (
+              <li key={i}>
+                <RenderDragItem width={300} height={300} {...m} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
+      {(active === 'all' || active === 'pageBg') && (
+        <>
+          <li className="render-material-item-title">页面背景框</li>
+          <ul className="render-material-item render-bg-border">
+            {pageBgBorder.map((m, i) => (
+              <li key={i}>
+                <RenderDragItem {...m} />
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </>
   );
 };

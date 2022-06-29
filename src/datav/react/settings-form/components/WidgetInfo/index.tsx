@@ -17,8 +17,10 @@ export const WidgetInfo: React.FC<WidgetInfoProps> = observer((props) => {
   return (
     <div className="widget-info">
       <div className="widget-title">
-        {name}&nbsp;v{ver}
-        <div className="sub-title">{type}</div>
+        {name}
+        <div className="sub-title">
+          {type} | v{ver}
+        </div>
       </div>
     </div>
   );
