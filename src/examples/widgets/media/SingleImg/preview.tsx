@@ -32,15 +32,20 @@ const SingleImg: React.FC<IWidgetProps> = ({ options }) => {
     let maskSize = 'initial';
     let background = '';
     let WebkitMaskImage = 'none';
+    let WebkitMaskRepeat = 'initial';
     if (options.imgType === 'svg') {
       if (options.repeat === 'repeat') {
         maskSize = 'auto';
+        WebkitMaskRepeat = 'repeat';
       } else if (options.repeat === 'repeat-x') {
         maskSize = 'auto 100%';
+        WebkitMaskRepeat = 'repeat-x';
       } else if (options.repeat === 'repeat-y') {
         maskSize = '100%';
+        WebkitMaskRepeat = 'repeat-y';
       } else {
         maskSize = '100% 100%';
+        WebkitMaskRepeat = 'no-repeat';
       }
       background = options.svgColor;
       WebkitMaskImage = `url(${options.svg})`;
@@ -59,6 +64,7 @@ const SingleImg: React.FC<IWidgetProps> = ({ options }) => {
     return {
       background,
       WebkitMaskImage,
+      WebkitMaskRepeat,
       WebkitMaskSize: maskSize,
       imageRendering: '-webkit-optimize-contrast',
       borderRadius: options.borderRadius || 0,

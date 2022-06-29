@@ -1,12 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { DragItem } from '../DragItem';
-import { bgImg } from './bgImgData';
-import { decorateData } from './decorateData';
-import { bgBorderData } from './bgBorderData';
-import { videoData } from './videoData';
+import { titleBgBorder, pageBgBorder, videoData, bgBorderData, decorateData, bgImg, smallTitleBgBorder } from './data';
 import './index.less';
-import { pageBgBorder } from './pageBorderData';
-import { titleBgBorder } from './titleBorderData';
 
 //  'video' | 'icon' | 'bgImg' | 'bgBorder' | 'decorate'
 const materialType = [
@@ -16,7 +11,6 @@ const materialType = [
   { name: '背景图', type: 'bgImg' },
   { name: '背景框', type: 'bgBorder' },
   { name: '装饰条', type: 'decorate' },
-  // { name: '插画', children: [] },
 ];
 
 const MaterialItem: React.FC = () => {
@@ -45,61 +39,60 @@ export default MaterialItem;
 
 const RenderDragItem: React.FC<{
   name: string;
-  type: 'SingleImg' | 'BgBox' | 'VideoPlayer';
+  type?: 'SingleImg' | 'BgBox' | 'VideoPlayer';
   cover?: string;
   url: string;
   width?: number;
   height?: number;
-  defaultConfig?: { [key: string]: any };
+  config?: { [key: string]: any };
 }> = (props) => {
-  const { name, type, cover, width, height, url, defaultConfig = {} } = props;
+  const { name, cover, width, type, height, url, config = {} } = props;
+  let widgetType = type;
+  if (!widgetType) widgetType = config.slice && config.width ? 'BgBox' : 'SingleImg';
 
   const dnConfig: any = useMemo(() => {
-    switch (type) {
+    const widgetConfig = {
+      w: width,
+      h: height,
+      defaultConfig: {},
+    };
+    switch (widgetType) {
       case 'SingleImg':
-        return {
-          w: width,
-          h: height,
-          defaultConfig: {
-            backgroundImg: url,
-            imgType: 'image',
-            svg: '',
-            svgColor: '#d9d9d9',
-            ...defaultConfig,
-          },
+        const suffix = url.split('.').pop();
+        widgetConfig.defaultConfig = {
+          backgroundImg: suffix === 'svg' ? '' : url,
+          imgType: suffix === 'svg' ? 'svg' : 'image',
+          svg: suffix === 'svg' ? url : '',
+          svgColor: '#d9d9d9',
+          ...config,
         };
+        break;
       case 'BgBox':
-        return {
-          w: width,
-          h: height,
-          defaultConfig: {
-            bgStyle: {
-              backgroundColor: 'rgba(0,0,0,0)',
-            },
-            borderStyle: {
-              borderType: 'image',
-              imageBorder: {
-                url,
-                ...defaultConfig,
-              },
+        widgetConfig.defaultConfig = {
+          bgStyle: {
+            backgroundColor: 'rgba(0,0,0,0)',
+          },
+          borderStyle: {
+            borderType: 'image',
+            imageBorder: {
+              url,
+              ...config,
             },
           },
         };
+        break;
       case 'VideoPlayer':
-        return {
-          w: width,
-          h: height,
-          defaultConfig: {
-            src: url,
-          },
+        widgetConfig.defaultConfig = {
+          src: url,
+          ...config,
         };
-      default:
-        return {};
+        break;
     }
-  }, [type]);
+    return widgetConfig;
+  }, [widgetType]);
 
   return (
-    <DragItem name={name} cover={cover || url} type={type} dnConfig={dnConfig}>
+    <DragItem name={name} cover={cover || url} type={widgetType} dnConfig={dnConfig}>
       <div className="title">{name}</div>
       <div className="cover-img">
         <img src={cover || url} alt={name} />
@@ -115,7 +108,15 @@ const RenderBgBorder: React.FC = () => {
       <ul className="render-material-item render-bg-border">
         {titleBgBorder.map((m, i) => (
           <li key={i}>
-            <RenderDragItem name={m.name} height={122} type={'SingleImg'} cover={m.cover} url={m.url} />
+            <RenderDragItem height={122} {...m} />
+          </li>
+        ))}
+      </ul>
+      <li className="render-material-item-title">小标题背景框</li>
+      <ul className="render-material-item render-bg-border">
+        {smallTitleBgBorder.map((m, i) => (
+          <li key={i}>
+            <RenderDragItem height={122} {...m} />
           </li>
         ))}
       </ul>
@@ -123,18 +124,7 @@ const RenderBgBorder: React.FC = () => {
       <ul className="render-material-item render-bg-border">
         {bgBorderData.map((m, i) => (
           <li key={i}>
-            <RenderDragItem
-              name={m.name}
-              type={'BgBox'}
-              cover={m.cover}
-              url={m.url}
-              width={300}
-              height={300}
-              defaultConfig={{
-                slice: m.slice,
-                width: m.width,
-              }}
-            />
+            <RenderDragItem width={300} height={300} {...m} />
           </li>
         ))}
       </ul>
@@ -142,7 +132,7 @@ const RenderBgBorder: React.FC = () => {
       <ul className="render-material-item render-bg-border">
         {pageBgBorder.map((m, i) => (
           <li key={i}>
-            <RenderDragItem name={m.name} type={'SingleImg'} cover={m.cover} url={m.url} />
+            <RenderDragItem {...m} />
           </li>
         ))}
       </ul>
@@ -155,7 +145,7 @@ const RenderBgImg: React.FC = () => {
     <ul className="render-material-item render-bg-img">
       {bgImg.map((m, i) => (
         <li key={i}>
-          <RenderDragItem name={m.name} type={'SingleImg'} url={m.url} />
+          <RenderDragItem {...m} />
         </li>
       ))}
     </ul>
@@ -167,7 +157,7 @@ const RenderDecorateStrip: React.FC = () => {
     <ul className="render-material-item render-decorate-strip">
       {decorateData.map((m, i) => (
         <li key={i}>
-          <RenderDragItem name={m.name} type={'SingleImg'} url={m.url} width={380} height={24} />
+          <RenderDragItem width={380} height={24} {...m} />
         </li>
       ))}
     </ul>
@@ -179,7 +169,7 @@ const RenderVideo: React.FC = () => {
     <ul className="render-material-item render-bg-img">
       {videoData.map((m, i) => (
         <li key={i}>
-          <RenderDragItem name={m.name} type={'VideoPlayer'} cover={m.cover} url={m.url} width={380} height={220} />
+          <RenderDragItem type={'VideoPlayer'} width={380} height={220} {...m} />
         </li>
       ))}
     </ul>
