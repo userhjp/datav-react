@@ -157,14 +157,23 @@ export interface IDataSourceSetting {
 
 /** 设计器素材类型，自适应根据type初始化组件 */
 export interface IDvMaterial {
-  /** 视频 | 图标 | 背景图 | 背景框 | 装饰 | 自定义组件名称 */
-  type: 'video' | 'icon' | 'bgImg' | 'bgBorder' | 'decorate';
   name: string;
+  /** 组件名称 单张图片组件 | 自定义背景框组件 | 视频播放器 */
+  type?: 'SingleImg' | 'BgBox' | 'VideoPlayer';
+  /** 封面 */
+  cover?: string;
+  /** 链接地址 */
   url: string;
+  /** 初始化宽度 */
+  width?: number;
+  /** 初始化高度 */
+  height?: number;
+  /** 初始化组件配置 */
   config?: {
-    width: string;
-    outset: string;
-    slice: string;
-    repeat: string;
+    /** 边框切片配置 */
+    slice?: string;
+    /** 边框宽度配置 */
+    width?: string;
+    [key: string]: any;
   };
 }
