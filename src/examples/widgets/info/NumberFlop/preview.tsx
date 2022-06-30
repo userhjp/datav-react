@@ -13,7 +13,7 @@ const NumberFlop: React.FC<IWidgetProps<any>> = ({ options = {}, data }) => {
 
   const titleText = useMemo((): string => {
     return options.titleConfig?.show ? data?.title || options.titleConfig?.title : '';
-  }, [options.titleConfig]);
+  }, [options.titleConfig, data?.title]);
 
   const prefixText = useMemo((): string => {
     const { counter } = options;

@@ -11,7 +11,7 @@ export const getFieldMap = (fields: IFieldSetting) => {
 };
 
 export const checkDataType = (dataType: IDataType, data: any) => {
-  if (!dataType) return true;
+  if (!dataType || dataType === IDataType.any) return true;
   if (Array.isArray(data)) {
     return dataType === IDataType.array;
   }

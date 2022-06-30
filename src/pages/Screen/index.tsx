@@ -4,20 +4,21 @@ import { useParams } from 'react-router-dom';
 import * as components from '@/examples/widgets';
 import { getPreviewKey } from '@/utils';
 import './index.less';
+import axios from 'axios';
 
 // GlobalRegistry.registerDesignerWidget({ ...components });
 
 const Screen: React.FC = () => {
-  const [previewData, setPreviewData] = useState(null);
+  const [data, setData] = useState(null);
   const { id } = useParams();
 
   const initData = async () => {
     if (id === 'preview') {
       const data = getPreviewKey();
-      setPreviewData(data);
+      setData(data);
     } else {
-      const data = getPreviewKey();
-      setPreviewData(data);
+      const res = await axios.get(`/json/${id}.json`);
+      if (res.data) setData(res.data);
     }
   };
 
@@ -26,7 +27,10 @@ const Screen: React.FC = () => {
   }, []);
   return (
     <div className="screen-page">
-      <Preview data={previewData} components={{ ...components }} />
+      <Preview data={data} components={{ ...components }} />
+      {!data && (
+        <div style={{ position: 'absolute', top: 30, fontSize: 20, color: '#fff', textAlign: 'center', width: '100%' }}>大屏不存在</div>
+      )}
     </div>
   );
 };

@@ -24,7 +24,7 @@ const BgBox: React.FC<IWidgetProps> = ({ options }) => {
   switch (borderStyle?.borderType) {
     case 'base':
       borderStyles = {
-        borderColor: borderStyle.baseBorder.borderColor,
+        borderColor: borderStyle.baseBorder.borderColor || 'transparent',
         borderStyle: borderStyle.baseBorder.borderStyle,
         borderWidth: borderStyle.baseBorder.borderWidth,
         borderTopLeftRadius: borderStyle.baseBorder.topLeft,

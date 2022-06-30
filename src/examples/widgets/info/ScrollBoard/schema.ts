@@ -98,6 +98,13 @@ export const ScrollBoardSchema: ISchema = {
           enum: hAligns,
           default: 'left',
         },
+        color: {
+          type: 'string',
+          title: '字体颜色',
+          'x-decorator': 'FormItem',
+          'x-component': 'ColorPicker',
+          default: '#fff',
+        },
         backgroundColor: {
           type: 'string',
           title: '背景颜色',
@@ -183,6 +190,35 @@ export const ScrollBoardSchema: ISchema = {
             'x-component': 'Select',
             enum: hAligns,
             default: 'left',
+          },
+          type: {
+            type: 'string',
+            title: '字段类型',
+            'x-decorator': 'FormItem',
+            'x-component': 'Select',
+            enum: [
+              { value: 'str', label: '字符串' },
+              { value: 'dateTime', label: '日期' },
+            ],
+            default: 'str',
+          },
+          format: {
+            type: 'string',
+            title: '格式化日期',
+            'x-decorator': 'FormItem',
+            'x-component': 'Input',
+            'x-component-props': {
+              placeholder: 'yyy-MM-dd HH:mm:ss',
+            },
+            'x-reactions': {
+              dependencies: ['.type'],
+              fulfill: {
+                state: {
+                  visible: '{{$deps[0] === "dateTime"}}',
+                },
+              },
+            },
+            default: 'yyyy-MM-dd HH:mm:ss',
           },
           columnWidth: {
             type: 'number',

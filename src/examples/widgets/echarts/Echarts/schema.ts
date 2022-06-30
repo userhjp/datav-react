@@ -16,7 +16,7 @@ export const EChartsSchema: ISchema = {
         className: 'filter-editor',
         fnName: 'getOptions(data, myChart, echarts)',
       },
-      default: `const orData = resData;
+      default: `const orData = data;
 const color = ['#38cafb', '#4caff9', '#4adeca', '#2aa7ee', '#0270f2', '#488cf7'];
 const days = ['民用户', '公建户', '改管', '干线', '场站'];
 const mapDats = {

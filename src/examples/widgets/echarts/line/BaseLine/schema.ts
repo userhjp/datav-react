@@ -15,9 +15,7 @@ export const BaseLineSchema: ISchema = {
     lineSeriesStyle: {
       color: ['#1179ff', '#79daff'],
     },
-    grid: {
-      right: 30,
-    },
+    grid: { left: 40, right: 30, top: 40, bottom: 40 },
   },
   properties: {
     grid: echartGridSchema,

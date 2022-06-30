@@ -54,7 +54,7 @@ const Tab: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
             }
           }}
           style={{
-            padding: `${padding?.vertical || 2}px ${padding?.horizontal || 10}px`,
+            padding: `${padding?.horizontal || 0}px ${padding?.vertical || 0}px`,
             ...style,
             ...options.borderStyle,
             ...(m.value === activate?.value ? options.activeStyle : {}),

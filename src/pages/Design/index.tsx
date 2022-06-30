@@ -5,6 +5,8 @@ import { IWidgetMenu } from '@/datav';
 import { message } from 'antd';
 import * as components from '@/examples/widgets';
 import { getSnapshot, setPreviewKey, setSnapshot } from '@/utils';
+import { useParams } from 'react-router';
+import axios from 'axios';
 
 const widgetMenu: IWidgetMenu[] = [
   {
@@ -30,6 +32,7 @@ const widgetMenu: IWidgetMenu[] = [
 ];
 
 const Design: React.FC = () => {
+  const { id } = useParams();
   const engine = useMemo(
     () =>
       createDesigner({
@@ -42,7 +45,7 @@ const Design: React.FC = () => {
         onSnapshot: (data) => {
           return new Promise((resolve) => {
             setTimeout(() => {
-              setSnapshot(data);
+              setSnapshot(id, data);
               message.success({
                 content: '保存成功',
                 className: 'dv-message-class',
@@ -59,10 +62,19 @@ const Design: React.FC = () => {
     []
   );
 
+  const initData = async () => {
+    engine.toolbar.addLoading();
+    let data = await getSnapshot(id);
+    if (!data && id !== 'new') {
+      const res = await axios.get(`/json/${id}.json`);
+      data = res.data;
+    }
+    if (data) engine.setInitialValue(data);
+    engine.toolbar.removeLoading();
+  };
+
   useEffect(() => {
-    getSnapshot().then((val) => {
-      engine.setInitialValue(val);
-    });
+    initData();
   }, []);
 
   return (

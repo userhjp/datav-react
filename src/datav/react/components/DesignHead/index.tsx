@@ -122,7 +122,7 @@ export const DesignHead: React.FC = observer(() => {
         </div>
         <div>
           <Space size={4} className="head-btn-group">
-            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'生成快照'}>
+            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'保存快照'}>
               <div className="head-btn" onClick={() => operation.onOperationBtn('snapshot')}>
                 <IconWidget infer="Snapshot" />
               </div>

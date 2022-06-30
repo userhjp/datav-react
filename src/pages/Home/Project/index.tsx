@@ -1,12 +1,15 @@
+import { GlobalRegistry } from '@/datav/core/registry';
 import { IconWidget } from '@/datav/react/components';
+import { Preview, Publish } from '@/datav/react/icons';
 import { CopyOutlined, DeleteOutlined, EditOutlined, SearchOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
-import { Badge, Button, Input, Select, Space, Spin } from 'antd';
+import { Badge, Button, Input, message, Select, Space, Spin } from 'antd';
 import React, { useState } from 'react';
-import './index.less';
 import { queryProjectList } from './service';
 const { Option } = Select;
+import './index.less';
 
+GlobalRegistry.registerDesignerIcons({ Publish, Preview });
 const Project: React.FC = () => {
   const [keyWord, setkeyWord] = useState('');
   const { loading, data } = useRequest(() => queryProjectList());
@@ -14,7 +17,7 @@ const Project: React.FC = () => {
   return (
     <div className="visual-project">
       <Space size="large" className="head">
-        <Button type="primary" onClick={() => window.open('/design')}>
+        <Button type="primary" onClick={() => window.open('/design/new')}>
           创建空白项目
         </Button>
         <Input
@@ -39,22 +42,59 @@ const Project: React.FC = () => {
           <div className="list">
             {data?.map((m) => (
               <div key={m.id} className="item font-color">
-                <div className="cover">
-                  <img src={m.cover} alt="" />
+                <div
+                  className="cover"
+                  style={{
+                    background: `url(${m.cover})`,
+                    backgroundRepeat: 'no-repeat',
+                    backgroundPosition: 'center',
+                    backgroundSize: '100% 100%',
+                  }}
+                >
+                  {/* <img src={m.cover} alt="" /> */}
                   <div className="activate">
                     <div className="publish">
                       <Space size={12}>
-                        <IconWidget infer="Publish" style={{ color: '#fff' }} />
-                        <IconWidget infer="Preview" style={{ color: '#fff' }} />
+                        <IconWidget
+                          title="发布"
+                          infer="Publish"
+                          onClick={() => {
+                            message.info('暂无接口支持');
+                          }}
+                          style={{ color: '#fff' }}
+                        />
+                        <IconWidget
+                          title="预览"
+                          infer="Preview"
+                          onClick={() => {
+                            window.open(`/screen/${m.id}`);
+                          }}
+                          style={{ color: '#fff' }}
+                        />
                       </Space>
                     </div>
-                    <div className="btn" onClick={() => window.open('/design')}>
+                    <div className="btn" onClick={() => window.open(`/design/${m.id}`)}>
                       编辑
                     </div>
                     <Space size={14}>
-                      <EditOutlined title="重命名" />
-                      <CopyOutlined title="复制" />
-                      <DeleteOutlined title="删除" />
+                      <EditOutlined
+                        title="重命名"
+                        onClick={() => {
+                          message.info('暂无接口支持');
+                        }}
+                      />
+                      <CopyOutlined
+                        title="复制"
+                        onClick={() => {
+                          message.info('暂无接口支持');
+                        }}
+                      />
+                      <DeleteOutlined
+                        title="删除"
+                        onClick={() => {
+                          message.info('暂无接口支持');
+                        }}
+                      />
                     </Space>
                   </div>
                 </div>

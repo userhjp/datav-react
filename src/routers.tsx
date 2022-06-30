@@ -17,7 +17,7 @@ const routes: RouteObject[] = [
     children: homeRoutes,
   },
   {
-    path: '/design',
+    path: '/design/:id',
     element: <Design />,
   },
   {

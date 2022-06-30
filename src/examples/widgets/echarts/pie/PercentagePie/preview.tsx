@@ -45,9 +45,8 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
         type: 'bar',
         roundCap: true,
         showBackground: true,
-        barWidth: 30,
         backgroundStyle: {
-          color: 'rgba(66, 66, 66, .3)',
+          color: pieStyle.backgroundStyle,
         },
         data: [dataset.value],
         coordinateSystem: 'polar',
@@ -72,7 +71,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
         name: '',
         type: 'pie',
         startAngle: 80,
-        radius: ['86%'],
+        radius: ['90%'],
         emphasis: {
           show: false,
         },
@@ -98,7 +97,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
         },
       },
       polar: {
-        radius: ['70%', '80%'],
+        radius: ['70%', '85%'],
         center: ['50%', '50%'],
       },
       angleAxis: {

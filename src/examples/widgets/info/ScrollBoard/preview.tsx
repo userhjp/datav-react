@@ -1,6 +1,7 @@
 import React, { forwardRef, useRef, useState } from 'react';
 import { useSize, useDebounceEffect } from 'ahooks';
 import './styles.less';
+import { formatDate } from '@/utils';
 
 const defaultConfig = {
   rowNum: 5,
@@ -75,13 +76,18 @@ function calcHeaderData({ column, indexHeader, header }) {
 function calcRows({ data, indexHeader, rowNum, column, textStyle }) {
   data = data.map((row) => {
     return column.map((col) => {
+      if (col.type === 'dateTime' && row[col?.mapKey]) {
+        return formatDate(row[col?.mapKey], col.format);
+      }
       return row[col?.mapKey] || '-';
     });
   });
 
   if (indexHeader?.show) {
     data = data.map((row, i) => {
-      const indexTag = `<span class="index" style="background-color: ${indexHeader.backgroundColor || ''};">${i + 1}</span>`;
+      const indexTag = `<span class="index" style="background-color: ${indexHeader.backgroundColor || ''};color: ${
+        indexHeader.color
+      };padding: 0 3px">${i + 1}</span>`;
       row.unshift(indexTag);
       return row;
     });

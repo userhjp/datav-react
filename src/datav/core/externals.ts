@@ -88,7 +88,7 @@ const contrastEventFields = (eventsFields: IEventFieldSetting): Array<IEventFiel
 const createSettingData = (cfg: ICreateWidgetConfig) => {
   if (!cfg.data) return null;
   const fieldsDes = cfg.data?.fields ?? {};
-  const dataType = isArr(cfg.data?.value) ? IDataType.array : IDataType.object;
+  const dataType = cfg.data.fields ? (isArr(cfg.data?.value) ? IDataType.array : IDataType.object) : 'any';
   const fields: IFieldSetting = createWidgetFields(fieldsDes);
   return {
     fields,

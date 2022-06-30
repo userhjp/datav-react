@@ -51,6 +51,7 @@ export enum FieldStatus {
 export enum IDataType {
   array = 'array',
   object = 'object',
+  any = 'any',
 }
 
 export enum ApiRequestMethod {

@@ -61,7 +61,7 @@ export const NumberFlopSchema: ISchema = {
             precision: 0,
             step: 1,
             min: 0,
-            max: 10,
+            max: 100,
           },
           default: 0,
         },
@@ -131,6 +131,8 @@ export const NumberFlopSchema: ISchema = {
           maxItems: 8,
           'x-component-props': {
             title: '前缀',
+            switch: true,
+            defaultSwitch: true,
           },
           default: {
             fontSize: 32,
@@ -173,6 +175,8 @@ export const NumberFlopSchema: ISchema = {
           maxItems: 8,
           'x-component-props': {
             title: '后缀',
+            switch: true,
+            defaultSwitch: false,
           },
           default: {
             fontSize: 30,
@@ -219,23 +223,14 @@ export const NumberFlopSchema: ISchema = {
         title: '数字',
         noPadding: true,
       },
-      properties: {
+      default: {
         textStyle: {
-          type: 'object',
-          'x-component': 'MyFormCollapse',
-          maxItems: 8,
-          'x-component-props': {
-            title: '文本样式',
-          },
-          default: {
-            fontSize: 36,
-            fontWeight: 'bolder',
-            color: '#006fff',
-          },
-          properties: {
-            voidTextStyle: textSchema(),
-          },
+          fontSize: 36,
+          fontWeight: 'bolder',
+          color: '#006fff',
         },
+      },
+      properties: {
         separating: {
           type: 'boolean',
           title: '千位分割符',
@@ -243,39 +238,6 @@ export const NumberFlopSchema: ISchema = {
           'x-component': 'Switch',
           default: false,
         },
-        // separating: {
-        //   type: 'object',
-        //   'x-component': 'MyFormCollapse',
-        //   maxItems: 8,
-        //   'x-component-props': {
-        //     title: '千位分割符',
-        //     switch: true,
-        //     defaultSwitch: true,
-        //   },
-        //   properties: {
-        //     separatingSymbol: {
-        //       type: 'string',
-        //       title: '分隔符符号',
-        //       'x-decorator': 'FormItem',
-        //       'x-decorator-props': {
-        //         tooltip: '分隔符最长一位，超出一位取第一位，无法以数字为分隔符',
-        //         tooltipLayout: 'text',
-        //       },
-        //       'x-component': 'Input',
-        //       'x-component-props': {
-        //         placeholder: '请输入',
-        //       },
-        //       default: ',',
-        //     },
-        //     bgSeparating: {
-        //       type: 'boolean',
-        //       title: '分隔符背景',
-        //       'x-decorator': 'FormItem',
-        //       'x-component': 'Switch',
-        //       default: false,
-        //     },
-        //   },
-        // },
         letterSpacing: {
           type: 'string',
           title: '文字间隔',
@@ -309,19 +271,6 @@ export const NumberFlopSchema: ISchema = {
           'x-decorator': 'FormItem',
           default: 'rgb(10, 115, 255, 0)',
         },
-        // digit: {
-        //   type: 'number',
-        //   title: '默认位数',
-        //   'x-decorator': 'FormItem',
-        //   'x-component': 'NumberPicker',
-        //   'x-component-props': {
-        //     placeholder: '请输入',
-        //     unit: '位',
-        //     min: 0,
-        //     max: 10,
-        //   },
-        //   default: 0,
-        // },
         decimal: {
           type: 'number',
           title: '小数点位数',
@@ -347,6 +296,7 @@ export const NumberFlopSchema: ISchema = {
           },
           default: 0,
         },
+        textStyle: textSchema('object'),
       },
     },
   },

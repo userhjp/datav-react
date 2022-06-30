@@ -176,7 +176,7 @@ export const TabSchema: ISchema = {
           'x-component': 'NumberPicker',
           'x-component-props': {
             unit: 'px',
-            min: 1,
+            min: 0,
           },
           default: 1,
         },

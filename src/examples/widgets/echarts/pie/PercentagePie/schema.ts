@@ -23,6 +23,13 @@ export const PercentagePieSchema: ISchema = {
         noPadding: true,
       },
       properties: {
+        backgroundStyle: {
+          type: 'string',
+          title: '环背景',
+          'x-decorator': 'FormItem',
+          'x-component': 'ColorPicker',
+          default: 'rgba(66, 66, 66, .1)',
+        },
         color: seriesColorSchema,
       },
       default: {
