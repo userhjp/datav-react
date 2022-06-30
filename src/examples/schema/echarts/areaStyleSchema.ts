@@ -1,4 +1,5 @@
 import { ISchema } from '@formily/react';
+import { seriesColorSchema } from './series/seriesColorSchema';
 
 /** 堆叠折线图区域填充样式 */
 export const areaStyleSchema = (defaultSwitch = true): ISchema => ({
@@ -10,13 +11,7 @@ export const areaStyleSchema = (defaultSwitch = true): ISchema => ({
     defaultSwitch,
   },
   properties: {
-    // color: {
-    //   type: 'string',
-    //   title: '填充颜色',
-    //   'x-decorator': 'FormItem',
-    //   'x-component': 'ColorPicker',
-    //   default: 'rgba(5, 213, 255, .8)',
-    // },
+    color: seriesColorSchema,
     opacity: {
       type: 'number',
       title: '透明度',

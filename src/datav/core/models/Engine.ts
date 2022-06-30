@@ -71,6 +71,7 @@ export class Engine extends Event {
     if (val.global) {
       this.global.setProps(val.global);
     }
+    this.viewport.autoScale();
   }
 
   mount() {

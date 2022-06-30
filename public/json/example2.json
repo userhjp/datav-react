@@ -783,7 +783,11 @@
           },
           "areaStyle": {
             "show": true,
-            "opacity": 0.38
+            "opacity": 0.38,
+            "color": [
+              "rgba(40, 208, 252, 0.8)",
+              "rgba(40, 208, 252, 0.2)"
+            ]
           },
           "symbol": "circle",
           "symbolSize": 10,
@@ -1035,7 +1039,11 @@
           },
           "areaStyle": {
             "show": true,
-            "opacity": 0.38
+            "opacity": 0.38,
+            "color": [
+              "rgba(255, 148, 141,0.8)",
+              "rgba(255, 148, 141,0.2)"
+            ]
           },
           "symbol": "circle",
           "symbolSize": 10,

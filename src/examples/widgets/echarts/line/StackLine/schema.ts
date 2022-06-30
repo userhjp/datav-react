@@ -1,5 +1,4 @@
 import { animationSchema } from '@/examples/schema/echarts/animationSchema';
-import { areaStyleSchema } from '@/examples/schema/echarts/areaStyleSchema';
 import { axisSchema } from '@/examples/schema/echarts/axisSchema';
 import { colorsSchema } from '@/examples/schema/echarts/colorsSchema';
 import { echartGridSchema } from '@/examples/schema/echarts/gridSchema';

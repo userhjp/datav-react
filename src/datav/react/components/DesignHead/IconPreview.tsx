@@ -25,20 +25,20 @@ export const IconPreview: React.FC = () => {
               <a
                 key={m}
                 onClick={() => {
-                  const textArea = document.createElement('textarea');
-                  textArea.value = `<IconWidget infer="${m}" />`;
-                  document.body.appendChild(textArea);
-                  textArea.select();
+                  // const textArea = document.createElement('textarea');
+                  // textArea.value = `<IconWidget infer="${m}" />`;
+                  // document.body.appendChild(textArea);
+                  // textArea.select();
                   try {
-                    document.execCommand('copy');
+                    navigator.clipboard.writeText(`<IconWidget infer="${m}" />`);
                     message.success({
                       content: '已复制到剪贴板',
                       className: 'dv-message-class',
                     });
-                  } catch (err) {
+                  } catch (error) {
                     alert('复制失败');
                   }
-                  document.body.removeChild(textArea);
+                  // document.body.removeChild(textArea);
                 }}
               >
                 <IconWidget infer={m} style={{ color: '#fff', fontSize: '20px', margin: '10px' }} />

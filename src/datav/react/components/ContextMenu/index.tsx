@@ -1,8 +1,9 @@
+import { WidgetNode } from '@/datav/core';
 import { Observer } from '@formily/react';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown, Menu, message } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import React from 'react';
-import { MoveSortType } from '../../../shared';
+import { copyText, MoveSortType } from '../../../shared';
 import { useOperation } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import './index.less';
@@ -20,6 +21,13 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
   const rename = () => operation.rename(currentId);
   const lockCom = (lockCom: boolean) => operation.lockCom(currentId, lockCom);
   const hideCom = (hideCom: boolean) => operation.hideCom(currentId, hideCom);
+  const copyClipboard = () => {
+    copyText(JSON.stringify(com));
+    message.success({
+      content: '已复制配置到剪贴板',
+      className: 'dv-message-class',
+    });
+  };
 
   const menuList: ItemType[] = [
     {
@@ -118,6 +126,39 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
     },
     {
       key: '9',
+      label: (
+        <span>
+          <IconWidget infer="Clone" />
+          &nbsp; 复制到剪贴板
+        </span>
+      ),
+      onClick: copyClipboard,
+    },
+    {
+      key: '111',
+      label: (
+        <span>
+          <IconWidget infer="Clone" />
+          &nbsp; 粘贴剪贴板组件
+        </span>
+      ),
+      onClick: async (e) => {
+        const dataStr = await navigator.clipboard.readText();
+        try {
+          const config: WidgetNode = JSON.parse(dataStr);
+          config.attr.x = 0;
+          config.attr.y = 0;
+          operation.addNode(config);
+        } catch (error) {
+          message.error({
+            content: '粘贴失败, 不是组件或配置有误',
+            className: 'dv-message-class',
+          });
+        }
+      },
+    },
+    {
+      key: '10',
       label: (
         <span>
           <IconWidget infer="Delete" />

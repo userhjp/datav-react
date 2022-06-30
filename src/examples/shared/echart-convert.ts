@@ -131,7 +131,9 @@ export function formDataToSeriesData(options: { [key: string]: any }): any[] {
       case 'line':
         Object.assign(f, { ...lineSeriesStyle, symbolOffset: [lineSeriesStyle.symbolOffsetX, lineSeriesStyle.symbolOffsetY] });
         f.label = lineSeriesStyle?.label?.show ? lineSeriesStyle.label : { show: false };
-        f.areaStyle = lineSeriesStyle?.areaStyle?.show ? { ...lineSeriesStyle?.areaStyle } : null;
+        f.areaStyle = lineSeriesStyle?.areaStyle?.show
+          ? { ...lineSeriesStyle.areaStyle, color: convertEChartColors(lineSeriesStyle.areaStyle.color) }
+          : null;
         break;
       default:
         break;

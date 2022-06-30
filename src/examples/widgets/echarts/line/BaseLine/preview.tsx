@@ -47,7 +47,9 @@ const LineBer: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
     };
     series.name = lineSeriesStyle.name;
     series.label = lineSeriesStyle?.label?.show ? lineSeriesStyle?.label : { show: false };
-    series.areaStyle = lineSeriesStyle.areaStyle.show ? { ...lineSeriesStyle.areaStyle } : null;
+    series.areaStyle = lineSeriesStyle.areaStyle.show
+      ? { ...lineSeriesStyle.areaStyle, color: convertEChartColors(lineSeriesStyle.areaStyle.color) }
+      : null;
     series.color = convertEChartColors(lineSeriesStyle.color);
     options.xAxis = formJsonToxAxisData(xAxis);
     options.yAxis = formJsonToyAxisData(yAxis);

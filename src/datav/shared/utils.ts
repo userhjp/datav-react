@@ -60,13 +60,18 @@ export function toJson<T>(data: any, defaultValue: T) {
 
 export const copyText = (text: string) => {
   try {
-    const input = document.createElement('textarea');
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand('copy');
-    document.body.removeChild(input);
-    return true;
+    // const input = document.createElement('textarea');
+    // input.value = text;
+    // document.body.appendChild(input);
+    // input.select();
+    // document.execCommand('copy');
+    // document.body.removeChild(input);
+    try {
+      navigator.clipboard.writeText(text);
+      return true;
+    } catch (error) {
+      return false;
+    }
   } catch (error) {
     return false;
   }
