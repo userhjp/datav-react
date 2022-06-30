@@ -4,7 +4,6 @@ import { Field, observer, useField, VoidField } from '@formily/react';
 import { MonacoEditor } from '../../../components';
 import { FormItem, Input, Select } from '@formily/antd';
 import './index.less';
-import { useDvGlobal } from '@/datav/react/hooks';
 
 const apiTypes = [
   {
