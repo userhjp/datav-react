@@ -6,6 +6,7 @@ import axios from 'axios';
 export async function queryProjectList(params?: { [key: string]: any }) {
   const example1 = await axios.get('/json/example1.json');
   const example2 = await axios.get('/json/example2.json');
+  const example3 = await axios.get('/json/example3.json');
   return [
     {
       id: 'example1',
@@ -13,6 +14,13 @@ export async function queryProjectList(params?: { [key: string]: any }) {
       options: example1.data,
       cover: example1.data.page.cutCover,
       createtime: '2022-06-30 23:51:23',
+    },
+    {
+      id: 'example3',
+      name: '运行管理主题屏-深色',
+      options: example3.data,
+      cover: example3.data.page.cutCover,
+      createtime: '2022-07-04 31:31:46',
     },
     {
       id: 'example2',

@@ -11,6 +11,102 @@
   },
   "components": [
     {
+      "id": "o3tesoemuIyuPTHScXHls26q",
+      "info": {
+        "name": "Tab切换",
+        "type": "Tab",
+        "ver": "1.0"
+      },
+      "attr": {
+        "x": 2288,
+        "y": 364,
+        "w": 95,
+        "h": 44,
+        "deg": 0,
+        "opacity": 1
+      },
+      "data": {
+        "fields": {
+          "label": {
+            "map": "",
+            "description": "标题"
+          },
+          "value": {
+            "map": "",
+            "description": "值"
+          }
+        },
+        "config": {
+          "dataType": "array",
+          "data": [
+            {
+              "label": "本月",
+              "value": "2"
+            },
+            {
+              "label": "本年",
+              "value": "1"
+            }
+          ],
+          "apiType": "static",
+          "useFilter": false,
+          "filterCode": "return res;"
+        },
+        "autoUpdate": false,
+        "updateTime": 1
+      },
+      "events": {
+        "changed": {
+          "fields": [
+            {
+              "key": "value",
+              "map": "yinghuanType",
+              "des": "选中值"
+            }
+          ],
+          "description": "当Tab切换时",
+          "enable": true
+        }
+      },
+      "options": {
+        "layout": "horizontal",
+        "autoSwitch": {
+          "show": false
+        },
+        "style": {
+          "fontSize": 20,
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "padding": {
+            "vertical": 0,
+            "horizontal": 12
+          },
+          "fontFamily": "Microsoft Yahei",
+          "fontWeight": "normal",
+          "color": "#000000"
+        },
+        "activeStyle": {
+          "fontSize": 20,
+          "backgroundColor": "rgba(0,0,0,0)",
+          "fontFamily": "Microsoft Yahei",
+          "fontWeight": "normal",
+          "color": "#4a90e2"
+        },
+        "borderStyle": {
+          "borderColor": "rgba(0,0,0,0)",
+          "borderRadius": 4,
+          "borderStyle": "solid",
+          "borderWidth": 1
+        }
+      },
+      "visible": {
+        "enable": false,
+        "key": "",
+        "val": "",
+        "type": "hide",
+        "renderDom": false
+      }
+    },
+    {
       "id": "pciUnz1wCyK8hido13N8roxC",
       "info": {
         "name": "Echarts自定义配置",
@@ -494,7 +590,7 @@
       },
       "events": {},
       "options": {
-        "options": "function random(min, max) { return Math.floor(Math.random() * (max - min)) + min; }\nconst resData = data || [];\nconst xdata = [];\nconst val = [];\nconst val2 = [];\nconst reserved1 = [];\nresData.forEach(f => {\n  xdata.push(f.name);\n  //const max = random(50, 200);\n  //const cval = random(50, max);\n  val.push(f.val);\n  val2.push(f.val);\n  reserved1.push(Number(f.val / f.val * 100))\n})\nreturn {\n  tooltip: {\n    trigger: 'axis',\n    axisPointer: {\n      type: 'cross',\n      crossStyle: {\n        color: '#999'\n      }\n    }\n  },\n  grid: {\n    left: 50,\n    top: 50,\n    right: 60,\n    bottom: 40\n  },\n  legend: {\n    show: true,\n    align: 'right',\n    right: 100,\n    top: 5,\n    textStyle: {\n      color: '#333',\n      fontSize: 16\n    }\n  },\n  xAxis: [\n    {\n      type: 'category',\n      data: xdata,\n      axisPointer: {\n        type: 'shadow'\n      },\n      axisLine: {\n        show: true, //隐藏X轴轴线\n        lineStyle: {\n          color: \"#163a5f\",\n          width: 1\n        }\n      },\n      axisLabel: {\n        interval: 0,\n        textStyle: {\n          color: '#333',\n          fontSize: 16\n        },\n        formatter: function (value, index) {\n          if (index % 2 !== 0) {\n            return '\\n' + value\n          } else {\n            return value\n          }\n        },\n      },\n\n    }\n  ],\n  yAxis: [\n    {\n      type: 'value',\n      name: '隐患数量',\n      nameTextStyle: {\n        color: \"#333\",\n        fontSize: 16,\n        padding: [0, 0, 8, 0]\n      },\n      min: 0,\n      //interval: 50,\n      axisLabel: {\n        formatter: function (value, index) {\n          return value;\n        },\n        textStyle: {\n          color: '#333',\n          fontSize: 16\n        }\n      },\n      axisLine: {\n        show: true,\n        lineStyle: {\n          color: \"#163a5f\",\n          width: 1\n        }\n      },\n      splitLine: {\n        show: true,\n        lineStyle: {\n          width: 1,\n          type: 'dashed',\n          color: \"rgba(233, 228, 228, 0.1)\"\n        }\n      },\n    },\n    {\n      type: 'value',\n      name: '整改率',\n      nameTextStyle: {\n        color: \"#333\",\n        fontSize: 16,\n        padding: [0, 0, 8, 20]\n      },\n      axisLine: {\n        show: true,\n        lineStyle: {\n          color: \"#163a5f\",\n          width: 1\n        }\n      },\n      splitLine: {\n        show: false,\n      },\n      min: 0,\n      max: 100,\n      interval: 20,\n      axisLabel: {\n        formatter: '{value} %',\n        textStyle: {\n          color: '#333',\n        }\n      }\n    }\n  ],\n  series: [\n    {\n      name: '隐患数',\n      type: 'bar',\n      barWidth: 12,\n      tooltip: {\n        valueFormatter: function (value) {\n          return value + ' 个';\n        }\n      },\n      itemStyle: {\n        color: new echarts.graphic.LinearGradient(0, 0, 0, 1,\n          [\n            {\n              offset: 0,\n              color: '#f585eb',\n            },\n            {\n              offset: 1,\n              color: '#7b7afe',\n            },\n          ],\n          false\n        ),\n        barBorderRadius: [20, 20, 20, 20]\n      },\n      data: val\n    },\n\n    {\n      name: '整改数',\n      type: 'bar',\n      barWidth: 12,\n      tooltip: {\n        valueFormatter: function (value) {\n          return value + ' 个';\n        }\n      },\n      itemStyle: {\n        color: new echarts.graphic.LinearGradient(0, 0, 0, 1,\n          [\n            {\n              offset: 0,\n              color: '#2fa1dc',\n            },\n            {\n              offset: 1,\n              color: '#54ddf9',\n            },\n          ],\n          false\n        ),\n        barBorderRadius: [20, 20, 20, 20]\n      },\n      data: val2\n    },\n\n    {\n      name: '整改率',\n      type: 'line',\n      yAxisIndex: 1,\n      smooth: true,\n      itemStyle: {\n        color: new echarts.graphic.LinearGradient(0, 0, 0, 1,\n          [\n            {\n              offset: 0,\n              color: '#28d0fc',\n            },\n            {\n              offset: 1,\n              color: '#6c7ffa',\n            },\n          ],\n          false\n        ),\n        barBorderRadius: [20, 20, 20, 20]\n      },\n      tooltip: {\n        valueFormatter: function (value) {\n          return value + ' %';\n        }\n      },\n      data: reserved1\n    }\n  ]\n};"
+        "options": "function random(min, max) { return Math.floor(Math.random() * (max - min)) + min; }\r\nconst resData = data || [];\r\nconst xdata = [];\r\nconst val = [];\r\nconst val2 = [];\r\nconst reserved1 = [];\r\nresData.forEach(f => {\r\n  xdata.push(f.name);\r\n  //const max = random(50, 200);\r\n  //const cval = random(50, max);\r\n  val.push(f.val);\r\n  val2.push(f.reserved1);\r\n  reserved1.push(Number(f.reserved1 / f.val * 100))\r\n})\r\nreturn {\r\n  tooltip: {\r\n    trigger: 'axis',\r\n    axisPointer: {\r\n      type: 'cross',\r\n      crossStyle: {\r\n        color: '#999'\r\n      }\r\n    }\r\n  },\r\n  grid: {\r\n    left: 50,\r\n    top: 50,\r\n    right: 60,\r\n    bottom: 40\r\n  },\r\n  legend: {\r\n    show: true,\r\n    align: 'right',\r\n    right: 100,\r\n    top: 5,\r\n    textStyle: {\r\n      color: '#333',\r\n      fontSize: 16\r\n    }\r\n  },\r\n  xAxis: [\r\n    {\r\n      type: 'category',\r\n      data: xdata,\r\n      axisPointer: {\r\n        type: 'shadow'\r\n      },\r\n      axisLine: {\r\n        show: true, //隐藏X轴轴线\r\n        lineStyle: {\r\n          color: \"#163a5f\",\r\n          width: 1\r\n        }\r\n      },\r\n      axisLabel: {\r\n        interval: 0,\r\n        textStyle: {\r\n          color: '#333',\r\n          fontSize: 16\r\n        },\r\n        formatter: function (value, index) {\r\n          if (index % 2 !== 0) {\r\n            return '\\n' + value\r\n          } else {\r\n            return value\r\n          }\r\n        },\r\n      },\r\n\r\n    }\r\n  ],\r\n  yAxis: [\r\n    {\r\n      type: 'value',\r\n      name: '隐患数量',\r\n      nameTextStyle: {\r\n        color: \"#333\",\r\n        fontSize: 16,\r\n        padding: [0, 0, 8, 0]\r\n      },\r\n      min: 0,\r\n      //interval: 50,\r\n      axisLabel: {\r\n        formatter: function (value, index) {\r\n          return value;\r\n        },\r\n        textStyle: {\r\n          color: '#333',\r\n          fontSize: 16\r\n        }\r\n      },\r\n      axisLine: {\r\n        show: true,\r\n        lineStyle: {\r\n          color: \"#163a5f\",\r\n          width: 1\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: true,\r\n        lineStyle: {\r\n          width: 1,\r\n          type: 'dashed',\r\n          color: \"rgba(233, 228, 228, 0.1)\"\r\n        }\r\n      },\r\n    },\r\n    {\r\n      type: 'value',\r\n      name: '整改率',\r\n      nameTextStyle: {\r\n        color: \"#333\",\r\n        fontSize: 16,\r\n        padding: [0, 0, 8, 20]\r\n      },\r\n      axisLine: {\r\n        show: true,\r\n        lineStyle: {\r\n          color: \"#163a5f\",\r\n          width: 1\r\n        }\r\n      },\r\n      splitLine: {\r\n        show: false,\r\n      },\r\n      min: 0,\r\n      max: 100,\r\n      interval: 20,\r\n      axisLabel: {\r\n        formatter: '{value} %',\r\n        textStyle: {\r\n          color: '#333',\r\n        }\r\n      }\r\n    }\r\n  ],\r\n  series: [\r\n    {\r\n      name: '隐患数',\r\n      type: 'bar',\r\n      barWidth: 12,\r\n      tooltip: {\r\n        valueFormatter: function (value) {\r\n          return value + ' 个';\r\n        }\r\n      },\r\n      itemStyle: {\r\n        color: new echarts.graphic.LinearGradient(0, 0, 0, 1,\r\n          [\r\n            {\r\n              offset: 0,\r\n              color: '#f585eb',\r\n            },\r\n            {\r\n              offset: 1,\r\n              color: '#7b7afe',\r\n            },\r\n          ],\r\n          false\r\n        ),\r\n        barBorderRadius: [20, 20, 20, 20]\r\n      },\r\n      data: val\r\n    },\r\n\r\n    {\r\n      name: '整改数',\r\n      type: 'bar',\r\n      barWidth: 12,\r\n      tooltip: {\r\n        valueFormatter: function (value) {\r\n          return value + ' 个';\r\n        }\r\n      },\r\n      itemStyle: {\r\n        color: new echarts.graphic.LinearGradient(0, 0, 0, 1,\r\n          [\r\n            {\r\n              offset: 0,\r\n              color: '#2fa1dc',\r\n            },\r\n            {\r\n              offset: 1,\r\n              color: '#54ddf9',\r\n            },\r\n          ],\r\n          false\r\n        ),\r\n        barBorderRadius: [20, 20, 20, 20]\r\n      },\r\n      data: val2\r\n    },\r\n\r\n    {\r\n      name: '整改率',\r\n      type: 'line',\r\n      yAxisIndex: 1,\r\n      smooth: true,\r\n      itemStyle: {\r\n        color: new echarts.graphic.LinearGradient(0, 0, 0, 1,\r\n          [\r\n            {\r\n              offset: 0,\r\n              color: '#28d0fc',\r\n            },\r\n            {\r\n              offset: 1,\r\n              color: '#6c7ffa',\r\n            },\r\n          ],\r\n          false\r\n        ),\r\n        barBorderRadius: [20, 20, 20, 20]\r\n      },\r\n      tooltip: {\r\n        valueFormatter: function (value) {\r\n          return value + ' %';\r\n        }\r\n      },\r\n      data: reserved1\r\n    }\r\n  ]\r\n};"
       },
       "visible": {
         "enable": false,
@@ -3571,16 +3667,16 @@
           "useFilter": true,
           "filterCode": "return res.data;",
           "apiMethod": "POST",
-          "apiHeaders": "{}",
+          "apiHeaders": {},
           "apiBody": "{}",
-          "apiUrl": "http://101.43.252.153:6004/om/common?type=3&categroy=1"
+          "apiUrl": "http://101.43.252.153:6004/om/common?type=3&categroy=1&usertype=:yinghuanType"
         },
         "autoUpdate": false,
         "updateTime": 1
       },
       "events": {},
       "options": {
-        "options": "const echartData = (data || []).map(m => {\n  m.value = m.val;\n  return m;\n})\nlet title = '';\nlet title2 = '';\nlet color2 = ['#2c5eed', '#3594fb', '#00c6ff', '#19e5ce', '#f1d848', '#422cec']\nlet color = ['#38cafb', '#4caff9', '#4adeca', '#2aa7ee', '#0270f2', '#488cf7'];\n\nlet formatNumber = function (num) {\n  let reg = /(?=(\\B)(\\d{3})+$)/g;\n  return Number(num).toString().replace(reg, ',');\n};\nlet total = echartData.reduce((a, b) => {\n  return a + b.value * 1;\n}, 0);\n\noption = {\n  color: color2,\n  grid: {\n    left: 0,\n    right: 0,\n    bottom: 0,\n    top: 0,\n  },\n  // tooltip: {\n  //     trigger: 'item'\n  // },\n  title: [\n    {\n      text: '{name|' + title + '}\\n{val|' + title2 + '}',\n      top: 'center',\n      left: 'center',\n      textStyle: {\n        rich: {\n          name: {\n            fontSize: 14,\n            fontWeight: 'normal',\n            color: '#000',\n            padding: [4, 0],\n          },\n          val: {\n            fontSize: 14,\n            fontWeight: 'normal',\n            color: '#000',\n          },\n        },\n      },\n    },\n  ],\n  series: [\n    {\n      type: 'pie',\n      radius: ['30%', '60%'],\n      center: ['50%', '50%'],\n      data: echartData,\n      hoverAnimation: false,\n      itemStyle: { borderColor: '#fff', borderWidth: 1 },\n      labelLine: {\n        normal: {\n          length: 5,\n          length2: 15,\n          lineStyle: {\n            // color: '#000',\n          },\n        },\n      },\n      label: {\n        normal: {\n          formatter: (params) => {\n            return '{name|' + params.name + ' }' + '{value|' + formatNumber(params.value) + '}' + '\\n' + '{value|' + params.percent + '%}';\n          },\n          rich: {\n            value: {\n              fontSize: 12,\n              fontFamily: 'PingFangSC-Regular, PingFang SC',\n              fontWeight: 400,\n              color: '#000',\n              lineHeight: 17,\n            },\n          },\n        },\n      },\n    },\n  ],\n};\n\nreturn option"
+        "options": "const echartData = (data || []).map(m => {\n  m.value = m.val;\n  return m;\n})\nlet title = '';\nlet title2 = '';\nlet color2 = ['#2c5eed', '#3594fb', '#00c6ff', '#19e5ce', '#f1d848', '#422cec']\nlet color = ['#38cafb', '#4caff9', '#4adeca', '#2aa7ee', '#0270f2', '#488cf7'];\n\nlet formatNumber = function (num) {\n  let reg = /(?=(\\B)(\\d{3})+$)/g;\n  return Number(num).toString().replace(reg, ',');\n};\nlet total = echartData.reduce((a, b) => {\n  return a + b.value * 1;\n}, 0);\n\noption = {\n  color: color2,\n  grid: {\n    left: 0,\n    right: 0,\n    bottom: 0,\n    top: 0,\n  },\n  // tooltip: {\n  //     trigger: 'item'\n  // },\n  title: [\n    {\n      text: '{name|' + title + '}\\n{val|' + title2 + '}',\n      top: 'center',\n      left: 'center',\n      textStyle: {\n        rich: {\n          name: {\n            fontSize: 14,\n            fontWeight: 'normal',\n            color: '#000',\n            padding: [4, 0],\n          },\n          val: {\n            fontSize: 14,\n            fontWeight: 'normal',\n            color: '#000',\n          },\n        },\n      },\n    },\n  ],\n  series: [\n    {\n      type: 'pie',\n      radius: [20, 60],\n      center: ['50%', '50%'],\n      data: echartData,\n      hoverAnimation: false,\n      itemStyle: { borderColor: '#fff', borderWidth: 1 },\n      labelLine: {\n        normal: {\n          length: 5,\n          length2: 15,\n          lineStyle: {\n            // color: '#000',\n          },\n        },\n      },\n      label: {\n        alignTo: 'edge',\n        formatter: (params) => {\n          return '{name|' + params.name + ' }' + '{value|' + formatNumber(params.value) + '}' + '\\n' + '{value|' + params.percent + '%}';\n        },\n        rich: {\n          value: {\n            fontSize: 12,\n            fontFamily: 'PingFangSC-Regular, PingFang SC',\n            fontWeight: 400,\n            color: '#000',\n            lineHeight: 17,\n          },\n        },\n        minMargin: 5,\n        edgeDistance: 10,\n        lineHeight: 15,\n      },\n    },\n  ],\n};\n\nreturn option"
       },
       "visible": {
         "enable": false,

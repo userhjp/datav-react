@@ -118,6 +118,7 @@ export class Viewport {
   }
 
   autoScale = () => {
+    if (!this.viewportElement) return;
     const w = (this.viewportElement.clientWidth - 110) / this.engine.screen.props.width;
     const h = (this.viewportElement.clientHeight - 110) / this.engine.screen.props.height;
     const num = Math.min(w, h);
