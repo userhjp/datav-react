@@ -198,7 +198,7 @@ export const ScrollBoardSchema: ISchema = {
             'x-component': 'Select',
             enum: [
               { value: 'str', label: '字符串' },
-              { value: 'dateTime', label: '日期' },
+              { value: 'dateTime', label: '日期格式' },
             ],
             default: 'str',
           },
@@ -232,6 +232,20 @@ export const ScrollBoardSchema: ISchema = {
               min: 0,
             },
             default: 'auto',
+          },
+          formatter: {
+            type: 'string',
+            title: '格式化文本',
+            'x-decorator': 'FormItem',
+            'x-decorator-props': {
+              tooltip: '支持返回HTML格式',
+              tooltipLayout: 'text',
+            },
+            'x-component': 'FunTextArea',
+            'x-component-props': {
+              funName: '(value)',
+            },
+            default: 'return value;',
           },
         },
       },

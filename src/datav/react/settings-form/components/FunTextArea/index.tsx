@@ -13,7 +13,7 @@ export const FunTextArea: React.FC<TextAreaProps & { funName: string }> = (props
 
   return (
     <div className="fun-textarea">
-      <p title="function filter(res) {" className="fake-code">
+      <p title="function filter(res) {" className="fake-code fake-code-start">
         <span className="--keyword">function</span> {`${funName} {`}
       </p>
       <Input.TextArea
@@ -29,7 +29,7 @@ export const FunTextArea: React.FC<TextAreaProps & { funName: string }> = (props
           props.onChange(e);
         }}
       />
-      <p className="fake-code end">{'}'}</p>
+      <p className="fake-code fake-code-end">{'}'}</p>
     </div>
   );
 };

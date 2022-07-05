@@ -76,10 +76,16 @@ function calcHeaderData({ column, indexHeader, header }) {
 function calcRows({ data, indexHeader, rowNum, column, textStyle }) {
   data = data.map((row) => {
     return column.map((col) => {
+      let str = '';
       if (col.type === 'dateTime' && row[col?.mapKey]) {
-        return formatDate(row[col?.mapKey], col.format);
+        str = formatDate(row[col?.mapKey], col.format);
       }
-      return row[col?.mapKey] || '-';
+      str = row[col?.mapKey] || '-';
+      if (col.formatter) {
+        const fun = new Function('value', `const fun = (value) => {  ${col.formatter}   }; return fun(value);`);
+        str = fun(str);
+      }
+      return str;
     });
   });
 

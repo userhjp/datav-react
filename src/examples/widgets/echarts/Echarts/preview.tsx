@@ -2,6 +2,7 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import * as echarts from 'echarts';
 import { useDebounceEffect, useSize } from 'ahooks';
+import { formatDate } from '@/utils';
 
 /** Echarts 图表通用组件，接收options配置文件，组件只负责渲染 */
 const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) => {
@@ -30,9 +31,13 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null, events }) 
     const { options: opt } = options;
     let echartOpt: any = {};
     try {
-      const fun = `const fun = (data, myChart, echarts) => {  ${opt}   }; return fun(data, myChart, echarts);`;
-      const func = new Function('data', 'myChart', 'echarts', fun);
-      echartOpt = func(data, myChart.current, echarts);
+      const fun = `const fun = (data, extend) => {  ${opt}   }; return fun(data, extend);`;
+      const func = new Function('data', 'extend', fun);
+      echartOpt = func(data, {
+        myChart: myChart.current,
+        echarts,
+        formatDate,
+      });
       if (echartOpt && !echartOpt.color) {
         // echartOpt.color = colors?.color;
       }
