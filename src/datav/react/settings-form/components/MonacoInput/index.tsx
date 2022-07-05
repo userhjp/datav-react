@@ -6,7 +6,7 @@ import { format, formatDocument } from './format';
 import { defaultOpts, handleCodeInput, handleInputCode, initMonaco } from './config';
 import { copyText, generateUUID } from '../../../../shared';
 import { IconWidget } from '../../../components';
-import { message, Modal } from 'antd';
+import { message, Modal, Tooltip } from 'antd';
 import cls from 'classnames';
 import './styles.less';
 
@@ -16,13 +16,27 @@ export interface MonacoInputProps extends EditorProps {
   readOnly?: boolean;
   fullScreenTitle: string;
   fnName?: string;
+  paramsTip?: string;
   autoFormat?: boolean;
   onChange?: (value: string) => void;
 }
 
 export const MonacoInput: React.FC<MonacoInputProps> & {
   loader?: typeof loader;
-} = ({ className = '', language, defaultLanguage, width, readOnly, height, fullScreenTitle, fnName, onMount, onChange, ...props }) => {
+} = ({
+  className = '',
+  language,
+  paramsTip,
+  defaultLanguage,
+  width,
+  readOnly,
+  height,
+  fullScreenTitle,
+  fnName,
+  onMount,
+  onChange,
+  ...props
+}) => {
   const [loaded, setLoaded] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const valueRef = useRef('');
@@ -278,8 +292,26 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
       style={{ width, height }}
     >
       {fnName && (
-        <p title="function filter(res) {" className="fake-code">
-          <span className="--keyword">function</span> {`${fnName} {`}
+        <p className="fake-code">
+          <span className="--keyword">function </span>
+          {paramsTip ? (
+            <Tooltip
+              overlayClassName="design-tip monaco-input-paramstip"
+              color="#2e343c"
+              placement="left"
+              overlayInnerStyle={{ width: 350 }}
+              title={<span style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: paramsTip }} />}
+            >
+              <span
+                style={{
+                  textDecoration: 'underline',
+                }}
+              >{`${fnName}`}</span>
+              {'{'}
+            </Tooltip>
+          ) : (
+            <span>{`${fnName} {`}</span>
+          )}
         </p>
       )}
       <div className={cls(prefix + '-view', { '--read-only': readOnly })}>

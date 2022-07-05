@@ -108,3 +108,13 @@ export function formatDate(datetime: number | Date, fmt = 'yyyy-MM-dd HH:mm:ss')
     if (new RegExp(`(${k})`).test(fmt)) fmt = fmt.replace(RegExp.$1, RegExp.$1.length === 1 ? o[k] : `00${o[k]}`.substr(`${o[k]}`.length));
   return fmt;
 }
+
+/**
+ * 千位分隔符
+ * @param num 数字 默认不保留小数四舍五入
+ * @param decimal 保留小数位数 默认0
+ * @returns string
+ */
+export function formatNumber(num: number, decimal = 0) {
+  return Number(num).toLocaleString(undefined, { minimumFractionDigits: decimal, maximumFractionDigits: decimal });
+}

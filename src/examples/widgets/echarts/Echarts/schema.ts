@@ -1,5 +1,4 @@
 import { ISchema } from '@formily/react';
-
 export const EChartsSchema: ISchema = {
   type: 'object',
   properties: {
@@ -13,12 +12,22 @@ export const EChartsSchema: ISchema = {
         autoFormat: true,
         height: 400,
         fullScreenTitle: 'Echarts配置',
-        className: 'filter-editor',
         fnName: 'getOptions(data, extend)',
+        paramsTip: `
+extend扩展对象属性<br/>
+extend: { <br/>
+&nbsp;&nbsp;myChart, // 当前图表实例。<br/>
+&nbsp;&nbsp;echarts, // echarts实例对象。<br/>
+&nbsp;&nbsp;formatDate, // 日期格式化<br/>
+&nbsp;&nbsp;例：formatDate('','yyyy-MM-dd HH:mm:ss')<br/>
+&nbsp;&nbsp;updateVariables, // 更新全局变量 <br/>
+&nbsp;&nbsp;例：updateVariables({ test: '1' })。<br/>
+&nbsp;&nbsp;formatNumber, // 千分位格式化 默认不保留小数四舍五入 <br/>
+&nbsp;&nbsp;例：formatNumber(123456.78, 2) --> 123,456.78<br/>
+}
+`,
       },
-      default: `// extend.myChart 当前图表实例。
-// extend.echarts echarts实例对象。
-// extend.formatDate 日期格式化 formatDate('','yyyy-MM-dd HH:mm:ss')。
+      default: `
 const { myChart, echarts, formatDate } = extend;
 const echartData = (data || []).map(m => {
   m.value = m.value;

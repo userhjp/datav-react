@@ -36,6 +36,10 @@ export class DataSource {
           this.variables[alias] = data[f.key] === undefined ? '' : data[f.key];
         }
       });
+    } else if (data && isObj(data)) {
+      Object.entries(data).forEach(([key, val]) => {
+        this.variables[key] = val;
+      });
     }
     console.log(this.variables);
   }
