@@ -143,12 +143,12 @@ export class Operation {
     if (this.selection.length > 1) {
       this.selection.selected.forEach((id) => {
         const com = this.findById(id);
-        com.attr.isLock = isLock;
+        com.isLock = isLock;
       });
       this.selection.clear();
     } else {
       const comp = this.findById(id);
-      comp.attr.isLock = isLock;
+      comp.isLock = isLock;
       this.selection.remove(id);
     }
   }
@@ -158,12 +158,12 @@ export class Operation {
     if (this.selection.length > 1) {
       this.selection.selected.forEach((id) => {
         const com = this.findById(id);
-        com.attr.isHide = isHide;
+        com.isHide = isHide;
       });
       this.selection.remove(...this.selection.selected);
     } else {
       const comp = this.findById(id);
-      comp.attr.isHide = isHide;
+      comp.isHide = isHide;
       this.selection.remove(id);
     }
   }
@@ -173,7 +173,7 @@ export class Operation {
     this.editableId = uuid;
     this.engine.toolbar.layer.show = true;
     const comp = this.findById(uuid);
-    if (!comp.attr.isHide) this.selection.safeSelect(uuid);
+    if (!comp.isHide) this.selection.safeSelect(uuid);
   }
 
   /** 取消编辑 */

@@ -19,7 +19,7 @@ export const LayerPanel: React.FC = observer(() => {
       {() => {
         return (
           <>
-            {value.attr.isHide && (
+            {value.isHide && (
               <IconWidget
                 infer="Eye"
                 className="com-icon-hover"
@@ -29,7 +29,7 @@ export const LayerPanel: React.FC = observer(() => {
                 }}
               />
             )}
-            {value.attr.isLock && !value.attr.isHide && (
+            {value.isLock && !value.isHide && (
               <IconWidget
                 className="com-icon-hover"
                 infer="lock"
@@ -83,7 +83,7 @@ export const LayerPanel: React.FC = observer(() => {
                 <IconWidget
                   className="com-icon"
                   infer="Title"
-                  style={{ color: item.attr.isHide ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.85)' }}
+                  style={{ color: item.isHide ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.85)' }}
                 />
                 {operation.editableId === item.id ? (
                   <Input
@@ -105,7 +105,7 @@ export const LayerPanel: React.FC = observer(() => {
                 ) : (
                   <div style={{ display: 'flex', flex: 1 }}>
                     <span
-                      style={{ flex: 1, color: item.attr.isHide ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.85)' }}
+                      style={{ flex: 1, color: item.isHide ? 'rgba(255, 255, 255, 0.5)' : 'rgba(255, 255, 255, 0.85)' }}
                       className="com-name"
                     >
                       {item.info?.name}

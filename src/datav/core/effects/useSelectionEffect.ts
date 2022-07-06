@@ -22,7 +22,7 @@ export const useSelectionEffect = (engine: Engine) => {
     const nodeId = el.getAttribute(engine.props.nodeIdAttrName);
     const structNodeId = el.getAttribute(engine.props.outlineNodeIdAttrName);
     const node = engine.operation.findById(nodeId || structNodeId);
-    if ((node.attr.isLock && !structNodeId) || node.attr.isHide) return;
+    if ((node.isLock && !structNodeId) || node.isHide) return;
     const selection = engine.operation.selection;
     const comId = nodeId || structNodeId;
     if (window.event['ctrlKey']) {

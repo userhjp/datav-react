@@ -55,6 +55,10 @@ export interface IWidgetProps<T = { [key: string]: any }> {
   data?: IWidgetData;
   events?: IWidgetEvents;
   visible?: IVisible;
+  /** 组件是否锁定 */
+  isLock?: boolean;
+  /** 组件是否隐藏 */
+  isHide?: boolean;
 }
 
 /** 组件位置信息 */
@@ -65,8 +69,6 @@ export interface IWidgetAttr {
   h: number;
   deg?: number;
   opacity?: number;
-  isLock?: boolean;
-  isHide?: boolean;
 }
 
 /** 组件描述 */

@@ -80,12 +80,12 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
           {() => (
             <span>
               <IconWidget infer="lock" />
-              &nbsp; {com.attr.isLock ? '解锁' : '锁定'}
+              &nbsp; {com.isLock ? '解锁' : '锁定'}
             </span>
           )}
         </Observer>
       ),
-      onClick: () => lockCom(!com.attr.isLock),
+      onClick: () => lockCom(!com.isLock),
     },
     {
       key: '6',
@@ -93,13 +93,13 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
         <Observer>
           {() => (
             <span>
-              <IconWidget infer={com.attr.isHide ? 'Eye' : 'EyeClose'} />
-              &nbsp; {com.attr.isHide ? '显示' : '隐藏'}
+              <IconWidget infer={com.isHide ? 'Eye' : 'EyeClose'} />
+              &nbsp; {com.isHide ? '显示' : '隐藏'}
             </span>
           )}
         </Observer>
       ),
-      onClick: () => hideCom(!com.attr.isHide),
+      onClick: () => hideCom(!com.isHide),
     },
     {
       type: 'divider',

@@ -17,7 +17,7 @@ const GlobalState = {
 export const RenderWidget: React.FC<{ node: WidgetNode }> = observer(
   ({ node }) => {
     const options = toJS(node.options);
-    if (!node.info?.type || node.attr.isHide) return <div />;
+    if (!node.info?.type || node.isHide) return <div />;
     return (
       <ErrorBoundary
         name={node.info.type}

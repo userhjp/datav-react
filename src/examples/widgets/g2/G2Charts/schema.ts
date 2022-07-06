@@ -16,7 +16,9 @@ export const G2ChartsSchema: ISchema = {
         paramsTip: `
 扩展对象属性<br/>
 extend: { <br/>
-&nbsp;&nbsp;chart, // 当前图表实例。<br/>
+&nbsp;&nbsp;chart, // 当前G2图表实例。<br/>
+&nbsp;&nbsp;G2, // G2库对象 <br/>
+&nbsp;&nbsp;DataSet, // antv数据转换处理库 <br/>
 &nbsp;&nbsp;formatDate, // 日期格式化<br/>
 &nbsp;&nbsp;例：formatDate('','yyyy-MM-dd HH:mm:ss')<br/>
 &nbsp;&nbsp;updateVariables, // 更新全局变量 <br/>
@@ -27,14 +29,15 @@ extend: { <br/>
 `,
       },
       default: `
-const { chart, formatDate, getEngine } = extend
-const G = getEngine("svg")
+const { chart, formatDate, G2 } = extend
+const G = G2.getEngine("svg")
 chart.coordinate("theta", {
-  radius: 0.75,
+  radius: 0.55,
+  innerRadius: 0.4,
 })
 
 chart.data(data)
-
+chart.legend(false); // 关闭图例
 chart.scale("percent", {
   formatter: (val) => {
     val = val * 100 + "%"

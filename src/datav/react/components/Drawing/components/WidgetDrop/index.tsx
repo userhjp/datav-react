@@ -77,12 +77,11 @@ type WidgetContainerProps = {
 };
 
 export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ node }) => {
-  const { attr, id } = node;
+  const { attr, id, isLock, isHide } = node;
   const ref = useRef<HTMLDivElement>();
   const selection = useSelection();
   const designer = useDesigner();
   const selected = selection.has(id);
-
   const transformStyle: React.CSSProperties = useMemo(() => {
     return {
       left: 0,
@@ -94,8 +93,8 @@ export const WidgetContainer: React.FC<WidgetContainerProps> = observer(({ node 
     };
   }, [attr.w, attr.h, attr.x, attr.y, selected]);
   const handlerStyle = useMemo(() => {
-    return { cursor: attr.isLock || attr.isHide ? 'default' : 'move', transform: `rotate(${attr.deg || 0}deg)` };
-  }, [attr.deg, attr.isLock, attr.isHide]);
+    return { cursor: isLock || isHide ? 'default' : 'move', transform: `rotate(${attr.deg || 0}deg)` };
+  }, [attr.deg, isLock, isHide]);
 
   const comStyle = useMemo(() => {
     return { opacity: attr.opacity };

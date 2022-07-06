@@ -17,7 +17,7 @@ export const EChartsSchema: ISchema = {
 扩展对象属性<br/>
 extend: { <br/>
 &nbsp;&nbsp;myChart, // 当前图表实例。<br/>
-&nbsp;&nbsp;echarts, // echarts实例对象。<br/>
+&nbsp;&nbsp;echarts, // Echarts库对象。<br/>
 &nbsp;&nbsp;formatDate, // 日期格式化<br/>
 &nbsp;&nbsp;例：formatDate('','yyyy-MM-dd HH:mm:ss')<br/>
 &nbsp;&nbsp;updateVariables, // 更新全局变量 <br/>
@@ -82,7 +82,6 @@ option = {
       radius: [20, 60],
       center: ['50%', '50%'],
       data: echartData,
-      hoverAnimation: false,
       itemStyle: { borderColor: '#fff', borderWidth: 1 },
       labelLine: {
         length: 15,

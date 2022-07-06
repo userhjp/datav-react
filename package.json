@@ -20,6 +20,7 @@
     "**/*.{js,jsx,tsx,ts,less,md,json}": "npm run prettier"
   },
   "dependencies": {
+    "@antv/data-set": "^0.11.8",
     "@antv/g2": "^4.2.4",
     "@formily/antd": "^2.1.4",
     "@formily/core": "^2.1.4",

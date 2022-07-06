@@ -31,7 +31,7 @@ export const useMoveNodeEffect = (engine: Engine) => {
     if (el?.closest(`*[${engine.props.nodeIdAttrName}]`)) {
       const nodeId = el?.getAttribute(engine.props.nodeIdAttrName);
       node = engine.operation.findById(nodeId);
-      if (node.attr.isHide || node.attr.isLock) return;
+      if (node.isHide || node.isLock) return;
       status = [];
       engine.cursor.setDragType(CursorDragType.Translate);
       if (engine.operation.selection.length > 1) {

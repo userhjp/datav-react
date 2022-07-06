@@ -21,6 +21,10 @@ export class WidgetNode {
   visible: IVisible;
   /** 组件异常信息 */
   errorInfo: NodeError;
+  /** 组件是否锁定 */
+  isLock?: boolean;
+  /** 组件是否隐藏 */
+  isHide?: boolean;
 
   constructor(props: IWidgetProps) {
     this.id = props.id;
@@ -36,6 +40,8 @@ export class WidgetNode {
       type: 'hide',
       renderDom: false,
     };
+    this.isLock = !!props.isLock;
+    this.isHide = !!props.isHide;
     this.makeObservable();
   }
 
@@ -47,6 +53,8 @@ export class WidgetNode {
       events: observable,
       options: observable,
       visible: observable,
+      isLock: observable.ref,
+      isHide: observable.ref,
       errorInfo: observable.ref,
       moveTo: action,
       changeLock: action,
@@ -77,11 +85,11 @@ export class WidgetNode {
   }
 
   changeLock(isLock: boolean) {
-    this.attr.isLock = !!isLock;
+    this.isLock = !!isLock;
   }
 
   changeVisible(isHide: boolean) {
-    this.attr.isHide = !!isHide;
+    this.isHide = !!isHide;
   }
 
   setError(error: NodeError) {

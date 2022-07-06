@@ -35,7 +35,7 @@ export const useFreeSelectionEffect = (engine: Engine) => {
     components.forEach((node) => {
       const nodeRect = engine.viewport.getValidNodeOffsetRect(node);
       if (nodeRect && isCrossRectInRect(selectionRect, nodeRect)) {
-        if (!node.attr.isHide && !node.attr.isLock) {
+        if (!node.isHide && !node.isLock) {
           selectedId.push(node.id);
         }
       }
