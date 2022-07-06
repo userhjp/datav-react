@@ -3,3 +3,4 @@ export * from './echarts';
 export * from './media';
 export * from './info';
 export * from './control';
+export * from './g2';

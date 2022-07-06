@@ -12,9 +12,9 @@ export const EChartsSchema: ISchema = {
         autoFormat: true,
         height: 400,
         fullScreenTitle: 'Echarts配置',
-        fnName: 'getOptions(data, extend)',
+        fnName: 'getOptions(data,extend)',
         paramsTip: `
-extend扩展对象属性<br/>
+扩展对象属性<br/>
 extend: { <br/>
 &nbsp;&nbsp;myChart, // 当前图表实例。<br/>
 &nbsp;&nbsp;echarts, // echarts实例对象。<br/>
