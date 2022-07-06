@@ -2,12 +2,12 @@ import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import { GridComponent, TitleComponent, PolarComponent } from 'echarts/components';
 import { PieChart, BarChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import { convertEChartColors } from '@/examples/shared';
 
-use([CanvasRenderer, PieChart, GridComponent, TitleComponent, PolarComponent, BarChart]);
+use([SVGRenderer, PieChart, GridComponent, TitleComponent, PolarComponent, BarChart]);
 /** 单值百分比饼图 */
 const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
   const elemtRef = useRef<HTMLDivElement>();
@@ -15,7 +15,7 @@ const PercentagePie: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
   const size = useSize(elemtRef);
 
   useLayoutEffect(() => {
-    myChart.current = init(elemtRef.current);
+    myChart.current = init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();
   }, []);
 

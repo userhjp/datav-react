@@ -2,12 +2,12 @@ import React, { useLayoutEffect, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import { LegendComponent, TooltipComponent, GridComponent } from 'echarts/components';
 import { FunnelChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import { formJsonToLegendData } from '@/examples/shared';
 
-use([CanvasRenderer, LegendComponent, FunnelChart, TooltipComponent, GridComponent]);
+use([SVGRenderer, LegendComponent, FunnelChart, TooltipComponent, GridComponent]);
 
 /** 漏斗图 */
 const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
@@ -16,7 +16,7 @@ const BaseFunnel: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const size = useSize(elemtRef);
 
   useLayoutEffect(() => {
-    myChart.current = init(elemtRef.current);
+    myChart.current = init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();
   }, []);
 

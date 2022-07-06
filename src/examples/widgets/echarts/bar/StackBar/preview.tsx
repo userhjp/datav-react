@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import { DatasetComponent, GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import { BarChart, LineChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import {
@@ -14,7 +14,7 @@ import {
   formJsonToyAxisData,
 } from '@/examples/shared';
 
-use([GridComponent, BarChart, LineChart, CanvasRenderer, LegendComponent, DatasetComponent, TooltipComponent]);
+use([GridComponent, BarChart, LineChart, SVGRenderer, LegendComponent, DatasetComponent, TooltipComponent]);
 
 /** 堆叠柱状图 */
 const StackBar: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
@@ -23,7 +23,7 @@ const StackBar: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const size = useSize(elemtRef);
 
   useLayoutEffect(() => {
-    myChart.current = init(elemtRef.current);
+    myChart.current = init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();
   }, []);
 

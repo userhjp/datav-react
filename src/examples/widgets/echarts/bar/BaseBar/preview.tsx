@@ -2,20 +2,20 @@ import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import { DatasetComponent, GridComponent, TooltipComponent } from 'echarts/components';
 import { BarChart, LineChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import { convert2Ddata, convertEChartColors, formDataToTooltipData, formJsonToxAxisData, formJsonToyAxisData } from '@/examples/shared';
 import { ECBasicOption } from 'echarts/types/dist/shared';
 
-use([GridComponent, BarChart, LineChart, CanvasRenderer, DatasetComponent, TooltipComponent]);
+use([GridComponent, BarChart, LineChart, SVGRenderer, DatasetComponent, TooltipComponent]);
 
 const BaseBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) => {
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<ECharts>();
   const size = useSize(elemtRef);
   useLayoutEffect(() => {
-    myChart.current = init(elemtRef.current);
+    myChart.current = init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();
   }, []);
 

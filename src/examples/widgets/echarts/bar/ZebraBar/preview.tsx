@@ -2,7 +2,7 @@ import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import { DatasetComponent, GridComponent, LegendComponent, TooltipComponent } from 'echarts/components';
 import { PictorialBarChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import {
@@ -14,7 +14,7 @@ import {
   formJsonToyAxisData,
 } from '@/examples/shared';
 
-use([GridComponent, PictorialBarChart, CanvasRenderer, LegendComponent, DatasetComponent, TooltipComponent]);
+use([GridComponent, PictorialBarChart, SVGRenderer, LegendComponent, DatasetComponent, TooltipComponent]);
 
 const ZebraBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) => {
   const elemtRef = useRef<HTMLDivElement>();
@@ -32,7 +32,7 @@ const ZebraBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) =
   };
 
   useLayoutEffect(() => {
-    myChart.current = init(elemtRef.current);
+    myChart.current = init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();
   }, []);
 

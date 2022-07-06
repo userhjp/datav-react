@@ -2,12 +2,12 @@ import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import { GridComponent, TitleComponent, PolarComponent, SingleAxisComponent } from 'echarts/components';
 import { ScatterChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import { convert2Ddata, formJsonToxAxisData, formJsonToyAxisData } from '@/examples/shared';
 
-use([CanvasRenderer, ScatterChart, GridComponent, TitleComponent, PolarComponent, SingleAxisComponent]);
+use([SVGRenderer, ScatterChart, GridComponent, TitleComponent, PolarComponent, SingleAxisComponent]);
 /** 气泡图 */
 const BubbleChart: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const elemtRef = useRef<HTMLDivElement>();
@@ -15,7 +15,7 @@ const BubbleChart: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const size = useSize(elemtRef);
 
   useLayoutEffect(() => {
-    myChart.current = init(elemtRef.current);
+    myChart.current = init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();
   }, []);
 

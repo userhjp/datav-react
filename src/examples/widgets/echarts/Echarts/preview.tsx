@@ -21,7 +21,7 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null }) => {
   );
 
   useLayoutEffect(() => {
-    myChart.current = echarts.init(elemtRef.current);
+    myChart.current = echarts.init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();
   }, []);
 

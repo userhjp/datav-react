@@ -2,12 +2,12 @@ import React, { useLayoutEffect, useMemo, useRef } from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import { DatasetComponent, GridComponent, TooltipComponent } from 'echarts/components';
 import { LineChart } from 'echarts/charts';
-import { CanvasRenderer } from 'echarts/renderers';
+import { SVGRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
 import { convert2Ddata, convertEChartColors, formDataToTooltipData, formJsonToxAxisData, formJsonToyAxisData } from '@/examples/shared';
 
-use([GridComponent, CanvasRenderer, DatasetComponent, TooltipComponent, LineChart]);
+use([GridComponent, SVGRenderer, DatasetComponent, TooltipComponent, LineChart]);
 
 const LineBer: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const elemtRef = useRef<HTMLDivElement>();
@@ -15,7 +15,7 @@ const LineBer: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
   const size = useSize(elemtRef);
 
   useLayoutEffect(() => {
-    myChart.current = init(elemtRef.current);
+    myChart.current = init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();
   }, []);
 
