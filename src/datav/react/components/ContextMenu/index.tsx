@@ -3,7 +3,7 @@ import { Observer } from '@formily/react';
 import { Dropdown, Menu, message } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import React from 'react';
-import { copyText, MoveSortType } from '../../../shared';
+import { copyText, generateUUID, MoveSortType } from '../../../shared';
 import { useOperation } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import './index.less';
@@ -148,6 +148,7 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
           const config: WidgetNode = JSON.parse(dataStr);
           config.attr.x = 0;
           config.attr.y = 0;
+          config.id = generateUUID();
           operation.addNode(config);
         } catch (error) {
           message.error({
