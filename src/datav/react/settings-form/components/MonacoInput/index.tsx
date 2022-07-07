@@ -58,8 +58,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const theme = 'dark';
 
   computedLanguage.current = language || defaultLanguage;
-  realLanguage.current = /(?:javascript|typescript)/gi.test(computedLanguage.current) ? 'javascript' : computedLanguage.current;
-
+  realLanguage.current = computedLanguage.current; // /(?:javascript|typescript)/gi.test(computedLanguage.current) ? 'typescript' : computedLanguage.current;
   const opts = useMemo(() => {
     return Object.assign({}, defaultOpts, props.options, {
       tabSize: 2,
@@ -87,6 +86,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   }, [props.extraLib]);
 
   const updateExtraLib = () => {
+    debugger;
     if (extraLibRef.current) {
       extraLibRef.current.dispose();
     }

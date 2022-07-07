@@ -10,6 +10,16 @@ export const G2ChartsSchema: ISchema = {
         language: 'javascript',
         readOnly: false,
         autoFormat: true,
+        extraLib: `
+          declare var extend: {
+            chart: any;
+            G2: any;
+            DataSet: any;
+            formatDate: any;
+            updateVariables: any;
+            formatNumber: any;
+          }
+        `,
         height: 400,
         fullScreenTitle: 'G2图表配置',
         fnName: 'getOptions(data,extend)',
