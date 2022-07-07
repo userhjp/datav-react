@@ -21,13 +21,6 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
   const rename = () => operation.rename(currentId);
   const lockCom = (lockCom: boolean) => operation.lockCom(currentId, lockCom);
   const hideCom = (hideCom: boolean) => operation.hideCom(currentId, hideCom);
-  const copyClipboard = () => {
-    copyText(JSON.stringify(com));
-    message.success({
-      content: '已复制配置到剪贴板',
-      className: 'dv-message-class',
-    });
-  };
 
   const menuList: ItemType[] = [
     {
@@ -125,6 +118,9 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
       onClick: copyComp,
     },
     {
+      type: 'divider',
+    },
+    {
       key: '9',
       label: (
         <span>
@@ -132,13 +128,19 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
           &nbsp; 复制到剪贴板
         </span>
       ),
-      onClick: copyClipboard,
+      onClick: () => {
+        copyText(JSON.stringify(com));
+        message.success({
+          content: '已复制配置到剪贴板',
+          className: 'dv-message-class',
+        });
+      },
     },
     {
       key: '111',
       label: (
         <span>
-          <IconWidget infer="Clone" />
+          <IconWidget infer="Paste" />
           &nbsp; 粘贴剪贴板组件
         </span>
       ),

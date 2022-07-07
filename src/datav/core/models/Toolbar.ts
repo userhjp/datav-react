@@ -63,13 +63,13 @@ export class Toolbar {
 
   makeObservable() {
     define(this, {
-      layer: observable,
-      components: observable,
-      config: observable,
-      toolbox: observable,
-      multiple: observable,
+      layer: observable.shallow,
+      components: observable.shallow,
+      config: observable.shallow,
+      toolbox: observable.shallow,
+      multiple: observable.shallow,
 
-      loading: observable,
+      loading: observable.ref,
       addLoading: action,
       removeLoading: action,
       removeAllLoading: action,

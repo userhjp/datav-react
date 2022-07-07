@@ -27,7 +27,7 @@ export class Selection {
 
   makeObservable() {
     define(this, {
-      selected: observable,
+      selected: observable.shallow,
       first: observable.computed,
       batchSelect: action,
       add: action,

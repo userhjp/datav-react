@@ -36,7 +36,7 @@ export class Operation {
     define(this, {
       editableId: observable.ref,
       errors: observable.computed,
-      components: observable,
+      components: observable.shallow,
       addNode: action,
       removeCompSchema: action,
       copyCompSchema: action,

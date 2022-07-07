@@ -14,9 +14,10 @@ export type Monaco = typeof monaco;
 export interface MonacoInputProps extends EditorProps {
   extraLib?: string;
   readOnly?: boolean;
+  helpCode?: string;
+  helpCodeViewWidth?: number | string;
   fullScreenTitle: string;
   fnName?: string;
-  paramsTip?: string;
   autoFormat?: boolean;
   onChange?: (value: string) => void;
 }
@@ -26,10 +27,11 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
 } = ({
   className = '',
   language,
-  paramsTip,
   defaultLanguage,
   width,
   readOnly,
+  helpCode,
+  helpCodeViewWidth,
   height,
   fullScreenTitle,
   fnName,
@@ -234,6 +236,41 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     }
   };
 
+  const renderHelpCode = () => {
+    if (!helpCode) return null;
+    return (
+      <div className={prefix + '-help --read-only'} style={{ width: helpCodeViewWidth || '30%' }}>
+        <Editor
+          value={helpCode}
+          theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
+          defaultLanguage={realLanguage.current}
+          language={realLanguage.current}
+          options={{
+            ...props.options,
+            lineNumbers: 'off',
+            readOnly: true,
+            glyphMargin: false,
+            folding: false,
+            lineDecorationsWidth: 0,
+            lineNumbersMinChars: 0,
+            minimap: {
+              enabled: false,
+            },
+            tabSize: 2,
+            smoothScrolling: true,
+            scrollbar: {
+              verticalScrollbarSize: 5,
+              horizontalScrollbarSize: 5,
+              alwaysConsumeMouseWheel: false,
+            },
+          }}
+          width="100%"
+          height="100%"
+        />
+      </div>
+    );
+  };
+
   const renderFullModal = () => {
     return (
       <Modal
@@ -248,37 +285,40 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
         onCancel={() => setIsFullScreen(false)}
         afterClose={() => closedFullModal()}
       >
-        <div className={cls('fullscreen-editor', { '--read-only': readOnly })}>
-          {fnName && (
-            <p title="function filter(res) {" className="fake-code">
-              <span className="--keyword">function</span> {`${fnName} {`}
-            </p>
-          )}
-          <section
-            style={{
-              display: 'flex',
-              position: 'relative',
-              textAlign: 'initial',
-              flex: 1,
-            }}
-          >
-            <Editor
-              {...props}
-              value={editorRef.current?.getValue()}
-              theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
-              defaultLanguage={realLanguage.current}
-              language={realLanguage.current}
-              options={opts}
-              width="100%"
-              height="100%"
-              onMount={onModalMountHandler}
-            />
-          </section>
-          {fnName && (
-            <p style={{}} className="fake-code">
-              {'}'}
-            </p>
-          )}
+        <div style={{ display: 'flex', height: '100%' }}>
+          <div style={{ flex: 1 }} className={cls('fullscreen-editor', { '--read-only': readOnly })}>
+            {fnName && (
+              <p title="function filter(res) {" className="fake-code">
+                <span className="--keyword">function</span> {`${fnName} {`}
+              </p>
+            )}
+            <section
+              style={{
+                display: 'flex',
+                position: 'relative',
+                textAlign: 'initial',
+                flex: 1,
+              }}
+            >
+              <Editor
+                {...props}
+                value={editorRef.current?.getValue()}
+                theme={theme === 'dark' ? 'monokai' : 'chrome-devtools'}
+                defaultLanguage={realLanguage.current}
+                language={realLanguage.current}
+                options={opts}
+                width="100%"
+                height="100%"
+                onMount={onModalMountHandler}
+              />
+            </section>
+            {fnName && (
+              <p style={{}} className="fake-code">
+                {'}'}
+              </p>
+            )}
+          </div>
+          {renderHelpCode()}
         </div>
       </Modal>
     );
@@ -294,24 +334,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
       {fnName && (
         <p className="fake-code">
           <span className="--keyword">function </span>
-          {paramsTip ? (
-            <Tooltip
-              overlayClassName="design-tip monaco-input-paramstip"
-              color="#2e343c"
-              placement="left"
-              overlayInnerStyle={{ width: 350 }}
-              title={<span style={{ fontSize: 12 }} dangerouslySetInnerHTML={{ __html: paramsTip }} />}
-            >
-              <span
-                style={{
-                  textDecoration: 'underline',
-                }}
-              >{`${fnName}`}</span>
-              {'{'}
-            </Tooltip>
-          ) : (
-            <span>{`${fnName} {`}</span>
-          )}
+          <span>{`${fnName} {`}</span>
         </p>
       )}
       <div className={cls(prefix + '-view', { '--read-only': readOnly })}>

@@ -11,22 +11,38 @@ export const G2ChartsSchema: ISchema = {
         readOnly: false,
         autoFormat: true,
         height: 400,
-        fullScreenTitle: 'Echarts配置',
+        fullScreenTitle: 'G2图表配置',
         fnName: 'getOptions(data,extend)',
-        paramsTip: `
-扩展对象属性<br/>
-extend: { <br/>
-&nbsp;&nbsp;chart, // 当前G2图表实例。<br/>
-&nbsp;&nbsp;G2, // G2库对象 <br/>
-&nbsp;&nbsp;DataSet, // antv数据转换处理库 <br/>
-&nbsp;&nbsp;formatDate, // 日期格式化<br/>
-&nbsp;&nbsp;例：formatDate('','yyyy-MM-dd HH:mm:ss')<br/>
-&nbsp;&nbsp;updateVariables, // 更新全局变量 <br/>
-&nbsp;&nbsp;例：updateVariables({ test: '1' })。<br/>
-&nbsp;&nbsp;formatNumber, // 千分位格式化 默认不保留小数四舍五入 <br/>
-&nbsp;&nbsp;例：formatNumber(123456.78, 2) --> 123,456.78<br/>
+        helpCode: `
+/**
+ * @param data 图表组件数据
+ * @param extend 扩展对象
+ * @returns void
+ */
+function getOptions(data, extend) {
+  const { chart, G2, DataSet, formatDate, updateVariables, formatNumber } = extend;
+
+  // 当前G2图表实例（参考Antv G2图表）
+  chart;
+
+  // G2库对象（参考Antv G2图表）
+  G2;
+
+  // antv数据转换处理库 https://g2.antv.vision/zh/docs/manual/dataset/overview
+  DataSet;
+
+  // 日期格式化
+  const dateStr = formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss');
+  console.log(dateStr); // --> 2022-07-07 11:47:23
+
+  // 将对象合并到全局变量
+  updateVariables({ test: '1' });
+
+  // 千分位格式化 默认不保留小数四舍五入
+  const num = formatNumber(123456.78, 2);
+  console.log(num); // --> 123,456.78
 }
-`,
+        `,
       },
       default: `
 const { chart, formatDate, G2 } = extend

@@ -13,19 +13,36 @@ export const EChartsSchema: ISchema = {
         height: 400,
         fullScreenTitle: 'Echarts配置',
         fnName: 'getOptions(data,extend)',
-        paramsTip: `
-扩展对象属性<br/>
-extend: { <br/>
-&nbsp;&nbsp;myChart, // 当前图表实例。<br/>
-&nbsp;&nbsp;echarts, // Echarts库对象。<br/>
-&nbsp;&nbsp;formatDate, // 日期格式化<br/>
-&nbsp;&nbsp;例：formatDate('','yyyy-MM-dd HH:mm:ss')<br/>
-&nbsp;&nbsp;updateVariables, // 更新全局变量 <br/>
-&nbsp;&nbsp;例：updateVariables({ test: '1' })。<br/>
-&nbsp;&nbsp;formatNumber, // 千分位格式化 默认不保留小数四舍五入 <br/>
-&nbsp;&nbsp;例：formatNumber(123456.78, 2) --> 123,456.78<br/>
+        helpCode: `
+/**
+ * @param data 图表组件数据
+ * @param extend 扩展对象
+ * @returns object
+ */
+function getOptions(data, extend) {
+  const { myChart, echarts, formatDate, updateVariables, formatNumber } = extend;
+
+  // 当前Echart图表实例（参考Echarts）
+  myChart;
+
+  // Echarts库对象（参考Echarts）
+  echarts;
+
+  // 日期格式化
+  const dateStr = formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss');
+  console.log(dateStr); // --> 2022-07-07 11:47:23
+
+  // 将对象合并到全局变量
+  updateVariables({ test: '1' });
+
+  // 千分位格式化 默认不保留小数四舍五入
+  const num = formatNumber(123456.78, 2);
+  console.log(num); // --> 123,456.78
+
+  // 返回Echarts配置对象
+  return {};
 }
-`,
+        `,
       },
       default: `
 const { myChart, echarts, formatDate } = extend;
