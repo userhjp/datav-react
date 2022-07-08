@@ -4,22 +4,14 @@ import * as G2 from '@antv/g2';
 import DataSet from '@antv/data-set';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { formatDate, formatNumber } from '@/utils';
-import { useDatavEvent } from '@/datav/react/hooks';
+import { useVariables } from '@/datav/react/hooks';
 
 /** Echarts 图表通用组件，接收options配置文件，组件只负责渲染 */
 const G2Charts: React.FC<IWidgetProps> = ({ options = {}, data = null }) => {
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<G2.Chart>();
   const size = useSize(elemtRef);
-  const updateVariables = useDatavEvent(
-    {
-      enable: true,
-      description: '事件',
-      fields: null,
-    },
-    null,
-    false
-  );
+  const variables = useVariables();
 
   useLayoutEffect(() => {
     myChart.current = new G2.Chart({
@@ -41,7 +33,6 @@ const G2Charts: React.FC<IWidgetProps> = ({ options = {}, data = null }) => {
   useLayoutEffect(() => {
     const { options: opt } = options;
     let echartOpt: any = {};
-    console.log('111');
     try {
       const fun = `const fun = (data, extend) => {  ${opt}   }; return fun(data, extend);`;
       const func = new Function('data', 'extend', fun);
@@ -50,7 +41,7 @@ const G2Charts: React.FC<IWidgetProps> = ({ options = {}, data = null }) => {
         chart: myChart.current,
         formatDate,
         formatNumber,
-        updateVariables,
+        ...variables,
         G2,
         DataSet,
       });

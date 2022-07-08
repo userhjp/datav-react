@@ -3,22 +3,14 @@ import { IWidgetProps } from '@/datav/react/interface';
 import * as echarts from 'echarts';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { formatDate, formatNumber } from '@/utils';
-import { useDatavEvent } from '@/datav/react/hooks';
+import { useVariables } from '@/datav/react/hooks';
 
 /** Echarts 图表通用组件，接收options配置文件，组件只负责渲染 */
 const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null }) => {
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<echarts.ECharts>();
   const size = useSize(elemtRef);
-  const updateVariables = useDatavEvent(
-    {
-      enable: true,
-      description: '事件',
-      fields: null,
-    },
-    null,
-    false
-  );
+  const variables = useVariables();
 
   useLayoutEffect(() => {
     myChart.current = echarts.init(elemtRef.current, null, { renderer: 'svg' });
@@ -48,7 +40,7 @@ const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null }) => {
         echarts,
         formatDate,
         formatNumber,
-        updateVariables,
+        ...variables,
       });
       if (echartOpt && !echartOpt.color) {
         // echartOpt.color = colors?.color;

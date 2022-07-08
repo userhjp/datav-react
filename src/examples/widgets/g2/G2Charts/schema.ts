@@ -30,7 +30,11 @@ export const G2ChartsSchema: ISchema = {
  * @returns void
  */
 function getOptions(data, extend) {
-  const { chart, G2, DataSet, formatDate, updateVariables, formatNumber } = extend;
+  const { 
+    chart, G2, DataSet, 
+    formatDate, formatNumber,
+    update, watch, variables,
+  } = extend;
 
   // 当前G2图表实例（参考Antv G2图表）
   chart;
@@ -41,12 +45,22 @@ function getOptions(data, extend) {
   // antv数据转换处理库 https://g2.antv.vision/zh/docs/manual/dataset/overview
   DataSet;
 
+  // 重要，可通过监听和更新全局变量，以全局变量作为组件间通讯的桥梁
+  watch('type', (item) => {
+    // 当全局变量'type'值变化后重复执行
+    console.log(item); // --> { type: 1 }
+  });
+  watch(['type', 'type2'], (item) => {
+    // 当全局变量'type'值变化后重复执行
+    console.log(item); --> // { type: 1, type2: 2 }
+  });
+  //更新全局变量
+  update({ type: 2 })
+  variables; // 当前存在的的全局变量对象
+
   // 日期格式化
   const dateStr = formatDate(new Date(), 'yyyy-MM-dd HH:mm:ss');
   console.log(dateStr); // --> 2022-07-07 11:47:23
-
-  // 将对象合并到全局变量
-  updateVariables({ test: '1' });
 
   // 千分位格式化 默认不保留小数四舍五入
   const num = formatNumber(123456.78, 2);

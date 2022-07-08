@@ -28,19 +28,10 @@ export class DataSource {
     });
   }
 
-  setVariables(fields: Array<IEventField>, data: Record<string, any>) {
-    if (data && isObj(data) && fields?.length) {
-      fields.forEach((f) => {
-        const alias = f.map || f.key;
-        if (alias && f.key) {
-          this.variables[alias] = data[f.key] === undefined ? '' : data[f.key];
-        }
-      });
-    } else if (data && isObj(data)) {
-      Object.entries(data).forEach(([key, val]) => {
-        this.variables[key] = val;
-      });
-    }
+  setVariables(data: Record<string, any>) {
+    Object.entries(data).forEach(([key, val]) => {
+      this.variables[key] = val;
+    });
     console.log(this.variables);
   }
 
