@@ -16,7 +16,7 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
   const domRef = useRef<HTMLDivElement>();
   return (
     <div ref={domRef} className="dv-data-array-collapse">
-      <Collapse expandIconPosition="right" defaultActiveKey={[]} ghost>
+      <Collapse expandIconPosition="end" defaultActiveKey={[]} ghost>
         {field.value?.map((item, index) => {
           return (
             <Collapse.Panel

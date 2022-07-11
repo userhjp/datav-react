@@ -14,7 +14,7 @@ export const GlobalColors: React.FC<any> = observer(({ value }) => {
 
   return (
     <div className="global-colors-select-dropdown-menu">
-      <Collapse className="global-colors-collapse" expandIconPosition="right" defaultActiveKey={[1]} ghost>
+      <Collapse className="global-colors-collapse" expandIconPosition="end" defaultActiveKey={[1]} ghost>
         <Collapse.Panel
           header={
             <ColorSelect

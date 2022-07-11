@@ -51,7 +51,7 @@ export const Palette: React.FC<any> = observer(({ value, onChange }) => {
   };
   return (
     <div className="palette-select-dropdown-menu">
-      <Collapse className="palette-collapse" expandIconPosition="right" ghost>
+      <Collapse className="palette-collapse" expandIconPosition="end" ghost>
         <Collapse.Panel
           header={
             <ColorSelect

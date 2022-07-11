@@ -1,11 +1,11 @@
 import rcUpload from '../../rc-upload';
 import { Input } from '@formily/antd';
-import { Upload, message, Divider } from 'antd';
+import { Upload, message, Divider, Modal } from 'antd';
 import { UploadFile, UploadChangeParam } from 'antd/lib/upload/interface';
 import React, { useContext, useState } from 'react';
 import { IconWidget } from '../../../components';
-import './index.less';
 import { SettingsFormContext } from '../../context';
+import './index.less';
 
 const { Dragger } = Upload;
 
@@ -16,6 +16,7 @@ type BgImgProps = {
 
 export const BgImg: React.FC<BgImgProps> = (props) => {
   const { onChange, value } = props;
+  const [showModal, setShowModal] = useState(false);
   const context = useContext(SettingsFormContext);
   const [fileList, setFileList] = useState([]);
 
@@ -82,9 +83,18 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
         >
           {value ? (
             <div className="image-show">
-              <img src={value} className="image-value" />
+              <img src={value} />
               <div className="upload-cover">
-                <div className="upload-del-btn">
+                <div className="upload-btn">
+                  <span
+                    onClick={(e) => {
+                      setShowModal(true);
+                      e.stopPropagation();
+                    }}
+                  >
+                    预览
+                  </span>
+                  <Divider type="vertical" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }} />
                   <span>更改</span>
                   <Divider type="vertical" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }} />
                   <span
@@ -114,6 +124,20 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
           )}
         </Dragger>
       </div>
+      <Modal
+        closeIcon={<IconWidget infer="Close" style={{ color: '#fff' }} />}
+        visible={showModal}
+        bodyStyle={{ padding: 12, background: '#2a2e33' }}
+        footer={null}
+        width={800}
+        onCancel={() => setShowModal(false)}
+      >
+        <div style={{ color: '#fff' }}>图片预览</div>
+        <Divider style={{ margin: '12px 0', borderColor: 'rgb(68 72 76)' }} />
+        <div className="preview-img">
+          <img src={value} className="image-value" />
+        </div>
+      </Modal>
     </div>
   );
 };

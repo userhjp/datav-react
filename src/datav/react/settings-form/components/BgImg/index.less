@@ -26,7 +26,7 @@
     align-items: center;
     justify-content: center;
     height: 110px;
-    padding: 10px;
+    padding: 8px;
     img {
       width: 100%;
       height: 100%;
@@ -43,14 +43,14 @@
       line-height: 110px;
       background: rgba(0, 0, 0, 0.6);
 
-      .upload-del-btn {
+      .upload-btn {
         display: inline-block;
         & > span:hover {
           color: @color-primary;
+          transition: all .3s;
         }
       }
     }
-
   }
 
   .image-show:hover .upload-cover {
@@ -69,5 +69,16 @@
 
   .ant-input-affix-wrapper input {
     padding-left: 2px !important;
+  }
+}
+
+.preview-img {
+  width: 100%;
+  height: 430px;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 }

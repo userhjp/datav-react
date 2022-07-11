@@ -204,7 +204,7 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
   return (
     <Collapse
       ghost
-      expandIconPosition="right"
+      expandIconPosition="end"
       className={`my-form-collapse parent-collapse ${props.noPadding ? 'no-parent-collapse-pd' : ''} ${props.className || ''}`}
       activeKey={takeActiveKeys()}
       onChange={(key) => _formCollapse?.setActiveKeys?.(key)}

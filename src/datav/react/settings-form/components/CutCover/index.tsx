@@ -1,12 +1,13 @@
 import rcUpload from '../../rc-upload';
-import { message, Upload } from 'antd';
+import { Divider, message, Modal, Upload } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 import html2canvas from 'html2canvas';
-import React, { useContext, useRef } from 'react';
+import React, { createElement, useContext, useRef, useState } from 'react';
 import { IconWidget } from '../../../components';
 import { SettingsFormContext } from '../../context';
 import './index.less';
+import { useToolbar } from '@/datav/react/hooks';
 
 type CutCoverProps = {
   value: string;
@@ -34,7 +35,9 @@ type CutCoverProps = {
 
 export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
   const context = useContext(SettingsFormContext);
+  const toolbar = useToolbar();
   const loading = useRef(false);
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
     const filelist = info.fileList.map((file) => {
@@ -59,11 +62,25 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
   };
 
   const cutCover = () => {
-    const dom: HTMLDivElement = document.querySelector('*[canvas-drawing=root]');
+    const elDiv: HTMLDivElement = document.createElement('div');
+    const dom: any = document.querySelector('*[canvas-drawing=root]').cloneNode(true);
     if (!dom || loading.current) return;
-    const { transform } = dom.style;
     dom.style.transform = 'scale(1) translate(0px, 0px)';
+    elDiv.appendChild(dom);
+    const style: React.CSSProperties = {
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      zIndex: -1,
+      opacity: 0,
+      overflow: 'hidden',
+    };
+    Object.entries(style).forEach(([key, val]) => {
+      elDiv.style[key] = val;
+    });
     loading.current = true;
+    toolbar.addLoading();
+    document.body.appendChild(elDiv);
     setTimeout(async () => {
       try {
         const res = await html2canvas(dom, {
@@ -74,9 +91,7 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
           scrollX: 0,
           scrollY: 0,
         });
-
-        dom.style.transform = transform;
-        const base64Url = res.toDataURL('image/jpeg', 0.8);
+        const base64Url = res.toDataURL('image/jpeg', 0.2);
         // const file = blobToFile(dataURLtoBlob(base64Url), 'thumbnail.jpeg');
         onChange(base64Url);
         message.success({
@@ -90,16 +105,14 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
         });
       } finally {
         loading.current = false;
+        toolbar.removeLoading();
+        document.body.removeChild(elDiv);
       }
-    }, 500);
-  };
-
-  const delImg = () => {
-    onChange('');
+    }, 200);
   };
 
   return (
-    <div className="item-cutcover">
+    <div className="cut-cover">
       <div className="btns">
         <div className="btn" onClick={cutCover}>
           截取封面
@@ -119,14 +132,38 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
       </div>
       <div className="cover-con">
         {value && (
-          <>
-            <img src={value} alt="" />
-            <div className="del-cover" onClick={delImg}>
-              <IconWidget infer="Delete" />
+          <div className="image-show">
+            <img src={value} />
+            <div className="upload-cover">
+              <div className="upload-btn">
+                <span
+                  onClick={(e) => {
+                    setShowModal(true);
+                  }}
+                >
+                  预览
+                </span>
+                <Divider type="vertical" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }} />
+                <span onClick={() => onChange('')}>删除</span>
+              </div>
             </div>
-          </>
+          </div>
         )}
       </div>
+      <Modal
+        closeIcon={<IconWidget infer="Close" style={{ color: '#fff' }} />}
+        visible={showModal}
+        bodyStyle={{ padding: 12, background: '#2a2e33' }}
+        footer={null}
+        width={800}
+        onCancel={() => setShowModal(false)}
+      >
+        <div style={{ color: '#fff' }}>图片预览</div>
+        <Divider style={{ margin: '12px 0', borderColor: 'rgb(68 72 76)' }} />
+        <div className="preview-img">
+          <img src={value} className="image-value" />
+        </div>
+      </Modal>
     </div>
   );
 };

@@ -84,7 +84,7 @@ export const EventFields: React.FC = observer(() => {
       activeKey={_formCollapse?.activeKeys || []}
       onChange={(key) => _formCollapse?.setActiveKeys?.(key)}
       ghost
-      expandIconPosition="left"
+      expandIconPosition="start"
       className="dv-events-collapse parent-collapse no-parent-collapse-pd"
     >
       {Object.keys(value).map((f) => {
