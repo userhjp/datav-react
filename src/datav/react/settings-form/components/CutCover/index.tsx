@@ -3,7 +3,7 @@ import { Divider, message, Modal, Upload } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 import html2canvas from 'html2canvas';
-import React, { createElement, useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { IconWidget } from '../../../components';
 import { SettingsFormContext } from '../../context';
 import './index.less';
@@ -74,6 +74,7 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
       zIndex: -1,
       opacity: 0,
       overflow: 'hidden',
+      pointerEvents: 'none',
     };
     Object.entries(style).forEach(([key, val]) => {
       elDiv.style[key] = val;
