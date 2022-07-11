@@ -30,8 +30,8 @@ export const G2ChartsSchema: ISchema = {
  * @returns void
  */
 function getOptions(data, extend) {
-  const { 
-    chart, G2, DataSet, 
+  const {
+    chart, G2, DataSet,
     formatDate, formatNumber,
     update, watch, variables,
   } = extend;
@@ -51,7 +51,7 @@ function getOptions(data, extend) {
     console.log(item); // --> { type: 1 }
   });
   watch(['type', 'type2'], (item) => {
-    // 当全局变量'type'值变化后重复执行
+    // 当全局变量'type' 或 'type2'值变化后重复执行
     console.log(item); --> // { type: 1, type2: 2 }
   });
   //更新全局变量

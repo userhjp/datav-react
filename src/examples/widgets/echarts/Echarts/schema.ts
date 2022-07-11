@@ -20,8 +20,8 @@ export const EChartsSchema: ISchema = {
  * @returns object
  */
 function getOptions(data, extend) {
-  const { 
-    myChart, echarts, 
+  const {
+    myChart, echarts,
     formatDate, formatNumber,
     update, watch, variables
    } = extend;
@@ -31,14 +31,14 @@ function getOptions(data, extend) {
 
   // Echarts库对象（参考Echarts）
   echarts;
-  
+
   // 重要，可通过监听和更新全局变量，以全局变量作为组件间通讯的桥梁
   watch('type', (item) => {
     // 当全局变量'type'值变化后重复执行
     console.log(item); // --> { type: 1 }
   });
   watch(['type', 'type2'], (item) => {
-    // 当全局变量'type'值变化后重复执行
+    // 当全局变量'type' 或 'type2'值变化后重复执行
     console.log(item); --> // { type: 1, type2: 2 }
   });
   //更新全局变量
