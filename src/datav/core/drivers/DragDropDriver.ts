@@ -15,9 +15,9 @@ export class DragDropDriver extends EventDriver<Engine> {
   startEvent: MouseEvent;
 
   onMouseDown = (e: MouseEvent) => {
-    if (e.button !== 0 || e.ctrlKey || e.metaKey) {
-      return false;
-    }
+    // if (e.button !== 0 || e.ctrlKey || e.metaKey) {
+    //   return false;
+    // }
     if (e.target['isContentEditable'] || e.target['contentEditable'] === 'true') {
       return true;
     }
@@ -27,8 +27,8 @@ export class DragDropDriver extends EventDriver<Engine> {
     GlobalState.dragging = false;
     GlobalState.onMouseDownAt = Date.now();
     this.batchAddEventListener('mouseup', this.onMouseUp);
-    this.batchAddEventListener('dragend', this.onMouseUp);
-    this.batchAddEventListener('dragstart', this.onStartDrag);
+    // this.batchAddEventListener('dragend', this.onMouseUp);
+    // this.batchAddEventListener('dragstart', this.onStartDrag);
     this.batchAddEventListener('mousemove', this.onDistanceChange);
     return false;
   };
@@ -49,7 +49,7 @@ export class DragDropDriver extends EventDriver<Engine> {
     this.batchRemoveEventListener('contextmenu', this.onContextMenuWhileDragging, true);
     this.batchRemoveEventListener('mouseup', this.onMouseUp);
     this.batchRemoveEventListener('mousedown', this.onMouseDown);
-    this.batchRemoveEventListener('dragover', this.onMouseMove);
+    // this.batchRemoveEventListener('dragover', this.onMouseMove);
     this.batchRemoveEventListener('mousemove', this.onMouseMove);
     this.batchRemoveEventListener('mousemove', this.onDistanceChange);
     GlobalState.dragging = false;
@@ -78,7 +78,7 @@ export class DragDropDriver extends EventDriver<Engine> {
     const canvasEl = e.currentTarget?.['className'] === 'canvas-panel-wrap';
     if (GlobalState.dragging || !canvasEl) return;
     GlobalState.startEvent = GlobalState.startEvent || e;
-    this.batchAddEventListener('dragover', this.onMouseMove);
+    // this.batchAddEventListener('dragover', this.onMouseMove);
     this.batchAddEventListener('mousemove', this.onMouseMove);
     this.batchAddEventListener('contextmenu', this.onContextMenuWhileDragging, true);
     this.dispatch(
@@ -113,9 +113,9 @@ export class DragDropDriver extends EventDriver<Engine> {
     GlobalState.onMouseDownAt = null;
     GlobalState.startEvent = null;
     this.batchRemoveEventListener('mousedown', this.onMouseDown, true);
-    this.batchRemoveEventListener('dragstart', this.onStartDrag);
-    this.batchRemoveEventListener('dragend', this.onMouseUp);
-    this.batchRemoveEventListener('dragover', this.onMouseMove);
+    // this.batchRemoveEventListener('dragstart', this.onStartDrag);
+    // this.batchRemoveEventListener('dragend', this.onMouseUp);
+    // this.batchRemoveEventListener('dragover', this.onMouseMove);
     this.batchRemoveEventListener('mouseup', this.onMouseUp);
     this.batchRemoveEventListener('mousemove', this.onMouseMove);
     this.batchRemoveEventListener('mousemove', this.onDistanceChange);

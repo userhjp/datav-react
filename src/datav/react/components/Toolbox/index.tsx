@@ -1,5 +1,5 @@
 import { observer } from '@formily/react';
-import { Checkbox, Switch } from 'antd';
+import { Switch } from 'antd';
 import React from 'react';
 import { PanelType } from '../../../shared';
 import { useToolbar } from '../../hooks';
@@ -16,15 +16,10 @@ export const Toolbox: React.FC = observer(() => {
   const changeAlignLinePanel = () => {
     toolbar.setPanelState({ type: PanelType.alignline, value: !toolbar.toolbox.alignline });
   };
-  const onChange = (val: any) => {};
 
   return (
     <div className={`toolbox-panel-wp ${toolbar.toolbox.show ? '' : 'collapsed'}`}>
       <div className="toolbox-panel">
-        {/* <div className="btn-box">
-          <span>对齐线</span>
-          <Checkbox onChange={onChange} />
-        </div> */}
         <div className="btn-box">
           <span>参考线</span>
           <Switch size="small" checked={toolbar.toolbox.referline} onChange={changeReferLinePanel} />

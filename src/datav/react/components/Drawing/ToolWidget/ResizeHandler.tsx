@@ -10,7 +10,6 @@ export interface ISelectionBoxProps {
 
 export const ResizeHandler: React.FC<ISelectionBoxProps> = observer(({ node }) => {
   const screen = useScreen();
-  const domRef = useRef<HTMLDivElement>();
   const designer = useDesigner();
   const cursor = useMemo(() => getCursors(node.attr.deg), [node.attr.deg]);
 
@@ -78,20 +77,34 @@ export const ResizeHandler: React.FC<ISelectionBoxProps> = observer(({ node }) =
   };
 
   return (
-    <div ref={domRef} style={style}>
+    <div style={style}>
       {Object.keys(points).map((key: string) => {
         const v = points[key];
         return (
           <Fragment key={key}>
             {v.rotateStyle ? (
               <i className={`${v.name}-handler`} data-html2canvas-ignore>
-                <span className="rotate-handler" style={v.rotateStyle} {...rotateHander}>
-                  <span className="control-point" style={v.style} {...resizeHandler} {...{ 'direction-type': key }} />
+                <span
+                  className="rotate-handler"
+                  style={{ ...v.rotateStyle, cursor: screen.engine.cursor.type === 'SELECTION' ? 'default' : v.rotateStyle.cursor }}
+                  {...rotateHander}
+                >
+                  <span
+                    className="control-point"
+                    style={{ ...v.style, cursor: screen.engine.cursor.type === 'SELECTION' ? 'default' : v.style.cursor }}
+                    {...resizeHandler}
+                    {...{ 'direction-type': key }}
+                  />
                 </span>
               </i>
             ) : (
               <i className={`${v.name}-handler`} data-html2canvas-ignore>
-                <span className="control-point" style={v.style} {...resizeHandler} {...{ 'direction-type': key }} />
+                <span
+                  className="control-point"
+                  style={{ ...v.style, cursor: screen.engine.cursor.type === 'SELECTION' ? 'default' : v.style.cursor }}
+                  {...resizeHandler}
+                  {...{ 'direction-type': key }}
+                />
               </i>
             )}
           </Fragment>

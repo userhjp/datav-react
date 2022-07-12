@@ -1,6 +1,6 @@
 import { Engine, CursorStatus, CursorType } from '../models';
 import { MouseMoveEvent, DragStartEvent, DragMoveEvent, DragStopEvent } from '../events';
-import { requestIdle } from '../../shared';
+import { KeyCode, requestIdle } from '../../shared';
 
 export const useCursorEffect = (engine: Engine) => {
   engine.subscribeTo(MouseMoveEvent, (event) => {

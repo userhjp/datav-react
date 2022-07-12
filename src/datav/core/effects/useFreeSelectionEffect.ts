@@ -1,18 +1,18 @@
-import { DragStopEvent } from '../events';
+import { DragStopEvent, KeyDownEvent, KeyUpEvent } from '../events';
 import { Engine, CursorType } from '../models';
-import { calcRectByStartEndPoint, isCrossRectInRect, Point } from '../../shared';
+import { calcRectByStartEndPoint, isCrossRectInRect, KeyCode, Point } from '../../shared';
 
 export const useFreeSelectionEffect = (engine: Engine) => {
-  // engine.subscribeTo(KeyDownEvent, (event) => {
-  //   if (event.data !== KeyCode.Control) return;
-  //   event.preventDefault();
-  //   event.stopPropagation();
-  //   engine.cursor.setType(CursorType.Selection);
-  // });
-  // engine.subscribeTo(KeyUpEvent, (event) => {
-  //   if (event.data !== KeyCode.Control) return;
-  //   engine.cursor.setType(CursorType.Normal);
-  // });
+  engine.subscribeTo(KeyDownEvent, (event) => {
+    if (event.data !== KeyCode.Control) return;
+    event.preventDefault();
+    event.stopPropagation();
+    engine.cursor.setType(CursorType.Selection);
+  });
+  engine.subscribeTo(KeyUpEvent, (event) => {
+    if (event.data !== KeyCode.Control) return;
+    engine.cursor.setType(CursorType.Normal);
+  });
 
   engine.subscribeTo(DragStopEvent, () => {
     if (engine.cursor.type !== CursorType.Selection) return;
@@ -41,6 +41,6 @@ export const useFreeSelectionEffect = (engine: Engine) => {
       }
     });
     engine.operation.selection.batchSafeSelect(selectedId);
-    engine.cursor.setType(CursorType.Normal);
+    // engine.cursor.setType(CursorType.Normal);
   });
 };

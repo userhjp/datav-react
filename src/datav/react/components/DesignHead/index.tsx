@@ -100,14 +100,14 @@ export const DesignHead: React.FC = observer(() => {
               </div>
             </Tooltip>
 
-            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'多选'}>
+            {/* <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'多选'}>
               <div
                 className={`head-btn ${cursor.type === CursorType.Selection ? 'selected' : ''}`}
                 onClick={() => cursor.setType(CursorType.Selection)}
               >
                 <IconWidget infer="Selection" style={{ color: '#fff' }} />
               </div>
-            </Tooltip>
+            </Tooltip> */}
             <IconPreview />
           </Space>
         </div>
