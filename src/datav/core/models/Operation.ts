@@ -1,5 +1,5 @@
 import { IPageType, IWidgetProps } from '../../react/interface';
-import { generateUUID } from '../../shared/utils';
+import { copyText, generateUUID } from '../../shared/utils';
 import { observable, define, action, toJS } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../events';
@@ -9,6 +9,7 @@ import { WidgetNode } from './WidgetNode';
 import { Hover } from './Hover';
 import { Engine } from './Engine';
 import { Selection } from './Selection';
+import { message } from 'antd';
 
 export interface IOperation {
   selection: Selection;
@@ -48,6 +49,7 @@ export class Operation {
       hideCom: action,
       singleCopy: action,
       batchAddNode: action,
+      pasteClipboard: action,
     });
   }
 
@@ -103,6 +105,35 @@ export class Operation {
       const newId = this.singleCopy(id);
       this.selection.safeSelect(newId);
     }
+  }
+
+  /** 复制组件到剪贴板 */
+  copeClipboard() {
+    const node = this.findById(this.selection.last);
+    if (!node) return;
+    copyText(JSON.stringify(node));
+    message.success({
+      duration: 1,
+      content: `"${node.info.name}"已复制`,
+      className: 'dv-message-class',
+    });
+  }
+
+  /** 粘贴剪贴板组件 */
+  async pasteClipboard(x: number = null, y: number = null) {
+    const dataStr = await navigator.clipboard.readText();
+    if (!dataStr) return;
+    try {
+      const config: WidgetNode = JSON.parse(dataStr);
+      const canvasPoint = this.engine.viewport.calcComponentPoint(config.attr.w, config.attr.h, x, y);
+      config.attr.x = canvasPoint.x;
+      config.attr.y = canvasPoint.y;
+      config.id = generateUUID();
+      this.addNode(config);
+    } catch (error) {
+      console.info('组件粘贴失败, 不是组件或配置有误');
+    }
+    navigator.clipboard.writeText('');
   }
 
   moveTo(type: IMoveType) {

@@ -6,8 +6,8 @@ import html2canvas from 'html2canvas';
 import React, { useContext, useRef, useState } from 'react';
 import { IconWidget } from '../../../components';
 import { SettingsFormContext } from '../../context';
-import './index.less';
 import { useToolbar } from '@/datav/react/hooks';
+import './index.less';
 
 type CutCoverProps = {
   value: string;

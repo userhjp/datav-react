@@ -4,3 +4,4 @@ export * from './LayerSwitch';
 export * from './SettingsSwitch';
 export * from './MoveComp';
 export * from './DeleteComp';
+export * from './CopyComp';

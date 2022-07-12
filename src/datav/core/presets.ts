@@ -24,6 +24,7 @@ import {
 import {
   AutoZoom,
   CompSidebar,
+  CopyComp,
   DeleteComp,
   LayerSwitch,
   MoveCompDown,
@@ -31,6 +32,7 @@ import {
   MoveCompRight,
   MoveCompUp,
   MoveScreen,
+  PasteComp,
   SettingsSwitch,
 } from './shortcuts';
 
@@ -70,4 +72,6 @@ export const DEFAULT_SHORTCUTS = [
   SettingsSwitch,
   DeleteComp,
   MoveScreen,
+  CopyComp,
+  PasteComp,
 ];

@@ -157,6 +157,10 @@ export class Selection {
     return this.selected && this.selected.length ? this.selected[0] : null;
   }
 
+  get last() {
+    return this.selected && this.selected.length ? this.selected[this.selected.length - 1] : null;
+  }
+
   get length() {
     return this.selected.length;
   }

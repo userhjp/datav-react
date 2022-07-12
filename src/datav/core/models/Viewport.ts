@@ -134,6 +134,29 @@ export class Viewport {
     Object.assign(this, this.getCurrentData());
   }
 
+  getCanvasCenterPoint() {
+    const rect = this.viewportElement.querySelector('*[canvas-drawing=root]').getBoundingClientRect();
+    const rectX = rect.left + rect.width / 2;
+    const rectY = rect.top + rect.height / 2;
+    return {
+      x: rectX,
+      y: rectY,
+    };
+  }
+
+  calcComponentPoint(comW = 0, comH = 0, x = null, y = null) {
+    const canvasPoint = this.getCanvasCenterPoint();
+    const offset = 60;
+    const offsetX = ((x ?? canvasPoint.x) - (this.offsetX + offset) + this.scrollX) / this.scale;
+    const offsetY = ((y ?? canvasPoint.y) - (this.offsetY + offset) + this.scrollY) / this.scale;
+    const attrx = Math.round(offsetX - comW / 2);
+    const attry = Math.round(offsetY - comH / 2);
+    return {
+      x: attrx,
+      y: attry,
+    };
+  }
+
   getCurrentData() {
     const data: IViewportData = {};
     data.scrollX = this.viewportElement?.scrollLeft || 0;

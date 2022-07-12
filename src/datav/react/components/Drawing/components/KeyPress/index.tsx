@@ -23,6 +23,14 @@ const KeyPress: React.FC = () => {
           <div className="shortcut-title">画布缩放到最佳位置</div>
           <div className="shortcut-value">Ctrl/Cmd + ↓</div>
         </div>
+        <div className="shortcut-item">
+          <div className="shortcut-title">复制组件到剪贴板</div>
+          <div className="shortcut-value">Ctrl/Cmd + C</div>
+        </div>
+        <div className="shortcut-item">
+          <div className="shortcut-title">粘贴剪贴板组件</div>
+          <div className="shortcut-value">Ctrl/Cmd + V</div>
+        </div>
       </div>
     );
   };

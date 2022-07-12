@@ -2,7 +2,7 @@ import { WidgetNode } from '@/datav/core';
 import { Observer } from '@formily/react';
 import { Dropdown, Menu, message } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
-import React from 'react';
+import React, { useRef } from 'react';
 import { copyText, generateUUID, MoveSortType } from '../../../shared';
 import { useOperation } from '../../hooks';
 import { IconWidget } from '../IconWidget';
@@ -11,6 +11,7 @@ import './index.less';
 export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, children }) => {
   const operation = useOperation();
   const com = operation.findById(currentId);
+  const currentMouseRef = useRef({ x: 0, y: 0 });
 
   const moveUp = () => operation.sortComp(MoveSortType.up, currentId);
   const moveDown = () => operation.sortComp(MoveSortType.down, currentId);
@@ -129,11 +130,7 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
         </span>
       ),
       onClick: () => {
-        copyText(JSON.stringify(com));
-        message.success({
-          content: '已复制配置到剪贴板',
-          className: 'dv-message-class',
-        });
+        operation.copeClipboard();
       },
     },
     {
@@ -145,19 +142,7 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
         </span>
       ),
       onClick: async (e) => {
-        const dataStr = await navigator.clipboard.readText();
-        try {
-          const config: WidgetNode = JSON.parse(dataStr);
-          config.attr.x = 0;
-          config.attr.y = 0;
-          config.id = generateUUID();
-          operation.addNode(config);
-        } catch (error) {
-          message.error({
-            content: '粘贴失败, 不是组件或配置有误',
-            className: 'dv-message-class',
-          });
-        }
+        operation.pasteClipboard(currentMouseRef.current.x, currentMouseRef.current.y);
       },
     },
     {
@@ -173,7 +158,20 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
   ];
 
   return (
-    <Dropdown destroyPopupOnHide overlay={<Menu items={menuList} />} trigger={['contextMenu']} overlayClassName="context-menu-weidget">
+    <Dropdown
+      destroyPopupOnHide
+      overlay={<Menu items={menuList} />}
+      trigger={['contextMenu']}
+      overlayClassName="context-menu-weidget"
+      onVisibleChange={(e) => {
+        if (e) {
+          currentMouseRef.current = {
+            x: operation.engine.cursor.position.clientX,
+            y: operation.engine.cursor.position.clientY,
+          };
+        }
+      }}
+    >
       {children}
     </Dropdown>
   );

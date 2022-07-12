@@ -10,7 +10,7 @@
       margin-bottom: 10px;
       font-size: 14px;
       line-height: 18px;
-    
+
       &::before {
         position: absolute;
         top: 50%;
@@ -25,7 +25,7 @@
         transition: background-color 0.2s;
         content: '';
       }
-    
+
       &::after {
         position: absolute;
         top: 10px;
@@ -36,11 +36,11 @@
         transform: scaleY(0.5);
         content: '';
       }
-    
+
       &.--error::before {
         background: #f43;
       }
-    
+
       &.--disabled::before {
         background: #444;
       }
@@ -50,13 +50,14 @@
       padding: 0;
       li {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         margin-bottom: 4px;
         font-size: 12px;
         &::before {
           display: inline-block;
           width: 6px;
           height: 6px;
+          margin-top: 7px;
           margin-right: 4px;
           background: @color-primary;
           border-radius: 4px;
@@ -65,5 +66,13 @@
         }
       }
     }
-    
+
+    .dv-list-item {
+      display: flex;
+      .dv-list-item-value {
+        flex: 1;
+        min-width: 0;
+      }
+    }
+
   }

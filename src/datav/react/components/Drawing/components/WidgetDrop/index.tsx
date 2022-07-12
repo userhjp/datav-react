@@ -28,16 +28,12 @@ export const WidgetDrag: React.FC = () => {
         });
         return;
       }
-      const offset = 60;
-      const offsetX = (x - (viewPort.offsetX + offset) + viewPort.scrollX) / viewPort.scale;
-      const offsetY = (y - (viewPort.offsetY + offset) + viewPort.scrollY) / viewPort.scale;
-      const attrx = Math.round(offsetX - comW / 2);
-      const attry = Math.round(offsetY - comH / 2);
+      const attrPosition = viewPort.calcComponentPoint(comW, comH, x, y);
       const widgetNode = createWidgetNode({
         w: comW,
         h: comH,
-        x: attrx,
-        y: attry,
+        x: attrPosition.x,
+        y: attrPosition.y,
         name,
         type,
         data: dnConfig.data,
