@@ -12,14 +12,14 @@ export const G2ChartsSchema: ISchema = {
         autoFormat: true,
         extraLib: `
           declare var extend: {
-            chart: any;
-            G2: any;
-            DataSet: any;
-            formatDate: any;
+            chart: object;
+            G2: object;
+            DataSet: object;
+            formatDate: (dateTime: Date | number, fmt: string) => string;
             update: (object) => void;
             watch: (key: string| string[], callback: (object) => void);
             variables: object;
-            formatNumber: any;
+            formatNumber: (num: number, decimal = 0) => string;
           }
         `,
         height: 400,

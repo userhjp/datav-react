@@ -7,7 +7,7 @@ import { MonacoEditor } from '../../../components';
 import { FieldGrid } from '../FieldGrid';
 import { DataSource } from '../DataSource';
 import { DataPreview } from '../DataPreview';
-import { useDataSource, useDvGlobal } from '@/datav/react/hooks';
+import { useDataSource, useDvGlobal, useVariables } from '@/datav/react/hooks';
 import './index.less';
 
 type DataConfigProps = {
@@ -20,6 +20,7 @@ export const DataConfig: React.FC<DataConfigProps> = (props) => {
   const { onChange, value, fields } = props;
   const configForm = useRef<IDataSourceSetting>();
   const dataSource = useDataSource();
+  const { variables } = useVariables();
   const dvGlobal = useDvGlobal();
 
   const openSourceDrawer = () => {
@@ -40,7 +41,7 @@ export const DataConfig: React.FC<DataConfigProps> = (props) => {
         return (
           <FormLayout layout="vertical" colon={false} className="config-layout" size="small">
             <div className="step-title">数据源</div>
-            <VoidField name="voidDataField" component={[DataSource, { globalDataOptions: dvGlobal.enableDataSources }]} />
+            <VoidField name="voidDataField" component={[DataSource, { globalDataOptions: dvGlobal.enableDataSources, variables }]} />
             <DataPreview config={form.values} dataSource={dataSource} />
             <div className="step-title">
               <label style={{ cursor: 'pointer' }}>

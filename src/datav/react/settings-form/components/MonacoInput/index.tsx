@@ -9,7 +9,6 @@ import { IconWidget } from '../../../components';
 import { message, Modal } from 'antd';
 import cls from 'classnames';
 import './styles.less';
-import { initDeclaration } from './declarations';
 
 export type Monaco = typeof monaco;
 export interface MonacoInputProps extends EditorProps {
@@ -18,6 +17,7 @@ export interface MonacoInputProps extends EditorProps {
   helpCode?: string;
   helpCodeViewWidth?: number | string;
   fullScreenTitle: string;
+  completionItem?: monaco.languages.CompletionItem[];
   fnName?: string;
   autoFormat?: boolean;
   onChange?: (value: string) => void;
@@ -46,6 +46,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const validateRef = useRef(null);
   const declarationRef = useRef<string[]>([]);
   const extraLibRef = useRef<monaco.IDisposable>(null);
+  const completionRef = useRef<monaco.IDisposable>(null);
   const monacoRef = useRef<Monaco>();
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
   const modalEditorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
@@ -72,7 +73,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   useEffect(() => {
     unmountedRef.current = false;
     initMonaco();
-    initDeclaration();
+    // initDeclaration();
     return () => {
       if (extraLibRef.current) {
         extraLibRef.current.dispose();
@@ -85,7 +86,39 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     if (monacoRef.current && props.extraLib) {
       updateExtraLib();
     }
+    return () => extraLibRef.current.dispose();
   }, [props.extraLib]);
+
+  useEffect(() => {
+    if (monacoRef.current && props.completionItem?.length) {
+      updatCompletion();
+    }
+    return () => completionRef.current.dispose();
+  }, [props.completionItem]);
+
+  const updatCompletion = () => {
+    if (completionRef.current) {
+      completionRef.current.dispose();
+    }
+    completionRef.current = monacoRef.current.languages.registerCompletionItemProvider(realLanguage.current, {
+      triggerCharacters: [':'],
+      provideCompletionItems: (model, position) => {
+        return {
+          suggestions: props.completionItem,
+          // [
+          //   {
+          //     label: 'user1',
+          //     detail: '字段说明',
+          //     documentation: '当字段插入时候变化',
+          //     insertText: 'user11111', // 选择后插入代码
+          //     kind: monaco.languages.CompletionItemKind.Field,
+          //     range: null,
+          //   },
+          // ],
+        };
+      },
+    });
+  };
 
   const updateExtraLib = () => {
     if (extraLibRef.current) {
@@ -141,6 +174,9 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     }
     if (props.extraLib) {
       updateExtraLib();
+    }
+    if (props.completionItem) {
+      updatCompletion();
     }
     editor.onDidChangeModelContent(() => {
       onChangeHandler(editor.getValue());

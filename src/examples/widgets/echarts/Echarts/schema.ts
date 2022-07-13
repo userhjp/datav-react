@@ -13,16 +13,18 @@ export const EChartsSchema: ISchema = {
         height: 400,
         fullScreenTitle: 'Echarts配置',
         fnName: 'getOptions(data,extend)',
-        //   extraLib: `
-        //   declare var extend: {
-        //     chart: any;
-        //     echarts: Echarts;
-        //     DataSet: any;
-        //     formatDate: (dateTime: Date | number, fmt: string) => string;
-        //     updateVariables: any;
-        //     formatNumber: any;
-        //   }
-        // `,
+        extraLib: `
+          declare var extend: {
+            chart: object;
+            echarts: echarts;
+            DataSet: object;
+            formatDate: (dateTime: Date | number, fmt: string) => string;
+            update: (object) => void;
+            watch: (key: string| string[], callback: (object) => void);
+            variables: object;
+            formatNumber: (num: number, decimal = 0) => string;
+          }
+        `,
         helpCode: `
 /**
  * @param data 图表组件数据
