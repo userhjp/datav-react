@@ -87,7 +87,7 @@ export const defaultOpts = {
   minimap: {
     enabled: false, // 是否显示缩略图
   },
-  quickSuggestions: false,
+  quickSuggestions: true, // 启用快速建议 默认true
   roundedSelection: true, // 使用圆角边框渲染编辑器选择。默认为true
   scrollBeyondLastLine: false, // 设置编辑器是否可以滚动到最后一行之后
   scrollbar: {
@@ -96,7 +96,7 @@ export const defaultOpts = {
     alwaysConsumeMouseWheel: false,
     arrowSize: 0,
   },
-  snippetSuggestions: 'none', // 启用代码建议
+  // snippetSuggestions: 'none', // 启用代码建议
   wordBasedSuggestions: false, // 控制是否应根据文档中的单词计算完成。默认为true。
   wordWrap: 'off', // 控制代码换行时机
   cursorStyle: 'line', // 光标样式

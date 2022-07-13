@@ -13,6 +13,16 @@ export const EChartsSchema: ISchema = {
         height: 400,
         fullScreenTitle: 'Echarts配置',
         fnName: 'getOptions(data,extend)',
+        //   extraLib: `
+        //   declare var extend: {
+        //     chart: any;
+        //     echarts: Echarts;
+        //     DataSet: any;
+        //     formatDate: (dateTime: Date | number, fmt: string) => string;
+        //     updateVariables: any;
+        //     formatNumber: any;
+        //   }
+        // `,
         helpCode: `
 /**
  * @param data 图表组件数据

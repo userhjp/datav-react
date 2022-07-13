@@ -16,7 +16,9 @@ export const G2ChartsSchema: ISchema = {
             G2: any;
             DataSet: any;
             formatDate: any;
-            updateVariables: any;
+            update: (object) => void;
+            watch: (key: string| string[], callback: (object) => void);
+            variables: object;
             formatNumber: any;
           }
         `,

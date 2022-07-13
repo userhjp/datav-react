@@ -10,6 +10,7 @@ import { Hover } from './Hover';
 import { Engine } from './Engine';
 import { Selection } from './Selection';
 import { message } from 'antd';
+import { createWidgetNode } from '../externals';
 
 export interface IOperation {
   selection: Selection;
@@ -57,6 +58,26 @@ export class Operation {
     return this.components.filter((f) => f.errorInfo).map((m) => ({ id: m.id, errorInfo: m.errorInfo }));
   }
 
+  createNode({ x = 0, y = 0, name, type, dnConfig }) {
+    const comW = dnConfig.w || 380;
+    const comH = dnConfig.h || 220;
+    if (!dnConfig) return null;
+    const attrPosition = this.engine.viewport.calcComponentPoint(comW, comH, x, y);
+    const widgetNode = createWidgetNode({
+      w: comW,
+      h: comH,
+      x: attrPosition.x,
+      y: attrPosition.y,
+      name,
+      type,
+      data: dnConfig.data,
+      options: dnConfig.defaultConfig,
+      ver: dnConfig.version || '1.0',
+      events: dnConfig.events,
+    });
+    return widgetNode;
+  }
+
   /** 批量添加组件 */
   batchAddNode(nodes: IWidgetProps[]) {
     const widgets = nodes.map((m) => new WidgetNode(m));
@@ -65,6 +86,7 @@ export class Operation {
 
   /** 添加组件 */
   addNode(node: IWidgetProps) {
+    if (!node) return;
     this.components.unshift(new WidgetNode(node));
     this.selection.safeSelect(node.id);
   }

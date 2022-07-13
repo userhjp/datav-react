@@ -4,7 +4,6 @@ import * as echarts from 'echarts';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { formatDate, formatNumber } from '@/utils';
 import { useVariables } from '@/datav/react/hooks';
-
 /** Echarts 图表通用组件，接收options配置文件，组件只负责渲染 */
 const Echarts: React.FC<IWidgetProps> = ({ options = {}, data = null }) => {
   const elemtRef = useRef<HTMLDivElement>();

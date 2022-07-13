@@ -6,9 +6,10 @@ import { format, formatDocument } from './format';
 import { defaultOpts, handleCodeInput, handleInputCode, initMonaco } from './config';
 import { copyText, generateUUID } from '../../../../shared';
 import { IconWidget } from '../../../components';
-import { message, Modal, Tooltip } from 'antd';
+import { message, Modal } from 'antd';
 import cls from 'classnames';
 import './styles.less';
+import { initDeclaration } from './declarations';
 
 export type Monaco = typeof monaco;
 export interface MonacoInputProps extends EditorProps {
@@ -71,6 +72,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   useEffect(() => {
     unmountedRef.current = false;
     initMonaco();
+    initDeclaration();
     return () => {
       if (extraLibRef.current) {
         extraLibRef.current.dispose();
@@ -86,11 +88,10 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   }, [props.extraLib]);
 
   const updateExtraLib = () => {
-    debugger;
     if (extraLibRef.current) {
       extraLibRef.current.dispose();
     }
-    extraLibRef.current = monacoRef.current.languages.typescript.typescriptDefaults.addExtraLib(props.extraLib, `${uidRef.current}.d.ts`);
+    extraLibRef.current = monacoRef.current.languages.typescript.javascriptDefaults.addExtraLib(props.extraLib, `${uidRef.current}.d.ts`);
   };
 
   const isFileLanguage = () => {

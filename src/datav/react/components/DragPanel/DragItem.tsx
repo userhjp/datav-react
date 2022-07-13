@@ -2,9 +2,10 @@ import { useDesigner } from '../../hooks';
 import { useDrag } from 'ahooks';
 import React, { useRef, useState } from 'react';
 import { IWidgetMenuData } from '../../types';
+import { message } from 'antd';
 
 export const DragItem: React.FC<IWidgetMenuData> = (props) => {
-  const { name, type, cover } = props;
+  const { name, type, cover, dnConfig } = props;
   const { children, ...dragProp } = props;
   const dragRef = useRef();
   const designer = useDesigner();
@@ -25,8 +26,20 @@ export const DragItem: React.FC<IWidgetMenuData> = (props) => {
     className: 'item-warp',
   };
 
+  const onAdd = () => {
+    const node = designer.operation.createNode({ x: null, y: null, name, type, dnConfig });
+    if (!node) {
+      message.success({
+        content: '开发中，敬请期待...',
+        className: 'dv-message-class',
+      });
+      return null;
+    }
+    designer.operation.addNode(node);
+  };
+
   return (
-    <div ref={dragRef} {...domProps}>
+    <div ref={dragRef} {...domProps} onClick={onAdd}>
       {children ? (
         children
       ) : (

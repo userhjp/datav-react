@@ -7,7 +7,7 @@ import { useOperation, useViewport } from '../../../../hooks';
 import { useDesigner, useSelection } from '../../../../hooks';
 import { ContextMenu } from '../../../../components';
 import { RenderWidget } from '../RenderWidget';
-import { createWidgetNode, WidgetNode } from '../../../../../core';
+import { WidgetNode } from '../../../../../core';
 import { IWidgetMenuData } from '../../../../../react/types';
 import './index.less';
 
@@ -19,29 +19,15 @@ export const WidgetDrag: React.FC = () => {
 
   const addBox = useCallback(
     ({ x = 0, y = 0, name, type, dnConfig }) => {
-      const comW = dnConfig.w || 380;
-      const comH = dnConfig.h || 220;
-      if (!dnConfig) {
+      const node = operation.createNode({ x, y, name, type, dnConfig });
+      if (!node) {
         message.success({
           content: '开发中，敬请期待...',
           className: 'dv-message-class',
         });
-        return;
+        return null;
       }
-      const attrPosition = viewPort.calcComponentPoint(comW, comH, x, y);
-      const widgetNode = createWidgetNode({
-        w: comW,
-        h: comH,
-        x: attrPosition.x,
-        y: attrPosition.y,
-        name,
-        type,
-        data: dnConfig.data,
-        options: dnConfig.defaultConfig,
-        ver: dnConfig.version || '1.0',
-        events: dnConfig.events,
-      });
-      operation.addNode(widgetNode);
+      operation.addNode(node);
     },
     [viewPort.scrollX, viewPort.scrollY, viewPort.offsetX, viewPort.offsetY]
   );
