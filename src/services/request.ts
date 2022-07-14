@@ -51,7 +51,8 @@ const errorHandler = (error: any) => {
 instance.interceptors.request.use((config) => {
   const url = config.url;
   config.params['uat'] = getTokenStorage();
-  config.params = sigEncryption(url, config.params);
+  config.params['sig'] = 'appcode_test0000';
+  // config.params = sigEncryption(url, config.params);
   return config;
 }, errorHandler);
 
@@ -82,7 +83,7 @@ instance.interceptors.response.use((res) => {
 const request = (url: string, options: API.AxiosRequest) => {
   return instance.request<any, API.Response>({
     method: 'GET',
-    baseURL: API_URL,
+    baseURL: 'http://localhost:3001', // API_URL,
     params: {},
     url,
     ...options,
