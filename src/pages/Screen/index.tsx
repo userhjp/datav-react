@@ -4,22 +4,28 @@ import { useParams } from 'react-router-dom';
 import * as components from '@/examples/widgets';
 import { getPreviewKey } from '@/utils';
 import './index.less';
-import axios from 'axios';
+import { message } from 'antd';
+import { getProjectDetail } from '@/services/datavApi';
 
 // GlobalRegistry.registerDesignerWidget({ ...components });
 
 const Screen: React.FC = () => {
   const [data, setData] = useState(null);
+  const [loading, setloading] = useState(true);
   const { id } = useParams();
 
   const initData = async () => {
-    if (id === 'preview') {
-      const data = getPreviewKey();
-      setData(data);
-    } else {
-      const res = await axios.get(`/json/${id}.json`);
-      if (res.data) setData(res.data);
+    let data = getPreviewKey(id);
+    if (!data) {
+      const res = await getProjectDetail(id);
+      if (res.code === 0) {
+        data = res.data?.config || null;
+      } else {
+        message.error(res.message);
+      }
     }
+    setData(data);
+    setloading(false);
   };
 
   useEffect(() => {
@@ -28,7 +34,7 @@ const Screen: React.FC = () => {
   return (
     <div className="screen-page">
       <Preview data={data} components={{ ...components }} />
-      {!data && (
+      {!data && !loading && (
         <div style={{ position: 'absolute', top: 30, fontSize: 20, color: '#fff', textAlign: 'center', width: '100%' }}>大屏不存在</div>
       )}
     </div>

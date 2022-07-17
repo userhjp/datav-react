@@ -4,9 +4,9 @@ import { Designer } from '@/datav/react';
 import { IWidgetMenu } from '@/datav';
 import { message } from 'antd';
 import * as components from '@/examples/widgets';
-import { getSnapshot, setPreviewKey, setSnapshot } from '@/utils';
+import { setPreviewKey } from '@/utils';
 import { useParams } from 'react-router';
-import axios from 'axios';
+import { addSnapshot, getProjectDetail, getSnapshotList, saveConfig } from './../../services/datavApi';
 
 const widgetMenu: IWidgetMenu[] = [
   {
@@ -36,27 +36,31 @@ const Design: React.FC = () => {
   const engine = useMemo(
     () =>
       createDesigner({
-        onPublish: (data) => {
-          message.info({
-            content: '点击发布按钮',
-            className: 'dv-message-class',
-          });
+        onPublish: async (data) => {
+          const res = await saveConfig(id, data);
+          if (res.code === 0) {
+            message.success({
+              content: '发布成功',
+              className: 'dv-message-class',
+            });
+          } else {
+            message.error(res.message);
+          }
         },
-        onSnapshot: (data) => {
-          return new Promise((resolve) => {
-            setTimeout(() => {
-              setSnapshot(id, data);
-              message.success({
-                content: '保存成功',
-                className: 'dv-message-class',
-              });
-              resolve();
-            }, 1000);
-          });
+        onSnapshot: async (data) => {
+          const res = await addSnapshot(id, data);
+          if (res.code === 0) {
+            message.success({
+              content: '保存成功',
+              className: 'dv-message-class',
+            });
+          } else {
+            message.error(res.message);
+          }
         },
         onPreview: (data) => {
-          setPreviewKey(data);
-          window.open(`/screen/preview`);
+          setPreviewKey(id, data);
+          window.open(`/screen/${id}`);
         },
       }),
     []
@@ -64,12 +68,20 @@ const Design: React.FC = () => {
 
   const initData = async () => {
     engine.toolbar.addLoading();
-    let data = await getSnapshot(id);
-    if (!data && id !== 'new') {
-      const res = await axios.get(`/json/${id}.json`);
-      data = res.data;
+    const snapshot = await getSnapshotList(id);
+    engine.snapshot.setInitialValue(snapshot.data || []);
+    // let data = await getSnapshot(id);
+
+    const res = await getProjectDetail(id);
+    if (res.code === 0) {
+      const data = res.data || null;
+      if (data) {
+        engine.setInitialValue(data.config);
+        engine.screen.title = data.title;
+      }
+    } else {
+      message.error(res.message);
     }
-    if (data) engine.setInitialValue(data);
     engine.toolbar.removeLoading();
   };
 

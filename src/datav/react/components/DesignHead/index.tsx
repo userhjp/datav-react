@@ -1,15 +1,16 @@
 import { observer } from '@formily/react';
 import { Badge, Dropdown, Menu, Space, Tooltip } from 'antd';
-import React, { useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import { PanelType } from '../../../shared';
-import { useCursor, useOperation, useDesigner, useToolbar, useDvGlobal, useSelected, useSelection } from '../../hooks';
+import { useCursor, useOperation, useDesigner, useToolbar, useSelection, useScreen } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import { CursorType, Engine } from '../../../core';
 import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../../../core/events';
 import { IconPreview } from './IconPreview';
 import { HelpPreview } from './HelpPreview';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
-
+import { Expression } from './Expression';
+import { Snapshot } from './Snapshot';
 import './index.less';
 
 export const useButtonEffect = (engine: Engine) => {
@@ -51,6 +52,7 @@ export const DesignHead: React.FC = observer(() => {
   const toolbar = useToolbar();
   const cursor = useCursor();
   const operation = useOperation();
+  const screen = useScreen();
   useDesigner((engine) => {
     useButtonEffect(engine);
   });
@@ -124,15 +126,20 @@ export const DesignHead: React.FC = observer(() => {
           }}
         >
           <IconWidget infer="Desktop" style={{ color: '#fff' }} />
-          &nbsp; 工作空间
+          &nbsp; {screen.title || '工作空间'}
         </div>
         <div>
           <Space size={4} className="head-btn-group">
-            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'保存快照'}>
-              <div className="head-btn" onClick={() => operation.onOperationBtn('snapshot')}>
-                <IconWidget infer="Snapshot" />
-              </div>
-            </Tooltip>
+            <div style={{ display: 'flex' }}>
+              <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'生成快照'}>
+                <div className="head-btn" onClick={() => operation.onOperationBtn('snapshot')}>
+                  <IconWidget infer="Snapshot" />
+                </div>
+              </Tooltip>
+              <Snapshot />
+            </div>
+
+            <Expression />
 
             <HelpPreview />
 

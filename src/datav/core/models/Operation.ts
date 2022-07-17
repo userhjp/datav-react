@@ -78,6 +78,11 @@ export class Operation {
     return widgetNode;
   }
 
+  setNodes(nodes: IWidgetProps[]) {
+    const widgets = nodes.map((m) => new WidgetNode(m));
+    this.components = [...widgets];
+  }
+
   /** 批量添加组件 */
   batchAddNode(nodes: IWidgetProps[]) {
     const widgets = nodes.map((m) => new WidgetNode(m));

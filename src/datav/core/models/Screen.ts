@@ -14,6 +14,7 @@ export interface IScreen {
   engine: Engine;
 }
 export class Screen {
+  title: '工作空间';
   props: IScreenProps;
   engine: Engine;
   scale = 1;

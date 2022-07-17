@@ -50,7 +50,7 @@ const errorHandler = (error: any) => {
 
 instance.interceptors.request.use((config) => {
   const url = config.url;
-  config.params['uat'] = getTokenStorage();
+  // config.params['uat'] = getTokenStorage();
   config.params['sig'] = 'appcode_test0000';
   // config.params = sigEncryption(url, config.params);
   return config;

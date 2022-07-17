@@ -16,7 +16,7 @@ export interface MonacoInputProps extends EditorProps {
   readOnly?: boolean;
   helpCode?: string;
   helpCodeViewWidth?: number | string;
-  fullScreenTitle: string;
+  fullScreenTitle?: string;
   completionItem?: monaco.languages.CompletionItem[];
   fnName?: string;
   autoFormat?: boolean;
@@ -93,7 +93,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     if (monacoRef.current && props.completionItem?.length) {
       updatCompletion();
     }
-    return () => completionRef.current.dispose();
+    return () => completionRef.current?.dispose();
   }, [props.completionItem]);
 
   const updatCompletion = () => {
@@ -387,16 +387,18 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
         />
         <div className="monaco-editor-actions">
           <IconWidget infer="Copy" className="action-btn" title="点击复制" onClick={copyData} />
-          <IconWidget
-            infer="FullScreen"
-            className={`action-btn ${isFullScreen ? 'v-icon-fullscreen-exit' : 'v-icon-fullscreen'}`}
-            title={`${isFullScreen ? '退出全屏' : '全屏模式下编辑或查看'}`}
-            onClick={() => setIsFullScreen(!isFullScreen)}
-          />
+          {!!fullScreenTitle && (
+            <IconWidget
+              infer="FullScreen"
+              className={`action-btn ${isFullScreen ? 'v-icon-fullscreen-exit' : 'v-icon-fullscreen'}`}
+              title={`${isFullScreen ? '退出全屏' : '全屏模式下编辑或查看'}`}
+              onClick={() => setIsFullScreen(!isFullScreen)}
+            />
+          )}
         </div>
       </div>
       {fnName && <p className="fake-code">{'}'}</p>}
-      {renderFullModal()}
+      {!!fullScreenTitle && renderFullModal()}
     </div>
   );
 };

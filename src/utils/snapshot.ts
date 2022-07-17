@@ -19,15 +19,15 @@ export const setSnapshot = (id: string, data: IPageType) => {
   localStorage.setItem(`${SnapshotKey}-${id}`, JSON.stringify(data));
 };
 
-export const getPreviewKey = () => {
+export const getPreviewKey = (id: string) => {
   try {
-    return JSON.parse(sessionStorage.getItem(PreviewKey));
+    return JSON.parse(sessionStorage.getItem(`${PreviewKey}-${id}`));
   } catch (error) {
     sessionStorage.removeItem(PreviewKey);
   }
   return null;
 };
 
-export const setPreviewKey = (data: IPageType) => {
-  sessionStorage.setItem(PreviewKey, JSON.stringify(data));
+export const setPreviewKey = (id: string, data: IPageType) => {
+  sessionStorage.setItem(`${PreviewKey}-${id}`, JSON.stringify(data));
 };

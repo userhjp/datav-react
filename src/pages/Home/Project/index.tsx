@@ -4,21 +4,69 @@ import { Preview, Publish, Return } from '@/datav/react/icons';
 import { CopyOutlined, DeleteOutlined, EditOutlined, SearchOutlined, ExclamationCircleOutlined } from '@ant-design/icons';
 import { useRequest } from 'ahooks';
 import { Badge, Button, Input, message, Modal, Select, Space, Spin } from 'antd';
-import React, { useState } from 'react';
-import { delProject, publishState, queryProjectList } from './service';
-const { Option } = Select;
-import './index.less';
+import React, { useRef, useState } from 'react';
+import { copyProject, delProject, editProject, publishState, queryProjectList } from '../../../services/datavApi';
 import { formatDate } from '@/utils';
+import AddProject from './add';
+import './index.less';
 
+const { Option } = Select;
 GlobalRegistry.registerDesignerIcons({ Publish, Preview, Return });
 
 const Project: React.FC = () => {
-  const [keyWord, setkeyWord] = useState('');
-  const { loading, data, mutate } = useRequest(() => queryProjectList({ pagesize: 100, pagenum: 1, keyword: keyWord }), {
-    debounceWait: 1000,
-    refreshDeps: [keyWord],
-    loadingDelay: 300,
+  const sotrtype = useRef<number>(1);
+  const keyWord = useRef('');
+  const [modalState, setModalState] = useState({
+    visible: false,
+    item: null,
   });
+  const { loading, data, mutate, refresh } = useRequest(
+    () => queryProjectList({ pagesize: 100, pagenum: 1, keyword: keyWord.current, sotrtype: sotrtype.current }),
+    {
+      // debounceWait: 1000,
+      // refreshDeps: [keyWord],
+      loadingDelay: 300,
+    }
+  );
+
+  const handleSubmit = async (item: any) => {
+    const res = await editProject(item);
+    if (res.code === 0) {
+      message.success({
+        content: item.id ? '修改成功' : '创建成功',
+        className: 'dv-message-class',
+      });
+      setModalState({
+        visible: false,
+        item: null,
+      });
+      refresh();
+      if (res.data?.id) {
+        window.open(`/design/${res.data?.id}`);
+      }
+    } else {
+      message.error({
+        content: res.message,
+        className: 'dv-message-class',
+      });
+    }
+  };
+
+  const copy = async (id: string) => {
+    const res = await copyProject(id);
+    if (res.code === 0) {
+      message.success({
+        content: '复制成功',
+        className: 'dv-message-class',
+      });
+      refresh();
+    } else {
+      message.error({
+        content: res.message,
+        className: 'dv-message-class',
+      });
+    }
+  };
 
   const deleteItem = (id: string) => {
     Modal.confirm({
@@ -37,7 +85,10 @@ const Project: React.FC = () => {
           });
           mutate((data as any[]).filter((f) => f.id !== id));
         } else {
-          message.error(res.message);
+          message.error({
+            content: res.message,
+            className: 'dv-message-class',
+          });
         }
       },
       onCancel: () => {},
@@ -46,25 +97,55 @@ const Project: React.FC = () => {
   return (
     <div className="visual-project">
       <Space size="large" className="head">
-        <Button type="primary" onClick={() => window.open('/design/new')}>
+        <AddProject
+          state={modalState}
+          onSubmit={handleSubmit}
+          onCancel={() => {
+            setModalState({
+              visible: false,
+              item: null,
+            });
+          }}
+        />
+        <Button
+          type="primary"
+          onClick={() => {
+            setModalState({
+              visible: true,
+              item: null,
+            });
+          }}
+        >
           创建空白项目
         </Button>
-        <Input
-          prefix={<SearchOutlined />}
-          autoComplete="off"
-          value={keyWord}
-          name="keyword"
-          onChange={(e) => {
-            setkeyWord(e.target.value);
-          }}
-          placeholder="请输入名称搜索"
-        />
+        <div style={{ display: 'flex', alignItems: 'center' }} className="search-input">
+          <Input
+            prefix={<SearchOutlined />}
+            // suffix={<SearchOutlined />}
+            allowClear
+            autoComplete="off"
+            name="keyword"
+            onChange={(e) => {
+              keyWord.current = e.target.value;
+            }}
+            placeholder="项目名称搜索"
+          />
+          <Button type="primary" style={{ marginLeft: 10 }} onClick={refresh} shape="circle" icon={<SearchOutlined />} />
+        </div>
         <div className="font-color stot">
           <div>排序方式：</div>
-          <Select defaultValue="3" style={{ width: 120 }} bordered={false}>
-            <Option value="1">按创建时间</Option>
-            <Option value="2">按修改时间</Option>
-            <Option value="3">按名称</Option>
+          <Select
+            defaultValue={1}
+            onChange={(e) => {
+              sotrtype.current = e;
+              refresh();
+            }}
+            style={{ width: 120 }}
+            bordered={false}
+          >
+            <Option value={1}>按创建时间</Option>
+            <Option value={2}>按修改时间</Option>
+            <Option value={3}>按名称</Option>
           </Select>
         </div>
       </Space>
@@ -72,7 +153,19 @@ const Project: React.FC = () => {
         <div className="list-container">
           <div className="list">
             {data?.map((m) => (
-              <RenderItem key={m.id} item={m} onDelete={deleteItem} />
+              <RenderItem
+                key={m.id}
+                sotrtype={sotrtype.current}
+                item={m}
+                onDelete={deleteItem}
+                onEdit={() => {
+                  setModalState({
+                    visible: true,
+                    item: m,
+                  });
+                }}
+                onCopy={copy}
+              />
             ))}
           </div>
         </div>
@@ -82,7 +175,13 @@ const Project: React.FC = () => {
 };
 export default Project;
 
-const RenderItem: React.FC<{ item: any; onDelete: (id: string) => void }> = ({ item, onDelete }) => {
+const RenderItem: React.FC<{
+  item: any;
+  onDelete: (id: string) => void;
+  onEdit: () => void;
+  sotrtype: number;
+  onCopy: (id: string) => void;
+}> = ({ item, sotrtype, onDelete, onEdit, onCopy }) => {
   const [publish, setPublish] = useState(item.publish);
 
   return (
@@ -90,9 +189,9 @@ const RenderItem: React.FC<{ item: any; onDelete: (id: string) => void }> = ({ i
       <div
         className="cover"
         style={
-          item.cover
+          item.cutCover
             ? {
-                background: `url(${item.cover})`,
+                background: `url(${item.cutCover})`,
                 backgroundRepeat: 'no-repeat',
                 backgroundPosition: 'center',
                 backgroundSize: '100% 100%',
@@ -105,8 +204,8 @@ const RenderItem: React.FC<{ item: any; onDelete: (id: string) => void }> = ({ i
           <div className="publish">
             <Space size={12}>
               <IconWidget
-                title={publish ? '取消发布' : '发布'}
-                infer={publish ? 'Return' : 'Publish'}
+                title={item.publish ? '取消发布' : '发布'}
+                infer={item.publish ? 'Return' : 'Publish'}
                 onClick={async () => {
                   const newPublish = publish === 1 ? 0 : 1;
                   const res = await publishState({ id: item.id, publish: newPublish });
@@ -115,6 +214,7 @@ const RenderItem: React.FC<{ item: any; onDelete: (id: string) => void }> = ({ i
                       content: newPublish === 1 ? '发布成功' : '已取消发布',
                       className: 'dv-message-class',
                     });
+                    item.publish = newPublish;
                     setPublish(newPublish);
                   } else {
                     message.info(res.message);
@@ -136,28 +236,24 @@ const RenderItem: React.FC<{ item: any; onDelete: (id: string) => void }> = ({ i
             编辑
           </div>
           <Space size={14}>
-            <EditOutlined
-              title="重命名"
-              onClick={() => {
-                message.info('暂无接口支持');
-              }}
-            />
-            <CopyOutlined
-              title="复制"
-              onClick={() => {
-                message.info('暂无接口支持');
-              }}
-            />
+            <EditOutlined title="重命名" onClick={onEdit} />
+            <CopyOutlined title="复制" onClick={() => onCopy(item.id)} />
             <DeleteOutlined title="删除" onClick={() => onDelete(item.id)} />
           </Space>
         </div>
       </div>
       <div className="info">
         <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{item.name}</div>
-          <div className="tr">{formatDate(item.createtime, 'yyyy-MM-dd HH:mm:ss')}</div>
+          <div style={{ textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap', paddingRight: 4 }} title={item?.title}>
+            {item.title || '未命名'}
+          </div>
+          {sotrtype === 2 ? (
+            <div className="tr">修改时间：{formatDate(item.updatetime, 'yyyy-MM-dd HH:mm:ss')}</div>
+          ) : (
+            <div className="tr">创建时间：{formatDate(item.createtime, 'yyyy-MM-dd HH:mm:ss')}</div>
+          )}
         </div>
-        {publish ? <Badge color="rgb(24 144 255)" text="已发布" /> : <Badge color="#576369" text="未发布" />}
+        {item.publish ? <Badge color="rgb(24 144 255)" text="已发布" /> : <Badge color="#576369" text="未发布" />}
       </div>
     </div>
   );
