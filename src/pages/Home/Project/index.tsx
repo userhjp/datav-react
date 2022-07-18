@@ -30,7 +30,12 @@ const Project: React.FC = () => {
   );
 
   const handleSubmit = async (item: any) => {
-    const res = await editProject(item);
+    const res = await editProject({
+      id: item.id || '',
+      title: item.title,
+      width: item.width,
+      height: item.height,
+    });
     if (res.code === 0) {
       message.success({
         content: item.id ? '修改成功' : '创建成功',
