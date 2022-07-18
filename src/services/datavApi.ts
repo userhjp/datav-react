@@ -65,7 +65,7 @@ export function saveConfig(id: string, config: object) {
 export function getSnapshotList(pid: string) {
   return request('/datav/getSnapshotList', {
     method: 'POST',
-    data: { pid },
+    params: { pid },
   });
 }
 
@@ -74,6 +74,22 @@ export function addSnapshot(pid: string, config: object) {
   return request('/datav/addSnapshot', {
     method: 'POST',
     data: { pid, config },
+  });
+}
+
+/** 删除快照 */
+export function removeSnapshot(id: string) {
+  return request('/datav/deleteSnapshot', {
+    method: 'POST',
+    params: { id },
+  });
+}
+
+/** 获取快照详情 */
+export function loadSnapshotDetail(id: string) {
+  return request('/datav/getSnapshot', {
+    method: 'POST',
+    params: { id },
   });
 }
 

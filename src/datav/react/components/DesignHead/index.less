@@ -58,6 +58,12 @@
     animation: com-rotate 2s infinite;
     animation-direction: alternate-reverse;
   }
+
+  .dv-snapshot-item .datav-icon {
+    &:hover {
+      color: #2483ff;
+    }
+  }
 }
 
 .head-loading {
@@ -96,7 +102,7 @@
   }
 }
 
-.dv-error-container {
+.dv-error-container, .dv-snapshot-container {
   .ant-dropdown-menu {
     background-color: #2a2e33;
     border: 1px solid @m-input-border-color;
@@ -116,3 +122,13 @@
     background-color: transparent;
   }
 }
+
+.dv-snapshot-container {
+  .ant-dropdown-menu {
+    padding: 0;
+    .ant-dropdown-menu-item {
+      padding: 3px 10px;
+    }
+  }
+}
+

@@ -70,6 +70,7 @@ const Project: React.FC = () => {
 
   const deleteItem = (id: string) => {
     Modal.confirm({
+      wrapClassName: 'dv-modal-confirm',
       title: '确认删除该项目吗？',
       icon: <ExclamationCircleOutlined />,
       content: '删除后无法恢复，请谨慎操作',

@@ -1,8 +1,7 @@
-import { IPageType, IWidgetProps } from '../../react/interface';
+import { IWidgetProps } from '../../react/interface';
 import { copyText, generateUUID } from '../../shared/utils';
 import { observable, define, action, toJS } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
-import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../events';
 import { IMoveType } from '../types';
 import { arrayMoveMutable } from 'array-move';
 import { WidgetNode } from './WidgetNode';
@@ -247,22 +246,5 @@ export class Operation {
   findById(id: string) {
     if (!id) return null;
     return this.components.find((f) => f.id === id);
-  }
-
-  onOperationBtn(type: 'publish' | 'snapshot' | 'preview' | 'help') {
-    const pageData: IPageType = { page: this.engine.screen.props, components: this.components, global: this.engine.global.props };
-    switch (type) {
-      case 'publish':
-        this.dispatch(new PublishClickEvent(pageData));
-        break;
-      case 'snapshot':
-        this.dispatch(new SnapshotClickEvent(pageData));
-        break;
-      case 'preview':
-        this.dispatch(new PreviewClickEvent(pageData));
-        break;
-      default:
-        break;
-    }
   }
 }

@@ -86,7 +86,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     if (monacoRef.current && props.extraLib) {
       updateExtraLib();
     }
-    return () => extraLibRef.current.dispose();
+    return () => extraLibRef.current?.dispose();
   }, [props.extraLib]);
 
   useEffect(() => {

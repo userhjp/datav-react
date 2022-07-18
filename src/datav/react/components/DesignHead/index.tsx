@@ -2,10 +2,9 @@ import { observer } from '@formily/react';
 import { Badge, Dropdown, Menu, Space, Tooltip } from 'antd';
 import React, { useRef } from 'react';
 import { PanelType } from '../../../shared';
-import { useCursor, useOperation, useDesigner, useToolbar, useSelection, useScreen } from '../../hooks';
+import { useCursor, useOperation, useToolbar, useSelection, useScreen } from '../../hooks';
 import { IconWidget } from '../IconWidget';
-import { CursorType, Engine } from '../../../core';
-import { PublishClickEvent, SnapshotClickEvent, PreviewClickEvent } from '../../../core/events';
+import { CursorType } from '../../../core';
 import { IconPreview } from './IconPreview';
 import { HelpPreview } from './HelpPreview';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
@@ -13,49 +12,30 @@ import { Expression } from './Expression';
 import { Snapshot } from './Snapshot';
 import './index.less';
 
-export const useButtonEffect = (engine: Engine) => {
-  engine.subscribeTo(PublishClickEvent, (event) => {
-    if (!engine.props.onPublish) return;
-    const handle = engine.props.onPublish(event.data);
-    if (handle instanceof Promise) {
-      engine.toolbar.addLoading();
-      handle.finally(() => {
-        engine.toolbar.removeLoading();
-      });
-    }
-  });
-
-  engine.subscribeTo(SnapshotClickEvent, (event) => {
-    if (!engine.props.onSnapshot) return;
-    const handle = engine.props.onSnapshot(event.data);
-    if (handle instanceof Promise) {
-      engine.toolbar.addLoading();
-      handle.finally(() => {
-        engine.toolbar.removeLoading();
-      });
-    }
-  });
-
-  engine.subscribeTo(PreviewClickEvent, (event) => {
-    if (!engine.props.onPreview) return;
-    const handle = engine.props.onPreview(event.data);
-    if (handle instanceof Promise) {
-      engine.toolbar.addLoading();
-      handle.finally(() => {
-        engine.toolbar.removeLoading();
-      });
-    }
-  });
-};
-
 export const DesignHead: React.FC = observer(() => {
   const toolbar = useToolbar();
   const cursor = useCursor();
-  const operation = useOperation();
   const screen = useScreen();
-  useDesigner((engine) => {
-    useButtonEffect(engine);
-  });
+
+  const onOperationBtn = async (type: 'publish' | 'snapshot' | 'preview' | 'help') => {
+    const pageData = screen.engine.getConfig();
+    let handle: Promise<void> | void;
+    screen.engine.toolbar.addLoading();
+    switch (type) {
+      case 'publish':
+        handle = await screen.engine.props.onPublish?.(pageData);
+        break;
+      case 'snapshot':
+        handle = await screen.engine.props.onSnapshot?.(pageData);
+        break;
+      case 'preview':
+        handle = await screen.engine.props.onPreview?.(pageData);
+        break;
+      default:
+        break;
+    }
+    screen.engine.toolbar.removeLoading();
+  };
 
   return (
     <>
@@ -132,7 +112,7 @@ export const DesignHead: React.FC = observer(() => {
           <Space size={4} className="head-btn-group">
             <div style={{ display: 'flex' }}>
               <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'生成快照'}>
-                <div className="head-btn" onClick={() => operation.onOperationBtn('snapshot')}>
+                <div className="head-btn" onClick={() => onOperationBtn('snapshot')}>
                   <IconWidget infer="Snapshot" />
                 </div>
               </Tooltip>
@@ -144,13 +124,13 @@ export const DesignHead: React.FC = observer(() => {
             <HelpPreview />
 
             <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'发布'}>
-              <div className="head-btn" onClick={() => operation.onOperationBtn('publish')}>
+              <div className="head-btn" onClick={() => onOperationBtn('publish')}>
                 <IconWidget infer="Publish" style={{ color: '#fff' }} />
               </div>
             </Tooltip>
 
             <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'预览'}>
-              <div className="head-btn" onClick={() => operation.onOperationBtn('preview')}>
+              <div className="head-btn" onClick={() => onOperationBtn('preview')}>
                 <IconWidget infer="Preview" style={{ color: '#fff' }} />
               </div>
             </Tooltip>

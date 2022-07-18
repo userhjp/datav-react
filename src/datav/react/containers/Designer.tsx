@@ -39,7 +39,7 @@ export const Designer: React.FC<IDesignerProps> = ({ components, engine, materia
       <div
         className="visual-design"
         onContextMenu={(e) => {
-          e.preventDefault();
+          // e.preventDefault();
         }}
         onMouseDown={() => {
           ref.current.operation.cancelRename();

@@ -58,7 +58,7 @@
 }
 
 // 重置antd样式
-.dv-settings-form, 
+.dv-settings-form,
 .sidebar-content,
 .data-settings-drawer {
   color: @m-text-color;
@@ -211,7 +211,7 @@
   .ant-input-number-input {
     font-size: @m-font-size;
   }
-  
+
   .ant-input-number,
   .ant-input-affix-wrapper {
     padding: 0;
@@ -400,5 +400,44 @@
     color: @m-text-color;
     background-color: #171b22;
     border: 1px solid #333;
+  }
+}
+
+// modal
+.dv-modal-confirm {
+  .ant-modal-body {
+    padding: 30px 20px 24px;
+  }
+  .ant-modal-content {
+    margin-top: 100px;
+    background-color: #1f1f1f;
+  }
+  .ant-modal-confirm-title, .ant-modal-confirm-content {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 13px;
+  }
+
+  .ant-btn:not(.ant-btn-dangerous,:hover) {
+    color: rgba(255, 255, 255, 0.85);
+    border-color: #434343;
+  }
+
+  .ant-btn-default, .ant-btn-dangerous {
+    background-color: transparent;
+  }
+
+  .ant-btn.ant-btn-primary {
+    color: #1890ff;
+    background-color: transparent;
+    border-color: #1890ff;
+    &:hover {
+      color: #52a7f7;
+      background-color: inherit;
+      border-color: #52a7f7;
+    }
+  }
+
+  .ant-btn::before {
+    background: #ffffff1f;
   }
 }

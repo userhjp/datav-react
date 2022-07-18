@@ -1,6 +1,7 @@
 import { IPageType } from '../react/interface';
 import { Event, IEventProps } from '../shared';
 import { Engine, Shortcut } from './models';
+import { ISnapshot } from './models/Snapshot';
 
 export interface IDesignerStore<P> {
   value: P;
@@ -32,6 +33,10 @@ export type IEngineProps<T = Event> = IEventProps<T> & {
   onPublish?: (data: IPageType) => void | Promise<void>;
   /** 生成快照按钮点击事件 */
   onSnapshot?: (data: IPageType) => void | Promise<void>;
+  /** 加载快照详情 */
+  loadSnapshot?: (data: ISnapshot) => void | Promise<ISnapshot | void>;
+  /** 删除快照 */
+  removeSnapshot?: (data: ISnapshot) => boolean | void | Promise<boolean | void>;
   /** 预览按钮点击事件 */
   onPreview?: (data: IPageType) => void | Promise<void>;
   /** 帮助按钮点击事件 */

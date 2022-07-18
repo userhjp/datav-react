@@ -2,11 +2,10 @@ import { observable, define, action } from '@formily/reactive';
 import { Engine } from './Engine';
 import { IPageType } from '@/datav/react';
 
-type ISnapshot = {
-  createtime: number;
+export type ISnapshot = {
   id: string;
   pid: string;
-  updatetime: number;
+  createtime: number;
   config?: IPageType;
 };
 
@@ -29,6 +28,7 @@ export class Snapshot {
       snapshotList: observable.ref,
       addSnapshot: action,
       removeSnapshot: action,
+      loadSnapshot: action,
     });
   }
 
@@ -37,10 +37,31 @@ export class Snapshot {
   }
 
   addSnapshot(config: ISnapshot) {
-    this.snapshotList.push(config);
+    this.snapshotList = [...this.snapshotList, config];
   }
 
-  removeSnapshot(index: number) {
-    this.snapshotList.slice(index, index + 1);
+  async removeSnapshot(item: ISnapshot) {
+    this.engine.toolbar.addLoading();
+    const handle = await this.engine.props.removeSnapshot(item);
+    this.engine.toolbar.removeLoading();
+    if (handle === false) return;
+    this.snapshotList = this.snapshotList.filter((f) => f.id !== item.id);
+  }
+
+  async recoverySnapshot(item: ISnapshot) {
+    const config = await this.loadSnapshot(item);
+    if (config) {
+      this.engine.setInitialValue(item.config);
+    }
+  }
+
+  async loadSnapshot(item: ISnapshot) {
+    if (item.config) return item.config;
+    this.engine.toolbar.addLoading();
+    const res = await this.engine.props.loadSnapshot?.(item);
+    const config = (res && res.config) || item.config;
+    if (res && res.config) item.config = res.config;
+    this.engine.toolbar.removeLoading();
+    return config;
   }
 }

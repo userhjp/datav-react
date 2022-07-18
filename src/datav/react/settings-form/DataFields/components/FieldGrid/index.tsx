@@ -9,7 +9,7 @@ type FieldGridProps = {
 
 export const FieldGrid: React.FC<FieldGridProps> = (props) => {
   const { fields, typeName } = props;
-  if (Object.keys(fields).length < 1) return null;
+  if (!fields || Object.keys(fields).length < 1) return null;
   return (
     <div v-if="fields" className="field-wp">
       <div className="field-info">

@@ -6,7 +6,7 @@ import { message } from 'antd';
 import * as components from '@/examples/widgets';
 import { setPreviewKey } from '@/utils';
 import { useParams } from 'react-router';
-import { addSnapshot, getProjectDetail, getSnapshotList, saveConfig } from './../../services/datavApi';
+import { addSnapshot, getProjectDetail, getSnapshotList, loadSnapshotDetail, removeSnapshot, saveConfig } from './../../services/datavApi';
 
 const widgetMenu: IWidgetMenu[] = [
   {
@@ -54,9 +54,31 @@ const Design: React.FC = () => {
               content: '保存成功',
               className: 'dv-message-class',
             });
+            engine.snapshot.addSnapshot(res.data || []);
           } else {
             message.error(res.message);
           }
+        },
+        removeSnapshot: async (data) => {
+          const res = await removeSnapshot(data.id);
+          if (res.code === 0) {
+            message.success({
+              content: '删除成功',
+              className: 'dv-message-class',
+            });
+          } else {
+            message.error(res.message);
+          }
+        },
+        loadSnapshot: async (data) => {
+          const res = await loadSnapshotDetail(data.id);
+          if (!res.data?.config) {
+            message.success({
+              content: '快照被损坏或已被删除',
+              className: 'dv-message-class',
+            });
+          }
+          return res.data;
         },
         onPreview: (data) => {
           setPreviewKey(id, data);
