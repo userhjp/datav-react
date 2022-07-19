@@ -60,7 +60,7 @@ export function toJson<T>(data: any, defaultValue: T) {
 
 export const copyText = (text: string) => {
   try {
-    if (navigator.clipboard && window.isSecureContext) {
+    if (!navigator.clipboard && window.isSecureContext) {
       navigator.clipboard.writeText(text); // 在非https下无法使用
     } else {
       const input = document.createElement('textarea');
@@ -69,6 +69,8 @@ export const copyText = (text: string) => {
       input.select();
       document.execCommand('copy');
       document.body.removeChild(input);
+      // http协议下实在没办法了，非https不让读取剪贴板
+      window.localStorage.setItem('dv-copy', text);
     }
     return true;
   } catch (error) {
@@ -76,20 +78,13 @@ export const copyText = (text: string) => {
   }
 };
 
-const delay = (time) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
-};
-
 export const getClipboardText = async () => {
   if (navigator.clipboard && window.isSecureContext) {
     return await navigator.clipboard?.readText();
   }
-  document.execCommand('paste');
-  debugger;
-  // document.body.removeChild(input);
-  return false;
+  const text = window.localStorage.getItem('dv-copy');
+  window.localStorage.removeItem('dv-copy');
+  return text || '';
 };
 
 /**
