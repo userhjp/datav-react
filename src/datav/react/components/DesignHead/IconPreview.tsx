@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as icons from '../../icons';
 import { Divider, message, Modal, Tooltip } from 'antd';
 import { IconWidget } from '../IconWidget/index';
+import { copyText } from '@/datav/shared';
 const iconList = Object.keys(icons);
 
 /** 开发时查看icon使用 */
@@ -25,12 +26,8 @@ export const IconPreview: React.FC = () => {
               <a
                 key={m}
                 onClick={() => {
-                  // const textArea = document.createElement('textarea');
-                  // textArea.value = `<IconWidget infer="${m}" />`;
-                  // document.body.appendChild(textArea);
-                  // textArea.select();
                   try {
-                    navigator.clipboard.writeText(`<IconWidget infer="${m}" />`);
+                    copyText(`<IconWidget infer="${m}" />`);
                     message.success({
                       content: '已复制到剪贴板',
                       className: 'dv-message-class',
@@ -38,7 +35,6 @@ export const IconPreview: React.FC = () => {
                   } catch (error) {
                     alert('复制失败');
                   }
-                  // document.body.removeChild(textArea);
                 }}
               >
                 <IconWidget infer={m} style={{ color: '#fff', fontSize: '20px', margin: '10px' }} />

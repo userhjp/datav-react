@@ -1,5 +1,5 @@
 import { IWidgetProps } from '../../react/interface';
-import { copyText, generateUUID } from '../../shared/utils';
+import { copyText, generateUUID, getClipboardText } from '../../shared/utils';
 import { observable, define, action, toJS } from '@formily/reactive';
 import { MoveSortType, ICustomEvent, isFn } from '../../shared';
 import { IMoveType } from '../types';
@@ -147,12 +147,8 @@ export class Operation {
 
   /** 粘贴剪贴板组件 */
   async pasteClipboard(x: number = null, y: number = null) {
-    const dataStr = await navigator.clipboard?.readText();
+    const dataStr = await getClipboardText();
     if (!dataStr) {
-      message.error({
-        content: `无法使用剪贴板`,
-        className: 'dv-message-class',
-      });
       return;
     }
     try {
@@ -165,7 +161,7 @@ export class Operation {
     } catch (error) {
       console.info('组件粘贴失败, 不是组件或配置有误');
     }
-    navigator.clipboard.writeText('');
+    copyText('');
   }
 
   moveTo(type: IMoveType) {

@@ -60,21 +60,36 @@ export function toJson<T>(data: any, defaultValue: T) {
 
 export const copyText = (text: string) => {
   try {
-    // const input = document.createElement('textarea');
-    // input.value = text;
-    // document.body.appendChild(input);
-    // input.select();
-    // document.execCommand('copy');
-    // document.body.removeChild(input);
-    try {
-      navigator.clipboard.writeText(text);
-      return true;
-    } catch (error) {
-      return false;
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text); // 在非https下无法使用
+    } else {
+      const input = document.createElement('textarea');
+      input.value = text;
+      document.body.appendChild(input);
+      input.select();
+      document.execCommand('copy');
+      document.body.removeChild(input);
     }
+    return true;
   } catch (error) {
     return false;
   }
+};
+
+const delay = (time) => {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
+};
+
+export const getClipboardText = async () => {
+  if (navigator.clipboard && window.isSecureContext) {
+    return await navigator.clipboard?.readText();
+  }
+  document.execCommand('paste');
+  debugger;
+  // document.body.removeChild(input);
+  return false;
 };
 
 /**
