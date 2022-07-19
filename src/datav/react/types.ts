@@ -10,6 +10,7 @@ export interface IDesignerLayoutProps {
   variables?: Record<string, string>;
 }
 export interface IDesignerProps extends IDesignerLayoutProps {
+  uploadAction?: string;
   /** 拖拽源数据分类配置 */
   menu: IWidgetMenu[];
   engine: Engine;

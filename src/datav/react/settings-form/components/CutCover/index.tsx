@@ -6,38 +6,46 @@ import html2canvas from 'html2canvas';
 import React, { useContext, useRef, useState } from 'react';
 import { IconWidget } from '../../../components';
 import { SettingsFormContext } from '../../context';
-import { useToolbar } from '@/datav/react/hooks';
+import { useScreen, useToolbar } from '@/datav/react/hooks';
+import { observer } from '@formily/react';
 import './index.less';
 
 type CutCoverProps = {
   value: string;
+  uploadAction?: string;
   onChange: (value: string) => void;
 };
 
 // 将base64转换为blob
-// function dataURLtoBlob(dataurl) {
-//   const arr = dataurl.split(',');
-//   const mime = arr[0].match(/:(.*?);/)[1];
-//   const bstr = atob(arr[1]);
-//   let n = bstr.length;
-//   const u8arr = new Uint8Array(n);
-//   while (n--) {
-//     u8arr[n] = bstr.charCodeAt(n);
-//   }
-//   return new Blob([u8arr], { type: mime });
-// }
-// // 将blob转换为file
-// function blobToFile(theBlob: Blob, fileName: string) {
-//   theBlob['lastModifiedDate'] = new Date();
-//   theBlob['name'] = fileName;
-//   return theBlob;
-// }
+function dataURLtoBlob(dataurl) {
+  const arr = dataurl.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1];
+  const bstr = atob(arr[1]);
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], { type: mime });
+}
+// 将blob转换为file
+function blobToFile(theBlob: Blob, fileName: string) {
+  theBlob['lastModifiedDate'] = new Date();
+  theBlob['name'] = fileName;
+  return theBlob;
+}
 
-export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
+export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, uploadAction }) => {
   const context = useContext(SettingsFormContext);
+  const screen = useScreen();
   const toolbar = useToolbar();
   const loading = useRef(false);
+  const uploadRef = useRef<UploadFile>();
   const [showModal, setShowModal] = useState(false);
+
+  const data = {
+    id: screen.id || '',
+  };
 
   const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
     const filelist = info.fileList.map((file) => {
@@ -55,7 +63,7 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
       });
       return;
     }
-    if (status === 'removed' || status === 'done') {
+    if (status === 'done') {
       const newFiles: any[] = filelist.filter((f) => !f.error && f.url).map((m) => m.url);
       if (onChange) onChange(newFiles[0] || '');
     }
@@ -92,21 +100,40 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
           scrollX: 0,
           scrollY: 0,
         });
-        const base64Url = res.toDataURL('image/jpeg', 0.2);
-        // const file = blobToFile(dataURLtoBlob(base64Url), 'thumbnail.jpeg');
-        onChange(base64Url);
-        message.success({
-          content: '截取成功',
-          className: 'dv-message-class',
+        const base64Url = res.toDataURL('image/png', 0.8);
+        const file = blobToFile(dataURLtoBlob(base64Url), 'cover.png');
+        rcUpload({
+          data,
+          filename: 'file',
+          file,
+          action: uploadAction || context.uploadAction,
+          method: 'POST',
+          onSuccess: (res) => {
+            onChange(res.url);
+            message.success({
+              content: '截取成功',
+              className: 'dv-message-class',
+            });
+            loading.current = false;
+            toolbar.removeLoading();
+          },
+          onError: (res) => {
+            message.error({
+              content: '图片上传失败',
+              className: 'dv-message-class',
+            });
+            loading.current = false;
+            toolbar.removeLoading();
+          },
+          onProgress: (res) => {},
         });
+        // onChange(base64Url);
       } catch (error) {
         message.error({
           content: error.toString(),
           className: 'dv-message-class',
         });
       } finally {
-        loading.current = false;
-        toolbar.removeLoading();
         document.body.removeChild(elDiv);
       }
     }, 200);
@@ -119,12 +146,14 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
           截取封面
         </div>
         <Upload
+          ref={uploadRef}
           accept="image/*"
           className="btn"
           name="file"
           maxCount={1}
           showUploadList={false}
-          action={context.uploadAction}
+          data={data}
+          action={uploadAction || context.uploadAction}
           customRequest={rcUpload}
           onChange={handleChange}
         >
@@ -167,4 +196,4 @@ export const CutCover: React.FC<CutCoverProps> = ({ value, onChange }) => {
       </Modal>
     </div>
   );
-};
+});

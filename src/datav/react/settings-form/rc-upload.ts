@@ -23,6 +23,9 @@ function getBody(xhr: XMLHttpRequest) {
 }
 
 export default function upload(option: UploadRequestOption<any>) {
+  if (!option.action.startsWith('http://') || !option.action.startsWith('https://') || !option.action.startsWith('//')) {
+    option.action = `${API_URL}${option.action}`;
+  }
   const xhr = new XMLHttpRequest();
   if (option.onProgress && xhr.upload) {
     xhr.upload.onprogress = function progress(e: UploadProgressEvent) {
@@ -70,7 +73,8 @@ export default function upload(option: UploadRequestOption<any>) {
       return option.onError(getError(option, xhr), res);
     }
     if (res.code === 0) {
-      return option.onSuccess(res, xhr);
+      res.data.url = res.data.fullurl;
+      return option.onSuccess(res.data, xhr);
     }
     return option.onError(res, xhr);
   };

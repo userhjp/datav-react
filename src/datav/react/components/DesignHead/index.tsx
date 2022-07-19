@@ -123,7 +123,7 @@ export const DesignHead: React.FC = observer(() => {
 
             <HelpPreview />
 
-            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'发布'}>
+            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'保存并发布'}>
               <div className="head-btn" onClick={() => onOperationBtn('publish')}>
                 <IconWidget infer="Publish" style={{ color: '#fff' }} />
               </div>

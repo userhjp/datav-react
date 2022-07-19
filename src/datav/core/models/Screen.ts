@@ -14,7 +14,8 @@ export interface IScreen {
   engine: Engine;
 }
 export class Screen {
-  title: '工作空间';
+  id: string;
+  title: string;
   props: IScreenProps;
   engine: Engine;
   scale = 1;
@@ -30,6 +31,8 @@ export class Screen {
   makeObservable() {
     define(this, {
       props: observable,
+      id: observable.ref,
+      title: observable.ref,
       scale: observable.ref,
       setScale: action,
       setSize: action,

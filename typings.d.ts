@@ -10,4 +10,3 @@ declare const APP_CODE: string;
 declare const APP_SIG: string;
 declare const PWD_SALT: string;
 declare const API_URL: string;
-declare const UPLOAD_URL: string;

@@ -83,7 +83,7 @@ instance.interceptors.response.use((res) => {
 const request = (url: string, options: API.AxiosRequest) => {
   return instance.request<any, API.Response>({
     method: 'GET',
-    baseURL: 'http://localhost:3001', // API_URL,
+    baseURL: API_URL, // API_URL,
     params: {},
     url,
     ...options,

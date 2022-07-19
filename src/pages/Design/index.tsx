@@ -51,12 +51,15 @@ const Design: React.FC = () => {
           const res = await addSnapshot(id, data);
           if (res.code === 0) {
             message.success({
-              content: '保存成功',
+              content: '已保存快照',
               className: 'dv-message-class',
             });
             engine.snapshot.addSnapshot(res.data || []);
           } else {
-            message.error(res.message);
+            message.success({
+              content: res.message,
+              className: 'dv-message-class',
+            });
           }
         },
         removeSnapshot: async (data) => {
@@ -100,6 +103,7 @@ const Design: React.FC = () => {
       if (data) {
         engine.setInitialValue(data.config);
         engine.screen.title = data.title;
+        engine.screen.id = id;
       }
     } else {
       message.error(res.message);
@@ -113,7 +117,14 @@ const Design: React.FC = () => {
 
   return (
     <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-      <Designer engine={engine} menu={widgetMenu} components={{ ...components }} material={[]} />;
+      <Designer
+        engine={engine}
+        uploadAction={`${API_URL}/datav/uploadFiles?sig=appcode_test0000`}
+        menu={widgetMenu}
+        components={{ ...components }}
+        material={[]}
+      />
+      ;
     </div>
   );
 };
