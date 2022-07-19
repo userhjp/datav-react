@@ -147,8 +147,14 @@ export class Operation {
 
   /** 粘贴剪贴板组件 */
   async pasteClipboard(x: number = null, y: number = null) {
-    const dataStr = await navigator.clipboard.readText();
-    if (!dataStr) return;
+    const dataStr = await navigator.clipboard?.readText();
+    if (!dataStr) {
+      message.error({
+        content: `无法使用剪贴板`,
+        className: 'dv-message-class',
+      });
+      return;
+    }
     try {
       const config: WidgetNode = JSON.parse(dataStr);
       const canvasPoint = this.engine.viewport.calcComponentPoint(config.attr.w, config.attr.h, x, y);
