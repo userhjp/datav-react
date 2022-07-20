@@ -1,6 +1,7 @@
 import { IPageType } from '../react/interface';
 import { Event, IEventProps } from '../shared';
 import { Engine, Shortcut } from './models';
+import { IDvFile } from './models/Upload';
 import { ISnapshot } from './models/Snapshot';
 
 export interface IDesignerStore<P> {
@@ -41,6 +42,8 @@ export type IEngineProps<T = Event> = IEventProps<T> & {
   onPreview?: (data: IPageType) => void | Promise<void>;
   /** 帮助按钮点击事件 */
   onHelp?: (data: IPageType) => void | Promise<void>;
+  /** 删除图片资源 */
+  removeFile?: (data: IDvFile) => boolean | void | Promise<boolean | void>;
 };
 
 export type IEngineContext = {

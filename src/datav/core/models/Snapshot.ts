@@ -32,12 +32,12 @@ export class Snapshot {
     });
   }
 
-  setInitialValue(configs: ISnapshot[]) {
-    this.snapshotList = configs || [];
+  setInitialValue(list: ISnapshot[]) {
+    this.snapshotList = list || [];
   }
 
-  addSnapshot(config: ISnapshot) {
-    this.snapshotList = [...this.snapshotList, config];
+  addSnapshot(item: ISnapshot) {
+    this.snapshotList = [...this.snapshotList, item];
   }
 
   async removeSnapshot(item: ISnapshot) {

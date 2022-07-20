@@ -24,6 +24,7 @@
 
   .list-container {
     height: 100%;
+    overflow-x: hidden;
     overflow-y: auto;
     &::-webkit-scrollbar {
       width: 6px;
@@ -45,9 +46,13 @@
     .list {
       display: flex;
       flex-wrap: wrap;
+      align-content: flex-start;
+      margin: -10px;
+      .item-wrap {
+        flex-basis: 25%;
+        padding: 10px;
+      }
       .item {
-        width: 260px;
-        margin: 0 30px 20px 0;
         border: 1px solid #3a4659;
         border-radius: 2px;
         cursor: pointer;

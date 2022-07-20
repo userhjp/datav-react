@@ -65,7 +65,7 @@ export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, up
     }
     if (status === 'done') {
       const newFiles: any[] = filelist.filter((f) => !f.error && f.url).map((m) => m.url);
-      if (onChange) onChange(newFiles[0] || '');
+      if (onChange) onChange(`${newFiles[0]}?t=${Date.now()}` || '');
     }
   };
 
@@ -109,7 +109,7 @@ export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, up
           action: uploadAction || context.uploadAction,
           method: 'POST',
           onSuccess: (res) => {
-            onChange(res.url);
+            onChange(`${res.url}?t=${Date.now()}`);
             message.success({
               content: '截取成功',
               className: 'dv-message-class',

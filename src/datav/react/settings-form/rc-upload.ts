@@ -73,7 +73,6 @@ export default function upload(option: UploadRequestOption<any>) {
       return option.onError(getError(option, xhr), res);
     }
     if (res.code === 0) {
-      res.data.url = res.data.fullurl;
       return option.onSuccess(res.data, xhr);
     }
     return option.onError(res, xhr);

@@ -6,7 +6,15 @@ import { message } from 'antd';
 import * as components from '@/examples/widgets';
 import { setPreviewKey } from '@/utils';
 import { useParams } from 'react-router';
-import { addSnapshot, getProjectDetail, getSnapshotList, loadSnapshotDetail, removeSnapshot, saveConfig } from './../../services/datavApi';
+import {
+  addSnapshot,
+  getFileList,
+  getProjectDetail,
+  getSnapshotList,
+  loadSnapshotDetail,
+  removeSnapshot,
+  saveConfig,
+} from './../../services/datavApi';
 
 const widgetMenu: IWidgetMenu[] = [
   {
@@ -95,6 +103,9 @@ const Design: React.FC = () => {
     engine.toolbar.addLoading();
     const snapshot = await getSnapshotList(id);
     engine.snapshot.setInitialValue(snapshot.data || []);
+
+    const fileList = await getFileList({ pagenum: 1, pagesize: 100 });
+    engine.upload.setFileList(fileList.data?.list || []);
     // let data = await getSnapshot(id);
 
     const res = await getProjectDetail(id);

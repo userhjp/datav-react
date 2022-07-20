@@ -3,7 +3,6 @@ import { Divider, Modal, Tooltip } from 'antd';
 import { IconWidget } from '../IconWidget/index';
 import { useDesigner } from '../../hooks';
 import { MonacoEditor } from '../../settings-form/components';
-import './styles.less';
 
 /** 配置JSON */
 export const Expression: React.FC = () => {

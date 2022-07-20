@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Divider, Modal, Tooltip } from 'antd';
 import { IconWidget } from '../IconWidget/index';
-import './styles.less';
 
 /** 帮助弹层 */
 export const HelpPreview: React.FC = () => {

@@ -1,7 +1,17 @@
 import { request } from '@/services';
 
 /** 项目列表 */
-export async function queryProjectList({ pagesize, pagenum, keyword, sotrtype }) {
+export async function queryProjectList({
+  pagesize,
+  pagenum,
+  keyword,
+  sotrtype,
+}: {
+  pagesize: number;
+  pagenum: number;
+  keyword: string;
+  sotrtype: number;
+}) {
   const res = await request('/datav/getList', {
     method: 'POST',
     params: { pagesize, pagenum, keyword, sotrtype },
@@ -90,6 +100,17 @@ export function loadSnapshotDetail(id: string) {
   return request('/datav/getSnapshot', {
     method: 'POST',
     params: { id },
+  });
+}
+
+/** 上传图片列表 */
+export function getFileList(params: { pagesize: number; pagenum: number }) {
+  return request('/datav/getFileList', {
+    method: 'POST',
+    params: {
+      pagesize: params.pagesize,
+      pagenum: params.pagenum,
+    },
   });
 }
 

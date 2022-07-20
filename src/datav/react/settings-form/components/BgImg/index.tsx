@@ -35,7 +35,7 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
         className: 'dv-message-class',
       });
     }
-    if (status === 'removed' || status === 'done') {
+    if (status === 'done') {
       const newFiles: any[] = filelist.filter((f) => !f.error && f.url).map((m) => m.url);
       if (onChange) onChange(newFiles[0] || '');
     }

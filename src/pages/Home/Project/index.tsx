@@ -159,19 +159,20 @@ const Project: React.FC = () => {
         <div className="list-container">
           <div className="list">
             {data?.map((m) => (
-              <RenderItem
-                key={m.id}
-                sotrtype={sotrtype.current}
-                item={m}
-                onDelete={deleteItem}
-                onEdit={() => {
-                  setModalState({
-                    visible: true,
-                    item: m,
-                  });
-                }}
-                onCopy={copy}
-              />
+              <div className="item-wrap" key={m.id}>
+                <RenderItem
+                  sotrtype={sotrtype.current}
+                  item={m}
+                  onDelete={deleteItem}
+                  onEdit={() => {
+                    setModalState({
+                      visible: true,
+                      item: m,
+                    });
+                  }}
+                  onCopy={copy}
+                />
+              </div>
             ))}
           </div>
         </div>

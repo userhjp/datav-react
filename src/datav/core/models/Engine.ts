@@ -10,6 +10,7 @@ import { Keyboard } from './Keyboard';
 import { Screen } from './Screen';
 import { DvGlobal } from './DvGlobal';
 import { Snapshot } from './Snapshot';
+import { DvUpload } from './Upload';
 
 /**
  * 设计器引擎
@@ -35,6 +36,8 @@ export class Engine extends Event {
 
   snapshot: Snapshot;
 
+  upload: DvUpload;
+
   constructor(props: IEngineProps<Engine>) {
     super(props);
     this.props = {
@@ -57,6 +60,7 @@ export class Engine extends Event {
     this.operation = new Operation(this);
     this.global = new DvGlobal(this.dataSource);
     this.snapshot = new Snapshot({ engine: this });
+    this.upload = new DvUpload();
   }
 
   createViewport(viewportElement: HTMLElement) {
@@ -71,15 +75,6 @@ export class Engine extends Event {
   setInitialValue(val: IPageType) {
     if (!val) return;
     if (val.components) this.operation.setNodes(val.components || []);
-    if (val.page) this.screen.setProps(val.page);
-    if (val.global) {
-      this.global.setProps(val.global);
-    }
-    this.viewport.autoScale();
-  }
-  setValue(val: IPageType) {
-    if (!val) return;
-    if (val.components) this.operation.batchAddNode(val.components || []);
     if (val.page) this.screen.setProps(val.page);
     if (val.global) {
       this.global.setProps(val.global);

@@ -7,7 +7,6 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React, { useRef } from 'react';
 import { useSnapshot } from '../../hooks';
 import { IconWidget } from '../IconWidget';
-import './styles.less';
 
 export const Snapshot: React.FC = observer(() => {
   const snapshot = useSnapshot();

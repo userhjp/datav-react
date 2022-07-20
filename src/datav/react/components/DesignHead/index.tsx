@@ -10,7 +10,9 @@ import { HelpPreview } from './HelpPreview';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { Expression } from './Expression';
 import { Snapshot } from './Snapshot';
+import { ImagePreview } from './ImagePreview';
 import './index.less';
+import './styles.less';
 
 export const DesignHead: React.FC = observer(() => {
   const toolbar = useToolbar();
@@ -97,6 +99,7 @@ export const DesignHead: React.FC = observer(() => {
               </div>
             </Tooltip>
             <IconPreview />
+            <ImagePreview />
           </Space>
         </div>
         <div

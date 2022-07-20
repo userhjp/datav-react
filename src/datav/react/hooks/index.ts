@@ -16,3 +16,4 @@ export * from './useWidgets';
 export * from './useDvGlobal';
 export * from './useMaterial';
 export * from './useSnapshot';
+export * from './useDvUpload';

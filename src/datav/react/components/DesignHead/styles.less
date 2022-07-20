@@ -76,3 +76,50 @@
     }
 
   }
+
+  .dv-image-preview-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    min-height: 450px;
+    .dv-image-preview-item {
+      flex-basis: 20%;
+      height: 120px;
+      padding: 10px;
+      // background-color: #000;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border: 1px solid #3a4659;
+      }
+
+      .upload-cover {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        color: @m-text-color;
+        font-size: 12px;
+        line-height: 110px;
+        background: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        transition: all .3s;
+
+        .upload-btn {
+          display: inline-block;
+          & > span:hover {
+            color: @color-primary;
+            transition: all .3s;
+          }
+        }
+      }
+    }
+
+    .dv-image-preview-item:hover .upload-cover {
+      opacity: 1;
+    }
+
+  }
