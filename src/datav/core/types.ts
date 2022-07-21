@@ -30,6 +30,8 @@ export type IEngineProps<T = Event> = IEventProps<T> & {
   nodeResizeHandlerAttrName?: string;
   /** 节点旋转dom属性名 */
   nodeRotateHanderAttrName?: string;
+  /** 附件上传地址 */
+  uploadAction?: string;
   /** 发布按钮点击事件 */
   onPublish?: (data: IPageType) => void | Promise<void>;
   /** 生成快照按钮点击事件 */

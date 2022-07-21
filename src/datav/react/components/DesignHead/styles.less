@@ -77,11 +77,31 @@
 
   }
 
+  .dv-upload-btn {
+    padding-left: 10px;
+    .ant-upload {
+      .ant-btn {
+        height: 28px;
+        padding: 0 10px;
+        color: @m-text-color;
+        font-size: 12px;
+        background: transparent;
+        border-color: @m-input-border-color;
+
+        &:hover {
+          color: @color-primary;
+          border-color: @color-primary;
+        }
+      }
+    }
+  }
+
   .dv-image-preview-container {
     display: flex;
     flex-wrap: wrap;
     align-content: flex-start;
-    min-height: 450px;
+    height: 480px;
+    overflow-y: auto;
     .dv-image-preview-item {
       flex-basis: 20%;
       height: 120px;
@@ -103,15 +123,17 @@
         height: 100%;
         color: @m-text-color;
         font-size: 12px;
-        line-height: 110px;
         background: rgba(0, 0, 0, 0.6);
         opacity: 0;
         transition: all .3s;
 
         .upload-btn {
-          display: inline-block;
+          padding: 4px 6px 0;
+          font-size: 15px;
+          text-align: right;
           & > span:hover {
             color: @color-primary;
+            cursor: pointer;
             transition: all .3s;
           }
         }

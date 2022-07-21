@@ -3,10 +3,9 @@ import { Divider, message, Modal, Upload } from 'antd';
 import { UploadChangeParam } from 'antd/lib/upload';
 import { UploadFile } from 'antd/lib/upload/interface';
 import html2canvas from 'html2canvas';
-import React, { useContext, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { IconWidget } from '../../../components';
-import { SettingsFormContext } from '../../context';
-import { useScreen, useToolbar } from '@/datav/react/hooks';
+import { useDvUpload, useScreen, useToolbar } from '@/datav/react/hooks';
 import { observer } from '@formily/react';
 import './index.less';
 
@@ -36,9 +35,9 @@ function blobToFile(theBlob: Blob, fileName: string) {
 }
 
 export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, uploadAction }) => {
-  const context = useContext(SettingsFormContext);
   const screen = useScreen();
   const toolbar = useToolbar();
+  const dvUpload = useDvUpload();
   const loading = useRef(false);
   const uploadRef = useRef<UploadFile>();
   const [showModal, setShowModal] = useState(false);
@@ -106,7 +105,7 @@ export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, up
           data,
           filename: 'file',
           file,
-          action: uploadAction || context.uploadAction,
+          action: uploadAction || dvUpload.uploadAction,
           method: 'POST',
           onSuccess: (res) => {
             onChange(`${res.url}?t=${Date.now()}`);
@@ -153,7 +152,7 @@ export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, up
           maxCount={1}
           showUploadList={false}
           data={data}
-          action={uploadAction || context.uploadAction}
+          action={uploadAction || dvUpload.uploadAction}
           customRequest={rcUpload}
           onChange={handleChange}
         >

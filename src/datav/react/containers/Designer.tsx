@@ -12,7 +12,7 @@ import { setNpmCDNRegistry } from '../settings-form/registry';
 import '../styles.less';
 setNpmCDNRegistry('//unpkg.com');
 GlobalRegistry.registerDesignerIcons(icons);
-export const Designer: React.FC<IDesignerProps> = ({ components, engine, material, uploadAction, ...props }) => {
+export const Designer: React.FC<IDesignerProps> = ({ components, engine, material, ...props }) => {
   const pEngine = useDesigner();
   const ref = useRef<Engine>();
 
@@ -51,7 +51,7 @@ export const Designer: React.FC<IDesignerProps> = ({ components, engine, materia
             <LayerPanel />
             <DragPanel />
             <Drawing />
-            <SettingsForm uploadAction={uploadAction || ''} />
+            <SettingsForm />
           </div>
         </DesignerEngineContext.Provider>
       </div>

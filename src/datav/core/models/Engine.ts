@@ -60,7 +60,7 @@ export class Engine extends Event {
     this.operation = new Operation(this);
     this.global = new DvGlobal(this.dataSource);
     this.snapshot = new Snapshot({ engine: this });
-    this.upload = new DvUpload();
+    this.upload = new DvUpload({ engine: this, uploadAction: props.uploadAction });
   }
 
   createViewport(viewportElement: HTMLElement) {

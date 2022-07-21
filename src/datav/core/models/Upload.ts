@@ -9,13 +9,18 @@ export type IDvFile = {
 
 export interface IDvUploadProps {
   fileList?: IDvFile[];
+  engine: Engine;
+  uploadAction?: string;
 }
 
 export class DvUpload {
+  uploadAction: string;
   fileList: IDvFile[];
   engine: Engine;
-  constructor(fileList?: IDvFile[]) {
-    this.fileList = fileList || [];
+  constructor(props: IDvUploadProps) {
+    this.fileList = props.fileList || [];
+    this.engine = props.engine;
+    this.uploadAction = props.uploadAction || '';
     this.makeObservable();
   }
 
@@ -32,12 +37,14 @@ export class DvUpload {
   }
 
   addFile(item: IDvFile) {
-    this.fileList = [...this.fileList, item];
+    this.fileList = [item, ...this.fileList];
   }
+
+  upload() {}
 
   async removeFile(item: IDvFile) {
     this.engine.toolbar.addLoading();
-    const handle = await this.engine.props.removeFile(item);
+    const handle = await this.engine.props?.removeFile(item);
     this.engine.toolbar.removeLoading();
     if (handle === false) return;
     this.fileList = this.fileList.filter((f) => f.id !== item.id);

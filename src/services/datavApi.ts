@@ -114,6 +114,14 @@ export function getFileList(params: { pagesize: number; pagenum: number }) {
   });
 }
 
+/** 删除快照 */
+export function removeFile(id: string) {
+  return request('/datav/deleteFiles', {
+    method: 'POST',
+    params: { id },
+  });
+}
+
 // const example1 = await axios.get('/json/example1.json');
 // const example2 = await axios.get('/json/example2.json');
 // const example3 = await axios.get('/json/example3.json');

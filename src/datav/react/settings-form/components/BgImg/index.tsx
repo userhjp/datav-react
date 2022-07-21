@@ -2,10 +2,10 @@ import rcUpload from '../../rc-upload';
 import { Input } from '@formily/antd';
 import { Upload, message, Divider, Modal } from 'antd';
 import { UploadFile, UploadChangeParam } from 'antd/lib/upload/interface';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { IconWidget } from '../../../components';
-import { SettingsFormContext } from '../../context';
 import './index.less';
+import { useDvUpload } from '@/datav/react/hooks';
 
 const { Dragger } = Upload;
 
@@ -17,8 +17,8 @@ type BgImgProps = {
 export const BgImg: React.FC<BgImgProps> = (props) => {
   const { onChange, value } = props;
   const [showModal, setShowModal] = useState(false);
-  const context = useContext(SettingsFormContext);
   const [fileList, setFileList] = useState([]);
+  const dvUpload = useDvUpload();
 
   const handleChange = (info: UploadChangeParam<UploadFile<any>>) => {
     const filelist = info.fileList.map((file) => {
@@ -36,8 +36,9 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
       });
     }
     if (status === 'done') {
-      const newFiles: any[] = filelist.filter((f) => !f.error && f.url).map((m) => m.url);
-      if (onChange) onChange(newFiles[0] || '');
+      const newFiles: any[] = filelist.filter((f) => !f.error && f.url);
+      onChange?.(newFiles[0]?.url || '');
+      if (newFiles[0]?.response) dvUpload.addFile(newFiles[0].response);
     }
     setFileList(filelist);
   };
@@ -46,7 +47,7 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
     onChange(url);
     if (url) {
       const filename = url.substring(url.lastIndexOf('/') + 1).toLowerCase();
-      const fullUrl = !url.startsWith('https://') && !url.startsWith('http://') ? context.uploadAction + url : url;
+      const fullUrl = !url.startsWith('https://') && !url.startsWith('http://') ? dvUpload.uploadAction + url : url;
       setFileList([
         {
           uid: 1,
@@ -61,18 +62,13 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
     }
   };
 
-  /** 删除图片 */
-  const deleteImage = () => {
-    onChange('');
-  };
-
   return (
     <div className="bg-img" onClick={(e) => e.stopPropagation()}>
       <Input {...props} onChange={(e) => valueChange(e.target.value)} />
       <div>
         <Dragger
           accept="image/*"
-          action={context.uploadAction}
+          action={dvUpload.uploadAction}
           fileList={fileList}
           defaultFileList={fileList}
           maxCount={1}
@@ -99,7 +95,7 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
                   <Divider type="vertical" style={{ backgroundColor: 'rgba(255, 255, 255, 0.85)' }} />
                   <span
                     onClick={(e) => {
-                      deleteImage();
+                      onChange('');
                       e.stopPropagation();
                     }}
                   >

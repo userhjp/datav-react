@@ -12,6 +12,7 @@ import {
   getProjectDetail,
   getSnapshotList,
   loadSnapshotDetail,
+  removeFile,
   removeSnapshot,
   saveConfig,
 } from './../../services/datavApi';
@@ -44,6 +45,7 @@ const Design: React.FC = () => {
   const engine = useMemo(
     () =>
       createDesigner({
+        uploadAction: `${API_URL}/datav/uploadFiles?sig=appcode_test0000`,
         onPublish: async (data) => {
           const res = await saveConfig(id, data);
           if (res.code === 0) {
@@ -52,7 +54,10 @@ const Design: React.FC = () => {
               className: 'dv-message-class',
             });
           } else {
-            message.error(res.message);
+            message.error({
+              content: res.message,
+              className: 'dv-message-class',
+            });
           }
         },
         onSnapshot: async (data) => {
@@ -64,7 +69,7 @@ const Design: React.FC = () => {
             });
             engine.snapshot.addSnapshot(res.data || []);
           } else {
-            message.success({
+            message.error({
               content: res.message,
               className: 'dv-message-class',
             });
@@ -78,13 +83,16 @@ const Design: React.FC = () => {
               className: 'dv-message-class',
             });
           } else {
-            message.error(res.message);
+            message.error({
+              content: res.message,
+              className: 'dv-message-class',
+            });
           }
         },
         loadSnapshot: async (data) => {
           const res = await loadSnapshotDetail(data.id);
           if (!res.data?.config) {
-            message.success({
+            message.error({
               content: '快照被损坏或已被删除',
               className: 'dv-message-class',
             });
@@ -94,6 +102,22 @@ const Design: React.FC = () => {
         onPreview: (data) => {
           setPreviewKey(id, data);
           window.open(`/screen/${id}`);
+        },
+        removeFile: async (data) => {
+          const res = await removeFile(data.id);
+          if (res.code === 0) {
+            message.success({
+              content: '删除成功',
+              className: 'dv-message-class',
+            });
+            return true;
+          } else {
+            message.error({
+              content: res.message,
+              className: 'dv-message-class',
+            });
+            return false;
+          }
         },
       }),
     []
@@ -106,7 +130,6 @@ const Design: React.FC = () => {
 
     const fileList = await getFileList({ pagenum: 1, pagesize: 100 });
     engine.upload.setFileList(fileList.data?.list || []);
-    // let data = await getSnapshot(id);
 
     const res = await getProjectDetail(id);
     if (res.code === 0) {
@@ -128,14 +151,7 @@ const Design: React.FC = () => {
 
   return (
     <div style={{ width: '100%', height: '100%', overflow: 'hidden' }}>
-      <Designer
-        engine={engine}
-        uploadAction={`${API_URL}/datav/uploadFiles?sig=appcode_test0000`}
-        menu={widgetMenu}
-        components={{ ...components }}
-        material={[]}
-      />
-      ;
+      <Designer engine={engine} menu={widgetMenu} components={{ ...components }} material={[]} />;
     </div>
   );
 };
