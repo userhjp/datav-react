@@ -1,11 +1,10 @@
 import React, { useRef } from 'react';
-import { Checkbox, FormDrawer, FormLayout } from '@formily/antd';
+import { FormDrawer, FormLayout } from '@formily/antd';
 import { Button, Tooltip } from 'antd';
-import { ArrayField, Field, observer } from '@formily/react';
+import { ArrayField, observer } from '@formily/react';
 import { InputProps } from 'rc-input';
-import { MonacoEditor } from '../../components';
 import { DataArrayCollapse } from './DataArrayCollapse';
-import { useDataSource, useDvGlobal } from '@/datav/react/hooks';
+import { useDataSource, useDvGlobal, useVariables } from '@/datav/react/hooks';
 import { DrawerContext } from './context';
 import { GlobalColors } from './GlobalColors';
 import { IconWidget } from '@/datav/react/components';
@@ -20,6 +19,7 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
   const configForm = useRef<any>();
   const dataSource = useDataSource();
   const dvGlobal = useDvGlobal();
+  const { variables } = useVariables();
   const openSourceDrawer = () => {
     FormDrawer(
       {
@@ -49,7 +49,7 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
               </Tooltip>
             </div>
             <div className="data-source-container">
-              <DrawerContext.Provider value={{ dataSource }}>
+              <DrawerContext.Provider value={{ dataSource, variables }}>
                 <ArrayField name="sourceArray" component={[DataArrayCollapse]} />
               </DrawerContext.Provider>
             </div>

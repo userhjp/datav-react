@@ -1,11 +1,10 @@
 import { ApiRequestMethod, ApiType } from '../../../../../shared';
 import React, { useMemo } from 'react';
-import { Field, Observer, observer, useField, VoidField } from '@formily/react';
+import { Field, observer, VoidField } from '@formily/react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { MonacoEditor } from '../../../components';
-import { FormItem, Input, Select } from '@formily/antd';
+import { FormItem, Select } from '@formily/antd';
 import './index.less';
-import { useVariables } from '@/datav/react/hooks';
 
 const apiTypes = [
   {

@@ -12,7 +12,8 @@ import './index.less';
 
 export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceType }> = observer(() => {
   const field = useField<ArrayFieldType>();
-  const { dataSource } = useContext(DrawerContext);
+  const { dataSource, variables } = useContext(DrawerContext);
+
   const domRef = useRef<HTMLDivElement>();
   return (
     <div ref={domRef} className="dv-data-array-collapse">
@@ -52,7 +53,7 @@ export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceTy
                     <span> 秒一次</span>
                   </div>
                 )}
-                <ObjectField name="config" component={[DataSource]} />
+                <ObjectField name="config" component={[DataSource, { variables }]} />
                 <DataPreview config={item.config} dataSource={dataSource} />
               </ObjectField>
             </Collapse.Panel>
