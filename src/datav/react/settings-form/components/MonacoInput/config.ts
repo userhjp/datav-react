@@ -6,7 +6,9 @@ import { isArr, isObj } from '../../../../shared';
 
 export type languageType = 'plaintext' | 'html' | 'javascript' | 'json' | 'sql' | string;
 let initialized = false;
-
+export const monacoState = {
+  completion: null,
+};
 export const initMonaco = () => {
   if (initialized) return;
   loader.init().then((monaco) => {

@@ -31,7 +31,7 @@ const devConfig: Configuration & { devServer: WebpackDevServer.Configuration } =
       APP_CODE: '"cms"',
       APP_SIG: '"O7NWdk*0e9-3#Gc.iqappkey"',
       PWD_SALT: '"O7Sw0k*0e9-3#Gc.UjfT8"',
-      API_URL: '"http://localhost:3001"',
+      API_URL: '"http://47.97.189.139:3001"',
     })
   ],
 };

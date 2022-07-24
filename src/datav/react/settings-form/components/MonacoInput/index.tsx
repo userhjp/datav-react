@@ -3,7 +3,7 @@ import Editor, { EditorProps, loader } from '@monaco-editor/react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import { parseExpression, parse } from '@babel/parser';
 import { format, formatDocument } from './format';
-import { defaultOpts, handleCodeInput, handleInputCode, initMonaco } from './config';
+import { defaultOpts, handleCodeInput, handleInputCode, initMonaco, monacoState } from './config';
 import { copyText, generateUUID } from '../../../../shared';
 import { IconWidget } from '../../../components';
 import { message, Modal } from 'antd';
@@ -46,7 +46,7 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
   const validateRef = useRef(null);
   const declarationRef = useRef<string[]>([]);
   const extraLibRef = useRef<monaco.IDisposable>(null);
-  const completionRef = useRef<monaco.IDisposable>(null);
+  // const completionRef = useRef<monaco.IDisposable>(null);
   const monacoRef = useRef<Monaco>();
   const editorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
   const modalEditorRef = useRef<monaco.editor.IStandaloneCodeEditor>();
@@ -93,14 +93,14 @@ export const MonacoInput: React.FC<MonacoInputProps> & {
     if (monacoRef.current && props.completionItem?.length) {
       updatCompletion();
     }
-    return () => completionRef.current?.dispose();
+    return () => monacoState.completion?.dispose();
   }, [props.completionItem]);
 
   const updatCompletion = () => {
-    if (completionRef.current) {
-      completionRef.current.dispose();
+    if (monacoState.completion) {
+      monacoState.completion.dispose();
     }
-    completionRef.current = monacoRef.current.languages.registerCompletionItemProvider(realLanguage.current, {
+    monacoState.completion = monacoRef.current.languages.registerCompletionItemProvider(realLanguage.current, {
       triggerCharacters: [':'],
       provideCompletionItems: (model, position) => {
         return {
