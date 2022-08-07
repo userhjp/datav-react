@@ -118,7 +118,7 @@ export const pageSchema: ISchema = {
           title: '缩略图',
           'x-component': 'CutCover',
           'x-component-props': {
-            uploadAction: '/uploadCover?sig=appcode_test0000',
+            uploadAction: '/datav/uploadCover?sig=appcode_test0000',
           },
           'x-decorator': 'FormItem',
         },
