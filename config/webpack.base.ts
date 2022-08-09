@@ -53,7 +53,7 @@ export const baseConfig: Configuration = {
   output: {
     filename: '[name].[contenthash:8].js',
     chunkFilename: '[id].[contenthash:8]_async.js',
-    path: join(__dirname, '../dist'),
+    path: join(__dirname, '../dist/datav-react'),
     // pathinfo: false,
     publicPath: '/', // 输出解析文件的目录，url 相对于 HTML 页面
     assetModuleFilename: 'static/[hash][ext][query]',
