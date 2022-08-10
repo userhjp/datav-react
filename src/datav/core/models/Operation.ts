@@ -134,8 +134,8 @@ export class Operation {
   }
 
   /** 复制组件到剪贴板 */
-  copeClipboard() {
-    const node = this.findById(this.selection.last);
+  copeClipboard(id?: string) {
+    const node = this.findById(id || this.selection.last);
     if (!node) return;
     copyText(JSON.stringify(node));
     message.success({

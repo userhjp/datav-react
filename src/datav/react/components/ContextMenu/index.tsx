@@ -130,7 +130,7 @@ export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, childr
         </span>
       ),
       onClick: () => {
-        operation.copeClipboard();
+        operation.copeClipboard(com.id);
       },
     },
     {
