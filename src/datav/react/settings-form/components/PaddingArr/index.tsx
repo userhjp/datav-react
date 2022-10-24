@@ -46,7 +46,6 @@ export const PaddingArr: React.FC<InputProps & { value: number[] | ObjValType; o
         const arr = [state.top, state.right, state.bottom, state.left];
         onChange(arr);
       } else {
-        debugger;
         onChange(state);
       }
     };

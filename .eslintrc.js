@@ -62,6 +62,7 @@ module.exports = {
     'react/display-name': 0,
     'react/prop-types': 0,
     '@typescript-eslint/ban-types': 0,
-    '@typescript-eslint/no-empty-interface': 0
+    '@typescript-eslint/no-empty-interface': 0,
+    'react/no-unknown-property': 0
   },
 };

@@ -2,9 +2,9 @@ import React from 'react';
 
 export const alignLeft = (
   <svg viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200">
-    <path d="M64 64h64v896H64z" p-id="4869" />
-    <path d="M192 192h515v256H192z" p-id="4870" />
-    <path d="M192 576h768v256H192z" p-id="4871" />
+    <path d="M64 64h64v896H64z" />
+    <path d="M192 192h515v256H192z" />
+    <path d="M192 576h768v256H192z" />
   </svg>
 );
 

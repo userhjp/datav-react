@@ -138,7 +138,7 @@ export const baseConfig: Configuration = {
     new ESLintPlugin({
       fix: false,
       extensions: ['tsx', 'ts', 'js', 'json'],
-      exclude: '/node_modules/'
+      exclude: ['node_modules']
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
