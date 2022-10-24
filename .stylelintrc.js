@@ -13,7 +13,8 @@ module.exports = {
     'keyframes-name-pattern': null,
     'selector-no-vendor-prefix': null,
     'rule-empty-line-before': null,
-    'function-no-unknown': null
+    'function-no-unknown': null,
+    'import-notation': null,
   },
   ignoreFiles: ['public', 'dist', '**/*.js', '**/*.jsx', '**/*.tsx', '**/*.ts', '**/*.svg', '**/*.md', '**/*.png', '**/*.jpg', '**/*.html'],
 };

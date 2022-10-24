@@ -1,38 +1,34 @@
+@import '../../../../theme.less';
 
-  
-  @import '../../../../theme.less';
-  
-  .dv-req-data-setting {
-    .ant-select.apitype-selectd {
-      .ant-select-selector {
+.dv-req-data-setting {
+  .ant-select.apitype-selectd {
+    .ant-select-selector {
+      height: 30px;
+      line-height: 30px;
+      background-color: @input-bg-color;
+      .ant-select-selection-item {
         height: 30px;
-        line-height: 30px;
-        background-color: @input-bg-color;
-        .ant-select-selection-item {
-          height: 30px;
-          line-height: 27px;
-        }
+        line-height: 27px;
+      }
 
-        .ant-select-selection-placeholder {
-          line-height: 28px;
-        }
+      .ant-select-selection-placeholder {
+        line-height: 28px;
       }
     }
-
-    .url-info {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 4px;
-    
-      .api-help {
-        color: @color-primary;
-      }
-    }
-    
-  
-    .url-info-text {
-      margin-bottom: 10px;
-    }
-    
   }
+
+  .url-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 4px;
+
+    .api-help {
+      color: @color-primary;
+    }
+  }
+
+  .url-info-text {
+    margin-bottom: 10px;
+  }
+}

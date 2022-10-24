@@ -51,7 +51,7 @@
         border: 1px solid #3a4659;
         border-radius: 2px;
         cursor: pointer;
-        transition: all .3s;
+        transition: all 0.3s;
         &:hover {
           background-color: #1d262e;
           border: solid 1px #2196f3;
@@ -153,8 +153,6 @@
     }
   }
 
-
-
   .ant-spin-blur::after {
     display: none;
   }
@@ -166,36 +164,38 @@
     }
 
     .ant-input-clear-icon {
-      color: rgba(255,255, 255, 0.7);
+      color: rgba(255, 255, 255, 0.7);
     }
 
     .ant-formily-item-label {
-        color: #c0bfbf;
+      color: #c0bfbf;
     }
 
-    input::-webkit-input-placeholder, .ant-input-suffix, .ant-input-prefix  {
-        color: rgba(255, 255, 255, 0.3);
+    input::-webkit-input-placeholder,
+    .ant-input-suffix,
+    .ant-input-prefix {
+      color: rgba(255, 255, 255, 0.3);
     }
 
     .ant-input-affix-wrapper {
-        color: rgba(255, 255, 255, 0.85);
-        background-color: transparent;
-        border-color: #434343;
-        box-shadow: none;
-        user-select: none;
+      color: rgba(255, 255, 255, 0.85);
+      background-color: transparent;
+      border-color: #434343;
+      box-shadow: none;
+      user-select: none;
     }
     .ant-input-affix-wrapper-focused {
+      border-color: #1890ff;
+    }
+    .ant-input-affix-wrapper .ant-input,
+    .ant-input {
+      color: inherit;
+      background-color: inherit;
+      &:focus {
         border-color: #1890ff;
+      }
     }
-    .ant-input-affix-wrapper .ant-input,.ant-input {
-        color: inherit;
-        background-color: inherit;
-        &:focus {
-            border-color: #1890ff;
-        }
-    }
-}
-
+  }
 }
 .dv-message-class {
   .ant-message-notice-content {

@@ -16,7 +16,7 @@
     "strictNullChecks": false, // 严格检查空值
     "noImplicitAny": false, // 不允许隐式 any
     "strictBindCallApply": false,
-    "noEmit": true, 
+    "noEmit": true,
     "removeComments": true,
     "suppressImplicitAnyIndexErrors":false,
     "allowSyntheticDefaultImports": true,
