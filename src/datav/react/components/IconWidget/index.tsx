@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useRef } from 'react';
+import React, { createContext, ReactNode, useContext, useEffect, useRef } from 'react';
 import { isStr, isFn, isObj, isPlainObj } from '../../../shared';
 import { Tooltip, TooltipProps } from 'antd';
 import { useRegistry } from '../../hooks';
@@ -10,6 +10,7 @@ const IconContext = createContext<IconProviderProps>(null);
 
 const isNumSize = (val: any) => /^[\d.]+$/.test(val);
 export interface IconProviderProps {
+  children: ReactNode;
   tooltip?: boolean;
 }
 
@@ -17,6 +18,8 @@ export interface IShadowSVGProps {
   content?: string;
   width?: number | string;
   height?: number | string;
+  fill?: string;
+  type?: string;
 }
 export interface IIconWidgetProps extends React.HTMLAttributes<HTMLElement> {
   tooltip?: React.ReactNode | TooltipProps;
@@ -55,7 +58,7 @@ export const IconWidget: React.FC<IIconWidgetProps> & {
           viewBox: infer.props.viewBox || '0 0 1024 1024',
           focusable: 'false',
           'aria-hidden': 'true',
-        });
+        } as any);
       } else if (infer.type === 'path' || infer.type === 'g') {
         return (
           <svg viewBox="0 0 1024 1024" height={height} width={width} fill="currentColor" focusable="false" aria-hidden="true">
@@ -66,7 +69,7 @@ export const IconWidget: React.FC<IIconWidgetProps> & {
         return React.cloneElement(infer, {
           height,
           width,
-        });
+        } as any);
       }
       return infer;
     } else if (isPlainObj(infer)) {
