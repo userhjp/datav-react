@@ -15,7 +15,7 @@ export const Select = connect(
       return {
         ...props,
         className: 'datav-selectd',
-        dropdownClassName: 'datav-dropdown', // 方便重置样式
+        popupClassName: 'datav-dropdown', // 方便重置样式
         suffixIcon: field?.['loading'] || field?.['validating'] ? <IconWidget infer="Loading" /> : props.suffixIcon,
       };
     }

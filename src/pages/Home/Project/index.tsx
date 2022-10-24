@@ -144,7 +144,7 @@ const Project: React.FC = () => {
           <div>排序方式：</div>
           <Select
             defaultValue={1}
-            dropdownClassName="project-sort-select"
+            popupClassName="project-sort-select"
             onChange={(e) => {
               sotrtype.current = e;
               refresh();

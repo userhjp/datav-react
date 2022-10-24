@@ -16,7 +16,7 @@ export const DecorateSelect: React.FC = (props) => {
       open={open}
       onBlur={() => setOpen(false)}
       className="decorate-select"
-      dropdownClassName="decorate-select-dropdown"
+      popupClassName="decorate-select-dropdown"
     >
       {fieldSchema.enum.map((item: any, i) => (
         <AntdSelect.Option key={i} value={item.value} className="decorate-option">

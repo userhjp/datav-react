@@ -110,7 +110,7 @@ const RenderBgBorder: React.FC = () => {
         <Select
           value={active}
           style={{ width: '100%' }}
-          dropdownClassName="datav-dropdown"
+          popupClassName="datav-dropdown"
           onChange={(e) => {
             setActive(e);
           }}

@@ -43,7 +43,7 @@ const AddProject: React.FC<EditUserProps> = (props) => {
       bodyStyle={{ padding: 12, background: '#2a2e33' }}
       maskClosable={false}
       destroyOnClose
-      visible={state.visible}
+      open={state.visible}
       footer={false}
       onCancel={onCancel}
     >

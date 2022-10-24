@@ -189,7 +189,7 @@ export const MonacoEditor: React.FC<MonacoEditorProps> = (props) => {
         bodyStyle={{ padding: '20px', height: '90%' }}
         wrapClassName="fullscreen-editor-dialog"
         footer={null}
-        visible={isFullScreen}
+        open={isFullScreen}
         maskClosable={false}
         onCancel={() => setIsFullScreen(false)}
         afterClose={() => closedFullModal()}

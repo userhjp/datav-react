@@ -43,7 +43,7 @@ const Select: React.FC<IWidgetProps> = ({ options, events, data = [] }) => {
         onChange={setSelectd}
         style={selectStyle}
         dropdownStyle={dropdownStyle}
-        dropdownClassName="widgets-select-dropdown"
+        popupClassName="widgets-select-dropdown"
       >
         {/* {data?.map((m, i) => (
           <AntdSelect.Option key={i} value={m.value}>

@@ -58,7 +58,7 @@ const ColorSelect: React.FC<InputNumberProps & { value: number; colors: IGlobalC
           }
         }}
         onBlur={() => setOpen(false)}
-        dropdownClassName="global-colors-select-dropdown"
+        popupClassName="global-colors-select-dropdown"
       >
         <AntdSelect.OptGroup label="选择配置模板">
           {colors.map((item, i) => {

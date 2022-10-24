@@ -122,7 +122,7 @@ export const BgImg: React.FC<BgImgProps> = (props) => {
       </div>
       <Modal
         closeIcon={<IconWidget infer="Close" style={{ color: '#fff' }} />}
-        visible={showModal}
+        open={showModal}
         bodyStyle={{ padding: 12, background: '#2a2e33' }}
         footer={null}
         width={800}

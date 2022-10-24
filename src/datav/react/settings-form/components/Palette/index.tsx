@@ -93,7 +93,7 @@ const ColorSelect: React.FC<InputNumberProps & { title?: string; colors: IGlobal
           setOpen(false);
         }}
         onBlur={() => setOpen(false)}
-        dropdownClassName="palette-select-dropdown"
+        popupClassName="palette-select-dropdown"
       >
         <AntdSelect.OptGroup label="当前映射">
           <AntdSelect.Option disabled value="current">

@@ -28,9 +28,8 @@ function dataURLtoBlob(dataurl) {
   return new Blob([u8arr], { type: mime });
 }
 // 将blob转换为file
-function blobToFile(theBlob: Blob, fileName: string) {
+function blobToFile(theBlob: Blob) {
   theBlob['lastModifiedDate'] = new Date();
-  theBlob['name'] = fileName;
   return theBlob;
 }
 
@@ -100,10 +99,10 @@ export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, up
           scrollY: 0,
         });
         const base64Url = res.toDataURL('image/png', 0.8);
-        const file = blobToFile(dataURLtoBlob(base64Url), 'cover.png');
+        const file = blobToFile(dataURLtoBlob(base64Url));
         rcUpload({
           data,
-          filename: 'file',
+          filename: 'cover.png',
           file,
           action: uploadAction || dvUpload.uploadAction,
           method: 'POST',
@@ -181,7 +180,7 @@ export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, up
       </div>
       <Modal
         closeIcon={<IconWidget infer="Close" style={{ color: '#fff' }} />}
-        visible={showModal}
+        open={showModal}
         bodyStyle={{ padding: 12, background: '#2a2e33' }}
         footer={null}
         width={800}

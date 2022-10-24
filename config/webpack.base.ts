@@ -135,6 +135,11 @@ export const baseConfig: Configuration = {
   },
   plugins: [
     new Webpackbar({}),
+    new ESLintPlugin({
+      fix: false,
+      extensions: ['tsx', 'ts', 'js', 'json'],
+      exclude: '/node_modules/'
+    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       // filename: '[name].html',
@@ -161,9 +166,6 @@ export const baseConfig: Configuration = {
     // new MonacoWebpackPlugin( {
     //   languages: ['json', 'javascript', 'typescript'],
     // }),
-    new ESLintPlugin({
-      exclude: ['node_modules', 'public'],
-    })
   ],
   cache: {
     type: "filesystem", // 使用文件缓存

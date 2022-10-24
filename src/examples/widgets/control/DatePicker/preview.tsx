@@ -24,7 +24,7 @@ const DatePicker: React.FC<IWidgetProps> = ({ options, events }) => {
     <div className="widgets-date-picker">
       <AntDatePicker
         locale={locale}
-        dropdownClassName="widgets-date-picker-dropdown"
+        popupClassName="widgets-date-picker-dropdown"
         style={{ ...options.style, width: '100%' }}
         {...options.config}
         onChange={(e, dateString) => {

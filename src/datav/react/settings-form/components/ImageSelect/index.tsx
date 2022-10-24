@@ -16,7 +16,7 @@ export const ImageSelect: React.FC<SelectProps> = (props) => {
       {...props}
       onBlur={() => setOpen(false)}
       className="image-select-dropdown-menu"
-      dropdownClassName="image-select-dropdown"
+      popupClassName="image-select-dropdown"
     >
       {fieldSchema.enum.map((item: any, i) => (
         <AntdSelect.Option key={i} value={item.value}>

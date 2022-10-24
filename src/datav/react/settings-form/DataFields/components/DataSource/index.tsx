@@ -43,14 +43,14 @@ export const DataSource: React.FC<{ globalDataOptions?: any[]; variables: Record
           dataSource={[...(globalDataOptions ? [{ label: '全局数据', value: ApiType.global }] : []), ...apiTypes]}
           initialValue={ApiType.api}
           decorator={[FormItem, { style: { marginBottom: 12 } }]}
-          component={[Select, { placeholder: '请选择数据类型', dropdownClassName: 'datav-dropdown', className: 'apitype-selectd' }]}
+          component={[Select, { placeholder: '请选择数据类型', popupClassName: 'datav-dropdown', className: 'apitype-selectd' }]}
         />
         <Field
           name="globalDataId"
           title="全局数据源"
           dataSource={globalDataOptions}
           decorator={[FormItem, { style: { marginBottom: 12 } }]}
-          component={[Select, { placeholder: '请选择数据源', dropdownClassName: 'datav-dropdown', className: 'apitype-selectd' }]}
+          component={[Select, { placeholder: '请选择数据源', popupClassName: 'datav-dropdown', className: 'apitype-selectd' }]}
           reactions={(field) => {
             const apiType = field.query('.apiType').get('value');
             field.setState({
@@ -83,7 +83,7 @@ export const DataSource: React.FC<{ globalDataOptions?: any[]; variables: Record
             initialValue={ApiRequestMethod.GET}
             dataSource={apiMethods}
             decorator={[FormItem, { style: { marginBottom: 12 } }]}
-            component={[Select, { placeholder: '请选择请求方式', dropdownClassName: 'datav-dropdown', className: 'apitype-selectd' }]}
+            component={[Select, { placeholder: '请选择请求方式', popupClassName: 'datav-dropdown', className: 'apitype-selectd' }]}
           />
           <p className="url-info">
             <label className="prefix-label">URL：</label>
