@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import { IWidgetMenuData } from '../../types';
 import { message } from 'antd';
 
-export const DragItem: React.FC<IWidgetMenuData> = (props) => {
+export const DragItem: React.FC<IWidgetMenuData & { children?: React.ReactNode }> = (props) => {
   const { name, type, cover, dnConfig } = props;
   const { children, ...dragProp } = props;
   const dragRef = useRef();

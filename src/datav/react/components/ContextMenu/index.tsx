@@ -8,7 +8,7 @@ import { useOperation } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import './index.less';
 
-export const ContextMenu: React.FC<{ currentId: string }> = ({ currentId, children }) => {
+export const ContextMenu: React.FC<{ currentId: string; children: React.ReactNode }> = ({ currentId, children }) => {
   const operation = useOperation();
   const com = operation.findById(currentId);
   const currentMouseRef = useRef({ x: 0, y: 0 });

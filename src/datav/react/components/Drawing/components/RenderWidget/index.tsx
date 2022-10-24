@@ -97,7 +97,7 @@ const ConnectData: React.FC<{ node: WidgetNode; options: Record<string, any> }> 
   );
 });
 
-const Visible: React.FC<{ visible: IVisible }> = observer(({ visible, children }) => {
+const Visible: React.FC<{ visible: IVisible; children: React.ReactNode }> = observer(({ visible, children }) => {
   const dataSource = useDataSource();
   const isVisible = visible.key && dataSource.variables[visible.key] === visible.val;
   if (visible.enable && visible.renderDom) {
@@ -107,7 +107,12 @@ const Visible: React.FC<{ visible: IVisible }> = observer(({ visible, children }
   return <div />;
 });
 
-class ErrorBoundary extends React.Component<{ name: string; onError: (message: string) => void; onClear: () => void }> {
+class ErrorBoundary extends React.Component<{
+  name: string;
+  onError: (message: string) => void;
+  onClear: () => void;
+  children: React.ReactNode;
+}> {
   state = {
     hasError: false,
     errorMsg: '',

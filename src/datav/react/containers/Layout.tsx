@@ -4,7 +4,7 @@ import { IDesignerLayoutProps } from '../types';
 import { useLayout } from '../hooks/useLayout';
 import cls from 'classnames';
 
-export const Layout: React.FC<IDesignerLayoutProps> = (props) => {
+export const Layout: React.FC<IDesignerLayoutProps & { children: React.ReactNode }> = (props) => {
   const layout = useLayout();
   const ref = useRef<HTMLDivElement>();
 

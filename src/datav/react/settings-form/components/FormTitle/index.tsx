@@ -3,6 +3,7 @@ import './index.less';
 
 type FormTitleProps = {
   label: string;
+  children: React.ReactNode;
 };
 
 export const FormTitle: React.FC<FormTitleProps> = (props) => {
