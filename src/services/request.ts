@@ -83,11 +83,11 @@ instance.interceptors.response.use((res) => {
 const request = (url: string, options: API.AxiosRequest) => {
   return instance.request<any, API.Response>({
     method: 'GET',
-    baseURL: API_URL, // API_URL,
+    baseURL: process.env.API_URL,
     params: {},
     url,
     ...options,
-  });
+  } as any);
 };
 
 export { request };

@@ -45,7 +45,7 @@ const Design: React.FC = () => {
   const engine = useMemo(
     () =>
       createDesigner({
-        uploadAction: `${API_URL}/datav/uploadFiles?sig=appcode_test0000`,
+        uploadAction: `${process.env.API_URL}/datav/uploadFiles?sig=appcode_test0000`,
         onPublish: async (data) => {
           const res = await saveConfig(id, data);
           if (res.code === 0) {

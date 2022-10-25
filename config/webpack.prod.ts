@@ -1,10 +1,9 @@
   import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
   import { merge } from 'webpack-merge';
   import TerserPlugin from 'terser-webpack-plugin';
-  import { Configuration, DefinePlugin } from 'webpack';
+  import { Configuration, EnvironmentPlugin } from 'webpack';
   import { baseConfig } from './webpack.base';
-
-  process.env.NODE_ENV = 'production';
+import { environment } from './environments/environment.prod';
 
   const prodConfig: Configuration = {
     mode: 'production',
@@ -46,13 +45,7 @@
       maxEntrypointSize: 3 * 1024 * 1024,
     },
     plugins: [
-      new DefinePlugin({
-        REACT_APP_ENV: false,
-        APP_CODE: '"cms"',
-        APP_SIG: '"O7NWdk*0e9-3#Gc.iqappkey"',
-        PWD_SALT: '"O7Sw0k*0e9-3#Gc.UjfT8"',
-        API_URL: '""',
-      })
+      new EnvironmentPlugin(environment)
     ],
   };
 

@@ -24,7 +24,7 @@ function getBody(xhr: XMLHttpRequest) {
 
 export default function upload(option: UploadRequestOption<any>) {
   if (!option.action.startsWith('http://') && !option.action.startsWith('https://') && !option.action.startsWith('//')) {
-    option.action = `${API_URL}${option.action}`;
+    option.action = `${process.env.API_URL}${option.action}`;
   }
   const xhr = new XMLHttpRequest();
   if (option.onProgress && xhr.upload) {
