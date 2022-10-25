@@ -218,17 +218,19 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
         forceRender
       >
         {schema.type === 'array' ? (
-          <Tabs activeKey={activeKey} onChange={(key) => setActiveKey(key)} className="tablist-collapse-panel-tab">
-            {dataSource?.map((item, index) => {
-              const items = Array.isArray(schema.items) ? schema.items[index] : schema.items;
-              const key = `tab-${index}`;
-              return (
-                <Tabs.TabPane key={key} closable={index !== 0} tab={badgedTab(index)}>
-                  <RecursionField schema={items} name={index} />
-                </Tabs.TabPane>
-              );
+          <Tabs
+            activeKey={activeKey}
+            onChange={(key) => setActiveKey(key)}
+            className="tablist-collapse-panel-tab"
+            items={dataSource?.map((m, i) => {
+              return {
+                closable: i !== 0,
+                label: badgedTab(i),
+                key: `tab-${i}`,
+                children: <RecursionField schema={Array.isArray(schema.items) ? schema.items[i] : schema.items} name={i} />,
+              };
             })}
-          </Tabs>
+          />
         ) : (
           <>
             {schema.mapProperties((schema, name) => {

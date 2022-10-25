@@ -163,7 +163,7 @@ export const ContextMenu: React.FC<{ currentId: string; children: React.ReactNod
       overlay={<Menu items={menuList} />}
       trigger={['contextMenu']}
       overlayClassName="context-menu-weidget"
-      onVisibleChange={(e) => {
+      onOpenChange={(e) => {
         if (e) {
           currentMouseRef.current = {
             x: operation.engine.cursor.position.clientX,

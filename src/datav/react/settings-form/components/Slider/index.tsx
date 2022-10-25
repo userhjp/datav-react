@@ -16,7 +16,7 @@ export const Slider: React.FC<SliderProps> = (props) => {
   return (
     <div className="settings-slider">
       <div className="settings-slider-slider">
-        <AntdSlider min={min} max={max} step={step} tooltipVisible={tooltipVisible} {...props} />
+        <AntdSlider min={min} max={max} step={step} tooltip={{ open: tooltipVisible }} {...props} />
       </div>
       <div className="settings-slider-number">
         <InputNumber min={min} max={max} step={step} precision={precision} {...props} />

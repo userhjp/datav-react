@@ -10,8 +10,6 @@ import { useWidgets } from '../../hooks/useWidgets';
 import MaterialItem from './MaterialItem';
 import './index.less';
 
-const { TabPane } = Tabs;
-
 const icons = {
   chart: <IconWidget infer="Chart" />,
   map: <IconWidget infer="Map" />,
@@ -86,14 +84,14 @@ export const DragPanel: React.FC = observer(() => {
           onChange={() => {
             if (!toolbar.components.show) changeConfigPanel();
           }}
-        >
-          {treeData.length > 0 &&
-            treeData.map((m, i) => (
-              <TabPane tab={<RenderTab icon={m.icon} name={m.name} />} key={i}>
-                {m.name === '素材' ? <MaterialItem /> : <PreviewItem data={m.children} />}
-              </TabPane>
-            ))}
-        </Tabs>
+          items={treeData.map((m, i) => {
+            return {
+              label: <RenderTab icon={m.icon} name={m.name} />,
+              key: `item-${i}`,
+              children: m.name === '素材' ? <MaterialItem /> : <PreviewItem data={m.children} />,
+            };
+          })}
+        />
       </div>
     </div>
   );

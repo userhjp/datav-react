@@ -59,7 +59,7 @@ const ScreenSelectd: React.FC = observer(() => {
       </Dropdown>
       <IconWidget infer="MinusSquare" onClick={() => handleScaleClick(0)} style={{ fontSize: 14 }} />
       &nbsp;
-      <Slider min={0.18} max={2} step={0.01} onChange={screen.setScale} value={screen.scale} tipFormatter={null} />
+      <Slider min={0.18} max={2} step={0.01} onChange={screen.setScale} value={screen.scale} tooltip={{ formatter: null }} />
       <IconWidget infer="PlusSquare" onClick={() => handleScaleClick(1)} style={{ fontSize: 14 }} />
     </div>
   );

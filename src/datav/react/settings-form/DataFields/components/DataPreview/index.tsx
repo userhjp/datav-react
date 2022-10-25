@@ -20,7 +20,7 @@ export const DataPreview: React.FC<{ config: IDataSourceSetting; dataSource: Dat
     <Tooltip
       placement="left"
       trigger="click"
-      onVisibleChange={loadData}
+      onOpenChange={loadData}
       overlayClassName="dv-data-preview"
       title={() => {
         return (

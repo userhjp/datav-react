@@ -90,29 +90,50 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
               {currentNode && compSchema ? (
                 <>
                   <Field name="info" component={[WidgetInfo]} />
-                  <Tabs className="my-form-tab" animated={false} centered tabBarStyle={tabBarStyle}>
-                    <Tabs.TabPane key="1" tab="属性">
-                      <SchemaField
-                        key={currentNode.id}
-                        components={props.components}
-                        scope={scope}
-                        schema={{
-                          type: 'void',
-                          properties: {
-                            attr: baseAttrSchema,
-                            options: compSchema.schema,
-                          },
-                        }}
-                      />
-                    </Tabs.TabPane>
-                    <Tabs.TabPane forceRender key="2" tab="数据" className="pl_10">
-                      <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />
-                    </Tabs.TabPane>
-                    <Tabs.TabPane forceRender key="3" tab="交互" className="pl_10">
-                      <ObjectField name="events" component={[EventFields]} />
-                      <ObjectField name="visible" component={[StatusFields]} />
-                    </Tabs.TabPane>
-                  </Tabs>
+                  <Tabs
+                    className="my-form-tab"
+                    animated={false}
+                    centered
+                    tabBarStyle={tabBarStyle}
+                    items={[
+                      {
+                        className: 'pl_10',
+                        label: '属性',
+                        key: 'item-1',
+                        children: (
+                          <SchemaField
+                            key={currentNode.id}
+                            components={props.components}
+                            scope={scope}
+                            schema={{
+                              type: 'void',
+                              properties: {
+                                attr: baseAttrSchema,
+                                options: compSchema.schema,
+                              },
+                            }}
+                          />
+                        ),
+                      },
+                      {
+                        className: 'pl_10',
+                        label: '数据',
+                        key: 'item-2',
+                        children: <ObjectField key={`${currentNode.id}`} name="data" component={[DataFields]} />,
+                      },
+                      {
+                        className: 'pl_10',
+                        label: '数据',
+                        key: 'item-3',
+                        children: (
+                          <>
+                            <ObjectField name="events" component={[EventFields]} />
+                            <ObjectField name="visible" component={[StatusFields]} />
+                          </>
+                        ),
+                      },
+                    ]}
+                  />
                 </>
               ) : (
                 <>

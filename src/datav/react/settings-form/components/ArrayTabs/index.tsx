@@ -51,18 +51,16 @@ export const ArrayTabs: React.FC<TabsProps> = observer((props) => {
       onChange={(key) => {
         setActiveKey(key);
       }}
+      items={dataSource?.map((m, i) => {
+        return {
+          closable: i !== 0,
+          label: badgedTab(i),
+          key: `tab-${i}`,
+          children: <RecursionField schema={Array.isArray(schema.items) ? schema.items[i] : schema.items} name={i} />,
+        };
+      })}
       // type="editable-card"
       // onEdit={onEdit}
-    >
-      {dataSource?.map((item, index) => {
-        const items = Array.isArray(schema.items) ? schema.items[index] : schema.items;
-        const key = `tab-${index}`;
-        return (
-          <Tabs.TabPane key={key} closable={index !== 0} tab={badgedTab(index)}>
-            <RecursionField schema={items} name={index} />
-          </Tabs.TabPane>
-        );
-      })}
-    </Tabs>
+    />
   );
 });
