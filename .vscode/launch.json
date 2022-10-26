@@ -11,7 +11,6 @@
       ],
       // "args": ["${workspaceFolder}/config/devServer.ts"],
       "cwd": "${workspaceFolder}",
-      "protocol": "inspector",
       "env": {
         "NODE_ENV": "development",
         "TS_NODE_PROJECT": "${workspaceFolder}/tsconfig.json"
