@@ -125,23 +125,25 @@ const Design: React.FC = () => {
 
   const initData = async () => {
     engine.toolbar.addLoading();
-    const snapshot = await getSnapshotList(id);
-    engine.snapshot.setInitialValue(snapshot.data || []);
+    try {
+      const snapshot = await getSnapshotList(id);
+      engine.snapshot.setInitialValue(snapshot.data || []);
 
-    const fileList = await getFileList({ pagenum: 1, pagesize: 100 });
-    engine.upload.setFileList(fileList.data?.list || []);
+      const fileList = await getFileList({ pagenum: 1, pagesize: 100 });
+      engine.upload.setFileList(fileList.data?.list || []);
 
-    const res = await getProjectDetail(id);
-    if (res.code === 0) {
-      const data = res.data || null;
-      if (data) {
-        engine.setInitialValue(data.config);
-        engine.screen.title = data.title;
-        engine.screen.id = id;
+      const res = await getProjectDetail(id);
+      if (res.code === 0) {
+        const data = res.data || null;
+        if (data) {
+          engine.setInitialValue(data.config);
+          engine.screen.title = data.title;
+          engine.screen.id = id;
+        }
+      } else {
+        message.error(res.message);
       }
-    } else {
-      message.error(res.message);
-    }
+    } catch (error) {}
     engine.toolbar.removeLoading();
   };
 

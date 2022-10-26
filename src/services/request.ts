@@ -43,7 +43,7 @@ const errorHandler = (error: any) => {
   }
   return {
     data: null,
-    code: response.status,
+    code: -1,
     message,
   };
 };

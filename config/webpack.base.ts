@@ -137,6 +137,7 @@ export const baseConfig: Configuration = {
     new Webpackbar({}),
     new ESLintPlugin({
       fix: false,
+      emitWarning: false,
       extensions: ['tsx', 'ts', 'js', 'json'],
       exclude: ['node_modules']
     }),
