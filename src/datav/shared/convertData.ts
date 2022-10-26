@@ -18,7 +18,7 @@ export const checkDataType = (dataType: IDataType, data: any) => {
   return typeof data === dataType;
 };
 
-export const mapObject = (obj: Record<string, any>, fieldMap: Record<string, string>, isOriginal = true) => {
+export const mapObject = (obj: Record<string, any>, fieldMap: Record<string, string>) => {
   if (!fieldMap || !Object.keys(fieldMap).length) return obj;
   const c_obj = Object.create({ ...obj });
   Object.entries(fieldMap).forEach(([key, map]) => (c_obj[key] = obj[map] ?? obj[key] ?? null));

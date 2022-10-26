@@ -1,9 +1,8 @@
-import { WidgetNode } from '@/datav/core';
 import { Observer } from '@formily/react';
-import { Dropdown, Menu, message } from 'antd';
+import { Dropdown, Menu } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import React, { useRef } from 'react';
-import { copyText, generateUUID, MoveSortType } from '../../../shared';
+import { MoveSortType } from '../../../shared';
 import { useOperation } from '../../hooks';
 import { IconWidget } from '../IconWidget';
 import './index.less';

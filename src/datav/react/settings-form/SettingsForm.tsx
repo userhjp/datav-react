@@ -123,7 +123,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
                       },
                       {
                         className: 'pl_10',
-                        label: '数据',
+                        label: '事件',
                         key: 'item-3',
                         children: (
                           <>
