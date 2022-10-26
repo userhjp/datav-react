@@ -7,7 +7,7 @@ import { useDataSource } from './useDataSource';
  * 组件事件Hook
  * @param event 事件配置
  * @param data 数据对象
- * @param monitor 是否自动监听依赖数据更新
+ * @param monitor 是否监听依赖数据更新 默认 true
  */
 export const useDatavEvent = (event: IChangedEvent, data: Record<string, any>, monitor = true) => {
   const dataSource = useDataSource();
