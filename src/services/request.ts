@@ -1,6 +1,6 @@
 import { getTokenStorage, sigEncryption } from '@/utils';
 import { message, notification } from 'antd';
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { API } from './typings';
 
 const codeMessage = {
@@ -80,14 +80,15 @@ instance.interceptors.response.use((res) => {
   return data;
 }, errorHandler);
 
-const request = (url: string, options: API.AxiosRequest) => {
-  return instance.request<any, API.Response>({
+const request = async (url: string, options: AxiosRequestConfig) => {
+  const res = await instance.request<API.Response>({
     method: 'GET',
     baseURL: process.env.API_URL,
     params: {},
     url,
     ...options,
-  } as any);
+  });
+  return res.data;
 };
 
 export { request };

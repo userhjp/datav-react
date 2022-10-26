@@ -7,18 +7,4 @@ declare namespace API {
     message: string;
     [key: string]: any;
   };
-
-  type AxiosRequest = {
-    method?: Method;
-    headers?: any;
-    params?: any;
-    data?: any;
-    responseType?: ResponseType;
-    socketPath?: string | null;
-    cancelToken?: CancelToken;
-    paramsSerializer?: (params: any) => string;
-    onUploadProgress?: (progressEvent: any) => void;
-    onDownloadProgress?: (progressEvent: any) => void;
-    validateStatus?: ((status: number) => boolean) | null;
-  };
 }
