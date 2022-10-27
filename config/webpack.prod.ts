@@ -25,17 +25,17 @@
             chunks: 'all',
             minChunks: 2,
           },
-          antd: {  // 将react 单独打包成一个 vendor[hash].js chunks
-            test: /[\\/]node_modules[\\/]antd[\\/]/,
-            name: 'vendor_antd',
-            chunks: 'all',
-          },
-          datav: {
-            test: /[\\/]src[\\/]datav[\\/]/,
-            name: 'datav',
-            chunks: 'all',
-            minChunks: 1,
-          },
+          // vendor: {  // 将react 单独打包成一个 vendor[hash].js chunks
+          //   test: /[\\/]src[\\/]datav[\\/]/,
+          //   name: 'vendor',
+          //   chunks: 'all',
+          // },
+          // antd: {  // 将react 单独打包成一个 vendor[hash].js chunks
+          //   test: /[\\/]node_modules[\\/]antd[\\/]/,
+          //   name: 'vendor_antd',
+          //   chunks: 'all',
+          //   priority: 99,
+          // },
       //     utils: { //拆分指定文件
       //       test: /(src\/utils\/index.ts)$/,
       //       name: 'utils~lib',

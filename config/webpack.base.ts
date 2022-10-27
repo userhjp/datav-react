@@ -24,9 +24,10 @@ const lessLoadder = {
 };
 const commonCssLoader = (cssModules: boolean) => {
   const cssLoader = [
-    process.env.NODE_ENV == 'production' ?
-    { loader: MiniCssExtractPlugin.loader }:
-    { loader: 'style-loader' },
+    // process.env.NODE_ENV == 'production' ?
+    // { loader: MiniCssExtractPlugin.loader }:
+    // { loader: 'style-loader' },
+    { loader: MiniCssExtractPlugin.loader },
     {
       loader: 'css-loader',
       options: {
