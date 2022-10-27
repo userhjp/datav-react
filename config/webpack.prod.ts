@@ -3,7 +3,7 @@
   import TerserPlugin from 'terser-webpack-plugin';
   import { Configuration, EnvironmentPlugin } from 'webpack';
   import { baseConfig } from './webpack.base';
-import { environment } from './environments/environment.prod';
+  import { environment } from './environments/environment.prod';
 
   const prodConfig: Configuration = {
     mode: 'production',
@@ -25,6 +25,11 @@ import { environment } from './environments/environment.prod';
             chunks: 'all',
             minChunks: 2,
           },
+          datav: {
+            test: /[\\/]src[\\/]datav[\\/]index[\\/]/,
+            name: 'datav',
+            chunks: 'all',
+          },
       //     utils: { //拆分指定文件
       //       test: /(src\/utils\/index.ts)$/,
       //       name: 'utils~lib',
@@ -42,7 +47,7 @@ import { environment } from './environments/environment.prod';
     performance: {
       hints: 'warning',
       maxAssetSize: 5 * 1024 * 1024,
-      maxEntrypointSize: 3 * 1024 * 1024,
+      maxEntrypointSize: 4 * 1024 * 1024,
     },
     plugins: [
       new EnvironmentPlugin(environment)

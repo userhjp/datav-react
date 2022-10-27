@@ -5,8 +5,7 @@ import Autoprefixer from 'autoprefixer';
 import Webpackbar from 'webpackbar';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 // import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
-import { Configuration } from 'webpack';
-import ESLintPlugin from 'eslint-webpack-plugin';
+import { Configuration, DllReferencePlugin } from 'webpack';
 
 const lessLoadder = {
   loader: 'less-loader',
@@ -20,7 +19,6 @@ const lessLoadder = {
     }
   }
 };
-
 const commonCssLoader = (cssModules: boolean) => {
   const cssLoader = [
     process.env.NODE_ENV == 'production' ?
@@ -42,10 +40,11 @@ const commonCssLoader = (cssModules: boolean) => {
           plugins: [Autoprefixer()],
         }
       },
-    },
+    }
   ]
   return cssLoader;
 };
+
 export const baseConfig: Configuration = {
   entry: {
     main: './src/app.tsx',
@@ -129,18 +128,7 @@ export const baseConfig: Configuration = {
       '@': resolve(__dirname, '../src/'),
     },
   },
-  performance: {
-    maxAssetSize: 400000,
-    maxEntrypointSize: 400000
-  },
   plugins: [
-    new Webpackbar({}),
-    new ESLintPlugin({
-      fix: false,
-      emitWarning: false,
-      extensions: ['tsx', 'ts', 'js', 'json'],
-      exclude: ['node_modules']
-    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       // filename: '[name].html',
@@ -164,6 +152,10 @@ export const baseConfig: Configuration = {
         }
       ]
     }),
+    // new DllReferencePlugin({
+    //   context: resolve(__dirname, '../'),
+    //   manifest: resolve(__dirname, '../node_modules/.dll/[name].manifest.json'),
+    // }),
     // new MonacoWebpackPlugin( {
     //   languages: ['json', 'javascript', 'typescript'],
     // }),

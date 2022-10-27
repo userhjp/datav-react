@@ -3,6 +3,7 @@ import { Configuration, EnvironmentPlugin } from 'webpack';
 import { baseConfig } from './webpack.base';
 import WebpackDevServer from 'webpack-dev-server';
 import { environment } from './environments/environment.prod';
+import ESLintPlugin from 'eslint-webpack-plugin';
 
 const devConfig: Configuration & { devServer: WebpackDevServer.Configuration } = {
   mode: 'development',
@@ -25,6 +26,12 @@ const devConfig: Configuration & { devServer: WebpackDevServer.Configuration } =
     chunkIds: 'named',
   },
   plugins: [
+    new ESLintPlugin({
+      fix: false,
+      emitWarning: false,
+      extensions: ['tsx', 'ts', 'js', 'json'],
+      exclude: ['node_modules']
+    }),
     new EnvironmentPlugin(environment)
   ],
 };
