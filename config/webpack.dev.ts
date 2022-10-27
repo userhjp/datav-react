@@ -36,4 +36,4 @@ const devConfig: Configuration & { devServer: WebpackDevServer.Configuration } =
   ],
 };
 
-export default merge<Configuration>(baseConfig, devConfig);
+export default merge<Configuration>(baseConfig('development'), devConfig);

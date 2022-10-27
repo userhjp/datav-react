@@ -43,7 +43,7 @@ export const SingleImgSchema: ISchema = {
           },
         },
       },
-      default: '/images/main-img.png',
+      default: '/static/images/main-img.png',
     },
     svg: {
       type: 'string',
@@ -69,7 +69,7 @@ export const SingleImgSchema: ISchema = {
           },
         },
       },
-      default: '/images/datav.svg',
+      default: '/static/images/datav.svg',
     },
     svgColor: {
       title: '填充色',

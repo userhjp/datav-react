@@ -19,7 +19,7 @@ export const FullScreenSchema: ISchema = {
         placeholder: '输入图片地址',
         prefix: "{{icon('Link')}}",
       },
-      default: '/images/fullscreen.svg',
+      default: '/static/images/fullscreen.svg',
     },
     exitFullScreen: {
       type: 'string',
@@ -30,7 +30,7 @@ export const FullScreenSchema: ISchema = {
         placeholder: '输入图片地址',
         prefix: "{{icon('Link')}}",
       },
-      default: '/images/fullscreen-exit.svg',
+      default: '/static/images/fullscreen-exit.svg',
     },
     backgroundColor: {
       type: 'string',

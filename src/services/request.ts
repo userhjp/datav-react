@@ -1,8 +1,12 @@
 import { getTokenStorage, sigEncryption } from '@/utils';
 import { message, notification } from 'antd';
 import axios, { AxiosRequestConfig } from 'axios';
-import { API } from './typings';
-
+interface APIResponse {
+  code: number;
+  data: any;
+  message: string;
+  [key: string]: any;
+}
 const codeMessage = {
   200: '服务器成功返回请求的数据。',
   201: '新建或修改数据成功。',
@@ -81,14 +85,14 @@ instance.interceptors.response.use((res) => {
 }, errorHandler);
 
 const request = async (url: string, options: AxiosRequestConfig) => {
-  const res = await instance.request<API.Response>({
+  const res = await instance.request<APIResponse>({
     method: 'GET',
     baseURL: process.env.API_URL,
     params: {},
     url,
     ...options,
   });
-  return res.data;
+  return res;
 };
 
 export { request };

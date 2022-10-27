@@ -6,7 +6,7 @@ export const BaseRadar = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '图表.雷达图.基础雷达图',
-    cover: '/menuCover/图表/雷达图/基础雷达图.png',
+    cover: '/static/menuCover/图表/雷达图/基础雷达图.png',
     w: 420,
     h: 260,
     schema: BaseRadarSchema,

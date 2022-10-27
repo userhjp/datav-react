@@ -3,6 +3,7 @@
   import TerserPlugin from 'terser-webpack-plugin';
   import { Configuration, EnvironmentPlugin } from 'webpack';
   import { baseConfig } from './webpack.base';
+  import MiniCssExtractPlugin from 'mini-css-extract-plugin';
   import { environment } from './environments/environment.prod';
 
   const prodConfig: Configuration = {
@@ -13,9 +14,13 @@
         new CssMinimizerPlugin(),
         new TerserPlugin({
           exclude: /\.html$/,
+          parallel: true,
           extractComments: false, // 将注释提取到单独的文件中
         }),
       ],
+      runtimeChunk: {
+        name: (entrypoint) => `runtime-${entrypoint.name}`,
+      },
       splitChunks: {
         chunks: 'all',
         name: false,
@@ -30,22 +35,7 @@
           //   name: 'vendor',
           //   chunks: 'all',
           // },
-          // antd: {  // 将react 单独打包成一个 vendor[hash].js chunks
-          //   test: /[\\/]node_modules[\\/]antd[\\/]/,
-          //   name: 'vendor_antd',
-          //   chunks: 'all',
-          //   priority: 99,
-          // },
-      //     utils: { //拆分指定文件
-      //       test: /(src\/utils\/index.ts)$/,
-      //       name: 'utils~lib',
-      //       chunks: 'initial',
-      //       priority: 10
-      //     }
         },
-      },
-      runtimeChunk: {
-        name: (entrypoint) => `runtime-${entrypoint.name}`,
       },
       emitOnErrors: true,
       chunkIds: 'deterministic',
@@ -56,8 +46,14 @@
       maxEntrypointSize: 4 * 1024 * 1024,
     },
     plugins: [
+      // 抽离css
+      new MiniCssExtractPlugin({
+        filename: 'css/[name].[contenthash:8].css',
+        chunkFilename: 'css/vendors_[contenthash:8].css',
+        ignoreOrder: true
+      }),
       new EnvironmentPlugin(environment)
     ],
   };
 
-  export default merge(baseConfig, prodConfig);
+  export default merge(baseConfig('production'), prodConfig);

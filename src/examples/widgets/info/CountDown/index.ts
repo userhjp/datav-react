@@ -6,7 +6,7 @@ export const CountDown = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '信息.倒计时',
-    cover: '/menuCover/信息/倒计时.png',
+    cover: '/static/menuCover/信息/倒计时.png',
     schema: CountDownSchema,
     w: 480,
     h: 150,

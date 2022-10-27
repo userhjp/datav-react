@@ -6,7 +6,7 @@ export const BaseBar = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '图表.柱状图.基础柱状图',
-    cover: '/menuCover/图表/柱状图/基础柱状图.png',
+    cover: '/static/menuCover/图表/柱状图/基础柱状图.png',
     schema: BaseBarSchema,
     data: {
       value: [

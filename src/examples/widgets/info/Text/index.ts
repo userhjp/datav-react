@@ -6,7 +6,7 @@ export const Text = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '信息.多行文本',
-    cover: '/menuCover/信息/多行文本.png',
+    cover: '/static/menuCover/信息/多行文本.png',
     sort: 2,
     schema: TextSchema,
     w: 300,

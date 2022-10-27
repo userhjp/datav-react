@@ -6,7 +6,7 @@ export const Iframe = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '媒体.Iframe',
-    cover: '/menuCover/媒体/iframe.png',
+    cover: '/static/menuCover/媒体/iframe.png',
     schema: IframeSchema,
   }
 );

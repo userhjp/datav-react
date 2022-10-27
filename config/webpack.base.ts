@@ -1,171 +1,148 @@
-import { resolve, join } from 'path';
+import { join, resolve } from 'path';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import Autoprefixer from 'autoprefixer';
 import Webpackbar from 'webpackbar';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
-// import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
-import { Configuration, DllReferencePlugin } from 'webpack';
-// import ESLintPlugin from 'eslint-webpack-plugin';
+import { Configuration } from 'webpack';
 
-const outPutPath = join(__dirname, '../dist/datav-react');
+const outputDir = resolve(__dirname, '../dist/datav-react');
 
-const lessLoadder = {
-  loader: 'less-loader',
-  options: {
-    lessOptions: {
-      // modifyVars: getThemeVariables({
-      //   // dark: true, // 开启暗黑模式
-      //   // compact: true, // 开启紧凑模式
-      // }),
-      javascriptEnabled: true
-    }
-  }
-};
-const commonCssLoader = (cssModules: boolean) => {
-  const cssLoader = [
-    // process.env.NODE_ENV == 'production' ?
-    // { loader: MiniCssExtractPlugin.loader }:
-    // { loader: 'style-loader' },
-    { loader: MiniCssExtractPlugin.loader },
-    {
-      loader: 'css-loader',
-      options: {
-        modules: cssModules ? {
-          localIdentName: '[datav]_[hash:base64:5]',
-        } : false,
-      }
-    },
-    {
-      loader: 'postcss-loader',
-      options: {
-        postcssOptions: {
-          ident: 'postcss',
-          plugins: [Autoprefixer()],
+export const baseConfig = (NODE_ENV: 'production' | 'development'): Configuration => {
+  const cssLoader = (cssModules: boolean) => {
+    return [
+      NODE_ENV == 'production' ?
+      { loader: MiniCssExtractPlugin.loader }:  // 代替 style-loader分离css
+      { loader: 'style-loader' },
+      {
+        loader: 'css-loader',
+        options: {
+          modules: cssModules ? {
+            localIdentName: '[app]_[hash:base64:5]',
+          } : false,
         }
       },
-    }
-  ]
-  return cssLoader;
-};
-
-export const baseConfig: Configuration = {
-  entry: {
-    main: './src/app.tsx',
-  },
-  output: {
-    filename: '[name].[contenthash:8].js',
-    chunkFilename: '[id].[contenthash:8]_async.js',
-    path: outPutPath,
-    // pathinfo: false,
-    publicPath: '/', // 输出解析文件的目录，url 相对于 HTML 页面
-    assetModuleFilename: 'static/[hash][ext][query]',
-    clean: true
-  },
-  stats: {
-    logging: 'warn',
-    modules: false,
-    version: false,
-    entrypoints: false,
-    builtAt: true,
-    hash: true,
-    assets: false,
-  },
-  module: {
-    rules: [
       {
-        oneOf: [
-          {
-            test: /\.tsx?$/,
-            exclude: /node_modules|public/,
-            use: {
-              loader: 'babel-loader',
-            },
-          },
-          {
-            test: /\.css$/,
-            use: [...commonCssLoader(false)]
-          },
-          {
-            test: /\.less$/,
-            resourceQuery: /css_modules/,
-            use: [
-              ...commonCssLoader(true),
-              lessLoadder,
-            ]
-          },
-          {
-            test: /\.less$/,
-            use: [
-              ...commonCssLoader(false),
-              lessLoadder,
-            ]
-          },
-          {
-            test: /\.(jpg|png|jepg|gif|svg)$/,
-            type: 'asset/resource',
-            parser: {
-              dataUrlCondition: {
-                maxSize: 8 * 1024,
+        loader: 'postcss-loader',
+        options: {
+          postcssOptions: {
+            ident: 'postcss',
+            plugins: [require('autoprefixer')],
+          }
+        },
+      },
+    ]
+  };
+
+  return {
+    entry: {
+      main: './src/app.tsx',
+    },
+    output: {
+      filename: 'js/[name].[contenthash:8].js',
+      chunkFilename: 'js/[id].[contenthash:8]_async.js',
+      path: outputDir,
+      // pathinfo: false,
+      publicPath: '/', // 输出解析文件的目录，url 相对于 HTML 页面
+      assetModuleFilename: 'static/[hash][ext][query]',
+      clean: true
+    },
+    stats: {
+      logging: 'warn',
+      modules: false,
+      version: false,
+      entrypoints: false,
+      builtAt: true,
+      hash: true,
+      assets: false,
+    },
+    module: {
+      rules: [
+        {
+          oneOf: [
+            {
+              test: /\.tsx?$/,
+              exclude: /node_modules|public/,
+              use: {
+                loader: 'babel-loader',
               },
             },
-            generator: {
-              filename: 'static/[name][ext][query]',
+            {
+              test: /\.css$/,
+              use: [...cssLoader(false)]
             },
-          },
-          {
-            test: /\.html$/,
-            loader: 'html-loader', // 解析html url路径
-            options: {
-              minimize: false
-            }
-          },
-        ],
-      },
-    ],
-  },
-  resolve: {
-    mainFiles: ['index'], // 解析目录时同时解析默认文件名
-    modules: ['node_modules'],
-    extensions: ['.tsx', '.ts', '.js'],
-    alias: {
-      '@': resolve(__dirname, '../src/'),
+            {
+              test: /\.less$/,
+              resourceQuery: /css_modules/,
+              use: [
+                ...cssLoader(true),
+                {
+                  loader: 'less-loader',
+                  options: { lessOptions: { javascriptEnabled: true } }
+                }
+              ]
+            },
+            {
+              test: /\.less$/,
+              use: [
+                ...cssLoader(false),
+                {
+                  loader: 'less-loader',
+                  options: { lessOptions: { javascriptEnabled: true } }
+                }
+              ]
+            },
+            {
+              test: /\.(jpg|png|jepg|gif|svg)$/,
+              type: 'asset/resource',
+              parser: {
+                dataUrlCondition: {
+                  maxSize: 8 * 1024,
+                },
+              },
+              generator: {
+                filename: 'static/[name][ext][query]',
+              },
+            },
+            {
+              test: /\.html$/,
+              loader: 'html-loader', // 解析html url路径
+              options: {
+                minimize: false
+              }
+            },
+          ],
+        },
+      ],
     },
-  },
-  plugins: [
-    new Webpackbar({}),
-    new HtmlWebpackPlugin({
-      template: './src/index.html',
-      // filename: '[name].html',
-      minify: {
-        collapseWhitespace: false,
-        removeComments: true,
-        removeAttributeQuotes: false,
+    resolve: {
+      mainFiles: ['index'], // 解析目录时同时解析默认文件名
+      modules: ['node_modules'],
+      extensions: ['.tsx', '.ts', '.json', '.js'],
+      alias: {
+        '@': resolve(__dirname, '../src/'),
       },
-    }),
-    // 抽离css
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css',
-      chunkFilename: 'vendors_[contenthash:8].css',
-      ignoreOrder: true
-    }),
-    new CopyWebpackPlugin({
-      patterns: [
-        {
-          from: resolve(__dirname, '../public/'),
-          to: outPutPath,
-        }
-      ]
-    }),
-    // new DllReferencePlugin({
-    //   context: resolve(__dirname, '../'),
-    //   manifest: resolve(__dirname, '../node_modules/.dll/[name].manifest.json'),
-    // }),
-    // new MonacoWebpackPlugin( {
-    //   languages: ['json', 'javascript', 'typescript'],
-    // }),
-  ],
-  cache: {
-    type: "filesystem", // 使用文件缓存
-  },
-};
+    },
+    plugins: [
+      new Webpackbar({}),
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        // filename: '[name].html',
+        favicon: './static/favicon.ico',
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: resolve(__dirname, '../static/'),
+            to: join(outputDir, '/static/'),
+          }
+        ]
+      }),
+      // new MonacoWebpackPlugin( {
+      //   languages: ['json', 'javascript', 'typescript'],
+      // }),
+    ],
+    cache: {
+      type: "filesystem", // 使用文件缓存
+    },
+  };
+}

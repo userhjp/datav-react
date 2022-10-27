@@ -6,7 +6,7 @@ export const BgBox = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '媒体.自定义背景块',
-    cover: '/menuCover/媒体/自定义背景块.png',
+    cover: '/static/menuCover/媒体/自定义背景块.png',
     schema: BgBoxSchema,
   }
 );

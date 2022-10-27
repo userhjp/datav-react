@@ -6,7 +6,7 @@ export const Select = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '控件.下拉选择器',
-    cover: '/menuCover/控件/下拉选择器.png',
+    cover: '/static/menuCover/控件/下拉选择器.png',
     schema: SelectSchema,
     h: 44,
     w: 280,

@@ -6,7 +6,6 @@
     "start": "npm run dev",
     "dev": "webpack serve --config ./config/webpack.dev.ts",
     "build": "webpack --mode=production --config ./config/webpack.prod.ts",
-    "build:dll": "webpack --config ./config/webpack.dll.ts",
     "build-batch": "webpack --mode=production --config ./config/webpack.prod.batch.ts",
     "analyze": "webpack --analyze --config ./config/webpack.prod.ts",
     "watch": "webpack --progress --watch",

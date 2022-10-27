@@ -6,7 +6,7 @@ export const Input = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '控件.输入框',
-    cover: '/menuCover/控件/输入框.png',
+    cover: '/static/menuCover/控件/输入框.png',
     schema: InputSchema,
     h: 44,
     w: 300,
