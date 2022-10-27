@@ -6,6 +6,7 @@ import Webpackbar from 'webpackbar';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 // import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin';
 import { Configuration, DllReferencePlugin } from 'webpack';
+// import ESLintPlugin from 'eslint-webpack-plugin';
 
 const lessLoadder = {
   loader: 'less-loader',
@@ -129,6 +130,7 @@ export const baseConfig: Configuration = {
     },
   },
   plugins: [
+    new Webpackbar({}),
     new HtmlWebpackPlugin({
       template: './src/index.html',
       // filename: '[name].html',
