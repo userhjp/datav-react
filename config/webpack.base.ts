@@ -8,6 +8,8 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import { Configuration, DllReferencePlugin } from 'webpack';
 // import ESLintPlugin from 'eslint-webpack-plugin';
 
+const outPutPath = join(__dirname, '../dist/datav-react');
+
 const lessLoadder = {
   loader: 'less-loader',
   options: {
@@ -53,7 +55,7 @@ export const baseConfig: Configuration = {
   output: {
     filename: '[name].[contenthash:8].js',
     chunkFilename: '[id].[contenthash:8]_async.js',
-    path: join(__dirname, '../dist/datav-react'),
+    path: outPutPath,
     // pathinfo: false,
     publicPath: '/', // 输出解析文件的目录，url 相对于 HTML 页面
     assetModuleFilename: 'static/[hash][ext][query]',
@@ -150,7 +152,7 @@ export const baseConfig: Configuration = {
       patterns: [
         {
           from: resolve(__dirname, '../public/'),
-          to: resolve(__dirname, '../dist/'),
+          to: outPutPath,
         }
       ]
     }),
