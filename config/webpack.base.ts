@@ -7,7 +7,7 @@ import { Configuration } from 'webpack';
 
 const outputDir = resolve(__dirname, '../dist/datav-react');
 
-export const baseConfig = (NODE_ENV: 'production' | 'development'): Configuration => {
+export const baseConfig = (NODE_ENV: 'production' | 'development' | 'none'): Configuration => {
   const cssLoader = (cssModules: boolean) => {
     return [
       NODE_ENV == 'production' ?
@@ -38,12 +38,11 @@ export const baseConfig = (NODE_ENV: 'production' | 'development'): Configuratio
       main: './src/app.tsx',
     },
     output: {
+      path: outputDir,
+      publicPath: '/', // 输出解析文件的目录，url 相对于 HTML 页面
       filename: 'js/[name].[contenthash:8].js',
       chunkFilename: 'js/[id].[contenthash:8]_async.js',
-      path: outputDir,
-      // pathinfo: false,
-      publicPath: '/', // 输出解析文件的目录，url 相对于 HTML 页面
-      assetModuleFilename: 'static/[hash][ext][query]',
+      assetModuleFilename: 'assets/[name][ext][query]',
       clean: true
     },
     stats: {
@@ -92,30 +91,26 @@ export const baseConfig = (NODE_ENV: 'production' | 'development'): Configuratio
               ]
             },
             {
-              test: /\.(jpg|png|jepg|gif|svg)$/,
-              type: 'asset/resource',
+              test: /\.(png|jpe?g|gif|svg)$/,
+              type: 'asset',
               parser: {
                 dataUrlCondition: {
-                  maxSize: 8 * 1024,
+                  maxSize: 4 * 1024, // 4kb
                 },
               },
-              generator: {
-                filename: 'static/[name][ext][query]',
-              },
             },
-            {
-              test: /\.html$/,
-              loader: 'html-loader', // 解析html url路径
-              options: {
-                minimize: false
-              }
-            },
+            // {
+            //   test: /\.html$/,
+            //   loader: 'html-loader', // 解析html url路径
+            //   options: {
+            //     minimize: false
+            //   }
+            // },
           ],
         },
       ],
     },
     resolve: {
-      mainFiles: ['index'], // 解析目录时同时解析默认文件名
       modules: ['node_modules'],
       extensions: ['.tsx', '.ts', '.json', '.js'],
       alias: {
@@ -125,15 +120,20 @@ export const baseConfig = (NODE_ENV: 'production' | 'development'): Configuratio
     plugins: [
       new Webpackbar({}),
       new HtmlWebpackPlugin({
-        template: './src/index.html',
-        // filename: '[name].html',
-        favicon: './static/favicon.ico',
+        template: './public/index.html',
+        favicon: './public/favicon.ico',
+        minify: {
+          collapseWhitespace: false,
+          removeComments: true,
+          removeAttributeQuotes: false,
+        },
       }),
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: resolve(__dirname, '../static/'),
-            to: join(outputDir, '/static/'),
+            from: resolve(__dirname, '../public/'),
+            to: outputDir,
+            filter: (filepath) => !filepath.match(/(favicon.ico|index.html)$/)
           }
         ]
       }),

@@ -9,6 +9,7 @@ const Design = React.lazy(() => import('@/pages/Design'));
 const routes: RouteObject[] = [
   {
     index: true,
+    path: '/',
     element: <Navigate to="visual" />,
   },
   {

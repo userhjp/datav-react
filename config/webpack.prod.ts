@@ -6,7 +6,7 @@
   import MiniCssExtractPlugin from 'mini-css-extract-plugin';
   import { environment } from './environments/environment.prod';
 
-  const prodConfig: Configuration = {
+  const Config: Configuration = {
     mode: 'production',
     devtool: false, // 'nosources-source-map',
     optimization: {
@@ -14,13 +14,9 @@
         new CssMinimizerPlugin(),
         new TerserPlugin({
           exclude: /\.html$/,
-          parallel: true,
           extractComments: false, // 将注释提取到单独的文件中
         }),
       ],
-      runtimeChunk: {
-        name: (entrypoint) => `runtime-${entrypoint.name}`,
-      },
       splitChunks: {
         chunks: 'all',
         name: false,
@@ -37,8 +33,10 @@
           // },
         },
       },
+      runtimeChunk: {
+        name: (entrypoint) => `runtime-${entrypoint.name}`,
+      },
       emitOnErrors: true,
-      chunkIds: 'deterministic',
     },
     performance: {
       hints: 'warning',
@@ -56,4 +54,4 @@
     ],
   };
 
-  export default merge(baseConfig('production'), prodConfig);
+  export default merge(baseConfig(Config.mode), Config);
