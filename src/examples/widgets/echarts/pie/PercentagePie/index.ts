@@ -6,7 +6,7 @@ export const PercentagePie = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '图表.饼图.单值百分比饼图',
-    cover: '/static/menuCover/图表/饼图/单值百分比饼图.png',
+    cover: '/menuCover/图表/饼图/单值百分比饼图.png',
     schema: PercentagePieSchema,
     data: {
       value: { text: '已完成', value: 75 },

@@ -122,9 +122,9 @@ export function removeFile(id: string) {
   });
 }
 
-// const example1 = await axios.get('/static/json/example1.json');
-// const example2 = await axios.get('/static/json/example2.json');
-// const example3 = await axios.get('/static/json/example3.json');
+// const example1 = await axios.get('/assets/json/example1.json');
+// const example2 = await axios.get('/assets/json/example2.json');
+// const example3 = await axios.get('/assets/json/example3.json');
 // return [
 //   {
 //     id: 'example1',

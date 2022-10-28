@@ -7,7 +7,7 @@ export const TextLabel = registerWidgetConfig(
   {
     taxonPath: '信息.文字标签',
     sort: 5,
-    cover: '/static/menuCover/信息/文字标签.png',
+    cover: '/menuCover/信息/文字标签.png',
     schema: TextLabelSchema,
     w: 300,
     h: 180,

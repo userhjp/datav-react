@@ -7,7 +7,7 @@ export const G2Charts = registerWidgetConfig(
   {
     taxonPath: '图表.通用图表.AntVG2自定义配置',
     sort: -1,
-    cover: '/static/menuCover/图表/通用图表/echarts_logo.png',
+    cover: '/menuCover/图表/通用图表/echarts_logo.png',
     schema: G2ChartsSchema,
     data: {
       value: [

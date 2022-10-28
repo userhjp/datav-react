@@ -1,9 +1,8 @@
 import React from 'react';
-import logo from '../assets/svg/logo.svg';
-import './VisualLayout.less';
 import { AppstoreAddOutlined, DesktopOutlined, FundProjectionScreenOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Link, NavLink } from 'react-router-dom';
 import { Outlet } from 'react-router';
+import './VisualLayout.less';
 
 const VisualLayout: React.FC = () => {
   return (
@@ -11,7 +10,7 @@ const VisualLayout: React.FC = () => {
       <div className="sidebar">
         <div>
           <div className="top">
-            <img alt="logo" className="logo" src={logo} />
+            <img alt="logo" className="logo" src={require('@/assets/svg/logo.svg')} />
             <div className="links">
               <NavLink to="/visual/project" className={(selected) => `${selected.isActive ? 'selected' : ''}`}>
                 <AppstoreAddOutlined />

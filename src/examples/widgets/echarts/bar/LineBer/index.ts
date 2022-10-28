@@ -6,7 +6,7 @@ export const LineBer = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '图表.柱状图.折线柱状图',
-    cover: '/static/menuCover/图表/柱状图/折线柱状图.png',
+    cover: '/menuCover/图表/柱状图/折线柱状图.png',
     schema: LineBerSchema,
     data: {
       value: [

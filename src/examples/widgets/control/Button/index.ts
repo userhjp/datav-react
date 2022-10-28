@@ -6,7 +6,7 @@ export const Button = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '控件.按钮',
-    cover: '/static/menuCover/控件/按钮.png',
+    cover: '/menuCover/控件/按钮.png',
     schema: ButtonSchema,
     h: 44,
     w: 200,

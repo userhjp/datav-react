@@ -6,7 +6,7 @@ export const Timer = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '信息.时间器',
-    cover: '/static/menuCover/信息/时间器.png',
+    cover: '/menuCover/信息/时间器.png',
     schema: TimerSchema,
     w: 300,
     h: 56,

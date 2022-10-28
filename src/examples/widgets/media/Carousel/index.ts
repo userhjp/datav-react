@@ -6,14 +6,14 @@ export const Carousel = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '媒体.轮播图',
-    cover: '/static/menuCover/媒体/轮播图.png',
+    cover: '/menuCover/媒体/轮播图.png',
     schema: CarouselSchema,
     data: {
       value: [
-        { imgurl: '/static/images/main-img.png', herf: 'https://www.baidu.com' },
-        { imgurl: '/static/images/main-img.png', herf: 'https://www.baidu.com' },
-        { imgurl: '/static/images/main-img.png', herf: 'https://www.baidu.com' },
-        { imgurl: '/static/images/main-img.png', herf: 'https://www.baidu.com' },
+        { imgurl: '/images/main-img.png', herf: 'https://www.baidu.com' },
+        { imgurl: '/images/main-img.png', herf: 'https://www.baidu.com' },
+        { imgurl: '/images/main-img.png', herf: 'https://www.baidu.com' },
+        { imgurl: '/images/main-img.png', herf: 'https://www.baidu.com' },
       ],
       fields: {
         imgurl: '图片链接地址',

@@ -6,7 +6,7 @@ export const SingleImg = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '媒体.单张图片',
-    cover: '/static/menuCover/媒体/单张图片.png',
+    cover: '/menuCover/媒体/单张图片.png',
     schema: SingleImgSchema,
   }
 );

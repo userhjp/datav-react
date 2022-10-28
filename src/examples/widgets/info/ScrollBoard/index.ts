@@ -6,7 +6,7 @@ export const ScrollBoard = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '信息.轮播列表',
-    cover: '/static/menuCover/信息/轮播列表.png',
+    cover: '/menuCover/信息/轮播列表.png',
     sort: 3,
     schema: ScrollBoardSchema,
     w: 320,

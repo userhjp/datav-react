@@ -6,7 +6,7 @@ export const DatePicker = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '控件.日期选择框',
-    cover: '/static/menuCover/控件/日期选择框.png',
+    cover: '/menuCover/控件/日期选择框.png',
     schema: DatePickerSchema,
     h: 44,
     w: 300,

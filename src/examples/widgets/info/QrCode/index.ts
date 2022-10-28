@@ -6,7 +6,7 @@ export const QrCode = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '信息.二维码',
-    cover: '/static/menuCover/信息/二维码.png',
+    cover: '/menuCover/信息/二维码.png',
     schema: QrCodeSchema,
     w: 200,
     h: 200,

@@ -6,7 +6,7 @@ export const Trend = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '信息.业务指标趋势',
-    cover: '/static/menuCover/信息/业务指标趋势.png',
+    cover: '/menuCover/信息/业务指标趋势.png',
     schema: TrendSchema,
     w: 240,
     h: 80,

@@ -6,7 +6,7 @@ export const ZebraBar = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '图表.柱状图.斑马柱状图',
-    cover: '/static/menuCover/图表/柱状图/斑马柱状图.png',
+    cover: '/menuCover/图表/柱状图/斑马柱状图.png',
     schema: ZebraBarSchema,
     data: {
       value: [

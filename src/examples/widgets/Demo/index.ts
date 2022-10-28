@@ -6,7 +6,7 @@ export const Demo = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '图表.通用图表.测试组件',
-    cover: '/static/menuCover/图表/通用图表/echarts_logo.png',
+    cover: '/menuCover/图表/通用图表/echarts_logo.png',
     schema: DemoSchema,
     data: {
       value: { title: '标题', value: 23 },

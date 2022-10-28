@@ -6,7 +6,7 @@ export const BaseFunnel = registerWidgetConfig(
   React.lazy(() => import('./preview')),
   {
     taxonPath: '图表.其他.漏斗图',
-    cover: '/static/menuCover/图表/其他/漏斗图.png',
+    cover: '/menuCover/图表/其他/漏斗图.png',
     schema: BaseFunnelSchema,
     w: 410,
     h: 280,
