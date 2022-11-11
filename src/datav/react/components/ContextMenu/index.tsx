@@ -159,7 +159,7 @@ export const ContextMenu: React.FC<{ currentId: string; children: React.ReactNod
   return (
     <Dropdown
       destroyPopupOnHide
-      overlay={<Menu items={menuList} />}
+      menu={{ items: menuList }}
       trigger={['contextMenu']}
       overlayClassName="context-menu-weidget"
       onOpenChange={(e) => {

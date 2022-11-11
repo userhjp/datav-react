@@ -171,7 +171,7 @@ const DvError: React.FC = observer(() => {
           </div>
         </Tooltip>
       ) : (
-        <Dropdown overlay={<Menu items={menuList} />} getPopupContainer={() => domRef.current}>
+        <Dropdown menu={{ items: menuList }} getPopupContainer={() => domRef.current}>
           <div className="head-btn" onClick={() => {}}>
             <Badge dot>
               <IconWidget infer="Warning" style={{ color: '#fff', fontSize: 15 }} />

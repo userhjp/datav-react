@@ -1,7 +1,7 @@
 import { ISnapshot } from '@/datav/core/models/Snapshot';
 import { formatDate } from '@/utils';
 import { observer } from '@formily/react';
-import { Dropdown, Menu, Modal } from 'antd';
+import { Dropdown, Menu, MenuProps, Modal } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import React, { useRef } from 'react';
@@ -39,7 +39,7 @@ export const Snapshot: React.FC = observer(() => {
     });
   };
 
-  const menuList: ItemType[] = snapshot.snapshotList.map((item) => {
+  const menuList = snapshot.snapshotList.map((item) => {
     return {
       key: item.id,
       label: (
@@ -55,15 +55,15 @@ export const Snapshot: React.FC = observer(() => {
     };
   });
 
-  const noData: ItemType[] = [
+  const noData = [
     {
-      key: 'nodata',
       label: <div style={{ padding: 0, fontSize: 12 }}>暂无快照</div>,
+      key: 'nodata',
     },
   ];
   return (
     <div ref={domRef} className="dv-snapshot-container">
-      <Dropdown overlay={<Menu items={menuList.length ? menuList : noData} />} getPopupContainer={() => domRef.current}>
+      <Dropdown menu={{ items: menuList.length ? menuList : noData }} getPopupContainer={() => domRef.current}>
         <div className="head-btn" style={{ width: 14, display: 'flex', alignItems: 'center', justifyContent: 'center' }} onClick={() => {}}>
           <IconWidget infer="Expand" style={{ color: '#fff', fontSize: 10, paddingBottom: 2 }} />
         </div>

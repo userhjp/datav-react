@@ -37,21 +37,18 @@ const ScreenSelectd: React.FC = observer(() => {
       screen.setScale(+val);
     }
   };
-  const renderMenu = () => {
-    return (
-      <Menu>
-        {menus.map((item, i) => (
-          <Menu.Item key={i} danger onClick={() => handleChange(item.value)}>
-            {item.label}
-          </Menu.Item>
-        ))}
-      </Menu>
-    );
-  };
+
+  const menuList = menus.map((item, i) => {
+    return {
+      key: `item-${i}`,
+      danger: true,
+      label: <div onClick={() => handleChange(item.value)}>{item.label}</div>,
+    };
+  });
 
   return (
     <div className="screen-selectd">
-      <Dropdown overlay={renderMenu} overlayClassName="screen-selectd-dropdown" trigger={['click']}>
+      <Dropdown menu={{ items: menuList }} overlayClassName="screen-selectd-dropdown" trigger={['click']}>
         <span className="dropdown">
           {`${Math.round(screen.scale * 100)}%`}&nbsp;
           <IconWidget infer="Expand" style={{ fontSize: 10 }} />

@@ -72,7 +72,7 @@ const ConnectData: React.FC<{ node: WidgetNode; options: Record<string, any> }> 
   };
 
   useEffect(() => {
-    if (!node.data) return null;
+    if (!node.data) return () => {};
     const dvdata = new DvData({
       dataSource,
       id: node.id,
