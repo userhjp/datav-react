@@ -138,9 +138,9 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
               ) : (
                 <>
                   {selected.length > 1 ? (
-                    <SchemaField schema={layoutSchema} components={props.components} scope={scope} />
+                    <SchemaField key={'layout-schema'} schema={layoutSchema} components={props.components} scope={scope} />
                   ) : (
-                    <SchemaField schema={pageSchema} components={props.components} scope={scope} />
+                    <SchemaField key={'page-schema'} schema={pageSchema} components={props.components} scope={scope} />
                   )}
                 </>
               )}

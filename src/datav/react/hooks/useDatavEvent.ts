@@ -29,7 +29,9 @@ export const useDatavEvent = (event: IChangedEvent, data: Record<string, any>, m
     dataSource.setVariables(obj);
   };
 
-  useEffect(() => monitor && updateVariables(), [data, event.fields]);
+  useEffect(() => {
+    monitor && updateVariables();
+  }, [data, event.fields]);
 
   useEffect(() => {
     const dispose = monitor && observe(event, () => updateVariables());
