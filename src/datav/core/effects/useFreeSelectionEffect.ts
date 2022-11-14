@@ -41,6 +41,6 @@ export const useFreeSelectionEffect = (engine: Engine) => {
       }
     });
     engine.operation.selection.batchSafeSelect(selectedId);
-    // engine.cursor.setType(CursorType.Normal);
+    engine.cursor.setType(CursorType.Normal);
   });
 };
