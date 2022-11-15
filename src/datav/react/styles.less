@@ -111,6 +111,7 @@
   .ant-input-number,
   .ant-input-number-input-wrap,
   .ant-input-number-handler-down,
+  .ant-input-number:hover:not(.ant-input-number-borderless) .ant-input-number-handler-down,
   .ant-input-group-addon,
   .ant-checkbox-inner,
   .ant-select .ant-select-selector,
@@ -224,6 +225,9 @@
 
   .ant-input-number-handler {
     border-left-color: @m-input-border-color;
+    &:active {
+      background: transparent;
+    }
   }
 
   .ant-select {

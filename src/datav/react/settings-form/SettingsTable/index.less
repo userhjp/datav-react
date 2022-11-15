@@ -1,0 +1,28 @@
+  // 样式重置----------------------------------------------
+  .my-form-tab {
+    .ant-tabs-content-holder .ant-tabs-tabpane {
+      padding: 0 10px 0 20px;
+    }
+    & > .ant-tabs-nav > .ant-tabs-nav-wrap {
+      & > .ant-tabs-nav-list {
+        width: 100%;
+        .ant-tabs-tab {
+          flex: 1;
+          justify-content: center;
+        }
+      }
+    }
+
+    & > .ant-tabs-nav > .ant-tabs-nav-operations {
+      display: none;
+    }
+
+    & > .ant-tabs-content-holder {
+      padding-bottom: 30px;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 0;
+      }
+    }
+  }

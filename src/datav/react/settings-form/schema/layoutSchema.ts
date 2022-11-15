@@ -12,7 +12,7 @@ export const layoutSchema: ISchema = {
       },
       properties: {
         layout: {
-          type: 'number',
+          type: 'void',
           title: '组件对齐',
           default: ZoomMode.auto,
           'x-decorator': 'FormItem',

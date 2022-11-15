@@ -2,13 +2,13 @@ import React from 'react';
 import { ObjectField as ObjectFieldType } from '@formily/core';
 import { Field, ObjectField, observer, useField } from '@formily/react';
 import { Checkbox } from '@formily/antd';
-import { MonacoEditor, BlurInput, SettingsEmpty } from '../components';
+import { MonacoEditor, BlurInput, SettingsEmpty } from '../../components';
 import { useMemo } from 'react';
-import { IDataSetting } from '../../interface';
+import { IDataSetting } from '../../../interface';
 import { InputNumber, Tooltip } from 'antd';
-import { useDataSource } from '../../hooks';
+import { useDataSource } from '../../../hooks';
 import { DataConfig, DataState } from './components';
-import { IconWidget } from '../../components';
+import { IconWidget } from '../../../components';
 import { FieldStatus } from '@/datav/shared';
 import './index.less';
 

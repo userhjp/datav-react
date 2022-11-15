@@ -4,10 +4,10 @@ import { ArrayField, Field, ObjectField, observer, useField } from '@formily/rea
 import { toArr } from '@formily/shared';
 import { Button, Checkbox, Collapse } from 'antd';
 import { useMemo } from 'react';
-import { IDataSetting, IEventField } from '../../interface';
+import { IDataSetting, IEventField } from '../../../interface';
 import { Tooltip } from 'antd';
-import { BlurInput } from '../components';
-import { IconWidget } from '../../components';
+import { BlurInput } from '../../components';
+import { IconWidget } from '../../../components';
 import { markRaw, model } from '@formily/reactive';
 import './index.less';
 

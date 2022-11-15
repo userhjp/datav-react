@@ -1,9 +1,9 @@
 import React, { useRef } from 'react';
-import { IDataSourceSetting, IFieldSetting } from '../../../../interface';
+import { IDataSourceSetting, IFieldSetting } from '../../../../../interface';
 import { Checkbox, FormDrawer, FormLayout } from '@formily/antd';
 import { Field, VoidField } from '@formily/react';
 import { Button } from 'antd';
-import { MonacoEditor } from '../../../components';
+import { MonacoEditor } from '../../../../components';
 import { FieldGrid } from '../FieldGrid';
 import { DataSource } from '../DataSource';
 import { DataPreview } from '../DataPreview';

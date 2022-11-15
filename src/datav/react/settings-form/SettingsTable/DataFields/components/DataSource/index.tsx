@@ -1,8 +1,8 @@
-import { ApiRequestMethod, ApiType } from '../../../../../shared';
+import { ApiRequestMethod, ApiType } from '../../../../../../shared';
 import React, { useMemo } from 'react';
 import { Field, observer, VoidField } from '@formily/react';
 import * as monaco from 'monaco-editor/esm/vs/editor/editor.api';
-import { MonacoEditor } from '../../../components';
+import { MonacoEditor } from '../../../../components';
 import { FormItem, Select } from '@formily/antd';
 import './index.less';
 

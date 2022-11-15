@@ -86,10 +86,10 @@ const AXISTYPE = {
             placeholder: '自适应',
           },
           enum: [
-            { label: '自适应', value: null },
+            { label: '自适应', value: 'auto' },
             { label: '最小值', value: 'dataMin' },
           ],
-          default: null,
+          default: 'auto',
         },
         max: {
           type: 'string',
@@ -102,10 +102,10 @@ const AXISTYPE = {
             placeholder: '自适应',
           },
           enum: [
-            { label: '自适应', value: null },
+            { label: '自适应', value: 'auto' },
             { label: '最大值', value: 'dataMax' },
           ],
-          default: null,
+          default: 'auto',
         },
       },
     },

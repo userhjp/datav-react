@@ -5,10 +5,11 @@ import React, { useContext, useRef } from 'react';
 import { Checkbox, Input } from '@formily/antd';
 import { IconWidget } from '@/datav/react/components';
 import { DataSource as DataSourceType } from '@/datav/core';
-import { DataPreview, DataSource } from '../../DataFields/components';
 import { DrawerContext } from './context';
 import { generateUUID } from '@/datav/shared';
 import './index.less';
+import { DataSource } from '../../SettingsTable/DataFields/components/DataSource';
+import { DataPreview } from '../../SettingsTable/DataFields/components';
 
 export const DataArrayCollapse: React.FC<InputProps & { dataSource: DataSourceType }> = observer(() => {
   const field = useField<ArrayFieldType>();

@@ -150,7 +150,7 @@ export class Selection {
   }
 
   clear() {
-    this.selected = [];
+    if (this.selected.length) this.selected = [];
   }
 
   get first() {

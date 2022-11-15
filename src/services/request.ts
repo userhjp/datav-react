@@ -29,6 +29,7 @@ const instance = axios.create();
 
 const errorHandler = (error: any) => {
   const { response } = error;
+  debugger;
   let message = '';
   if (response && response.status) {
     const errorText = codeMessage[response.status] || response.statusText;

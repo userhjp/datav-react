@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IDataSourceSetting } from '@/datav/react/interface';
 import { Tooltip } from 'antd';
-import { MonacoEditor } from '../../../components';
+import { MonacoEditor } from '../../../../components';
 import { IconWidget } from '@/datav/react/components';
 import { DataSource } from '@/datav/core';
 import { observer } from '@formily/react';

@@ -2,7 +2,7 @@ import { merge } from 'webpack-merge';
 import { Configuration, EnvironmentPlugin } from 'webpack';
 import { baseConfig } from './webpack.base';
 import WebpackDevServer from 'webpack-dev-server';
-import { environment } from './environments/environment.prod';
+import { environment } from './environments/environment';
 
 const Config: Configuration & { devServer: WebpackDevServer.Configuration } = {
   mode: 'development',
