@@ -26,7 +26,7 @@ export const SettingsTable: React.FC<SettingsTableProps> = observer((props) => {
   useEffect(() => {
     if (selected.length !== 1 || selected[0] === oldSelectedRef.current) return;
     oldSelectedRef.current = selected[0];
-    form.setValuesIn('component', null);
+    form.deleteValuesIn('component');
     form.clearFormGraph(`component.*`); // 回收字段模型
     const comp = currentNode ? widgets[currentNode.info.type]?.DnConfig : null;
     form.setValuesIn('component', currentNode);
