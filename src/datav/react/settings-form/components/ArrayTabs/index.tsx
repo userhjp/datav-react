@@ -11,23 +11,7 @@ export const ArrayTabs: React.FC<TabsProps> = observer((props) => {
   const [activeKey, setActiveKey] = useState('tab-0');
   const value = Array.isArray(field.value) ? field.value : [];
   const dataSource = value?.length ? value : [{}];
-  // const onEdit = (targetKey: any, type: 'add' | 'remove') => {
-  //   if (type == 'add') {
-  //     const id = dataSource.length;
-  //     if (field?.value?.length) {
-  //       field.push(null);
-  //     } else {
-  //       field.push(null, null);
-  //     }
-  //     setActiveKey(`tab-${id}`);
-  //   } else if (type == 'remove') {
-  //     const index = targetKey.match(/-(\d+)/)?.[1];
-  //     field.remove(Number(index));
-  //     if (activeKey === targetKey) {
-  //       setActiveKey(`tab-${index - 1}`);
-  //     }
-  //   }
-  // };
+
   const badgedTab = (index: number) => {
     const tab = `${field.title || 'Untitled'} ${index + 1}`;
     const path = field.address.concat(index);

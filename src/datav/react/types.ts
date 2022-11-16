@@ -44,7 +44,7 @@ export interface IWidgetMenuData {
   name: string;
   cover: string;
   type: string;
-  dnConfig?: IWidgetConfig;
+  dnConfig: IWidgetConfig;
 }
 
 export interface IWidgetMenuChildData {

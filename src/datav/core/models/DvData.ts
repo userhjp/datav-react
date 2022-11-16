@@ -1,6 +1,6 @@
 import { checkDataType, FieldStatus, getFieldMap, mapObject } from '@/datav/shared';
 import { define, observable, action, autorun, toJS } from '@formily/reactive';
-import { IDataSetting, IDataSourceSetting } from '../../react/interface';
+import { IDataSetting, IDataSourceSetting, IFieldSetting } from '../../react/interface';
 import { DataSource } from './DataSource';
 
 type IDvData = {
@@ -19,11 +19,10 @@ export class DvData {
   loading: boolean;
   data: null | Array<any> | object = null;
   metadata: null | Array<any> | object;
-
+  fieldMap: Record<string, string>;
   autoUpdate: boolean;
   updateTime: number;
   config: IDataSourceSetting;
-  fieldMap: Record<string, string>;
   fieldsStatus: Record<string, FieldStatus>;
 
   constructor(props: IDvData) {
@@ -44,6 +43,7 @@ export class DvData {
     define(this, {
       loading: observable.ref,
       data: observable.ref,
+      // fieldMap: observable.computed,
       fieldsStatus: observable,
       changeFieldsStatus: action,
     });

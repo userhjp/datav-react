@@ -49,7 +49,7 @@ export class WidgetNode {
     define(this, {
       info: observable,
       attr: observable,
-      data: observable.shallow,
+      data: observable,
       events: observable,
       options: observable,
       visible: observable,

@@ -1,9 +1,10 @@
-import { IDataSourceSetting } from '@/datav/react/interface';
+import { IDataSourceSetting, IFieldSetting } from '@/datav/react/interface';
 import { observable, define, action } from '@formily/reactive';
 import { DataSource } from './DataSource';
 import { DvData } from './DvData';
 
 type ISourceGlobal = {
+  fields?: IFieldSetting;
   enable: boolean;
   title: string;
   id: string;
@@ -71,6 +72,7 @@ export class DvGlobal {
             autoUpdate: f.autoUpdate,
             updateTime: f.updateTime,
             config: f.config,
+            fields: f.fields,
           },
         })
       );

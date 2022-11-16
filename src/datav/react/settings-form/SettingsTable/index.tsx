@@ -43,7 +43,7 @@ export const SettingsTable: React.FC<SettingsTableProps> = observer((props) => {
   if (!schema) return <></>;
 
   return (
-    <div key={oldSelectedRef.current}>
+    <div key={oldSelectedRef.current} style={{ height: '100%' }}>
       <Field basePath={field.address} name="info" component={[WidgetInfo]} />
       <Tabs
         className="my-form-tab"

@@ -102,7 +102,7 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
     return [];
   };
 
-  const switchPanel = (props: IFormCollapseProps, schema: Schema) => {
+  const SwitchPanel: React.FC<IFormCollapseProps> = observer((props) => {
     const value = getFieldValue(schema);
     const basePath = `${field.props.basePath}.${schema.name}`;
     if (value[mapSwitchKey] === undefined) {
@@ -133,9 +133,9 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
         checked={!!value[mapSwitchKey]}
       />
     );
-  };
+  });
 
-  const renderExtra = (props: IFormCollapseProps, schema: Schema) => {
+  const RenderExtra: React.FC<IFormCollapseProps> = observer((props) => {
     return Array.isArray(field.value) ? (
       <>
         {_formCollapse.hasActiveKey(schema.name) && (
@@ -153,12 +153,16 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
         )}
       </>
     ) : (
-      <>{props.switch && switchPanel(props, schema)}</>
+      <>{props.switch && <SwitchPanel {...props} />}</>
     );
-  };
+  });
 
-  const badgedTab = (index: number) => {
-    const tab = `${props.title || 'Untitled'} ${index + 1}`;
+  const BadgedTab: React.FC<{ index: number }> = ({ index }) => {
+    const tab = (
+      <span>
+        {props.title || 'Untitled'} {index + 1}
+      </span>
+    );
     const path = field.address.concat(index);
     const errors = field.form.queryFeedbacks({
       type: 'error',
@@ -212,7 +216,7 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
       <Collapse.Panel
         className={`${schema.type === 'array' ? 'tablist-collapse-panel' : ''}`}
         collapsible={props.switch && !Array.isArray(field.value) && !getFieldValue(schema)[mapSwitchKey] ? 'disabled' : null}
-        extra={renderExtra(props, schema)}
+        extra={<RenderExtra {...props} />}
         header={props.title}
         key={schema.name}
         forceRender
@@ -225,7 +229,7 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
             items={dataSource?.map((m, i) => {
               return {
                 closable: i !== 0,
-                label: badgedTab(i),
+                label: <BadgedTab index={i} />,
                 key: `tab-${i}`,
                 children: <RecursionField schema={Array.isArray(schema.items) ? schema.items[i] : schema.items} name={i} />,
               };
