@@ -104,20 +104,20 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
 
   const SwitchPanel: React.FC<IFormCollapseProps> = observer((props) => {
     const value = getFieldValue(schema);
-    const basePath = `${field.props.basePath}.${schema.name}`;
-    if (value[mapSwitchKey] === undefined) {
-      value[mapSwitchKey] = !!props.defaultSwitch;
-    }
-    if (!value[mapSwitchKey] && _formCollapse.hasActiveKey(schema.name)) {
-      _formCollapse.removeActiveKey(schema.name);
-    }
-    field.form.setFieldState(`${basePath}.*`, (state) => {
-      if (FormPath.parse('options.*.type').match((state as Field).path.entire)) {
-        state.hidden = !value[mapSwitchKey];
-      } else {
-        state.display = value[mapSwitchKey] ? 'visible' : 'none';
-      }
-    });
+    // const basePath = `${field.props.basePath}.${schema.name}`;
+    // if (value[mapSwitchKey] === undefined) {
+    //   value[mapSwitchKey] = !!props.defaultSwitch;
+    // }
+    // if (!value[mapSwitchKey] && _formCollapse.hasActiveKey(schema.name)) {
+    //   _formCollapse.removeActiveKey(schema.name);
+    // }
+    // field.form.setFieldState(`${basePath}.*`, (state) => {
+    //   if (FormPath.parse('options.*.type').match((state as Field).path.entire)) {
+    //     state.hidden = !value[mapSwitchKey];
+    //   } else {
+    //     state.display = value[mapSwitchKey] ? 'visible' : 'none';
+    //   }
+    // });
     return (
       <Switch
         onClick={(_, event) => {
