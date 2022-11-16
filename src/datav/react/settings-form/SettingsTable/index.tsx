@@ -43,7 +43,7 @@ export const SettingsTable: React.FC<SettingsTableProps> = observer((props) => {
   if (!schema) return <></>;
 
   return (
-    <div key={oldSelectedRef.current} style={{ height: '100%' }}>
+    <div style={{ height: '100%' }}>
       <Field basePath={field.address} name="info" component={[WidgetInfo]} />
       <Tabs
         className="my-form-tab"
@@ -56,23 +56,23 @@ export const SettingsTable: React.FC<SettingsTableProps> = observer((props) => {
             key: 'item-1',
             children: (
               <>
-                <RecursionField basePath={field.address} name="attr" schema={baseAttrSchema} />
-                <RecursionField basePath={field.address} name="options" schema={schema} />
+                <RecursionField key={`${oldSelectedRef.current}_attr`} basePath={field.address} name="attr" schema={baseAttrSchema} />
+                <RecursionField key={`${oldSelectedRef.current}_options`} basePath={field.address} name="options" schema={schema} />
               </>
             ),
           },
           {
             label: '数据',
             key: 'item-2',
-            children: <ObjectField name="data" component={[DataFields]} />,
+            children: <ObjectField key={`${oldSelectedRef.current}_data`} name="data" component={[DataFields]} />,
           },
           {
             label: '事件',
             key: 'item-3',
             children: (
               <>
-                <ObjectField name="events" component={[EventFields]} />
-                <ObjectField name="visible" component={[StatusFields]} />
+                <ObjectField key={`${oldSelectedRef.current}_events`} name="events" component={[EventFields]} />
+                <ObjectField key={`${oldSelectedRef.current}_visible`} name="visible" component={[StatusFields]} />
               </>
             ),
           },
