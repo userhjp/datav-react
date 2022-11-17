@@ -48,7 +48,7 @@ export const Expression: React.FC = () => {
         <div
           className={`head-btn`}
           onClick={() => {
-            valRef.current = designer.getConfig();
+            valRef.current = designer.values();
             setisModalVisible(true);
           }}
         >

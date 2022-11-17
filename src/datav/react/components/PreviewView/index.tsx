@@ -92,29 +92,29 @@ export const PreviewView: React.FC = observer(() => {
   const changePageStyle = () => {
     if (!screen) return;
     let style = {};
-    switch (screen.props.zoomMode) {
+    switch (screen.zoomMode) {
       case ZoomMode.auto:
-        style = resizeAuto(screen.props.width, screen.props.height);
+        style = resizeAuto(screen.width, screen.height);
         break;
       case ZoomMode.width:
-        style = resizeWidth(screen.props.width);
+        style = resizeWidth(screen.width);
         break;
       case ZoomMode.height:
-        style = resizeHeight(screen.props.width, screen.props.height);
+        style = resizeHeight(screen.width, screen.height);
         break;
       case ZoomMode.full:
-        style = resizeFull(screen.props.width, screen.props.height);
+        style = resizeFull(screen.width, screen.height);
         break;
       default:
         style = resizeNone();
         break;
     }
     setPageStyle({
-      backgroundColor: screen.props.backgroundColor,
-      backgroundImage: screen.props?.backgroundImg ? `url(${screen.props.backgroundImg})` : 'none',
+      backgroundColor: screen.backgroundColor,
+      backgroundImage: screen?.backgroundImg ? `url(${screen.backgroundImg})` : 'none',
       position: 'relative',
-      width: `${screen.props.width}px`,
-      height: `${screen.props.height}px`,
+      width: `${screen.width}px`,
+      height: `${screen.height}px`,
       overflow: 'hidden',
       ...style,
     });

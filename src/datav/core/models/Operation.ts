@@ -167,7 +167,7 @@ export class Operation {
   moveTo(type: IMoveType) {
     this.selection.selected.forEach((f) => {
       const comp = this.findById(f);
-      const grid = this.engine.screen.props.grid;
+      const grid = this.engine.screen.grid;
       comp.moveTo(type, grid);
     });
   }

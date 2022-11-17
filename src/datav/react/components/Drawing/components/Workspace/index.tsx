@@ -8,15 +8,12 @@ import './index.less';
 const Workspace: React.FC = observer(() => {
   const screen = useScreen();
   const designer = useDesigner();
-  const screenProps = screen.props;
   const domRef = useRef<HTMLDivElement>();
 
   const style: React.CSSProperties = {
-    background: screenProps?.backgroundImg
-      ? `url(${screenProps.backgroundImg}) 0% 0% / 100% 100% no-repeat`
-      : screenProps.backgroundColor || '#0e2a42',
-    width: screenProps.width,
-    height: screenProps.height,
+    background: screen?.backgroundImg ? `url(${screen.backgroundImg}) 0% 0% / 100% 100% no-repeat` : screen.backgroundColor || '#0e2a42',
+    width: screen.width,
+    height: screen.height,
     transform: `scale(${screen.scale})`,
   };
 
@@ -29,8 +26,8 @@ const Workspace: React.FC = observer(() => {
   };
 
   const containerStyle: React.CSSProperties = {
-    width: screenProps.width * screen.scale + 100,
-    height: screenProps.height * screen.scale + 100,
+    width: screen.width * screen.scale + 100,
+    height: screen.height * screen.scale + 100,
     position: 'absolute',
   };
 

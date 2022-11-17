@@ -31,7 +31,7 @@ export const GlobalConfig: React.FC<GlobalConfigProps & InputProps> = observer((
         width: 500,
         className: 'global-config-drawer data-settings-drawer',
         getContainer: false,
-        onClose: () => dvGlobal.setProps(configForm.current),
+        onClose: () => dvGlobal.setInitialValue(configForm.current),
       },
       (form) => {
         configForm.current = form.values;

@@ -1,13 +1,7 @@
 import { Engine } from './Engine';
 import { action, define, observable } from '@formily/reactive';
-import { ZoomMode } from '../../shared';
-import { IScreenProps } from '../../react/interface';
-
-// export enum ScreenType {
-//   PC = 'PC',
-//   Responsive = 'Responsive',
-//   Mobile = 'Mobile',
-// }
+import { generateUUID, ZoomMode } from '../../shared';
+import { IScreenProps, ScreenType } from '../../react/interface';
 
 export interface IScreen {
   props?: IScreenProps;
@@ -16,14 +10,25 @@ export interface IScreen {
 export class Screen {
   id: string;
   title: string;
-  props: IScreenProps;
   engine: Engine;
+
   scale = 1;
-  // type: ScreenType;
-  // flip = false;
+  width: number;
+  height: number;
+  backgroundColor: string;
+  backgroundImg: string;
+  grid: number;
+  zoomMode: ZoomMode;
+  type: ScreenType;
   constructor(screen: IScreen) {
-    // this.type = engine.props.defaultScreenType;
-    this.props = { ...Screen.defaultProps, ...screen?.props };
+    const props = { ...Screen.defaultProps, ...screen?.props };
+    this.id = generateUUID();
+    this.type = props.type;
+    this.width = props.width;
+    this.height = props.height;
+    this.backgroundColor = props.backgroundColor;
+    this.backgroundImg = props.backgroundImg;
+    this.zoomMode = props.zoomMode;
     this.engine = screen.engine;
     this.makeObservable();
   }
@@ -33,12 +38,28 @@ export class Screen {
       id: observable.ref,
       title: observable.ref,
       scale: observable.ref,
-      props: observable,
+      width: observable.ref,
+      height: observable.ref,
+      backgroundColor: observable.ref,
+      backgroundImg: observable.ref,
+      grid: observable.ref,
+      zoomMode: observable.ref,
       setScale: action,
       setSize: action,
-      setProps: action,
+      setInitialValue: action,
       // setFlip: action,
     });
+  }
+
+  get values() {
+    return {
+      backgroundColor: this.backgroundColor,
+      backgroundImg: this.backgroundImg,
+      grid: this.grid,
+      height: this.height,
+      width: this.width,
+      zoomMode: this.zoomMode,
+    };
   }
 
   setScale(scale: number) {
@@ -53,30 +74,27 @@ export class Screen {
 
   setSize(width?: number, height?: number) {
     if (width) {
-      this.props.width = width;
+      this.width = width;
     }
     if (height) {
-      this.props.height = height;
+      this.height = height;
     }
   }
 
-  setProps(props: IScreenProps) {
-    this.props.backgroundColor = props.backgroundColor;
-    this.props.backgroundImg = props.backgroundImg;
-    this.props.grid = props.grid;
-    this.props.height = props.height;
-    this.props.width = props.width;
-    this.props.zoomMode = props.zoomMode;
+  setInitialValue(props: IScreenProps) {
+    const assignProps = { ...Screen.defaultProps, ...props };
+    this.backgroundColor = assignProps.backgroundColor;
+    this.backgroundImg = assignProps.backgroundImg;
+    this.grid = assignProps.grid;
+    this.height = assignProps.height;
+    this.width = assignProps.width;
+    this.zoomMode = assignProps.zoomMode;
   }
 
-  // setFlip(flip: boolean) {
-  //   this.flip = flip;
-  // }
-
   static defaultProps: IScreenProps = {
+    type: ScreenType.PC,
     width: 1920,
     height: 1080,
-    // scale: 1,
     backgroundColor: '#0e2a42',
     backgroundImg: '',
     grid: 8,

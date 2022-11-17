@@ -1,5 +1,5 @@
 import { IDataSourceSetting, IFieldSetting } from '@/datav/react/interface';
-import { observable, define, action } from '@formily/reactive';
+import { observable, define, action, batch } from '@formily/reactive';
 import { DataSource } from './DataSource';
 import { DvData } from './DvData';
 
@@ -21,44 +21,39 @@ export type IDvGlobal = {
 };
 export class DvGlobal {
   dataSource: DataSource;
-  props: IDvGlobal = {
-    sourceArray: [],
-    colors: [],
-  };
+  sourceArray: ISourceGlobal[];
+  colors: Array<IGlobalColor>;
 
   constructor(dataSource: DataSource) {
-    this.props = {
-      ...DvGlobal.defaultProps,
-    };
+    this.colors = DvGlobal.defaultProps.colors;
+    this.sourceArray = DvGlobal.defaultProps.sourceArray;
     this.dataSource = dataSource;
     this.makeObservable();
-  }
-
-  get colors() {
-    return this.props.colors || [];
-  }
-
-  get sourceArray() {
-    return this.props.sourceArray || [];
   }
 
   get enableDataSources() {
     return this.sourceArray.filter((f) => f.enable).map((m) => ({ label: m.title, value: m.id }));
   }
 
+  get values() {
+    return {
+      sourceArray: this.sourceArray,
+      colors: this.colors,
+    };
+  }
+
   makeObservable() {
     define(this, {
-      props: observable,
-      colors: observable.computed,
-      sourceArray: observable.computed,
+      colors: observable,
+      sourceArray: observable,
       enableDataSources: observable.computed,
-      // setProps: action, actions内部无法通过autorun追踪依赖
+      setInitialValue: batch, // actions内部无法通过autorun追踪依赖
     });
   }
 
-  setProps(props: IDvGlobal) {
-    this.props.colors = Object.assign(this.colors, props.colors);
-    this.props.sourceArray = Object.assign(this.sourceArray, props.sourceArray);
+  setInitialValue(props: IDvGlobal) {
+    this.colors = Object.assign(this.colors, props.colors);
+    this.sourceArray = Object.assign(this.sourceArray, props.sourceArray);
     this.dataSource.globalDataMap.forEach((f) => f.destroy());
     this.dataSource.globalDataMap.clear();
     this.sourceArray.forEach((f) => {

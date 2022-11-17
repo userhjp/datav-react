@@ -75,15 +75,15 @@ export class Engine extends Event {
   setInitialValue(val: IPageType) {
     if (!val) return;
     if (val.components) this.operation.setNodes(val.components || []);
-    if (val.page) this.screen.setProps(val.page);
+    if (val.page) this.screen.setInitialValue(val.page);
     if (val.global) {
-      this.global.setProps(val.global);
+      this.global.setInitialValue(val.global);
     }
     this.viewport.autoScale();
   }
 
-  getConfig() {
-    return { page: this.screen.props, components: this.operation.components, global: this.global.props };
+  values() {
+    return { page: this.screen.values, components: this.operation.components, global: this.global.values };
   }
 
   mount() {

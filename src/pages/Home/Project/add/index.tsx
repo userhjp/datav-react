@@ -1,6 +1,6 @@
 import { _Validators } from '@/utils/validators';
-import { Button, Divider, Modal } from 'antd';
-import { Form, FormItem, Input, Select, Submit, FormGrid, FormButtonGroup } from '@formily/antd';
+import { Modal } from 'antd';
+import { Form, FormItem, Input, Submit, FormGrid, FormButtonGroup } from '@formily/antd';
 import React, { useEffect } from 'react';
 import { createForm } from '@formily/core';
 import { Field, VoidField } from '@formily/react';
@@ -39,6 +39,7 @@ const AddProject: React.FC<EditUserProps> = (props) => {
     <Modal
       wrapClassName="project-add-wrap"
       width={500}
+      forceRender
       style={{ top: '26%' }}
       maskClosable={false}
       destroyOnClose
@@ -57,12 +58,12 @@ const AddProject: React.FC<EditUserProps> = (props) => {
       >
         <Field
           name="title"
-          title="大屏名称"
+          title="数据大屏名称"
           decorator={[FormItem]}
           component={[Input, { placeholder: '请输入' }]}
           validator={{
             required: true,
-            message: '大屏名称不能为空',
+            message: '请填写数据大屏名称',
           }}
         />
         <VoidField

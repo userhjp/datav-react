@@ -106,7 +106,7 @@ export class Viewport {
   }
 
   get grid() {
-    return this.engine.screen.props.grid;
+    return this.engine.screen.grid;
   }
 
   get dragScrollXDelta() {
@@ -119,8 +119,8 @@ export class Viewport {
 
   autoScale = () => {
     if (!this.viewportElement) return;
-    const w = (this.viewportElement.clientWidth - 110) / this.engine.screen.props.width;
-    const h = (this.viewportElement.clientHeight - 110) / this.engine.screen.props.height;
+    const w = (this.viewportElement.clientWidth - 110) / this.engine.screen.width;
+    const h = (this.viewportElement.clientHeight - 110) / this.engine.screen.height;
     const num = Math.min(w, h);
     const scale = Number(num.toFixed(2));
     this.engine.screen.setScale(scale);

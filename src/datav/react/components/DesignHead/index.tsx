@@ -20,7 +20,7 @@ export const DesignHead: React.FC = observer(() => {
   const screen = useScreen();
 
   const onOperationBtn = async (type: 'publish' | 'snapshot' | 'preview' | 'help') => {
-    const pageData = screen.engine.getConfig();
+    const pageData = screen.engine.values();
     let handle: Promise<void> | void;
     screen.engine.toolbar.addLoading();
     switch (type) {

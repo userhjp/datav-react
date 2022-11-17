@@ -81,8 +81,14 @@ export interface IWidgetInfo {
   ver?: string;
 }
 
+export enum ScreenType {
+  PC = 'PC',
+  Mobile = 'Mobile',
+}
+
 /** 页面配置 */
 export interface IScreenProps {
+  type: ScreenType;
   width: number;
   height: number;
   // scale: number;

@@ -30,7 +30,7 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
       }>({
         values: observable({
           component: null,
-          pages: screen.props,
+          pages: screen,
         }),
         effects(form) {
           props.effects?.(form);
