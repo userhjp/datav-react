@@ -94,6 +94,7 @@ export interface IScreenProps {
   // scale: number;
   backgroundColor: string;
   backgroundImg: string;
+  cutCover: string;
   grid: number;
   zoomMode: ZoomMode;
 }

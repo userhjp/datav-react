@@ -102,7 +102,7 @@ export const CutCover: React.FC<CutCoverProps> = observer(({ value, onChange, up
         const file = blobToFile(dataURLtoBlob(base64Url));
         rcUpload({
           data,
-          filename: 'cover.png',
+          filename: 'file',
           file,
           action: uploadAction || dvUpload.uploadAction,
           method: 'POST',

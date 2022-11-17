@@ -17,6 +17,7 @@ export class Screen {
   height: number;
   backgroundColor: string;
   backgroundImg: string;
+  cutCover: string;
   grid: number;
   zoomMode: ZoomMode;
   type: ScreenType;
@@ -29,6 +30,7 @@ export class Screen {
     this.backgroundColor = props.backgroundColor;
     this.backgroundImg = props.backgroundImg;
     this.zoomMode = props.zoomMode;
+    this.cutCover = props.cutCover;
     this.engine = screen.engine;
     this.makeObservable();
   }
@@ -44,6 +46,7 @@ export class Screen {
       backgroundImg: observable.ref,
       grid: observable.ref,
       zoomMode: observable.ref,
+      cutCover: observable.ref,
       setScale: action,
       setSize: action,
       setInitialValue: action,
@@ -55,6 +58,7 @@ export class Screen {
     return {
       backgroundColor: this.backgroundColor,
       backgroundImg: this.backgroundImg,
+      cutCover: this.cutCover,
       grid: this.grid,
       height: this.height,
       width: this.width,
@@ -89,6 +93,7 @@ export class Screen {
     this.height = assignProps.height;
     this.width = assignProps.width;
     this.zoomMode = assignProps.zoomMode;
+    this.cutCover = assignProps.cutCover;
   }
 
   static defaultProps: IScreenProps = {
@@ -97,6 +102,7 @@ export class Screen {
     height: 1080,
     backgroundColor: '#0e2a42',
     backgroundImg: '',
+    cutCover: '',
     grid: 8,
     zoomMode: ZoomMode.auto,
   };
