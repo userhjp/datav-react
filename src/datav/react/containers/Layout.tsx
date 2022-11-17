@@ -15,7 +15,6 @@ export const Layout: React.FC<IDesignerLayoutProps & { children: React.ReactNode
       });
     }
   }, []);
-
   if (layout) {
     return <Fragment>{props.children}</Fragment>;
   }

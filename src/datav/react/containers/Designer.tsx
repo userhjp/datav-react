@@ -18,18 +18,14 @@ export const Designer: React.FC<IDesignerProps> = ({ components, engine, materia
 
   useEffect(() => {
     if (engine) {
-      if (engine && ref.current) {
-        if (engine !== ref.current) {
-          ref.current.unmount();
-        }
+      if (ref.current && engine !== ref.current) {
+        ref.current.unmount();
       }
       engine.mount();
       ref.current = engine;
     }
     return () => {
-      if (engine) {
-        engine.unmount();
-      }
+      engine && engine.unmount();
     };
   }, [engine]);
   if (pEngine) throw new Error('There can only be one Designable Engine Context in the React Tree');

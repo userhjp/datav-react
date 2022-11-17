@@ -70,34 +70,27 @@ const RosePie: React.FC<IWidgetProps> = ({ options = {}, data = [] }) => {
           emphasis: {
             show: false,
           },
-          itemStyle: {
-            normal: {
-              // borderColor: bgColor,
-              // borderWidth: 2,
-            },
-          },
+          itemStyle: {},
           ...series,
           label: {
-            normal: {
-              formatter: (params) => {
-                return '{icon|●}{name|' + params.name + '}\n{value|' + formatNumber(params.value) + '}';
+            formatter: (params) => {
+              return '{icon|●}{name|' + params.name + '}\n{value|' + formatNumber(params.value) + '}';
+            },
+            rich: {
+              icon: {
+                fontSize: 16,
+                color: 'inherit',
               },
-              rich: {
-                icon: {
-                  fontSize: 16,
-                  color: 'inherit',
-                },
-                name: {
-                  fontSize: 14,
-                  padding: [0, 0, 0, 10],
-                  color: '#fefefe',
-                },
-                value: {
-                  fontSize: 14,
-                  fontWeight: 'bolder',
-                  padding: [10, 0, 0, 20],
-                  color: 'inherit',
-                },
+              name: {
+                fontSize: 14,
+                padding: [0, 0, 0, 10],
+                color: '#fefefe',
+              },
+              value: {
+                fontSize: 14,
+                fontWeight: 'bolder',
+                padding: [10, 0, 0, 20],
+                color: 'inherit',
               },
             },
           },

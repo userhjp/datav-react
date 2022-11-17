@@ -21,7 +21,6 @@ export const baseAttrSchema: ISchema = {
             placeholder: '宽度',
             min: 0,
           },
-          default: 200,
         },
         h: {
           type: 'number',
@@ -31,7 +30,6 @@ export const baseAttrSchema: ISchema = {
             placeholder: '高度',
             min: 0,
           },
-          default: 100,
         },
       },
     },
@@ -52,7 +50,6 @@ export const baseAttrSchema: ISchema = {
           'x-component-props': {
             placeholder: '左侧距离',
           },
-          default: 0,
         },
         y: {
           type: 'number',
@@ -61,7 +58,6 @@ export const baseAttrSchema: ISchema = {
           'x-component-props': {
             placeholder: '顶部距离',
           },
-          default: 0,
         },
       },
     },
@@ -75,7 +71,6 @@ export const baseAttrSchema: ISchema = {
         min: 0,
         max: 360,
       },
-      default: 0,
     },
     opacity: {
       type: 'number',
@@ -92,7 +87,6 @@ export const baseAttrSchema: ISchema = {
       'x-component-props': {
         placeholder: '透明度',
       },
-      default: 1,
     },
   },
 };

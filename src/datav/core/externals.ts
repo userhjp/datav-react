@@ -116,7 +116,7 @@ export const createWidgetNode = (config: ICreateWidgetConfig): IWidgetProps => {
   return {
     id: generateUUID(),
     info: { name: config.name, type: config.type, ver: config.ver },
-    attr: { x: config.x, y: config.y, w: config.w, h: config.h },
+    attr: { x: config.x, y: config.y, w: config.w, h: config.h, deg: 0, opacity: 1 },
     events: eventsFields,
     options: config.options || null,
     data: createSettingData(config),
