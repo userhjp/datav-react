@@ -5,6 +5,7 @@ import { RadarChart } from 'echarts/charts';
 import { SVGRenderer } from 'echarts/renderers';
 import { useDebounceEffect, useSize } from 'ahooks';
 import { use, ECharts, init } from 'echarts/core';
+import { convertEChartColors } from '@/examples/shared';
 
 use([SVGRenderer, RadarChart, GridComponent, TitleComponent, PolarComponent, TooltipComponent]);
 /** 基础雷达图 */
@@ -46,6 +47,7 @@ const BaseRadar: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
 
   const chartOptions = useMemo(() => {
     const { grid, tooltip = {}, radar = {}, radarSeries = {}, colors } = options;
+    const { splitArea, ...radarObj } = radar;
     if (!dataset.indicator?.length) return {};
     return {
       color: colors,
@@ -58,13 +60,19 @@ const BaseRadar: React.FC<IWidgetProps> = ({ options = {}, data = {} }) => {
         enterable: false, // 鼠标是否可以移动到tooltip区域内
       },
       radar: {
-        ...radar,
+        ...radarObj,
         indicator: dataset.indicator,
+        splitArea: splitArea.areaStyle?.show
+          ? { areaStyle: { ...splitArea.areaStyle, color: convertEChartColors(splitArea.areaStyle.color) } }
+          : {},
       },
       series: {
         type: 'radar',
         data: dataset.data,
         ...radarSeries,
+        areaStyle: radarSeries.areaStyle?.show
+          ? { ...radarSeries.areaStyle, color: convertEChartColors(radarSeries.areaStyle.color) }
+          : null,
       },
     };
   }, [options]);

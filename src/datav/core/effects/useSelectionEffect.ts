@@ -22,8 +22,11 @@ export const useSelectionEffect = (engine: Engine) => {
     const nodeId = el.getAttribute(engine.props.nodeIdAttrName);
     const structNodeId = el.getAttribute(engine.props.outlineNodeIdAttrName);
     const node = engine.operation.findById(nodeId || structNodeId);
-    if ((node.isLock && !structNodeId) || node.isHide) return;
     const selection = engine.operation.selection;
+    if ((node.isLock && !structNodeId) || node.isHide) {
+      selection.clear();
+      return;
+    }
     const comId = nodeId || structNodeId;
     if (engine.cursor.type === CursorType.Selection) {
       if (selection.has(comId)) {

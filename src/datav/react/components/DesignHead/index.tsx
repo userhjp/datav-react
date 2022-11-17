@@ -1,5 +1,5 @@
 import { observer } from '@formily/react';
-import { Badge, Dropdown, Menu, Space, Tooltip } from 'antd';
+import { Badge, Dropdown, Space, Tooltip } from 'antd';
 import React, { useRef } from 'react';
 import { PanelType } from '../../../shared';
 import { useCursor, useOperation, useToolbar, useSelection, useScreen } from '../../hooks';
@@ -126,7 +126,7 @@ export const DesignHead: React.FC = observer(() => {
 
             <HelpPreview />
 
-            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'保存并发布'}>
+            <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'保存发布'}>
               <div className="head-btn" onClick={() => onOperationBtn('publish')}>
                 <IconWidget infer="Publish" style={{ color: '#fff' }} />
               </div>

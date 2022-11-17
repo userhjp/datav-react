@@ -24,7 +24,7 @@ export type IWidgetConfig = {
   /** 交互数据属性 */
   events?: {
     /** 映射字段到全局变量 */
-    changed: {
+    changed?: {
       /** 事件描述 */
       description: string;
       /** 字段映射 默认data.fields */

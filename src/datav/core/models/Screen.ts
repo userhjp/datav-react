@@ -63,6 +63,7 @@ export class Screen {
       height: this.height,
       width: this.width,
       zoomMode: this.zoomMode,
+      type: this.type,
     };
   }
 

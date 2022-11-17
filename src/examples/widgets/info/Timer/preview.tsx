@@ -74,7 +74,7 @@ const Timer: React.FC<IWidgetProps> = ({ options, events }) => {
 
   return (
     <div style={textStyle} className="widget-timer">
-      {iconStyle.show && (
+      {iconStyle?.show && (
         <svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" style={iconSty}>
           <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g transform="translate(-920.000000, -643.000000)" fill="config.iconStyle.color" style={{ fill: iconStyle.color }}>

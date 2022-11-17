@@ -44,7 +44,7 @@ export const Expression: React.FC = () => {
           }}
         />
       </Modal>
-      <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'大屏JSON配置'}>
+      <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'JSON配置'}>
         <div
           className={`head-btn`}
           onClick={() => {

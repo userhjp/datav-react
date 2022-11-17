@@ -1,5 +1,5 @@
 import { Observer } from '@formily/react';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import React, { useRef } from 'react';
 import { MoveSortType } from '../../../shared';

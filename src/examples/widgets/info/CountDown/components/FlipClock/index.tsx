@@ -6,6 +6,7 @@ import './index.less';
 type FlipperProps = {
   value: number;
   valStyle: any;
+  onFinish: () => void;
 };
 
 const revamp = (num: number) => {
@@ -58,15 +59,19 @@ const FlipClock: React.FC<FlipperProps> = (props) => {
       }
       (flipObjs[i].current as FlipperRef).flip('down', +nextTimeStr[i], +nowTimeStr[i]);
     }
+    if (nowTimeStr === nextTimeStr) {
+      clearTimeout(timer.current);
+      props.onFinish && props.onFinish();
+    }
   };
 
   // 开始计时
   const run = () => {
     clearTimeout(timer.current);
-    update();
     timer.current = setTimeout(() => {
       run();
     }, 1000);
+    update();
   };
 
   return (

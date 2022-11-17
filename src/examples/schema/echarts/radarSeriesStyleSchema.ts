@@ -11,6 +11,11 @@ export const radarSeriesStyleSchema: ISchema = {
     title: '系列样式',
     noPadding: true,
   },
+  default: {
+    areaStyle: {
+      color: ['#1179ff'],
+    },
+  },
   properties: {
     label: labelSchema,
     symbolVoid: symbolStyleSchema,

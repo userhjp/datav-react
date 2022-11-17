@@ -18,5 +18,13 @@ export const CountDown = registerWidgetConfig(
         endTime: '时间',
       },
     },
+    events: {
+      countdown: {
+        description: '当倒计时结束时',
+        fields: {
+          finish: '倒计时结束',
+        },
+      },
+    },
   }
 );

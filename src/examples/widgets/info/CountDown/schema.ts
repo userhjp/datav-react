@@ -45,7 +45,7 @@ export const CountDownSchema: ISchema = {
         dependencies: ['.flop'],
         fulfill: {
           state: {
-            visible: '{{!$deps[0].show}}',
+            visible: '{{$deps[0] && !$deps[0].show}}',
           },
         },
       },

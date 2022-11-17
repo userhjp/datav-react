@@ -14,10 +14,6 @@ export const radarSchema: ISchema = {
     center: ['50%', '50%'], // 雷达图居中
     radius: '80%',
     startAngle: 120, // 坐标轴起始角度
-    axisName: {
-      color: '#05D5FF',
-      fontSize: 14,
-    },
   },
   properties: {
     voiditem: {
@@ -30,7 +26,7 @@ export const radarSchema: ISchema = {
         rowGap: 0,
       },
       properties: {
-        nameGap: {
+        axisNameGap: {
           type: 'number',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
@@ -122,6 +118,7 @@ export const radarSchema: ISchema = {
       default: {
         areaStyle: {
           opacity: 0,
+          color: ['#1179ff'],
         },
       },
       properties: {
