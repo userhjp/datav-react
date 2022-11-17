@@ -14,6 +14,7 @@ const BaseBar: React.FC<IWidgetProps> = ({ options = {}, data = [], events }) =>
   const elemtRef = useRef<HTMLDivElement>();
   const myChart = useRef<ECharts>();
   const size = useSize(elemtRef);
+
   useLayoutEffect(() => {
     myChart.current = init(elemtRef.current, null, { renderer: 'svg' });
     return () => myChart.current.dispose();

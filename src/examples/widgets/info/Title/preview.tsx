@@ -2,14 +2,16 @@ import React from 'react';
 import { IWidgetProps } from '@/datav/react/interface';
 import './styles.less';
 
-const Title: React.FC<IWidgetProps> = (props) => {
+const Title: React.FC<IWidgetProps> = ({ options, data }) => {
+  const { backgroundStyle, link, ...opt } = options;
+  const { show, ...bgStyle } = backgroundStyle;
   const style = {
-    ...props.options,
-    ...(props.options?.backgroundStyle || {}),
+    ...opt,
+    ...(show ? bgStyle : {}),
   };
-  const linkUrl = props.options?.link?.href;
+  const linkUrl = link?.href;
   const goPath = () => {
-    if (props.options?.link.isblank) {
+    if (options?.link.isblank) {
       window.open(linkUrl);
     } else {
       window.location.href = linkUrl;
@@ -18,7 +20,7 @@ const Title: React.FC<IWidgetProps> = (props) => {
 
   return (
     <div style={style} className={`widget-title-comp ${linkUrl ? 'cursor_p' : ''}`} onClick={linkUrl ? goPath : null}>
-      <span>{props.options?.content || props.data?.title}</span>
+      <span>{options?.content || data?.title}</span>
     </div>
   );
 };

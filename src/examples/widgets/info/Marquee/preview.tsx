@@ -11,6 +11,8 @@ const Marquee: React.FC<IWidgetProps> = ({ options, data }) => {
   const timeId1 = useRef<NodeJS.Timeout>();
   const timeId2 = useRef<NodeJS.Timeout>();
   const width = useRef(0);
+  const { ifSpeed, speed, duration, loop, timeout, backgroundStyle } = options;
+  const { show, ...bgStyle } = backgroundStyle;
 
   const [textStyle, setTextStyle] = useState({
     transform: 'translateX(0)',
@@ -22,10 +24,10 @@ const Marquee: React.FC<IWidgetProps> = ({ options, data }) => {
       width.current = marqueeTextRef.current.offsetWidth / 2;
       if (width.current > size?.width) {
         let t = 0;
-        if (options.ifSpeed) {
-          t = (options.speed / 100) * width.current;
+        if (ifSpeed) {
+          t = (speed / 100) * width.current;
         } else {
-          t = options.duration;
+          t = duration;
         }
         setTextStyle({
           transform: `translateX(-${width.current}px)`,
@@ -36,9 +38,9 @@ const Marquee: React.FC<IWidgetProps> = ({ options, data }) => {
             transform: 'translateX(0)',
             transition: 'none 0s ease 0s',
           });
-          if (options.loop) {
-            if (options.timeout > 0) {
-              timeId2.current = setTimeout(doMarquee, options.timeout);
+          if (loop) {
+            if (timeout > 0) {
+              timeId2.current = setTimeout(doMarquee, timeout);
             } else {
               doMarquee();
             }
@@ -73,7 +75,7 @@ const Marquee: React.FC<IWidgetProps> = ({ options, data }) => {
         clearTimeout(timeId2.current);
       };
     },
-    [size, options.ifSpeed, options.duration, options.timeout, options.loop, options.speed],
+    [size, ifSpeed, duration, timeout, loop, speed],
     { wait: 500 }
   );
 
@@ -82,8 +84,6 @@ const Marquee: React.FC<IWidgetProps> = ({ options, data }) => {
       ...options,
     };
   }, [options]);
-
-  const bgStyle = useMemo(() => options?.backgroundStyle || {}, [options]);
 
   const renderText = () => {
     return (
@@ -105,7 +105,7 @@ const Marquee: React.FC<IWidgetProps> = ({ options, data }) => {
   };
 
   return (
-    <div className="widget-marquee-warp" style={bgStyle}>
+    <div className="widget-marquee-warp" style={show ? bgStyle : {}}>
       <div ref={marqueeRef} style={{ overflow: 'hidden', whiteSpace: 'nowrap', ...style }} className="widget-marquee-comp">
         <div style={{ display: 'inline-block', ...textStyle }} ref={marqueeTextRef}>
           <React.Fragment key="1">{renderText()}</React.Fragment>

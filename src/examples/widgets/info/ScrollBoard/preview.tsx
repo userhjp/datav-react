@@ -198,7 +198,7 @@ const ScrollBoard = forwardRef<any, any>(({ onClick, options = {}, data, onMouse
 
   function calcHeights({ header, rowNum, data, column }) {
     let allHeight = size?.height || 0;
-    if (column.length) allHeight -= header.height || 0;
+    if (column.length) allHeight -= (header.show ? header.height : 0) || 0;
 
     const avgHeight = allHeight / rowNum;
 

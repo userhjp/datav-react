@@ -1,8 +1,7 @@
 import React, { useMemo } from 'react';
 import { observer } from '@formily/react';
-import { useToolbar, useScreen, useSelected } from '../hooks';
+import { useToolbar, useScreen } from '../hooks';
 import { cancelIdle, requestIdle } from '../../shared';
-import { useCurrentNode } from '../hooks/useCurrentNode';
 import { createForm } from '@formily/core';
 import { Form } from '@formily/antd';
 import { ISettingFormProps } from './types';
@@ -14,6 +13,7 @@ import { SettingsTable } from './SettingsTable';
 import { WidgetNode } from '@/datav/core';
 import { SettingsPage } from './SettingsPage';
 import './styles.less';
+import { observable } from '@formily/reactive';
 
 const GlobalState = {
   idleRequest: null,
@@ -28,10 +28,10 @@ export const SettingsForm: React.FC<ISettingFormProps> = observer(
         component: WidgetNode;
         pages: IScreenProps;
       }>({
-        values: {
+        values: observable({
           component: null,
           pages: screen.props,
-        },
+        }),
         effects(form) {
           props.effects?.(form);
         },

@@ -56,7 +56,7 @@ export const SettingsTable: React.FC<SettingsTableProps> = observer((props) => {
             key: 'item-1',
             children: (
               <>
-                <RecursionField key={`${oldSelectedRef.current}_attr`} basePath={field.address} name="attr" schema={baseAttrSchema} />
+                <RecursionField basePath={field.address} name="attr" schema={baseAttrSchema} />
                 <RecursionField key={`${oldSelectedRef.current}_options`} basePath={field.address} name="options" schema={schema} />
               </>
             ),

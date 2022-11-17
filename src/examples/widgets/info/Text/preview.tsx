@@ -65,10 +65,11 @@ const Text: React.FC<IWidgetProps> = ({ options, data }) => {
     };
   }, [options]);
 
-  const bgStyle = useMemo(() => options?.backgroundStyle || {}, [options]);
+  const bgStyle = useMemo(() => (options?.backgroundStyle?.show ? options?.backgroundStyle : {}), [options]);
 
   const linkUrl = options?.link?.href;
   const goPath = () => {
+    if (!options?.link?.show) return;
     if (!linkUrl) return;
     if (options?.link.isblank) {
       window.open(linkUrl);

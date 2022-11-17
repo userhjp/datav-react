@@ -30,10 +30,10 @@ export class Screen {
 
   makeObservable() {
     define(this, {
-      props: observable,
       id: observable.ref,
       title: observable.ref,
       scale: observable.ref,
+      props: observable,
       setScale: action,
       setSize: action,
       setProps: action,
@@ -61,7 +61,12 @@ export class Screen {
   }
 
   setProps(props: IScreenProps) {
-    this.props = Object.assign(this.props, props);
+    this.props.backgroundColor = props.backgroundColor;
+    this.props.backgroundImg = props.backgroundImg;
+    this.props.grid = props.grid;
+    this.props.height = props.height;
+    this.props.width = props.width;
+    this.props.zoomMode = props.zoomMode;
   }
 
   // setFlip(flip: boolean) {

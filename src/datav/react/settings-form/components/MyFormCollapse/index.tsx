@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { Collapse, Badge, Switch, Tabs, Button } from 'antd';
-import { model, markRaw, toJS } from '@formily/reactive';
+import { model, markRaw, toJS, action } from '@formily/reactive';
 import { CollapseProps, CollapsePanelProps } from 'antd/lib/collapse';
 import { useField, observer, useFieldSchema, RecursionField } from '@formily/react';
 import { Schema } from '@formily/json-schema';
@@ -105,9 +105,9 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
   const SwitchPanel: React.FC<IFormCollapseProps> = observer((props) => {
     const value = getFieldValue(schema);
     // const basePath = `${field.props.basePath}.${schema.name}`;
-    // if (value[mapSwitchKey] === undefined) {
-    //   value[mapSwitchKey] = !!props.defaultSwitch;
-    // }
+    if (value[mapSwitchKey] === undefined) {
+      value[mapSwitchKey] = !!props.defaultSwitch;
+    }
     // if (!value[mapSwitchKey] && _formCollapse.hasActiveKey(schema.name)) {
     //   _formCollapse.removeActiveKey(schema.name);
     // }
@@ -118,6 +118,7 @@ export const MyFormCollapse: ComposedFormCollapse = observer(({ formCollapse, ..
     //     state.display = value[mapSwitchKey] ? 'visible' : 'none';
     //   }
     // });
+
     return (
       <Switch
         onClick={(_, event) => {
