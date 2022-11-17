@@ -81,7 +81,7 @@ instance.interceptors.response.use((res) => {
     default:
       break;
   }
-  return data;
+  return res;
 }, errorHandler);
 
 const request = async (url: string, options: AxiosRequestConfig) => {
@@ -92,7 +92,7 @@ const request = async (url: string, options: AxiosRequestConfig) => {
     url,
     ...options,
   });
-  return res;
+  return res.data;
 };
 
 export { request };

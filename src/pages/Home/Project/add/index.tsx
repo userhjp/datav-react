@@ -38,18 +38,23 @@ const AddProject: React.FC<EditUserProps> = (props) => {
   return (
     <Modal
       wrapClassName="project-add-wrap"
-      forceRender
-      width={700}
-      bodyStyle={{ padding: 12, background: '#2a2e33' }}
+      width={500}
+      style={{ top: '26%' }}
       maskClosable={false}
       destroyOnClose
       open={state.visible}
       footer={false}
       onCancel={onCancel}
     >
-      <div style={{ color: '#fff' }}>{state.item ? '重命名项目' : '新增项目'}</div>
-      <Divider style={{ margin: '12px 0', borderColor: 'rgb(68 72 76)' }} />
-      <Form form={form} labelCol={5} wrapperCol={16} onAutoSubmit={(values) => onSubmit({ ...values, id: state.item?.id || null })}>
+      <div className="project-add-wrap-title">{state.item ? '重命名项目' : '创建空白项目'}</div>
+      {/* <Divider style={{ margin: '12px 0', borderColor: 'rgb(68 72 76)' }} /> */}
+      <Form
+        layout={'vertical'}
+        form={form}
+        labelCol={5}
+        wrapperCol={16}
+        onAutoSubmit={(values) => onSubmit({ ...values, id: state.item?.id || null })}
+      >
         <Field
           name="title"
           title="大屏名称"
@@ -106,9 +111,6 @@ const AddProject: React.FC<EditUserProps> = (props) => {
           />
         </VoidField>
         <FormButtonGroup.FormItem style={{ textAlign: 'center' }}>
-          <Button type="default" onClick={onCancel}>
-            取消
-          </Button>
           <Submit>提交</Submit>
         </FormButtonGroup.FormItem>
       </Form>

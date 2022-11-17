@@ -1,7 +1,50 @@
 .project-add-wrap {
   color: #fff;
+
+  .project-add-wrap-title {
+    color: #00baff;
+    font-size: 14px;
+  }
+
   .ant-modal-close-icon {
-    color: #fff;
+    color: #00baff;
+  }
+
+  .ant-modal-body {
+    padding: 16px 24px;
+    background: #27343e;
+
+    &::before {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-image: linear-gradient(-181deg,#00deff 0,#00baff 74%);
+      content: '';
+    }
+  }
+
+  .ant-btn-primary {
+    padding: 4px 20px;
+    background: none;
+    background-image: linear-gradient(-225deg,#00d3f1 0,#12b3ff 100%);
+    border-color: transparent;
+  }
+
+
+  .ant-formily-layout {
+    padding-top: 14px;
+  }
+
+  .ant-formily-item-control-content-component {
+    text-align: right;
+  }
+
+  .ant-formily-item-control .ant-formily-item-help {
+    text-align: left;
   }
 
   .ant-formily-item-label {
@@ -14,13 +57,13 @@
 
   .ant-input-affix-wrapper {
     color: rgba(255, 255, 255, 0.85);
-    background-color: transparent;
+    background-color: #1c222b;
     border-color: #434343;
     box-shadow: none;
     user-select: none;
   }
   .ant-input-affix-wrapper-focused {
-    border-color: #1890ff;
+    border-color: #00baff;
   }
   .ant-input-affix-wrapper .ant-input,
   .ant-input {
