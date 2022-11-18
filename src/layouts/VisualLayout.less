@@ -4,6 +4,8 @@
   padding: 20px 0;
   overflow: hidden;
   background-color: #171b22;
+
+
   .sidebar {
     display: inline-block;
     width: 240px;
@@ -44,9 +46,23 @@
 
     .logo {
       width: 60px;
-      margin-bottom: 12px;
       background: url("../assets/svg/logo.svg");
       background-size: 100% 100%;
+    }
+    .rotate {
+      margin-bottom: 12px;
+      animation: log-rotate 3s infinite;
+      animation-direction: alternate-reverse;
+    }
+
+    @keyframes log-rotate {
+      0% {
+        transform: rotateZ(0);
+      }
+
+      100% {
+        transform: rotateZ(360deg);
+      }
     }
   }
 
