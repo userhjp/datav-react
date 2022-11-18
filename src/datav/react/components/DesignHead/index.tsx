@@ -98,8 +98,8 @@ export const DesignHead: React.FC = observer(() => {
                 <IconWidget infer="Selection" style={{ color: '#fff' }} />
               </div>
             </Tooltip>
-            <IconPreview />
             <ImagePreview />
+            {process.env.APP_DEV === 'dev' && <IconPreview />}
           </Space>
         </div>
         <div

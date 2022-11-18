@@ -44,8 +44,8 @@ export const IconPreview: React.FC = () => {
         </div>
       </Modal>
       <Tooltip overlayClassName="design-tip" color="#2681ff" placement="bottom" title={'查看ICON'}>
-        <div className={`head-btn`} onClick={() => setisModalVisible(true)}>
-          <IconWidget infer="Image" style={{ color: '#fff' }} />
+        <div className={`head-btn`} style={{ lineHeight: '20px' }} onClick={() => setisModalVisible(true)}>
+          dev
         </div>
       </Tooltip>
     </div>
