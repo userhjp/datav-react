@@ -24,7 +24,6 @@ export const pageSchema: ISchema = {
           properties: {
             width: {
               type: 'number',
-              default: 1920,
               'x-decorator': 'FormItem',
               'x-decorator-props': {
                 feedbackText: '宽度',
@@ -39,7 +38,6 @@ export const pageSchema: ISchema = {
             },
             height: {
               type: 'number',
-              default: 1080,
               'x-decorator': 'FormItem',
               'x-decorator-props': {
                 feedbackText: '高度',
@@ -56,14 +54,12 @@ export const pageSchema: ISchema = {
         backgroundColor: {
           type: 'string',
           title: '背景颜色',
-          default: '#0e2a42',
           'x-component': 'ColorPicker',
           'x-decorator': 'FormItem',
         },
         backgroundImg: {
           type: 'string',
           title: '背景图',
-          // default: 'http://bpic.588ku.com//back_origin_min_pic/21/05/26/2578f41da1e66a5743ad2f4a2e689003.jpg',
           'x-component': 'BgImg',
           'x-decorator': 'FormItem',
           'x-decorator-props': {
@@ -94,7 +90,6 @@ export const pageSchema: ISchema = {
         grid: {
           type: 'number',
           title: '栅格间距',
-          default: 8,
           'x-decorator': 'FormItem',
           'x-decorator-props': {
             style: {
