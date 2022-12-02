@@ -8,8 +8,8 @@ import { Tabs } from 'antd';
 import { EventFields } from './EventsFields';
 import { StatusFields } from './StatusFields';
 import { DataFields } from './DataFields';
-import './index.less';
 import { cancelIdle, requestIdle } from '@/datav/shared';
+import './index.less';
 
 type SettingsTableProps = {
   schema?: ISchema;
