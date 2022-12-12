@@ -1,3 +1,4 @@
+import { observer } from '@formily/react';
 import React from 'react';
 import './index.less';
 
@@ -6,7 +7,7 @@ type FormTitleProps = {
   children: React.ReactNode;
 };
 
-export const FormTitle: React.FC<FormTitleProps> = (props) => {
+export const FormTitle: React.FC<FormTitleProps> = observer((props) => {
   const { label, children } = props;
   return (
     <div className="m-form-title">
@@ -14,4 +15,4 @@ export const FormTitle: React.FC<FormTitleProps> = (props) => {
       <div className="m-form-title-form scoll-prettify">{children}</div>
     </div>
   );
-};
+});

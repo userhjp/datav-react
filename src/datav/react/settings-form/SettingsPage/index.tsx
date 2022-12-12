@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { RecursionField, useField, observer, VoidField } from '@formily/react';
 import { useSelected } from '../../hooks';
 import { layoutSchema, pageSchema } from '../schema';
-import { observe } from '@formily/reactive';
 import './index.less';
 
 export const SettingsPage: React.FC = observer((props) => {
@@ -12,7 +11,7 @@ export const SettingsPage: React.FC = observer((props) => {
   return (
     <VoidField basePath={field.address} name="settings">
       <div className="settings-layout" style={{ zIndex: selected.length > 1 ? 99 : -1 }}>
-        <RecursionField schema={layoutSchema} />
+        <RecursionField name={'layout'} schema={layoutSchema} />
       </div>
       <div className="settings-layout" style={{ zIndex: selected.length == 0 ? 99 : -1 }}>
         <RecursionField schema={pageSchema} />

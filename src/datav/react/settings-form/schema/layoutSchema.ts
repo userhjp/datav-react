@@ -2,7 +2,7 @@ import { ISchema } from '@formily/react';
 import { ZoomMode } from '../../../shared';
 
 export const layoutSchema: ISchema = {
-  type: 'object',
+  type: 'void',
   properties: {
     page: {
       type: 'void',
