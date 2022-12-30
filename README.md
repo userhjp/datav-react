@@ -1,7 +1,7 @@
 # React可视化设计器
 基于Formily表单驱动
 * 💪 React 17.x
-* 🔥 Formily 2.x
+* 🔥 [Formily 2.x](https://formilyjs.org/zh-CN)
 * 🔥 TypeScript 4.x
 * 🔥 ECharts 5.x
 
@@ -98,3 +98,7 @@ src
 └── pages
     └── Design           # 设计器页面
 ```
+
+#### 使用:
+
+> 该项目仅供学习交流使用
