@@ -10,6 +10,8 @@
 
 > 若无法访问，表示当前网络不支持ipv6
 
+![截图](https://repository-images.githubusercontent.com/452603611/62ec66d4-fdb1-4179-9a73-c1576502dbfd)
+
 ## 安装与使用
 
 ```bash
