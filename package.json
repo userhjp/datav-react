@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
   "license": "MIT",
-  "private": true,
+  "public": true,
   "scripts": {
     "start": "npm run dev",
     "dev": "webpack serve --config ./config/webpack.dev.ts",
