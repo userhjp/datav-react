@@ -12,6 +12,7 @@
 
 ![截图](https://repository-images.githubusercontent.com/452603611/62ec66d4-fdb1-4179-9a73-c1576502dbfd)
 ![截图2](https://repository-images.githubusercontent.com/452603611/e609c4a0-145d-4198-950c-e00b9522d429)
+![截图3](https://repository-images.githubusercontent.com/452603611/b4bc2a88-53e6-4b76-9452-637ddfcd60ed)
 
 ## 安装与使用
 
@@ -88,18 +89,6 @@ npm run build
   * [√] 日期选择器
   * [√] 输入框
   * [√] 下拉选择器
-```
-
-#### 目录结构 (如: main-title):
-
-```bash
-src
-├── datav             # 设计器核心代码
-├── examples          # 设计器组件开发
-|    └── schema           # 公共schema
-|    └── widgets          # 组件目录
-└── pages
-    └── Design           # 设计器页面
 ```
 
 #### 使用:
