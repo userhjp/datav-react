@@ -49,7 +49,7 @@ const VisualLayout: React.FC = () => {
         <div className="router-out">
           <Outlet />
         </div>
-        <div className="text">version 1.2 重庆咸鱼科技公司</div>
+        <div className="text">version 1.2 重庆xxx有限公司</div>
       </div>
     </div>
   );
