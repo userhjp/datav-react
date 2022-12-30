@@ -11,6 +11,7 @@
 > 若无法访问，表示当前网络不支持ipv6，可以尝试手机开热点连上试试，目前貌似三大手机网络都已支持ipv6。
 
 ![截图](https://repository-images.githubusercontent.com/452603611/62ec66d4-fdb1-4179-9a73-c1576502dbfd)
+![截图2](https://repository-images.githubusercontent.com/452603611/e609c4a0-145d-4198-950c-e00b9522d429)
 
 ## 安装与使用
 
