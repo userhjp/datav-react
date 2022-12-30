@@ -12,7 +12,8 @@
 
 ![截图](https://repository-images.githubusercontent.com/452603611/62ec66d4-fdb1-4179-9a73-c1576502dbfd)
 ![截图2](https://repository-images.githubusercontent.com/452603611/e609c4a0-145d-4198-950c-e00b9522d429)
-![截图3](https://repository-images.githubusercontent.com/452603611/b4bc2a88-53e6-4b76-9452-637ddfcd60ed)
+![截图3](https://repository-images.githubusercontent.com/452603611/11eede0b-e1f8-4146-a28e-001d04db7477)
+
 
 ## 安装与使用
 
