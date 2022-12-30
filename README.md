@@ -5,6 +5,11 @@
 * 🔥 TypeScript 4.x
 * 🔥 ECharts 5.x
 
+### 预览
+- [DataV 在线预览](http://www.userhu.top:81)
+
+> 若无法访问，表示当前网络不支持ipv6
+
 ## 安装与使用
 
 ```bash
