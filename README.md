@@ -11,6 +11,9 @@
 > 若无法访问，表示当前网络不支持ipv6，可以尝试手机开热点连上试试，目前貌似三大手机网络都已支持ipv6。
 
 ![截图](https://repository-images.githubusercontent.com/452603611/62ec66d4-fdb1-4179-9a73-c1576502dbfd)
+![截图2](https://repository-images.githubusercontent.com/452603611/e609c4a0-145d-4198-950c-e00b9522d429)
+![截图3](https://repository-images.githubusercontent.com/452603611/11eede0b-e1f8-4146-a28e-001d04db7477)
+
 
 ## 安装与使用
 
@@ -87,18 +90,6 @@ npm run build
   * [√] 日期选择器
   * [√] 输入框
   * [√] 下拉选择器
-```
-
-#### 目录结构 (如: main-title):
-
-```bash
-src
-├── datav             # 设计器核心代码
-├── examples          # 设计器组件开发
-|    └── schema           # 公共schema
-|    └── widgets          # 组件目录
-└── pages
-    └── Design           # 设计器页面
 ```
 
 #### 使用:
